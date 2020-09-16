@@ -8,7 +8,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="resources/css/bootstrap.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/footer.css">
+<link rel="stylesheet" href="resources/css/content_footer.css">
 <title>menubar</title>
 </head>
 <%@include file="preloader.jsp"%>
