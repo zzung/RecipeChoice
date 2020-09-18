@@ -357,7 +357,8 @@
                 </tr>
             </table>
 
-        </div>
+       	</div>
+       </div>
 
         <!-- 작성글 삭제 모달 -->
         <form action="">
@@ -412,7 +413,6 @@
                             <div class="modal-body" align="center">
                                 
 
-                                <form action="">
                                     <table>
     
                                         <tr>
@@ -472,7 +472,6 @@
                                             </td>
                                         </tr>
                                     </table>
-                                </form>
 
                                 <input id="reportContentNo" type="hidden" name="bno" value="이글의 번호">
                                 <input id="reportReplyNo" type="hidden" name="no" value="">

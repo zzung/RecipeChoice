@@ -1,5 +1,26 @@
+<%@page import="com.kh.board.model.vo.PageInfo"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.kh.board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	// type safety경고를 피하기위해 타입검사수행하였음
+	ArrayList<Board> boardList = new ArrayList<Board>();
+	if(request.getAttribute("boardList") instanceof ArrayList) {
+		ArrayList<?> tmpList = (ArrayList<?>)request.getAttribute("boardList");
+		for(Object obj : tmpList) {
+			if(obj instanceof Board) {
+				boardList.add((Board)obj);
+			}
+		}
+	}
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,6 +128,20 @@
         .btnSearch:hover {
             cursor: pointer;
         }
+        
+        .btnDisabled {
+			color: #fff;
+			background-color: #007bff;
+			border-color: #007bff;
+		}
+		
+		.btnDisabled:hover {
+			cursor: none;
+		}
+        
+        .pagebtn {
+        	background: rgb(170, 170, 170);
+        }
     </style>
 </head>
 <body>
@@ -160,25 +195,20 @@
         <table class="listArea" style="margin: 0px auto; width: 800px;">
             <!-- hover시 여백용 tr -->
             <tr style="height: 10px;"><td></td><td></td><td></td></tr>
+            <% for(Board b : boardList) { %>
             <tr>
-                <td width="10%"><img src="<%= request.getContextPath() %>resources/image/board/defaultprofile.png" width="40px" height="40px"></td>
-                <td width="10%">일상</td>
+            	<% if(b.getMemPic() == null) { %>
+                <td width="10%"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" width="40px" height="40px"></td>
+                <% } else { %>
+                <td width="10%"><img src="<%= request.getContextPath() %>/<%= b.getMemPic() %>" width="40px" height="40px"></td>
+                <% } %>
+                <td width="10%"><%= b.getCategory() %></td>
                 <td width="80%">
-                    <div align="left" class="content content-title">이며, 심장은 광야에서 풍부하게 두손을 위하여서. 설레는 원대하고, 무엇을 사막이다.</div>
+                    <div align="left" class="content content-title"><%= b.getBoardTitle() %></div>
                     <div class="content">
-                        예수는 맺어, 산야에 무엇이 미인을 것은 약동하다. 거선의 넣는 하였으며, 그림자는 같이, 봄바람이다. 소금이라 이상 이것이야말로 얼마나 소담스러운 미인을 사람은 이것이다.
-                        장식하는 듣기만 심장의 때까지 없으면, 있으랴? 이상의 낙원을 광야에서 듣기만 이성은 위하여, 그들의 같이 그리하였는가? 꽃이 생명을 그것을 되려니와, 몸이 있으랴? 있는 대고, 반짝이는 위하여 꽃 설레는
-                        속잎나고, 철환하였는가? 청춘 보이는 바이며, 심장은 광야에서 풍부하게 두손을 위하여서. 설레는 원대하고, 무엇을 무엇을 사막이다.
-                    
-                        충분히 많이 이것이야말로 몸이 같이, 속잎나고, 사랑의 그들에게 뿐이다. 사는가 꽃이 뜨고, 꽃이 말이다. 설레는 피가 위하여 것은 끓는다. 없는 바이며, 커다란 꾸며 노년에게서 구하지 공자는 영락과 인류의
-                        위하여서. 것은 청춘의 방황하였으며, 운다. 꽃이 같은 것은 것이다. 싸인 가는 피가 없으면, 이상은 것이다. 싶이 설산에서 능히 보는 청춘의 품으며, 할지니, 힘있다. 소금이라 이상의 없는 예수는 영원히
-                        귀는 위하여, 것이다.
-                    
-                        예수는 이상의 거선의 눈이 없는 어디 청춘의 별과 더운지라 부패뿐이다. 실로 끓는 청춘은 그와 청춘의 설레는 위하여, 못할 그리하였는가? 그들은 봄바람을 가장 수 두손을 그것을 커다란 그림자는 지혜는
-                        아름다우냐? 우리 뭇 구하지 얼마나 것이다.보라, 과실이 뿐이다. 그들의 기쁘며, 간에 갑 살 것이다.보라, 청춘의 끝에 봄바람을 것이다. 기관과 그것은 용기가 그리하였는가? 이상 현저하게 붙잡아 긴지라
-                        따뜻한 청춘 들어 무엇이 사막이다. 타오르고 간에 같이, 같이 아니한 뜨거운지라, 따뜻한 못하다 운다. 그들은 속잎나고, 있는 아니다.
+                    	<%= b.getBoardContent() %>
                     </div>
-                    <div align="right" style="padding-right: 20px; color: gray;">2020.08.03 18:36</div>
+                    <div align="right" style="padding-right: 20px; color: gray;"><%= sdf.format(b.getCreateDate()) %></div>
                 </td>
             </tr>
             <tr class="bar">
@@ -187,79 +217,7 @@
                     <div style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 750px; height: 20px;"></div>
                 </td>
             </tr>
-            <tr>
-                <td width="10%"><img src="<%= request.getContextPath() %>resources/image/board/defaultprofile.png" width="40px" height="40px"></td>
-                <td width="10%">일상</td>
-                <td width="80%">
-                    <div align="left" class="content content-title">이며, 심장은 광야에서 풍부하게 두손을 위하여서. 설레는 원대하고, 무엇을 사막이다.</div>
-                    <div class="content">
-                        예수는 맺어, 산야에 무엇이 미인을 것은 약동하다. 거선의 넣는 하였으며, 그림자는 같이, 봄바람이다. 소금이라 이상 이것이야말로 얼마나 소담스러운 미인을 사람은 이것이다.
-                        장식하는 듣기만 심장의 때까지 없으면, 있으랴? 이상의 낙원을 광야에서 듣기만 이성은 위하여, 그들의 같이 그리하였는가? 꽃이 생명을 그것을 되려니와, 몸이 있으랴? 있는 대고, 반짝이는 위하여 꽃 설레는
-                        속잎나고, 철환하였는가? 청춘 보이는 바이며, 심장은 광야에서 풍부하게 두손을 위하여서. 설레는 원대하고, 무엇을 무엇을 사막이다.
-                    
-                        충분히 많이 이것이야말로 몸이 같이, 속잎나고, 사랑의 그들에게 뿐이다. 사는가 꽃이 뜨고, 꽃이 말이다. 설레는 피가 위하여 것은 끓는다. 없는 바이며, 커다란 꾸며 노년에게서 구하지 공자는 영락과 인류의
-                        위하여서. 것은 청춘의 방황하였으며, 운다. 꽃이 같은 것은 것이다. 싸인 가는 피가 없으면, 이상은 것이다. 싶이 설산에서 능히 보는 청춘의 품으며, 할지니, 힘있다. 소금이라 이상의 없는 예수는 영원히
-                        귀는 위하여, 것이다.
-                    
-                        예수는 이상의 거선의 눈이 없는 어디 청춘의 별과 더운지라 부패뿐이다. 실로 끓는 청춘은 그와 청춘의 설레는 위하여, 못할 그리하였는가? 그들은 봄바람을 가장 수 두손을 그것을 커다란 그림자는 지혜는
-                        아름다우냐? 우리 뭇 구하지 얼마나 것이다.보라, 과실이 뿐이다. 그들의 기쁘며, 간에 갑 살 것이다.보라, 청춘의 끝에 봄바람을 것이다. 기관과 그것은 용기가 그리하였는가? 이상 현저하게 붙잡아 긴지라
-                        따뜻한 청춘 들어 무엇이 사막이다. 타오르고 간에 같이, 같이 아니한 뜨거운지라, 따뜻한 못하다 운다. 그들은 속잎나고, 있는 아니다.
-                    </div>
-                    <div align="right" style="padding-right: 20px; color: gray;">2020.08.03 18:36</div>
-                </td>
-            </tr>
-            <tr class="bar">
-                <td colspan="3" align="center">
-                    <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 750px; height: 20px;"></div>
-                </td>
-            </tr>
-            <tr>
-                <td width="10%"><img src="<%= request.getContextPath() %>resources/image/board/defaultprofile.png" width="40px" height="40px"></td>
-                <td width="10%">일상</td>
-                <td width="80%">
-                    <div align="left" class="content content-title">이며, 심장은 광야에서 풍부하게 두손을 위하여서. 설레는 원대하고, 무엇을 사막이다.</div>
-                    <div class="content">
-                        예수는 맺어, 산야에 무엇이 미인을 것은 약동하다. 거선의 넣는 하였으며, 그림자는 같이, 봄바람이다. 소금이라 이상 이것이야말로 얼마나 소담스러운 미인을 사람은 이것이다.
-                        장식하는 듣기만 심장의 때까지 없으면, 있으랴? 이상의 낙원을 광야에서 듣기만 이성은 위하여, 그들의 같이 그리하였는가? 꽃이 생명을 그것을 되려니와, 몸이 있으랴? 있는 대고, 반짝이는 위하여 꽃 설레는
-                        속잎나고, 철환하였는가? 청춘 보이는 바이며, 심장은 광야에서 풍부하게 두손을 위하여서. 설레는 원대하고, 무엇을 무엇을 사막이다.
-                    
-                        충분히 많이 이것이야말로 몸이 같이, 속잎나고, 사랑의 그들에게 뿐이다. 사는가 꽃이 뜨고, 꽃이 말이다. 설레는 피가 위하여 것은 끓는다. 없는 바이며, 커다란 꾸며 노년에게서 구하지 공자는 영락과 인류의
-                        위하여서. 것은 청춘의 방황하였으며, 운다. 꽃이 같은 것은 것이다. 싸인 가는 피가 없으면, 이상은 것이다. 싶이 설산에서 능히 보는 청춘의 품으며, 할지니, 힘있다. 소금이라 이상의 없는 예수는 영원히
-                        귀는 위하여, 것이다.
-                    
-                        예수는 이상의 거선의 눈이 없는 어디 청춘의 별과 더운지라 부패뿐이다. 실로 끓는 청춘은 그와 청춘의 설레는 위하여, 못할 그리하였는가? 그들은 봄바람을 가장 수 두손을 그것을 커다란 그림자는 지혜는
-                        아름다우냐? 우리 뭇 구하지 얼마나 것이다.보라, 과실이 뿐이다. 그들의 기쁘며, 간에 갑 살 것이다.보라, 청춘의 끝에 봄바람을 것이다. 기관과 그것은 용기가 그리하였는가? 이상 현저하게 붙잡아 긴지라
-                        따뜻한 청춘 들어 무엇이 사막이다. 타오르고 간에 같이, 같이 아니한 뜨거운지라, 따뜻한 못하다 운다. 그들은 속잎나고, 있는 아니다.
-                    </div>
-                    <div align="right" style="padding-right: 20px; color: gray;">2020.08.03 18:36</div>
-                </td>
-            </tr>
-            <tr class="bar">
-                <td colspan="3" align="center">
-                    <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 750px; height: 20px;"></div>
-                </td>
-            </tr>
-            <tr>
-                <td width="10%"><img src="<%= request.getContextPath() %>resources/image/board/defaultprofile.png" width="40px" height="40px"></td>
-                <td width="10%">일상</td>
-                <td width="80%">
-                    <div align="left" class="content content-title">이며, 심장은 광야에서 풍부하게 두손을 위하여서. 설레는 원대하고, 무엇을 사막이다.</div>
-                    <div class="content">
-                        예수는 맺어, 산야에 무엇이 미인을 것은 약동하다. 거선의 넣는 하였으며, 그림자는 같이, 봄바람이다. 소금이라 이상 이것이야말로 얼마나 소담스러운 미인을 사람은 이것이다.
-                        장식하는 듣기만 심장의 때까지 없으면, 있으랴? 이상의 낙원을 광야에서 듣기만 이성은 위하여, 그들의 같이 그리하였는가? 꽃이 생명을 그것을 되려니와, 몸이 있으랴? 있는 대고, 반짝이는 위하여 꽃 설레는
-                        속잎나고, 철환하였는가? 청춘 보이는 바이며, 심장은 광야에서 풍부하게 두손을 위하여서. 설레는 원대하고, 무엇을 무엇을 사막이다.
-                    
-                        충분히 많이 이것이야말로 몸이 같이, 속잎나고, 사랑의 그들에게 뿐이다. 사는가 꽃이 뜨고, 꽃이 말이다. 설레는 피가 위하여 것은 끓는다. 없는 바이며, 커다란 꾸며 노년에게서 구하지 공자는 영락과 인류의
-                        위하여서. 것은 청춘의 방황하였으며, 운다. 꽃이 같은 것은 것이다. 싸인 가는 피가 없으면, 이상은 것이다. 싶이 설산에서 능히 보는 청춘의 품으며, 할지니, 힘있다. 소금이라 이상의 없는 예수는 영원히
-                        귀는 위하여, 것이다.
-                    
-                        예수는 이상의 거선의 눈이 없는 어디 청춘의 별과 더운지라 부패뿐이다. 실로 끓는 청춘은 그와 청춘의 설레는 위하여, 못할 그리하였는가? 그들은 봄바람을 가장 수 두손을 그것을 커다란 그림자는 지혜는
-                        아름다우냐? 우리 뭇 구하지 얼마나 것이다.보라, 과실이 뿐이다. 그들의 기쁘며, 간에 갑 살 것이다.보라, 청춘의 끝에 봄바람을 것이다. 기관과 그것은 용기가 그리하였는가? 이상 현저하게 붙잡아 긴지라
-                        따뜻한 청춘 들어 무엇이 사막이다. 타오르고 간에 같이, 같이 아니한 뜨거운지라, 따뜻한 못하다 운다. 그들은 속잎나고, 있는 아니다.
-                    </div>
-                    <div align="right" style="padding-right: 20px; color: gray;">2020.08.03 18:36</div>
-                </td>
-            </tr>
+            <% } %>
             <!-- hover시 여백용 tr -->
             <tr style="height: 10px;"><td></td><td></td><td></td></tr>
         </table>
@@ -273,27 +231,33 @@
 
         <div class="pagingArea" align="center">
             
+            <% if(pi.getCurrentPage() != 1) { %>
             <!-- 맨 처음으로 (<<) -->
-            <button class="btn btn-secondry"> &lt;&lt; </button>
+            <a href="<%= request.getContextPath() %>/board.bo?p=1" class="btn btn-secondry"> &lt;&lt; </a>
             <!-- 이전페이지로 (<) -->
-            <button class="btn btn-secondry"> &lt; </button>
+            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() - 1 %>"class="btn btn-secondry"> &lt; </a>
+         	<% } %>
+         	
+            <% for(int i = pi.getStartPage(), last = pi.getLastPage(); i <= last; i++) { %>
+            	<% if(i == pi.getCurrentPage()) { %>
+                <a class="btn btnDisabled"><%= i %></a>
+            	<% } else { %>
+            	<a href="<%= request.getContextPath() %>/board.bo?p=<%= i %>"class="btn btn-secondry pagebtn"><%= i %></a>
+            	<% } %>
+            	
+            	<% 
+            	if(i == pi.getMaxPage()) {
+					break;            		
+            	}
+            	%>
+            <% } %>
             
-            <!-- button{$}*10 -->
-            <button class="btn btn-primary" disabled>1</button>
-            <button class="btn btn-secondry">2</button>
-            <button class="btn btn-secondry">3</button>
-            <button class="btn btn-secondry">4</button>
-            <button class="btn btn-secondry">5</button>
-            <button class="btn btn-secondry">6</button>
-            <button class="btn btn-secondry">7</button>
-            <button class="btn btn-secondry">8</button>
-            <button class="btn btn-secondry">9</button>
-            <button class="btn btn-secondry">10</button>
-            
+            <% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
             <!-- 다음페이지로 (>) -->
-            <button class="btn btn-secondry"> &gt; </button>
+            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() + 1 %>"class="btn btn-secondry"> &gt; </a>
             <!-- 맨 끝으로 (>>) -->
-            <button class="btn btn-secondry"> &gt;&gt; </button>
+            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getMaxPage() %>" class="btn btn-secondry"> &gt;&gt; </a>
+            <% } %>
         </div>
     </div>
     
