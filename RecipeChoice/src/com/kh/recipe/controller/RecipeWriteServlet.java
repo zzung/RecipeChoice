@@ -1,8 +1,6 @@
 package com.kh.recipe.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class RecipeMainView
+ * Servlet implementation class RecipeWriteServlet
  */
-@WebServlet("/recipeView.rp")
-public class RecipeMainView extends HttpServlet {
+@WebServlet("/recipeWrite.rp")
+public class RecipeWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecipeMainView() {
+    public RecipeWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,11 +26,9 @@ public class RecipeMainView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		request.getRequestDispatcher("views/recipe/recipeWrite.jsp").forward(request, response);
 		
-		request.setCharacterEncoding("UTF-8");
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/recipe/recipeMainView.jsp");
-		view.forward(request, response);
 	}
 
 	/**

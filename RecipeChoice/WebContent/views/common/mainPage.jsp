@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="resources/css/bootstrap.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/footer.css">
+<link rel="stylesheet" href="resources/css/w3.css">
 <title>menubar</title>
 <style>
 	.contents{
