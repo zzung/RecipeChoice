@@ -1,0 +1,188 @@
+@charset "UTF-8";
+
+.contents {
+	margin-top: 160px;
+}
+
+#content {
+	width: 900px;
+	height: 800px;
+	margin: auto;
+}
+
+.selectRecipe {
+	height: 40%;
+	padding: 5px;
+}
+
+.listArea {
+	height: 47%;
+	margin-top: 40px;
+}
+
+.selectRecipe tr td li {
+	list-style-type: none;
+	float: left;
+	margin: auto;
+	padding: 10px;
+}
+
+td>input {
+	margin: 13px;
+}
+
+img {
+	border-radius: "50px";
+}
+
+.thumbnail {
+	display: inline-block;
+	margin: 8px;
+}
+
+.arrangeList {
+	width: 870px;
+	margin-top: 15px;
+}
+
+.btn-circle.btn-xl {
+	width: 70px;
+	height: 70px;
+	padding: 10px 16px;
+	border-radius: 35px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.selectRecipe tr>th {
+	color: rgb(39, 174, 96);
+}
+
+.selectRecipe tr .contentList {
+	border-right: 1px solid lightgrey;
+	border-left: 1px solid lightgrey;
+}
+
+}
+.pagination {
+	display: inline-block;
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+.pagination a.active {
+	background-color: rgb(39, 174, 96);
+	color: white;
+	border-radius: 5px;
+}
+
+.pagination
+ 
+a
+:hover
+:not
+ 
+(
+.active
+ 
+)
+{
+background-color
+:
+ 
+#ddd
+;
+
+	
+border-radius
+:
+ 
+5
+px
+;
+
+
+}
+#searchbt {
+	border: none;
+	background: rgb(39, 174, 96);
+	font-size: 16px;
+	color: white;
+	border-radius: 4px;
+	width: 70px;
+	height: 40px;
+}
+
+#searchbt:hover {
+	cursor: pointer;
+	opacity: 0.75;
+}
+
+#resetbt {
+	border: none;
+	background: rgb(69, 88, 77);
+	font-size: 16px;
+	color: white;
+	border-radius: 4px;
+	width: 70px;
+	height: 40px;
+}
+
+.tag_btn {
+	position: absolute;
+	left: 47%;
+	margin-top:10px;
+}
+
+.theme_tag {
+	border: none;
+	cursor: pointer;
+	background: rgb(39, 174, 96);
+	color: white;
+}
+
+input[type="checkbox"] {
+	display: none;
+	font-size: 13px;
+}
+
+input[type="checkbox"]:checked ~ .recipe {
+	color: rgb(39, 174, 96);
+	font-size: 16px;
+}
+
+input[type="checkbox"]:hover ~ .recipe {
+	color: rgb(39, 174, 96);
+	cursor: pointer;
+}
+
+#recipe {
+	border: none;
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	background: rgb(245, 244, 244);
+}
+
+#recipe>p {
+	margin-top: 19px;
+	font-size: 13px;
+	text-align: center;
+}
+
+input[type="checkbox"]:checked ~ #recipe {
+	color: white;
+	font-size: 16px;
+	background: rgb(39, 174, 96);
+}
+
+input[type="checkbox"]:hover ~ #recipe {
+	color: white;
+	cursor: pointer;
+	background: rgb(39, 174, 96);
+}

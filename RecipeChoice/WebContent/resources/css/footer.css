@@ -1,14 +1,4 @@
 @charset "UTF-8";
-.contents{
-margin-top:50px; 
-height:800px; 
-}
-
-#content{
-margin:auto; 
-width:900px;
-height:100%;
-}
 
 #footer_1>a {
 	text-decoration: none;
