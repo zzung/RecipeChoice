@@ -137,7 +137,7 @@
 
 			<!--테마닫고/오픈하기-->
 				<button class="theme_tag tag_btn">레시피테마</button>
-			
+			<br>
 			<script>
 				$(function() {
 					$(".tag_btn").click(function() {
@@ -152,17 +152,8 @@
 					});
 				});
 			</script>
-
-			<!--썸내일 정력-->
-			<div class="dropdown arrageList" align="right">
-				<a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> 최신순 </a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">인기순</a> 
-					<a class="dropdown-item" href="#">조회순</a>
-				</div>
-			</div>
-			<br>
 			
+			<div class="listArea">
 			<!--검색후 보여질 결과(if문처리)-->
 			<div align="center">
 				<p>
@@ -170,9 +161,17 @@
 					의 레시피가 검색되었습니다.
 				</p>
 			</div>
-
+			
+			<!-- 썸네일 정렬 -->
+			<div class="view_type">
+				<ul>
+					<li><a onclick="" href="">최신순</a></li>
+					<li><a onclick="" href="">인기순</a></li>
+					<li><a onclick="" href="">조회순</a></li>
+				</ul>
+			</div>
+			<br><br>
 			<!--썸네일-->
-			<div class="listArea">
 				<div class="thumbnail" align="center">
 					<a href=""><img src="resources/image/log/churro.png" width="200px" height="150px" /></a>
 					<br />
