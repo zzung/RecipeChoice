@@ -11,13 +11,13 @@
 }
 
 .selectRecipe {
-	height: 40%;
+	height: 32.2%;
 	padding: 5px;
 }
 
 .listArea {
-	height: 47%;
-	margin-top: 40px;
+	height: 60%;
+	margin-top: 50px;
 }
 
 .selectRecipe tr td li {
@@ -38,6 +38,7 @@ img {
 .thumbnail {
 	display: inline-block;
 	margin: 8px;
+	margin-top:10px;
 }
 
 .arrangeList {
@@ -82,31 +83,49 @@ img {
 }
 
 .pagination
+
  
+
 a
+
+
 :hover
+
+
 :not
+
  
+
 (
 .active
+
  
+
 )
 {
 background-color
-:
- 
-#ddd
-;
 
-	
-border-radius
+
 :
+
  
+
+#ddd
+
+
+;
+border-radius
+
+
+:
+
+ 
+
 5
 px
+
+
 ;
-
-
 }
 #searchbt {
 	border: none;
@@ -136,7 +155,7 @@ px
 .tag_btn {
 	position: absolute;
 	left: 47%;
-	margin-top:10px;
+	margin-top: -15px;
 }
 
 .theme_tag {
@@ -185,4 +204,26 @@ input[type="checkbox"]:hover ~ #recipe {
 	color: white;
 	cursor: pointer;
 	background: rgb(39, 174, 96);
+}
+
+.view_type li {
+	list-style-type: none;
+	float: right;
+	padding: 3px;
+	font-size: 13px;
+}
+
+.view_type {
+	width: 860px;
+	margin: auto;
+	margin-top:10px;
+}
+
+.view_type li:hover {
+	opacity: 0.5;
+}
+
+.view_type li>a {
+	text-decoration: none;
+	color: rgb(39, 174, 96);
 }
