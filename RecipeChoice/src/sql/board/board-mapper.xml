@@ -34,5 +34,25 @@
 		SELECT COUNT(*) MAX
   		  FROM BOARD_VIEW
 	</entry>
+	
+	<entry key="writeBoardContent">
+		INSERT
+		  INTO BOARD
+		  (
+		    BOARD_NO
+		  , USER_NO
+		  , BOARD_TITLE
+		  , BOARD_CATEGORY
+		  , BOARD_CONTENT
+		  )
+		  VALUES
+		  (
+		    SEQ_BOARD_NO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  )
+	</entry>
 
 </properties>

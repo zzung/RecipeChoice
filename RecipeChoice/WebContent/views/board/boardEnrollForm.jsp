@@ -80,8 +80,11 @@
         <br><br><br>
 
 
-        <form action="test.do" id="insertForm" method="post">
-
+        <form action="boardWrite.bo" id="insertForm" method="post">
+			
+			<!-- 2는 테스트용 로그인과 세션 구현시 실제 로그인한 유저의 번호 -->			
+			<input type="hidden" name="userNo" value="2">
+			
             <table style="margin: 0px auto;">
             
                 <tr>

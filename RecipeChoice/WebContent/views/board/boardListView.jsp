@@ -20,6 +20,8 @@
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	
 %>    
 <!DOCTYPE html>
 <html>
@@ -42,7 +44,7 @@
             margin-right: 30px!important;
         }
 
-        img {
+        .profileImg {
             border-radius: 100px;
         }
 
@@ -102,7 +104,7 @@
             color: black;
         }
 
-        .content>img {
+        .content img {
             display: none;
         }
 
@@ -143,6 +145,16 @@
         	background: rgb(170, 170, 170);
         }
     </style>
+    <script>
+    	$(function () {
+    		var alertMsg = "<%= alertMsg %>";
+    		
+    		if(alertMsg != "null") {
+    			alert.(alertMsg);
+    			<% session.removeAttribute("alertMsg"); %>
+    		}
+    	});
+    </script>
 </head>
 <body>
     <!-- 메뉴바 추가 -->
@@ -198,9 +210,9 @@
             <% for(Board b : boardList) { %>
             <tr>
             	<% if(b.getMemPic() == null) { %>
-                <td width="10%"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" width="40px" height="40px"></td>
+                <td width="10%"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" class="profileImg" width="40px" height="40px"></td>
                 <% } else { %>
-                <td width="10%"><img src="<%= request.getContextPath() %>/<%= b.getMemPic() %>" width="40px" height="40px"></td>
+                <td width="10%"><img src="<%= request.getContextPath() %>/<%= b.getMemPic() %>" class="profileImg" width="40px" height="40px"></td>
                 <% } %>
                 <td width="10%"><%= b.getCategory() %></td>
                 <td width="80%">
@@ -224,11 +236,14 @@
         
         <!-- 로그인했을때만 -->
         <div align="right" style="width: 900px;">
-            <button class="btn btn-secondry btnWrite">글쓰기</button>
+            <button class="btn btn-secondry btnWrite" onclick="location.href='<%= request.getContextPath() %>/boardWriteForm.bo'">
+            	글쓰기
+            </button>
         </div>
         
         <br>
 
+		<!-- 페이징 -->
         <div class="pagingArea" align="center">
             
             <% if(pi.getCurrentPage() != 1) { %>

@@ -31,6 +31,12 @@ public class BoardDao {
 		
 	}
 
+	/**
+	 * 게시글 목록 가져오기
+	 * @param conn
+	 * @param currentPage			현재페이지 정보
+	 * @return
+	 */
 	public ArrayList<Board> selectBoardList(Connection conn, int currentPage) {
 		
 		ArrayList<Board> boardList = new ArrayList<Board>();
@@ -71,6 +77,11 @@ public class BoardDao {
 		return boardList;
 	}
 
+	/**
+	 * 게시글 최대수를 가져와 페이지 정보객체에 넣어줌
+	 * @param conn
+	 * @param pi		최대 페이지수를 저장할 페이지정보 객체
+	 */
 	public void getMaxPage(Connection conn, PageInfo pi) {
 		
 		Statement stmt = null;
@@ -94,6 +105,33 @@ public class BoardDao {
 			close(stmt);
 		}
 		
+	}
+
+	public int insertBoardContent(Connection conn, Board writed) {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("writeBoardContent");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, writed.getUserNo());
+			pstmt.setString(2, writed.getBoardTitle());
+			pstmt.setString(3, writed.getCategory());
+			pstmt.setString(4, writed.getBoardContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

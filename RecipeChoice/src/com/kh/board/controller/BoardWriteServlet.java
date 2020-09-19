@@ -1,30 +1,27 @@
 package com.kh.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
-import com.kh.board.model.vo.PageInfo;
 
 /**
- * 게시판 리스트를 가져오는 서블릿
+ * Servlet implementation class boardWriteServlet
  */
-@WebServlet("/board.bo")
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/boardWrite.bo")
+public class BoardWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public BoardWriteServlet() {
         super();
     }
 
@@ -35,26 +32,27 @@ public class BoardListServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String regex = "^[0-9]*$";
-		String page = request.getParameter("p");
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		String category = request.getParameter("category");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
 		
+		Board writed = new Board();
+		writed.setUserNo(userNo);
+		writed.setCategory(category);
+		writed.setBoardTitle(title);
+		writed.setBoardContent(content);
 		
-		// 넘겨받은 p값이 널인지 0인지 또는 숫자가 아닌값이 들어왔는지 확인
-		if(page == null || !Pattern.matches(regex, page) || page.equals("0")) {
-			page = "1";
+		int result = new BoardService().insertBoardContent(writed);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "작성하신 글이 성공적으로 등록되었습니다.");
+		} else {
+			request.getSession().setAttribute("alertMsg", "작성글 등록에 실패하였습니다.");
 		}
 		
-		PageInfo pi = new PageInfo(Integer.parseInt(page));
+		response.sendRedirect(request.getContextPath() + "/board.bo?p=1");
 		
-		new BoardService().getMaxPage(pi);
-
-		ArrayList<Board> boardList = new BoardService().selectBoardList(pi.getCurrentPage());
-		
-		request.setAttribute("boardList", boardList);
-		request.setAttribute("pageInfo", pi);
-	
-		request.getRequestDispatcher("/views/board/boardListView.jsp").forward(request, response);
-	
 	}
 
 	/**

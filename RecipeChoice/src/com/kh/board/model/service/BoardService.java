@@ -32,4 +32,19 @@ public class BoardService {
 		
 	}
 
+	public int insertBoardContent(Board writed) {
+		
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().insertBoardContent(conn, writed);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollBack(conn);
+		}
+		
+		return result;
+	}
+
 }
