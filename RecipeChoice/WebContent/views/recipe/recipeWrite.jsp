@@ -15,7 +15,7 @@
 <%@include file="../common/menubar.jsp" %>
 
     <div class="contents">
-      <div id="content">
+      <div class="content">
         <div class="w3-container w3-border-bottom w3-border-grey">
           <p id="pageTitle">
             <b><big>레시피 작성하기 </big></b>
@@ -54,8 +54,7 @@
                     <i class="fa fa-plus" style="font-size: 14px"></i>
                   </button>
                 </p>
-                <textarea name="ingredient" cols="12" rows="1" placeholder="재료명" 
-                	style="resize: none; font-size: 14px">
+                <textarea name="ingredient" cols="12" rows="1" style="resize: none; font-size: 14px" placeholder="재료명">
                 </textarea>
                 <textarea name="measurement" cols="25" rows="1" placeholder="정확한 계량을 입력해주세요(ex.200g, 1tsp)"
                  	style="resize: none; font-size: 14px">

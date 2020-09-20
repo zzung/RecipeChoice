@@ -15,7 +15,7 @@
 <body>
 <%@include file="../common/menubar.jsp" %>
 	<div class="contents">
-		<div id="content">
+		<div class="content">
 			<div class="selectRecipe">
 				<form action="">
 					<table class="tb_list">
