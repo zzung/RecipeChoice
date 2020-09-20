@@ -10,6 +10,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="resources/css/bootstrap.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/css/footer.css">
+<link rel="stylesheet" href="resources/css/w3.css">
 <title>menubar</title>
 </head>
 <body>
@@ -47,7 +49,7 @@
 					</div>
 				</li>
 				<li class="nav-item margin-top">
-					<a class="navbar-brand nav-link" href="#"> 
+					<a class="navbar-brand nav-link" href="<%=contextPath%>/recipeWrite.rp"> 
 						<img src="resources/image/navbar/pencil.png" alt="logo" style="width: 30px;">
 					</a>
 				</li>
