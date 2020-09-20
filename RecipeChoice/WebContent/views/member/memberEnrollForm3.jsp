@@ -42,8 +42,6 @@
     .area2{width:33.3%}
     .area3{width:33.3%;  background-color: rgb(60, 223, 128);}
   
-
-    
     #login_btn{
         margin: 20px 200px 20px 250px;
         border-radius: 20px;

@@ -68,7 +68,7 @@
         padding: 10px 0px 10px 10px;
     }
     input::placeholder {
-        font-size: 12px;
+        font-size: 13px;
     }
     #next_btn{
         margin: 30px 200px 30px 180px;
