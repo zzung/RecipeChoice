@@ -68,7 +68,7 @@
         <div id="content">
             <div id="content_1">
                 <div id="menu_1">고객센터</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;공지사항</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1 문의</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;개인정보취급방침</div>
