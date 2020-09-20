@@ -150,7 +150,7 @@
     		var alertMsg = "<%= alertMsg %>";
     		
     		if(alertMsg != "null") {
-    			alert.(alertMsg);
+    			alert(alertMsg);
     			<% session.removeAttribute("alertMsg"); %>
     		}
     	});
@@ -208,7 +208,7 @@
             <!-- hover시 여백용 tr -->
             <tr style="height: 10px;"><td></td><td></td><td></td></tr>
             <% for(Board b : boardList) { %>
-            <tr>
+            <tr onclick="location.href='<%= request.getContextPath() %>/boardView.bo?bno=<%= b.getBoardNo() %>'">
             	<% if(b.getMemPic() == null) { %>
                 <td width="10%"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" class="profileImg" width="40px" height="40px"></td>
                 <% } else { %>

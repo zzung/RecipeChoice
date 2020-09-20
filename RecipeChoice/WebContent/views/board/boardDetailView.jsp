@@ -1,5 +1,12 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.kh.board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Board b = (Board)request.getAttribute("boardDetail");
+
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +27,7 @@
             margin-right: 30px!important;
         }
 
-        img {
+        .profileImg {
             border-radius: 100px;
         }
 
@@ -211,23 +218,24 @@
             
             <tr>
                 <th width="15%" style="padding-left: 30px;">카테고리</th>
-                <td width="10%">일상</td>
+                <td width="10%"><%= b.getCategory() %></td>
                 <th width="10%">제목</th>
                 <td width="40%" align="left">
                     <div id="contentTitle" class="content-title">
-                        제목이들어갈자리제목이들어갈자리자리제목이들어갈자리자리제목이들어갈자리자리제목이들어갈자리
+                    	<%= b.getBoardTitle() %>
                     </div>
                 </td>
-                <td width="15%" align="right" style="padding-right: 30px;">2020-08-31</td>
+                <td width="15%" align="right" style="padding-right: 30px;"><%= sdf.format(b.getCreateDate()) %></td>
             </tr>
             <tr>
                 <th width="15%" style="padding-left: 40px;">작성자</th>
-                <td width="30%" align="left" style="padding-left: 40px;" id="contentWriter">작성자</td>
+                <td width="30%" align="left" style="padding-left: 40px;" id="contentWriter"><%= b.getMemName() %></td>
                 <td width="45%" align="right">조회수</td>
-                <td width="10%" style="padding-right: 30px;">0</td>
+                <td width="10%" style="padding-right: 30px;"><%= b.getBoardCount() %></td>
             </tr>
             <tr style="border: none;">
                 
+                <!-- 수정과 삭제버튼은 로그인시에만 보이도록 수정 -->
                 <td width="87%" align="right">
                     <a href="">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32.24800109863281" height="32.24800109863281" viewBox="0 0 32.24800109863281 32.24800109863281" fill="#000000" data-svg-content="true"><g><path d="M 21.172,21.172L 19.39,15.792L 9.11,5.512L 5.512,9.11L 15.792,19.39 zM 0.746,0.746c-0.994,0.994-0.994,2.604,0,3.598l 2.648,2.648l 3.598-3.598L 4.344,0.746 C 3.35-0.248, 1.74-0.248, 0.746,0.746zM 30,6L 15.822,6 l 2,2L 30,8 l0,22 L 8,30 L 8,17.822 l-2-2L 6,30 c0,1.104, 0.896,2, 2,2l 22,0 c 1.104,0, 2-0.896, 2-2L 32,8 C 32,6.896, 31.104,6, 30,6z"></path></g></svg>
@@ -246,17 +254,7 @@
             <tr>
                 <td width="100%">
                     <div class="contentArea">
-                        예수는 맺어, 산야에 무엇이 미인을 것은 약동하다. 거선의 넣는 하였으며, 그림자는 같이, 봄바람이다. 소금이라 이상 이것이야말로 얼마나 소담스러운 미인을 사람은 이것이다.
-                        장식하는 듣기만 심장의 때까지 없으면, 있으랴? 이상의 낙원을 광야에서 듣기만 이성은 위하여, 그들의 같이 그리하였는가? 꽃이 생명을 그것을 되려니와, 몸이 있으랴? 있는 대고, 반짝이는 위하여 꽃 설레는
-                        속잎나고, 철환하였는가? 청춘 보이는 바이며, 심장은 광야에서 풍부하게 두손을 위하여서. 설레는 원대하고, 무엇을 무엇을 사막이다.
-                        <br><br>
-                        충분히 많이 이것이야말로 몸이 같이, 속잎나고, 사랑의 그들에게 뿐이다. 사는가 꽃이 뜨고, 꽃이 말이다. 설레는 피가 위하여 것은 끓는다. 없는 바이며, 커다란 꾸며 노년에게서 구하지 공자는 영락과 인류의
-                        위하여서. 것은 청춘의 방황하였으며, 운다. 꽃이 같은 것은 것이다. 싸인 가는 피가 없으면, 이상은 것이다. 싶이 설산에서 능히 보는 청춘의 품으며, 할지니, 힘있다. 소금이라 이상의 없는 예수는 영원히
-                        귀는 위하여, 것이다.
-                        <br><br>
-                        예수는 이상의 거선의 눈이 없는 어디 청춘의 별과 더운지라 부패뿐이다. 실로 끓는 청춘은 그와 청춘의 설레는 위하여, 못할 그리하였는가? 그들은 봄바람을 가장 수 두손을 그것을 커다란 그림자는 지혜는
-                        아름다우냐? 우리 뭇 구하지 얼마나 것이다.보라, 과실이 뿐이다. 그들의 기쁘며, 간에 갑 살 것이다.보라, 청춘의 끝에 봄바람을 것이다. 기관과 그것은 용기가 그리하였는가? 이상 현저하게 붙잡아 긴지라
-                        따뜻한 청춘 들어 무엇이 사막이다. 타오르고 간에 같이, 같이 아니한 뜨거운지라, 따뜻한 못하다 운다. 그들은 속잎나고, 있는 아니다.
+                        <%= b.getBoardContent() %>
                     </div>
                 </td>
             </tr>
@@ -283,7 +281,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="10%" align="center"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" width="50px" height="50px"></td>
+                    <td width="10%" align="center"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" class="profileImg" width="50px" height="50px"></td>
                     <td width="90%" style="padding-right: 30px;">
                         <div align="left" style="color: gray;">
                             <b style="color: rgb(9, 175, 79); margin-right: 20px;" id="writerNickName">왕십리대마왕</b>
@@ -308,7 +306,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="10%" align="center"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" width="50px" height="50px"></td>
+                    <td width="10%" align="center"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" class="profileImg" width="50px" height="50px"></td>
                     <td width="90%" style="padding-right: 30px;">
                         <div align="left" style="color: gray;">
                             <b style="color: rgb(9, 175, 79); margin-right: 20px;" id="writerNickName">왕십리대마왕</b>
@@ -333,7 +331,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="10%" align="center"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" width="50px" height="50px"></td>
+                    <td width="10%" align="center"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" class="profileImg" width="50px" height="50px"></td>
                     <td width="90%" style="padding-right: 30px;">
                         <div align="left" style="color: gray;">
                             <b style="color: rgb(9, 175, 79); margin-right: 20px;">닉네임</b>
@@ -370,7 +368,7 @@
                             <div class="modal-body" align="center">
                                 
                                 <p>삭제하시겠습니까?</p>
-                                <input id="deleteNo" type="hidden" name="no" value="이 게시글의 번호">
+                                <input id="deleteNo" type="hidden" name="no" value="<%= b.getBoardNo() %>">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                                 <button type="submit" class="btn btn-primary">삭제</button>
     
@@ -473,7 +471,7 @@
                                         </tr>
                                     </table>
 
-                                <input id="reportContentNo" type="hidden" name="bno" value="이글의 번호">
+                                <input id="reportContentNo" type="hidden" name="bno" value="<%= b.getBoardNo() %>">
                                 <input id="reportReplyNo" type="hidden" name="no" value="">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                                 <button type="submit" class="btn btn-primary">신고하기</button>

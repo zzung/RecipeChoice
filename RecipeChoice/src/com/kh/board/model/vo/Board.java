@@ -18,13 +18,14 @@ public class Board {
 	
 	public Board() {}
 
-	public Board(int boardNo, int userNo, String memId, String memName, String boardTitle, String category,
-			String boardContent, Date createDate, int boardCount, String status) {
+	public Board(int boardNo, int userNo, String memId, String memName, String memPic, String boardTitle,
+			String category, String boardContent, Date createDate, int boardCount, String status) {
 		super();
 		this.boardNo = boardNo;
 		this.userNo = userNo;
 		this.memId = memId;
 		this.memName = memName;
+		this.memPic = memPic;
 		this.boardTitle = boardTitle;
 		this.category = category;
 		this.boardContent = boardContent;
@@ -32,6 +33,8 @@ public class Board {
 		this.boardCount = boardCount;
 		this.status = status;
 	}
+
+
 
 	public Board(int boardNo, int userNo, String memName, String memPic, String boardTitle, String category,
 			String boardContent, Date createDate) {

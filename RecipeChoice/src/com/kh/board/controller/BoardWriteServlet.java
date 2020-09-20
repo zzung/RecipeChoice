@@ -12,6 +12,7 @@ import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
 
 /**
+ * 게시글 등록 서블릿
  * Servlet implementation class boardWriteServlet
  */
 @WebServlet("/boardWrite.bo")

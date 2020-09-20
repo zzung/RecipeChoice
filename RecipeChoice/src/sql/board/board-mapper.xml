@@ -54,5 +54,29 @@
 		  , ?
 		  )
 	</entry>
+	
+	<entry key="selectBoardDetail">
+		SELECT 
+		       B.BOARD_NO
+		     , B.USER_NO
+		     , M.MEM_ID
+		     , M.MEM_NAME
+		     , M.MEM_PIC
+		     , B.BOARD_TITLE
+		     , B.BOARD_CATEGORY
+		     , B.BOARD_CONTENT
+		     , B.CREATE_DATE
+		     , B.BOARD_COUNT
+		  FROM BOARD_VIEW B
+		  JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
+		 WHERE B.BOARD_NO = ?
+	</entry>
+	
+	<entry key="updateBoardCount">
+		UPDATE
+		       BOARD_VIEW
+		   SET BOARD_COUNT = BOARD_COUNT + 1
+		 WHERE BOARD_NO = ?
+	</entry>
 
 </properties>

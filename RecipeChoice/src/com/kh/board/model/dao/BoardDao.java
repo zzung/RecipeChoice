@@ -107,6 +107,12 @@ public class BoardDao {
 		
 	}
 
+	/**
+	 * 게시글을 DB에 insert함
+	 * @param conn
+	 * @param writed
+	 * @return
+	 */
 	public int insertBoardContent(Connection conn, Board writed) {
 
 		int result = 0;
@@ -125,6 +131,82 @@ public class BoardDao {
 			
 			result = pstmt.executeUpdate();
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 게시글 번호를 통해 게시글 상세 내용을 가져옴
+	 * @param conn
+	 * @param bno
+	 * @return
+	 */
+	public Board selectBoardDetail(Connection conn, int bno) {
+		
+		Board b = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectBoardDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				b = new Board(rs.getInt("BOARD_NO")
+						    , rs.getInt("USER_NO")
+						    , rs.getString("MEM_ID")
+						    , rs.getString("MEM_NAME")
+						    , rs.getString("MEM_PIC")
+						    , rs.getString("BOARD_TITLE")
+						    , rs.getString("BOARD_CATEGORY")
+						    , rs.getString("BOARD_CONTENT")
+						    , rs.getDate("CREATE_DATE")
+						    , rs.getInt("BOARD_COUNT")
+						    , "Y");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return b;
+	}
+
+	/**
+	 * 게시글 상세조회시 조회전에 해당게시글의 조회수 증가
+	 * @param conn
+	 * @param bno
+	 * @return
+	 */
+	public int updateBoardCount(Connection conn, int bno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateBoardCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+
+			result = pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
