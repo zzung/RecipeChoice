@@ -6,7 +6,7 @@
 
 #content {
 	width: 900px;
-	height: 1200px;
+	height: auto;
 	margin: auto;
 }
 
@@ -15,10 +15,21 @@
 	padding: 5px;
 }
 
-#contentMainPic {
+#titleImg {
 	width: 350px;
 	height: 350px;
 	border: 1px solid grey;
+}
+#titleImg:hover{
+	cursor:pointer; 
+}
+
+#detailImg:hover{
+	cursor:pointer;
+}
+#detailImg{
+	width:200px;
+	height:150px;
 }
 
 #userPic {
@@ -79,4 +90,22 @@
 	color: white;
 	border-radius: 50%;
 	display: inline-block;
+}
+
+#insertRecipe {
+	border: none;
+	background: rgb(39, 174, 96);
+	font-size: 16px;
+	color: white;
+	border-radius: 4px;
+	width: 100px;
+	height: 40px;
+}
+
+#insertRecipe:hover {
+	cursor: pointer;
+	opacity: 0.75;
+}
+.fileArea{
+	display:none; 
 }

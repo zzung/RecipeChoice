@@ -21,12 +21,12 @@
             <b><big>레시피 작성하기 </big></b>
           </p>
         </div>
-        <form action="" id="titleImg" method="POST" enctype="multipart/form-data">
+        <form action="" id="writeRecipe" method="POST" enctype="multipart/form-data">
           <table class="tb_writeRecipe">
             <tr>
             <!-- 왼쪽컬럼 -->
               <td class="leftContent" align="center">
-                <img src="" id="contentMainPic" /><br />
+                <img src="" id="titleImg" /><br />
                 <div class="userImg">
                   <img src="resources/image/logo/churro.png" id="userPic" style="width: 90px"/>
                   <br><br>
@@ -214,14 +214,81 @@
                   <i class="fa fa-minus" style="font-size: 14px"></i>
                 </button>
                 &nbsp;&nbsp;
-                <img src="" id="detailImg" width="200" height="150" />
+                <img src="" id="detailImg" />
               </td>
               <td align="center">
                 <span class="dot">1</span>&nbsp;&nbsp;
                 <textarea name="recipeDetail" id="text" cols="40" rows="5" style="resize: none"></textarea>
               </td>
             </tr>
+            
+            
           </table>
+           <div class="fileArea">
+            <input type="file" id="recipeWrite_mainPic" name="recipeWrite_mainPic" onchange="loadImg(this,1);" required/>
+            <input type="file" id="recipeWrite_detailPic" name="recipeWrite_detailPic" onchange="loadImg(this,1);">
+          </div>
+          <!-- 레시피작성 대표이미지 등록 -->
+          <script>
+            $(function () {
+              $("#titleImg").click(function () {
+                $("#recipeWrite_mainPic").click();
+              });
+            });
+
+            function loadImg(inputFile, num) {
+              if (inputFile.files.length == 1) {
+                var reader = new FileReader();
+                reader.readAsDataURL(inputFile.files[0]);
+                reader.onload = function (e) {
+
+                  if (num == 1) {
+                    $("#titleImg").attr("src", e.target.result);
+                  }
+                };
+              } else {
+                if (num == 1) {
+                  $("#titleImg").attr("src", null);
+                }
+              }
+            }
+          </script>
+          
+          <!-- 레시피작성 조리법 이미지 등록 -->
+          <script>
+          	$(function(){
+          		$("#detailImg").click(function(){
+          			$("#recipeWrite_detailPic").click();
+          		});
+          	});
+          		
+          		function loadImg(inputFile,num){
+          			if(inputFile.files.length == 1){
+          				var reader = new FileReader();
+          				reader.readAsDataURL(inputFile.files[0]);
+          				reader.onload = function(e){
+          					
+          					switch(num){
+          					case 1: 
+          						$("#detailImg").attr("src",e.target.result);
+          						break;
+          					}
+          					
+          				};
+          			}else{
+          				switch(num){
+          					case 1:
+          						$("#detailImg").attr("src",null);
+          						break; 
+          				}
+          			}
+          		}
+          </script>
+          <br><br>
+          <div align="right">
+            <button type="submit" id="insertRecipe">등록하기</button>
+          </div>
+          <br><br><br>
         </form>
       </div>
     </div>
@@ -230,7 +297,6 @@
     <%@include file="../common/footer.jsp" %>
     
     <script src="resources/js/bootstrap.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </body>
 </html>
