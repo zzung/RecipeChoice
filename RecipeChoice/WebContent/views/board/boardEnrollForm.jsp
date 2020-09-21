@@ -1,5 +1,11 @@
+<%@page import="com.kh.user.board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Board b = (Board)request.getServletContext().getAttribute("boardInfo");
+
+	String servletPath = "boardWrite.bo";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,10 +61,23 @@
         }
 
     </style>
+    <script>
+    	$(function () {
+    		<% if(b != null) { %>
+    			<% servletPath = "boardUpdate.bo"; %>
+	   			$("#categorySelect").children().each(function () {
+	   				var category = "<%= b.getCategory() %>";
+	   				if($(this).val() == category) {
+	   					$(this).prop("selected", true);
+	   				}
+	   			});
+   			<% } %>
+    	});
+    </script>
 </head>
 <body>
     <!-- 메뉴바 추가 -->
-
+    
     <div class="outer">
 
         <div align="right" style="width: 900px;">
@@ -80,7 +99,7 @@
         <br><br><br>
 
 
-        <form action="boardWrite.bo" id="insertForm" method="post">
+        <form action="<%= servletPath %>" id="insertForm" method="post">
 			
 			<!-- 2는 테스트용 로그인과 세션 구현시 실제 로그인한 유저의 번호 -->			
 			<input type="hidden" name="userNo" value="2">
@@ -90,13 +109,14 @@
                 <tr>
                     <th width="70px">카테고리</th>
                     <td width="500">
-                        <select class="custom-select" name="category">
+                        <select id="categorySelect" class="custom-select" name="category">
                             <option value="일상" selected>일상</option>
                             <option value="후기">후기</option>
                         </select>
                     </td>
                 </tr>
                 
+                <% if(b == null) { %>
                 <tr>
                     <th>제목</th>
                     <td><input class="form-control" type="text" name="title" placeholder="제목을 입력해주세요" required></td>
@@ -112,11 +132,36 @@
                             tabsize: 2,
                             height: 400
                         });
-                        // $('#summernote').summernote('code', "아아아아아아");
                         </script>
                     </td>
                 </tr>
+                <% } else { %>
+        		<tr>
+                    <th>제목</th>
+                    <td>
+                    	<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
+                    	<input class="form-control" type="text" name="title" placeholder="제목을 입력해주세요" value="<%= b.getBoardTitle() %>" required>
+                    </td>
+                    
+                </tr>
         
+                <tr>
+                    <th>내용</th>
+                    <td>
+                        <textarea id="summernote" name="content"></textarea>
+                        <script>
+                        
+                        $('#summernote').summernote({
+                            tabsize: 2,
+                            height: 400
+                        });
+                        
+						$("#summernote").summernote('code', '<%= b.getBoardContent() %>');
+                        
+                        </script>
+                    </td>
+                </tr>
+        		<% } %>
             </table>
         
             <br>

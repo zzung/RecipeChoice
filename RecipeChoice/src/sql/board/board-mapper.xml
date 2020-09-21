@@ -78,5 +78,21 @@
 		   SET BOARD_COUNT = BOARD_COUNT + 1
 		 WHERE BOARD_NO = ?
 	</entry>
+	
+	<entry key="updateBoardContent">
+		UPDATE
+		       BOARD_VIEW
+		   SET BOARD_TITLE = ?
+		     , BOARD_CATEGORY = ?
+		     , BOARD_CONTENT = ?
+		 WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="deleteBoardContent">
+		UPDATE
+		       BOARD
+		   SET STATUS = 'N'
+		 WHERE BOARD_NO = ?
+	</entry>
 
 </properties>
