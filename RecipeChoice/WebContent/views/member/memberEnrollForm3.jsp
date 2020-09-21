@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +93,7 @@
             <h6 align="center">바로 로그인 하시려면 아래 로그인버튼을 눌러주세요</h6><br>
         </div>
        
-        <button type="button" id="login_btn" class="btn btn-success">로그인</button>
+        <a href="<%=contextPath%>/login.me" id="login_btn" class="btn btn-success">로그인</a>
     </div>
 </body>
 </html>

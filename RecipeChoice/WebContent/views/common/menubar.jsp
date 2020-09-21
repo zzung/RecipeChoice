@@ -45,7 +45,8 @@
 						<img src="resources/image/navbar/user.png" alt="logo" style="width: 30px;">
 					</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">회원가입</a>
+						<a class="dropdown-item" href="<%=contextPath%>/enrollForm.me">회원가입</a>
+						<a class="dropdown-item" href="<%=contextPath%>/login.me">로그인</a>
 					</div>
 				</li>
 				<li class="nav-item margin-top">
