@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.user.board.model.vo.Board;
+import com.kh.user.board.model.service.BoardService;
 
 /**
- * Servlet implementation class BoardWriteFormViewServlet
+ * Servlet implementation class BoardDeleteServlet
  */
-@WebServlet("/boardWriteForm.bo")
-public class BoardWriteFormViewServlet extends HttpServlet {
+@WebServlet("/boardDelete.bo")
+public class BoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardWriteFormViewServlet() {
+    public BoardDeleteServlet() {
         super();
     }
 
@@ -28,7 +28,17 @@ public class BoardWriteFormViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/views/board/boardEnrollForm.jsp").forward(request, response);
+		int bno = Integer.parseInt(request.getParameter("bno"));
+
+		int result = new BoardService().deleteBoardContent(bno);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "작성글을 성공적으로 삭제하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/board.bo?p=1");
+		} else {
+			request.getSession().setAttribute("alertMsg", "작성글 삭제에 실패했습니다");
+			response.sendRedirect(request.getContextPath() + "/boardView.bo?bno=" + bno);
+		}
 		
 	}
 

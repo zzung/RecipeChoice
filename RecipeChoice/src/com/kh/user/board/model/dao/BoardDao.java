@@ -216,4 +216,66 @@ public class BoardDao {
 		return result;
 	}
 
+	/**
+	 * 게시글 수정
+	 * @param conn
+	 * @param update
+	 * @return
+	 */
+	public int updateBoardContent(Connection conn, Board update) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateBoardContent");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, update.getBoardTitle());
+			pstmt.setString(2, update.getCategory());
+			pstmt.setString(3, update.getBoardContent());
+			pstmt.setInt(4, update.getBoardNo());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 게시글 삭제
+	 * @param conn
+	 * @param bno
+	 * @return
+	 */
+	public int deleteBoardContent(Connection conn, int bno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteBoardContent");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
