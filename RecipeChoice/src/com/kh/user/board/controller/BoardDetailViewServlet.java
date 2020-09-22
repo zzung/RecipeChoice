@@ -1,6 +1,7 @@
 package com.kh.user.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.user.board.model.service.BoardService;
 import com.kh.user.board.model.vo.Board;
+import com.kh.user.board.model.vo.Reply;
 
 /**
  * Servlet implementation class BoardDetailViewServlet
@@ -60,6 +62,19 @@ public class BoardDetailViewServlet extends HttpServlet {
 		if(b == null) {
 			notExistError(request, response, session);
 		} else {
+			
+			int topReplyNo = new BoardService().replyTopNo(bno);
+		
+			request.setAttribute("topReplyNo", topReplyNo);
+			
+			int replyCount = new BoardService().replyMaxCount(bno);
+			
+			request.setAttribute("replyCount", replyCount);
+			
+			ArrayList<Reply> replyList = new BoardService().selectReplyList(bno, 1, 10);
+			
+			request.setAttribute("replyList", replyList);
+			
 			request.setAttribute("boardDetail", b);
 			request.getRequestDispatcher("/views/board/boardDetailView.jsp").forward(request, response);
 		}

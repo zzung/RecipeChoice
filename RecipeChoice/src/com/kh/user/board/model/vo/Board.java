@@ -1,7 +1,5 @@
 package com.kh.user.board.model.vo;
 
-import java.sql.Date;
-
 public class Board {
 
 	private int boardNo;			// 게시판 번호
@@ -12,14 +10,14 @@ public class Board {
 	private String boardTitle;		// 게시판 제목
 	private String category;		// 카테고리
 	private String boardContent;	// 게시판 내용
-	private Date createDate;		// 작성일
+	private String createDate;		// 작성일
 	private int boardCount;			// 조회수
 	private String status;			// 상태
 	
 	public Board() {}
 
 	public Board(int boardNo, int userNo, String memId, String memName, String memPic, String boardTitle,
-			String category, String boardContent, Date createDate, int boardCount, String status) {
+			String category, String boardContent, String createDate, int boardCount, String status) {
 		super();
 		this.boardNo = boardNo;
 		this.userNo = userNo;
@@ -37,7 +35,7 @@ public class Board {
 
 
 	public Board(int boardNo, int userNo, String memName, String memPic, String boardTitle, String category,
-			String boardContent, Date createDate) {
+			String boardContent, String createDate) {
 		super();
 		this.boardNo = boardNo;
 		this.userNo = userNo;
@@ -105,11 +103,11 @@ public class Board {
 		this.boardContent = boardContent;
 	}
 
-	public Date getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
 
