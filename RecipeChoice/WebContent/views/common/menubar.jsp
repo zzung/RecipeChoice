@@ -58,7 +58,7 @@
 				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> 고객센터 </a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="<%= contextPath %>/serviceCenter.no">이용 방법</a> 
-						<a class="dropdown-item" href="#">공지사항</a> 
+						<a class="dropdown-item" href="<%= contextPath%>/notice.no">공지사항</a> 
 						<a class="dropdown-item" href="#">FAQ</a> 
 						<a class="dropdown-item" href="#">1:1 문의</a> 
 						<a class="dropdown-item" href="#">개인정보취급방침</a>

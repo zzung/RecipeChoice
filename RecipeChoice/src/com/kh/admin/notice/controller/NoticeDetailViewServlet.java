@@ -7,17 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/notice.no")
-public class NoticeListServlet extends HttpServlet {
+@WebServlet("/noticeDetail.no")
+public class NoticeDetailViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public NoticeListServlet() {
+    public NoticeDetailViewServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("views/notice/noticeList.jsp").forward(request, response);
+
+	
 	
 	}
 

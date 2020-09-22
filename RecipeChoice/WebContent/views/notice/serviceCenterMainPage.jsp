@@ -68,7 +68,7 @@
         <div id="content">
             <div id="content_1">
                 <div id="menu_1">고객센터</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/notice.no'">&nbsp;&nbsp;&nbsp;공지사항</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1 문의</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;개인정보취급방침</div>
@@ -84,21 +84,21 @@
 				<br><br>
                 <h4>&nbsp;&nbsp;&nbsp;&nbsp;고객센터 이렇게 이용하세요 !</h4>
                 <hr><br><br>
-                <img src="resources/image/navbar/serviceCenter.jpg" align="center">
+                <img src="resources/image/admin/serviceCenter.jpg" align="center">
 				
 				<br>
                 <table>
                     <tr>
                         <td style="width: 350px">
-                            궁금한 사항을 자주 묻는  <br> 질문에서 먼저 확인 하세요 <br><br>
-                            <a href="" class="btn btn-secondary">&nbsp;GO&nbsp;</a>
+	                                                     궁금한 사항을 자주 묻는  <br> 질문에서 먼저 확인 하세요 <br><br>
+	                        <a href="" class="btn btn-secondary">&nbsp;GO&nbsp;</a>
                         </td>
                         <td style="width: 500px">
-                            원하는 답변이 없을 경우 <br> 운영자에게 1:1 문의를 남겨주세요 <br><br>
-                            <a href="" class="btn btn-secondary">&nbsp;GO&nbsp;</a>
+	                                                     원하는 답변이 없을 경우 <br> 운영자에게 1:1 문의를 남겨주세요 <br><br>
+	                        <a href="" class="btn btn-secondary">&nbsp;GO&nbsp;</a>
                         </td>
                         <td style="width: 300px">
-                            접수하신 문의내용을 <br> 확인해주세요 <br><br>
+                                                              접수하신 문의내용을 <br> 확인해주세요 <br><br>
                             <a href="" class="btn btn-secondary">&nbsp;GO&nbsp;</a>
                         </td>
                     </tr>
