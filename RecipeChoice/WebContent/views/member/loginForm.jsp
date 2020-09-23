@@ -9,50 +9,57 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
  <style>
-     <style>
-    .outer{
+        .wrap{
+            width:1000px;
+            height:1000px;
+            padding:100px 10px 300px 510px;
+            /* margin: auto; */
+        }
+          #login_form_etc a, a:hover{
+              color: black;
+            text-decoration: none;
+            vertical-align: middle;
+            font-size: 15px;
+          }
+        .clickLink a, a:hover {
+            color: black;
+            text-decoration: none;
+            vertical-align: middle;
+            font-size: 15px;
+        }
+        #login_btn{
+            width: 310px;
+        }
+        #login_form td{
+           padding: 5px 10px 20px 10px;
+        }
+        #login_form{
+            /*margin-top: 10px; */
+            border: solid 1px green;
+            padding: 20px;
+            width:100%;
+            height:380px;
+         
+        }
+      
+          .clickLink{
+            width:150px;
+            margin: 100px 200px 60px 600px;
+        }
+        #login_form_etc{
+            margin-top: 30px;
+        }
     
-        width:600px;
-        height:800px;
-        /* border:solid 1px; */
-        margin: auto;
-        margin-top: 160px;
-        
-    }
-    a, a:hover {
-    color: black;
-    text-decoration: none;
-    vertical-align: middle;
-    font-size: 15px;
-
-    }
-    #login_btn{
-        width: 300px;
-    }
-    #login_form td{
-       padding: 0px 10px 20px 20px;
-    }
-    #login_form{
-        margin-top: 100px;
-        border: solid 1px green;
-        padding: 20px;
-        width:450px;
-        margin: auto;
-    }
-  
-      .click_link{
-        margin: 160px 50px 60px 240px;
-    }
-    </style>
- </style>   
+     </style>     
 </head>
 <body>
     <!-- 메뉴바 추가 -->
 <%@include file="../common/menubar.jsp" %>
 
-	<div class="outer">
-	    <div align="right" class="click_link" style="width: 900px;">
+	<div class="wrap">
+	    <div align="right" class="clickLink" >
 	
 	        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48" data-svg-content="true" fill="#000000" style="vertical-align: middle;">
 	            <path d="M20 40V28h8v12h10V24h6L24 6 4 24h6v16z"></path>
@@ -74,7 +81,7 @@
 	                <table align="center">
 	                    <tr>
 	                        <td> 아이디</td>
-	                        <td><input type="text" name="userId" class="form-control" style="height:30px;"maxlength="12" placeholder=" 아이디를 입력하세요"required></td><br>
+	                        <td><input type="text" name="userId" class="form-control" style="height:30px;width:230px;"maxlength="12" placeholder=" 아이디를 입력하세요"required></td><br>
 	                        <td></td>
 	                    </tr>
 	                    <tr>
@@ -87,30 +94,17 @@
 	                        </td>
 	                    </tr>
 	                </table>
-	        
-	    
 	            </form>
 	    
 	            <!-- 2_2. 회원가입페이지, ID/PWD 찾기 페이지 이동용 a 가 들어갈 영역-->
 	            <div id="login_form_etc" align="center">
-	                <a href="">회원가입 </a> 
-	                <a href="">ID 찾기 </a> 
+	                <a href="">회원가입 |</a> 
+	                <a href="">ID 찾기 |</a> 
 	                <a href="">PWD 찾기 </a>
 	            </div>
 	    
 	        </div>
-	    </div>
-	
+    </div>
 
-
-
-
-   
-       
-      
-<script src="resources/js/bootstrap.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </body>
 </html>

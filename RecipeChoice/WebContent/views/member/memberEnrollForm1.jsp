@@ -11,16 +11,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     
   <style>
+  	.wrap{
+  	
+  	width:1000px;
+  	height:1000px;
+  	padding: 0px 200px 30px 500px;
+  	
+  	}
+  	
     .enroll{
     
-        width:600px;
-        height:800px;
-  
-        margin: auto;
-        margin-top: 50px;
+       width:600px;
+       height:700px;
+       margin: auto;
+       margin-top: 50px;
         
     }
-    a, a:hover {
+    .clickLink a, a:hover {
     color: black;
     text-decoration: none;
     vertical-align: middle;
@@ -69,19 +76,20 @@
         font-size: 14px;
         padding: 8px 17px 8px 17px;
        
-    }
-      .click_link{
-        margin: 160px 50px 60px 300px;
-    }
+	 }
+      .clickLink{
+        width:200px;
+        margin: 200px 170px 10px 650px;
+     }
     </style> 
 </head>
 <body>
     <!-- 메뉴바 추가 -->
 <%@include file="../common/menubar.jsp" %>  
 
-    <div class="outer">
+    <div class="wrap">
 		
-	    <div align="right" class="click_link" style="width: 900px;">
+	    <div class="clickLink">
 	
 	        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48" data-svg-content="true" fill="#000000" style="vertical-align: middle;">
 	            <path d="M20 40V28h8v12h10V24h6L24 6 4 24h6v16z"></path>
@@ -121,7 +129,8 @@
 	        </div>
 	        <p class="agree" align="right"><input type="checkbox" id="contractCheck2" value="2" > 동의합니다</p>
 	    
-	        <button type="button" id="agree_btn" class="btn btn-success">다음</button>
+	        <a href="<%=contextPath%>/enrollForm2.me" type="button" id="agree_btn" class="btn btn-success">다음</a>
     </div>
+   
 </body>
 </html>
