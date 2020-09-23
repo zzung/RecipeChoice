@@ -89,7 +89,8 @@
 </head>
 <body>
 	<!-- 메뉴바 추가 -->
-	 <%@include file="../common/menubar.jsp" %>
+	
+	<%@include file="../common/menubar.jsp" %>
 	<div class="wrap">
         <div id="header">
             <div id="header_1"></div>
