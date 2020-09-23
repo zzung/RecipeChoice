@@ -1,28 +1,25 @@
-package com.kh.user.board.controller;
+package com.kh.user.reply.controller;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.user.board.model.service.BoardService;
-import com.kh.user.board.model.vo.Board;
+import com.kh.user.reply.model.service.ReplyService;
 
 /**
- * Servlet implementation class BoardWriteFormViewServlet
+ * Servlet implementation class ReplyChangeServlet
  */
-@WebServlet("/boardWriteForm.bo")
-public class BoardWriteFormViewServlet extends HttpServlet {
+@WebServlet("/replyChange.re")
+public class ReplyChangeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardWriteFormViewServlet() {
+    public ReplyChangeServlet() {
         super();
     }
 
@@ -31,20 +28,12 @@ public class BoardWriteFormViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String getBno = request.getParameter("bno");
-		String regex = "^[0-9]*$";
+		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
+		String replyContent = request.getParameter("replyContent");
 		
-		if(getBno != null && Pattern.matches(regex, getBno)) {
-			int bno = Integer.parseInt(getBno);
-			
-			Board b = new BoardService().selectBoardDetail(bno);
-			
-			if(b != null) {
-				request.setAttribute("boardInfo", b);
-			}
-		}
+		int result = new ReplyService().replyUpdate(replyNo, replyContent);
 		
-		request.getRequestDispatcher("/views/board/boardEnrollForm.jsp").forward(request, response);
+		response.getWriter().print(result);
 		
 	}
 

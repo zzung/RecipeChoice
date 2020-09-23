@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import com.kh.user.board.model.dao.BoardDao;
 import com.kh.user.board.model.vo.Board;
 import com.kh.user.board.model.vo.PageInfo;
-import com.kh.user.board.model.vo.Reply;
 
 public class BoardService {
 
@@ -110,36 +109,5 @@ public class BoardService {
 		return result;
 	}
 
-	public int replyMaxCount(int bno) {
-		
-		Connection conn = getConnection();
-		
-		int replyCount = new BoardDao().replyMaxCount(conn, bno);
-		
-		close(conn);
-		
-		return replyCount;
-	}
-
-	public ArrayList<Reply> selectReplyList(int bno, int start, int maxReply) {
-		
-		Connection conn = getConnection();
-		
-		ArrayList<Reply> replyList = new BoardDao().selectReplyList(conn, bno, start, maxReply);
-		
-		close(conn);
-		
-		return replyList;
-	}
-
-	public int replyTopNo(int bno) {
-		Connection conn = getConnection();
-		
-		int topReplyNo = new BoardDao().replyTopNo(conn, bno);
-		
-		close(conn);
-		
-		return topReplyNo;
-	}
 
 }

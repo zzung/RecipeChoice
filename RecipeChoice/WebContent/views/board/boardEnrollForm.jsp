@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Board b = (Board)request.getServletContext().getAttribute("boardInfo");
+	Board b = (Board)request.getAttribute("boardInfo");
 
 	String servletPath = "boardWrite.bo";
 %>
@@ -153,6 +153,7 @@
                         
                         $('#summernote').summernote({
                             tabsize: 2,
+                            width:710,
                             height: 400
                         });
                         
@@ -167,6 +168,7 @@
             <br>
 
             <div align="right" style="width: 890px;">
+            	<% // TODO 버튼 색갈 변경 필요 %>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkModal">등록하기</button>
             </div>
 

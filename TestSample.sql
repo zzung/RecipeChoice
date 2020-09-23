@@ -91,7 +91,7 @@ SELECT *
                      , B.BOARD_TITLE
                      , B.BOARD_CATEGORY
                      , B.BOARD_CONTENT
-                     , B.CREATE_DATE
+                     , TO_CHAR(B.CREATE_DATE, 'yyyy-MM-dd') CREATE_DATE
                   FROM BOARD_VIEW B
                   JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
                  ORDER
@@ -141,14 +141,14 @@ CREATE OR REPLACE VIEW BOARD_REPLY_VIEW AS
 SELECT *
   FROM REPLY
  WHERE STATUS = 'Y'
-   AND BOARD_TYPE = '자유'
  ORDER
     BY BRE_DATE DESC;
   
 -- 해당 게시글의 댓글 개수를 가져옴
 SELECT COUNT(*)
   FROM BOARD_REPLY_VIEW
- WHERE BOARD_NO = 396;
+ WHERE BOARD_NO = 396
+   AND BOARD_TYPE = '자유';
 
 -- 해당 게시글 최상단 댓글 번호
 SELECT BRE_NO
@@ -156,6 +156,7 @@ SELECT BRE_NO
         SELECT ROWNUM RNO, BRE_NO
           FROM BOARD_REPLY_VIEW
          WHERE BOARD_NO = 396
+           AND BOARD_TYPE = '자유'
        )
  WHERE RNO = 1;
 
@@ -174,7 +175,14 @@ SELECT *
           FROM BOARD_REPLY_VIEW B
           JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
          WHERE BOARD_NO = 396
+           AND BOARD_TYPE = '자유'
         )
  WHERE RNO BETWEEN 1 AND 10;
+ 
+-- 댓글 변경
+UPDATE
+       BOARD_REPLY_VIEW
+   SET BRE_CONTENT = '수정함'
+ WHERE BRE_NO = 131;
  
 ROLLBACK;

@@ -1,4 +1,4 @@
-package com.kh.user.board.model.vo;
+package com.kh.user.reply.model.vo;
 
 public class Reply {
 	

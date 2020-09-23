@@ -1,4 +1,4 @@
-<%@page import="com.kh.user.board.model.vo.Reply"%>
+<%@page import="com.kh.user.reply.model.vo.Reply"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.kh.user.board.model.vo.Board"%>
@@ -6,20 +6,6 @@
     pageEncoding="UTF-8"%>
 <%
 	Board b = (Board)request.getAttribute("boardDetail");
-	
-	int topReplyNo = (Integer)request.getAttribute("topReplyNo");
-	int replyCount = (Integer)request.getAttribute("replyCount");
-	
-	ArrayList<Reply> replyList = new ArrayList<Reply>();
-	if(request.getAttribute("replyList") instanceof ArrayList) {
-		ArrayList<?> tmpList = (ArrayList<?>)request.getAttribute("replyList");
-		for(Object obj : tmpList) {
-			if(obj instanceof Reply) {
-				replyList.add((Reply)obj);
-			}
-		}
-	}
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -135,13 +121,16 @@
     </style>
     <script>
         var preHtml = "";
-		var maxReply = 10;
-		var replyCount = <%= replyCount %>;
-		var topReplyNo = <%= topReplyNo %>;
+		var maxReply = 0;
+		var replyCount = 0;
+		var topReplyNo = 0;
+		var type = '자유';
 		
 		var contextPath = "<%= request.getContextPath() %>";
 		
         $(function () {
+        	
+        	selectReply();
         	
         	$(document).scroll(function() {
 	        	if(maxReply < replyCount) {
@@ -149,71 +138,7 @@
 	        	    var currentScroll = $(window).scrollTop() + $(window).height();
 	
 	        	    if (maxHeight <= currentScroll + 100) {
-							$.ajax({
-							url: 'replyAppend.bo',
-							data: {
-								bno:<%= b.getBoardNo() %>,
-								topReplyNo:topReplyNo,
-								replyCount:replyCount,
-								maxReply:maxReply
-							},
-							type: 'get',
-							async: false,
-							success: function (json) {
-								
-								console.log(JSON.parse(json[0]));
-								
-								var replyList = JSON.parse(json[0]);
-								
-								if(replyList.length > 10) {
-									$("#replylistArea>tbody").html("");
-								}
-								
-								for (var i = 0, max = replyList.length; i < max; i++) {
-									
-									var picPath = contextPath + "/resources/image/board/defaultprofile.png";
-									
-									if(replyList[i].memPic != null) {
-										picPath = contextPath + "/replyList[i].memPic";
-									}
-									
-									$("#replylistArea>tbody").append(
-											'<tr>' +
-						                    '	<td width="10%" align="center">' +
-						                    '		<img src=' + '"' + picPath + '"' + ' class="profileImg" width="50px" height="50px">' +
-						                    '	</td>' +
-							                '	<td width="90%" style="padding-right: 30px;">' +
-						                    '   	<div align="left" style="color: gray;">' +
-						                    '   		<b style="color: rgb(9, 175, 79); margin-right: 20px;" id="writerNickName">' + replyList[i].memName + '</b>' +
-						                    			replyList[i].createDate + 
-						                    '        	| <a onclick="callChangeForm(this)" style="color: gray; cursor: pointer;">수정</a>' +
-						                    '        	| <a href="#replyDeleteModal" data-toggle="modal" data-target="#replyDeleteModal" data-no="3" onclick="modalGetEl(this)" style="color: gray">삭제</a>' +
-						                    '        	| <a href="#reportModal" data-toggle="modal" data-target="#reportModal" data-no="3" onclick="reportContent(this)" style="color: gray">신고</a>' +
-						                    '   	</div>' +
-						                    '    	<div id="replyConent">' +
-						                    			replyList[i].replyContent +
-						                    '    	</div>' +
-						                    '	</td>' +
-							            	'</tr>' +
-							            	'<tr>' +
-						                    '	<td colspan="2">' +
-						                    '		<div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>' +
-						                    '	</td>' +
-						                	'</tr>'
-									);
-								}
-								
-								topReplyNo = json[1];
-								replyCount = json[2];
-								maxReply += 10;
-								
-								console.log(maxReply);
-								
-							},
-							error: function () {
-								console.log("통신 실패");	
-							}
-						});
+	        	    	selectReply();
 	        	    }
 	        	}
        	  	});
@@ -226,6 +151,10 @@
             }); 
         });
 
+        function isEmptyObject(e) {
+        	return Object.keys(e).length() === 0 && e.constructor === Object;
+        }
+        
         function modalGetEl(e) {
             $("#deleteReplyNo").val($(e).data("no"));
         }
@@ -234,28 +163,36 @@
 
             preHtml = $(e).parents('tr').html();
             var writer = $(e).siblings("#writerNickName").text();
-            var text = $(e).parent().siblings("#replyConent").text().trim();
+            var text = $(e).parent().siblings("#replyContent").text().trim();
+            var replyNo = $(e).data("no");
 
             var trimText = text.replace(/\s{2,}/gm,""); 
 
+            var $changeFormSearch = $("#replyChangeForm");
+            
+            if($changeFormSearch.length > 0) {
+            	changeCancel($changeFormSearch);
+            }
+            
             $(e).parents('tr').html(
-                '<td colspan="2" width="90%" style="padding: 20px 40px; border: 1px solid gray">' +
+                '<td id="replyChangeForm" colspan="2" width="90%" style="padding: 20px 40px; border: 1px solid gray">' +
                     '<div align="left" style="color: gray;">' +
                         '<b style="color: rgb(9, 175, 79); margin-right: 20px;">' +  writer + '</b>' +
-                        '<a style="color: gray; padding-left: 550px; cursor: pointer;" onclick="reDeleteCancel(this)">취소</a>' +
+                        '<a style="color: gray; padding-left: 550px; cursor: pointer;" onclick="changeCancel(this)">취소</a>' +
                     '</div>' +
                     '<br>' +
                     '<textarea class="form-control" id="reChangeArea" rows="4" style="resize: none;">' +
                     trimText +
                     '</textarea>' +
                     '<div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>' +
-                    '<input type="button" class="btn btn-primary reChangebtn" value="등록">' +
+                    '<input id="changeReplyNo" type="hidden" value="' + replyNo + '">' +
+                    '<input type="button" class="btn btn-primary reChangebtn" value="등록" onclick="replyChangeAjax()">' +
                 '</td>'
             );
 
         }
 
-        function reDeleteCancel(e) {
+        function changeCancel(e) {
             $(e).parents('tr').html(preHtml);
         }
 
@@ -285,9 +222,113 @@
 
         }
         
-        function updateForm() {
-        	<% pageContext.setAttribute("boardInfo", b, PageContext.APPLICATION_SCOPE); %>
+        // 댓글조회 ajax
+        function selectReply() {
+			$.ajax({
+				url: 'replyAppend.re',
+				data: {
+					bno:<%= b.getBoardNo() %>,
+					topReplyNo:topReplyNo,
+					replyCount:replyCount,
+					maxReply:maxReply,
+					boardType:type
+				},
+				type: 'post',
+				async: false,
+				success: function (json) {
+				
+					var replyList = JSON.parse(json[0]);
+					
+					if(replyList.length > 10) {
+						$("#replylistArea>tbody").html(
+							'<tr>' +
+			                    '<td colspan="2">' +
+			                        '<div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>' +
+			                    '</td>' +
+			                '</tr>'
+						);
+					}
+					
+					for (var i = 0, max = replyList.length; i < max; i++) {
+						
+						var picPath = contextPath + "/resources/image/board/defaultprofile.png";
+						
+						if(replyList[i].memPic != null) {
+							picPath = contextPath + replyList[i].memPic;
+						}
+						
+						$("#replylistArea>tbody").append(
+								'<tr>' +
+			                    '	<td width="10%" align="center">' +
+			                    '		<img src=' + '"' + picPath + '"' + ' class="profileImg" width="50px" height="50px">' +
+			                    '	</td>' +
+				                '	<td width="90%" style="padding-right: 30px;">' +
+			                    '   	<div align="left" style="color: gray;">' +
+			                    '   		<b style="color: rgb(9, 175, 79); margin-right: 20px;" id="writerNickName">' + replyList[i].memName + '</b>' +
+			                    			replyList[i].createDate + 
+			                    '        	| <a onclick="callChangeForm(this)" data-no="' + replyList[i].boardReplyNo + '" style="color: gray; cursor: pointer;">수정</a>' +
+			                    '        	| <a href="#replyDeleteModal" data-toggle="modal" data-target="#replyDeleteModal" data-no="' + replyList[i].boardReplyNo + '" onclick="modalGetEl(this)" style="color: gray">삭제</a>' +
+			                    '        	| <a href="#reportModal" data-toggle="modal" data-target="#reportModal" data-no="' + replyList[i].boardReplyNo + '" onclick="reportContent(this)" style="color: gray">신고</a>' +
+			                    '   	</div>' +
+			                    '    	<div id="replyContent">' +
+			                    			replyList[i].replyContent +
+			                    '    	</div>' +
+			                    '	</td>' +
+				            	'</tr>' +
+				            	'<tr>' +
+			                    '	<td colspan="2">' +
+			                    '		<div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>' +
+			                    '	</td>' +
+			                	'</tr>'
+						);
+					}
+				
+					topReplyNo = json[1];
+					
+					
+					replyCount = json[2];
+					
+					$("#replyCount").html("댓글 " + replyCount);
+					
+					maxReply += 10;
+				
+				},
+				error: function () {
+					console.log("통신 실패");	
+				}
+			});
         }
+        
+        // 댓글 수정
+        function replyChangeAjax() {
+        	
+        	var changeContent = $("#reChangeArea").val();
+        	
+        	$.ajax({
+				url: 'replyChange.re',
+				data: {
+					replyNo:$("#changeReplyNo").val(),
+					replyContent:changeContent,
+				},
+				type: 'post',
+				success: function (result) {
+					
+					var $tr = $("#replyChangeForm").parents('tr');
+
+					$tr.html(preHtml);
+					
+					if(result > 0) {
+						$tr.find("#replyContent").html(changeContent);
+					} else {
+						alert("수정에 실패했습니다.");
+					}
+					
+				},
+				error: function () {
+					console.log("통신 실패");	
+				}
+			});
+		}
     </script>
 </head>
 <body>
@@ -337,7 +378,7 @@
                 
                 <!-- 수정과 삭제버튼은 로그인시에만 보이도록 수정 -->
                 <td width="87%" align="right">
-                    <a href="<%= request.getContextPath() %>/boardWriteForm.bo" onclick="updateForm()">
+                    <a href="<%= request.getContextPath() %>/boardWriteForm.bo?bno=<%= b.getBoardNo() %>">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32.24800109863281" height="32.24800109863281" viewBox="0 0 32.24800109863281 32.24800109863281" fill="#000000" data-svg-content="true"><g><path d="M 21.172,21.172L 19.39,15.792L 9.11,5.512L 5.512,9.11L 15.792,19.39 zM 0.746,0.746c-0.994,0.994-0.994,2.604,0,3.598l 2.648,2.648l 3.598-3.598L 4.344,0.746 C 3.35-0.248, 1.74-0.248, 0.746,0.746zM 30,6L 15.822,6 l 2,2L 30,8 l0,22 L 8,30 L 8,17.822 l-2-2L 6,30 c0,1.104, 0.896,2, 2,2l 22,0 c 1.104,0, 2-0.896, 2-2L 32,8 C 32,6.896, 31.104,6, 30,6z"></path></g></svg>
                     </a>
                 </td>
@@ -372,7 +413,7 @@
 
             <br><br>
 
-            <h4 class="replytitle" align="left">댓글 <%= replyCount %></h4>
+            <h4 id="replyCount" class="replytitle" align="left"></h4>
 
             <table id="replylistArea" class="replylistArea" style="margin: 0px auto; width: 800px;">
                 <tr>
@@ -380,34 +421,7 @@
                         <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
                     </td>
                 </tr>
-                <% for(Reply reply : replyList) { %>
-	            <tr>
-	            	<% if(reply.getMemPic() == null) { %>
-                    <td width="10%" align="center"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" class="profileImg" width="50px" height="50px"></td>
-	                <% } else { %>
-                    <td width="10%" align="center"><img src="<%= request.getContextPath() %>/<%= reply.getMemPic() %>" class="profileImg" width="50px" height="50px"></td>
-	                <% } %>
-	                <td width="90%" style="padding-right: 30px;">
-                        <div align="left" style="color: gray;">
-                            <b style="color: rgb(9, 175, 79); margin-right: 20px;" id="writerNickName"><%= reply.getMemName() %></b>
-                            <%= reply.getCreateDate() %>
-                            <!-- 작성자일경우에만 표시 -->
-                            | <a onclick="callChangeForm(this)" style="color: gray; cursor: pointer;">수정</a>
-                            | <a href="#replyDeleteModal" data-toggle="modal" data-target="#replyDeleteModal" data-no="3" onclick="modalGetEl(this)" style="color: gray">삭제</a>
-                            <!-- 항상표시 -->
-                            | <a href="#reportModal" data-toggle="modal" data-target="#reportModal" data-no="3" onclick="reportContent(this)" style="color: gray">신고</a>
-                        </div>
-                        <div id="replyConent">
-                            <%= reply.getReplyContent() %>
-                        </div>
-                    </td>
-	            </tr>
-	            <tr>
-                    <td colspan="2">
-                        <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
-                    </td>
-                </tr>
-	            <% } %>
+                <!-- 조회된 댓글 출력 -->
             </table>
 
        	</div>
