@@ -18,8 +18,6 @@
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	
 %>    
@@ -220,7 +218,7 @@
                     <div class="content">
                     	<%= b.getBoardContent() %>
                     </div>
-                    <div align="right" style="padding-right: 20px; color: gray;"><%= sdf.format(b.getCreateDate()) %></div>
+                    <div align="right" style="padding-right: 20px; color: gray;"><%= b.getCreateDate() %></div>
                 </td>
             </tr>
             <tr class="bar">

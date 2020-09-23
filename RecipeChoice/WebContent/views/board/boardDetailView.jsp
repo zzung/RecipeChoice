@@ -1,18 +1,32 @@
+<%@page import="com.kh.user.board.model.vo.Reply"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.kh.user.board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	Board b = (Board)request.getAttribute("boardDetail");
-
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	int topReplyNo = (Integer)request.getAttribute("topReplyNo");
+	int replyCount = (Integer)request.getAttribute("replyCount");
+	
+	ArrayList<Reply> replyList = new ArrayList<Reply>();
+	if(request.getAttribute("replyList") instanceof ArrayList) {
+		ArrayList<?> tmpList = (ArrayList<?>)request.getAttribute("replyList");
+		for(Object obj : tmpList) {
+			if(obj instanceof Reply) {
+				replyList.add((Reply)obj);
+			}
+		}
+	}
+	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <title>Document</title>
@@ -121,8 +135,90 @@
     </style>
     <script>
         var preHtml = "";
-
+		var maxReply = 10;
+		var replyCount = <%= replyCount %>;
+		var topReplyNo = <%= topReplyNo %>;
+		
+		var contextPath = "<%= request.getContextPath() %>";
+		
         $(function () {
+        	
+        	$(document).scroll(function() {
+	        	if(maxReply < replyCount) {
+	        	    var maxHeight = $(document).height();
+	        	    var currentScroll = $(window).scrollTop() + $(window).height();
+	
+	        	    if (maxHeight <= currentScroll + 100) {
+							$.ajax({
+							url: 'replyAppend.bo',
+							data: {
+								bno:<%= b.getBoardNo() %>,
+								topReplyNo:topReplyNo,
+								replyCount:replyCount,
+								maxReply:maxReply
+							},
+							type: 'get',
+							async: false,
+							success: function (json) {
+								
+								console.log(JSON.parse(json[0]));
+								
+								var replyList = JSON.parse(json[0]);
+								
+								if(replyList.length > 10) {
+									$("#replylistArea>tbody").html("");
+								}
+								
+								for (var i = 0, max = replyList.length; i < max; i++) {
+									
+									var picPath = contextPath + "/resources/image/board/defaultprofile.png";
+									
+									if(replyList[i].memPic != null) {
+										picPath = contextPath + "/replyList[i].memPic";
+									}
+									
+									$("#replylistArea>tbody").append(
+											'<tr>' +
+						                    '	<td width="10%" align="center">' +
+						                    '		<img src=' + '"' + picPath + '"' + ' class="profileImg" width="50px" height="50px">' +
+						                    '	</td>' +
+							                '	<td width="90%" style="padding-right: 30px;">' +
+						                    '   	<div align="left" style="color: gray;">' +
+						                    '   		<b style="color: rgb(9, 175, 79); margin-right: 20px;" id="writerNickName">' + replyList[i].memName + '</b>' +
+						                    			replyList[i].createDate + 
+						                    '        	| <a onclick="callChangeForm(this)" style="color: gray; cursor: pointer;">수정</a>' +
+						                    '        	| <a href="#replyDeleteModal" data-toggle="modal" data-target="#replyDeleteModal" data-no="3" onclick="modalGetEl(this)" style="color: gray">삭제</a>' +
+						                    '        	| <a href="#reportModal" data-toggle="modal" data-target="#reportModal" data-no="3" onclick="reportContent(this)" style="color: gray">신고</a>' +
+						                    '   	</div>' +
+						                    '    	<div id="replyConent">' +
+						                    			replyList[i].replyContent +
+						                    '    	</div>' +
+						                    '	</td>' +
+							            	'</tr>' +
+							            	'<tr>' +
+						                    '	<td colspan="2">' +
+						                    '		<div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>' +
+						                    '	</td>' +
+						                	'</tr>'
+									);
+								}
+								
+								topReplyNo = json[1];
+								replyCount = json[2];
+								maxReply += 10;
+								
+								console.log(maxReply);
+								
+							},
+							error: function () {
+								console.log("통신 실패");	
+							}
+						});
+	        	    }
+	        	}
+       	  	});
+        	
+        	
             $('#report3').on('change', function(e){
                 if(e.target.checked){
                     $('#etcReportModal').modal();
@@ -170,7 +266,7 @@
             var writer = "";
 
             if(replyNum != null) {
-                writer = $(e).siblings("writerNickName").text();
+                writer = $(e).siblings("#writerNickName").text();
             } else {
                 writer = $("#contentWriter").text();
             }
@@ -229,7 +325,7 @@
                     	<%= b.getBoardTitle() %>
                     </div>
                 </td>
-                <td width="15%" align="right" style="padding-right: 30px;"><%= sdf.format(b.getCreateDate()) %></td>
+                <td width="15%" align="right" style="padding-right: 30px;"><%= b.getCreateDate() %></td>
             </tr>
             <tr>
                 <th width="15%" style="padding-left: 40px;">작성자</th>
@@ -267,6 +363,7 @@
         
         <br>
 
+		<!-- 댓글 -->
         <div class="replyArea" align="center">
 
             <textarea class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
@@ -275,22 +372,25 @@
 
             <br><br>
 
-            <!-- 숫자에 실제로 가져온 댓글의 숫자값으로 대체 -->
-            <h4 class="replytitle" align="left">댓글 15</h4>
+            <h4 class="replytitle" align="left">댓글 <%= replyCount %></h4>
 
-            <table class="replylistArea" style="margin: 0px auto; width: 800px;">
+            <table id="replylistArea" class="replylistArea" style="margin: 0px auto; width: 800px;">
                 <tr>
                     <td colspan="2">
                         <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
                     </td>
                 </tr>
-                <tr>
+                <% for(Reply reply : replyList) { %>
+	            <tr>
+	            	<% if(reply.getMemPic() == null) { %>
                     <td width="10%" align="center"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" class="profileImg" width="50px" height="50px"></td>
-                    <td width="90%" style="padding-right: 30px;">
+	                <% } else { %>
+                    <td width="10%" align="center"><img src="<%= request.getContextPath() %>/<%= reply.getMemPic() %>" class="profileImg" width="50px" height="50px"></td>
+	                <% } %>
+	                <td width="90%" style="padding-right: 30px;">
                         <div align="left" style="color: gray;">
-                            <b style="color: rgb(9, 175, 79); margin-right: 20px;" id="writerNickName">왕십리대마왕</b>
-                            <!-- 뿌릴때 서브스트링으로 4자 이후는 ***로 표시 -->
-                            <input type="hidden" id="writerId" value="Wang***">                            20200827 08:31
+                            <b style="color: rgb(9, 175, 79); margin-right: 20px;" id="writerNickName"><%= reply.getMemName() %></b>
+                            <%= reply.getCreateDate() %>
                             <!-- 작성자일경우에만 표시 -->
                             | <a onclick="callChangeForm(this)" style="color: gray; cursor: pointer;">수정</a>
                             | <a href="#replyDeleteModal" data-toggle="modal" data-target="#replyDeleteModal" data-no="3" onclick="modalGetEl(this)" style="color: gray">삭제</a>
@@ -298,65 +398,16 @@
                             | <a href="#reportModal" data-toggle="modal" data-target="#reportModal" data-no="3" onclick="reportContent(this)" style="color: gray">신고</a>
                         </div>
                         <div id="replyConent">
-                            ㅇㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ
-                            ㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇ ㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㄹㄴㅇㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹ
+                            <%= reply.getReplyContent() %>
                         </div>
                     </td>
-                </tr>
-                <!-- 여기서 부터는 테이블 스타일 테스트용 더미 지울예정 -->
-                <tr>
+	            </tr>
+	            <tr>
                     <td colspan="2">
                         <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
                     </td>
                 </tr>
-                <tr>
-                    <td width="10%" align="center"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" class="profileImg" width="50px" height="50px"></td>
-                    <td width="90%" style="padding-right: 30px;">
-                        <div align="left" style="color: gray;">
-                            <b style="color: rgb(9, 175, 79); margin-right: 20px;" id="writerNickName">왕십리대마왕</b>
-                            <!-- 뿌릴때 서브스트링으로 4자 이후는 ***로 표시 -->
-                            <input type="hidden" id="writerId" value="Wang***">
-                            20200827 08:31
-                            <!-- 작성자일경우에만 표시 -->
-                            | <a style="color: gray">수정</a>
-                            | <a style="color: gray">삭제</a>
-                            <!-- 항상표시 -->
-                            | <a style="color: gray">신고</a>
-                        </div>
-                        <div>
-                            예수는 맺어, 산야에 무엇이 미인을 것은 약동하다. 거선의 넣는 하였으며, 그림자는 같이, 봄바람이다. 소금이라 이상 이것이야말로 얼마나 소담스러운 미인을 사람은 이것이다.
-                            장식하는 듣기만 심장의 때까지 없으면, 
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="10%" align="center"><img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" class="profileImg" width="50px" height="50px"></td>
-                    <td width="90%" style="padding-right: 30px;">
-                        <div align="left" style="color: gray;">
-                            <b style="color: rgb(9, 175, 79); margin-right: 20px;">닉네임</b>
-                            20200827 08:31
-                            <!-- 작성자일경우에만 표시 -->
-                            | <a style="color: gray">수정</a>
-                            | <a style="color: gray">삭제</a>
-                            <!-- 항상표시 -->
-                            | <a style="color: gray">신고</a>
-                        </div>
-                        <div>
-                            예수는 맺어, 산야에 무엇이 미인을 것은 약동하다. 거선의 넣는 하였으며, 그림자는 같이, 봄바람이다. 소금이라 이상 이것이야말로 얼마나 소담스러운 미인을 사람은 이것이다.
-                            장식하는 듣기만 심장의 때까지 없으면, 
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
-                    </td>
-                </tr>
+	            <% } %>
             </table>
 
        	</div>

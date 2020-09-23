@@ -20,7 +20,7 @@
 		                     , B.BOARD_TITLE
 		                     , B.BOARD_CATEGORY
 		                     , B.BOARD_CONTENT
-		                     , B.CREATE_DATE
+		                     , TO_CHAR(B.CREATE_DATE, 'yyyy-MM-dd HH:mm') CREATE_DATE
 		                  FROM BOARD_VIEW B
 		                  JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
 		                 ORDER
@@ -65,7 +65,7 @@
 		     , B.BOARD_TITLE
 		     , B.BOARD_CATEGORY
 		     , B.BOARD_CONTENT
-		     , B.CREATE_DATE
+		     , TO_CHAR(B.CREATE_DATE, 'yyyy-MM-dd') CREATE_DATE
 		     , B.BOARD_COUNT
 		  FROM BOARD_VIEW B
 		  JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
@@ -93,6 +93,41 @@
 		       BOARD
 		   SET STATUS = 'N'
 		 WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="selectReplyList">
+		SELECT *
+		  FROM (
+		        SELECT
+		               ROWNUM RNO
+		             , B.BRE_NO
+		             , B.USER_NO
+		             , B.MEM_NAME
+		             , M.MEM_PIC
+		             , B.BOARD_NO
+		             , B.BRE_CONTENT
+		             , TO_CHAR(B.BRE_DATE, 'yyyyMMdd HH:mm') BRE_DATE
+		          FROM BOARD_REPLY_VIEW B
+		          JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
+		         WHERE BOARD_NO = ?
+		        )
+		 WHERE RNO BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="replyMaxCount">
+		SELECT COUNT(*)
+		  FROM BOARD_REPLY_VIEW
+		 WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="replyTopNo">
+		SELECT BRE_NO
+		  FROM (
+		        SELECT ROWNUM RNO, BRE_NO
+		          FROM BOARD_REPLY_VIEW
+		         WHERE BOARD_NO = ?
+		       )
+		 WHERE RNO = 1
 	</entry>
 
 </properties>
