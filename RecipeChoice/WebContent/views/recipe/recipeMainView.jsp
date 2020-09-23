@@ -173,7 +173,10 @@
 			<br><br>
 			<!--썸네일-->
 				<div class="thumbnail" align="center">
-					<a href=""><img src="resources/image/log/churro.png" width="200px" height="150px" /></a>
+				<!-- 링크 수정 필요 일단 화면에 보기 위해서 그냥 넘김.  -->
+					<a href="<%=contextPath%>/recipeContent.rp">
+						<img src="resources/image/log/churro.png" width="200px" height="150px" />
+					</a>
 					<br />
 					<div class="w3-container w3-border-bottom w3-border-teamColor">
 						레시피 제목입니다. <br /> 

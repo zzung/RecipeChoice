@@ -1,29 +1,25 @@
-package com.kh.user.board.controller;
+package com.kh.user.recipe.controller;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.user.board.model.service.BoardService;
-import com.kh.user.board.model.vo.Board;
-
 /**
- * Servlet implementation class BoardWriteFormViewServlet
+ * Servlet implementation class RecipeContentServlet
  */
-@WebServlet("/boardWriteForm.bo")
-public class BoardWriteFormViewServlet extends HttpServlet {
+@WebServlet("/recipeContent.rp")
+public class RecipeContentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardWriteFormViewServlet() {
+    public RecipeContentServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -31,27 +27,15 @@ public class BoardWriteFormViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String getBno = request.getParameter("bno");
-		String regex = "^[0-9]*$";
-		
-		if(getBno != null && Pattern.matches(regex, getBno)) {
-			int bno = Integer.parseInt(getBno);
-			
-			Board b = new BoardService().selectBoardDetail(bno);
-			
-			if(b != null) {
-				request.setAttribute("boardInfo", b);
-			}
-		}
-		
-		request.getRequestDispatcher("/views/board/boardEnrollForm.jsp").forward(request, response);
-		
+		request.setCharacterEncoding("UTF-8");
+		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

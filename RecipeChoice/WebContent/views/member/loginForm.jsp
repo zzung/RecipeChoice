@@ -58,6 +58,56 @@
     <!-- 메뉴바 추가 -->
 <%@include file="../common/menubar.jsp" %>
 
+
+    <div align="right" class="click_link" style="width: 900px;">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48" data-svg-content="true" fill="#000000" style="vertical-align: middle;">
+            <path d="M20 40V28h8v12h10V24h6L24 6 4 24h6v16z"></path>
+        </svg>
+
+        <a href="">츄레</a>
+        &lt;
+        <a href="">로그인</a>
+    </div>
+
+
+        <!-- 1. 전체 내용을 감싸는 div -->
+        <div id="login_form">
+            <h3 align="center"><b>로그인</b></h3>
+            <!-- 2_1. 입력을 받는 input요소들이 위치할 영역 -->
+            <form action="" id="login_form_input">
+    
+                <!-- 3_1. ID/PWD input요소가 들어갈 div -->
+                <table align="center">
+                    <tr>
+                        <td> 아이디</td>
+                        <td><input type="text" name="userId" class="form-control" style="height:30px;"maxlength="12" placeholder=" 아이디를 입력하세요"required></td><br>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td> 비밀번호</td>
+                        <td><input type="password" name="userPwd" maxlength="15" class="form-control" style="height:30px;" placeholder="비밀번호를 입력하세요"required></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><input type="submit"class="btn btn-success" id="login_btn" value="로그인">
+                        </td>
+                    </tr>
+                </table>
+        
+    
+            </form>
+    
+            <!-- 2_2. 회원가입페이지, ID/PWD 찾기 페이지 이동용 a 가 들어갈 영역-->
+            <div id="login_form_etc" align="center">
+                <a href="">회원가입 </a> 
+                <a href="">ID 찾기 </a> 
+                <a href="">PWD 찾기 </a>
+            </div>
+    
+        </div>
+    
+
 	<div class="wrap">
 	    <div align="right" class="clickLink" >
 	
@@ -105,6 +155,7 @@
 	    
 	        </div>
     </div>
+
 
 </body>
 </html>

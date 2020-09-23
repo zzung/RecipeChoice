@@ -14,7 +14,6 @@ import java.util.Properties;
 
 import com.kh.user.board.model.vo.Board;
 import com.kh.user.board.model.vo.PageInfo;
-import com.kh.user.board.model.vo.Reply;
 
 public class BoardDao {
 	
@@ -277,123 +276,6 @@ public class BoardDao {
 		}
 		
 		return result;
-	}
-
-	/**
-	 * 댓글의 개수를 가져옴
-	 * @param conn
-	 * @param bno
-	 * @return
-	 */
-	public int replyMaxCount(Connection conn, int bno) {
-		
-		int replyCount = 0;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		String sql = prop.getProperty("replyMaxCount");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, bno);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				replyCount = rs.getInt(1);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		return replyCount;
-	}
-
-	/**
-	 * 댓글의 리스트를 가져옴
-	 * @param conn
-	 * @param bno
-	 * @return
-	 */
-	public ArrayList<Reply> selectReplyList(Connection conn, int bno, int start, int maxReply) {
-		
-		ArrayList<Reply> replyList = new ArrayList<Reply>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		String sql = prop.getProperty("selectReplyList");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, bno);
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, maxReply);
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				replyList.add(new Reply(rs.getInt("BRE_NO")
-									  , rs.getInt("USER_NO")
-									  , rs.getString("MEM_NAME")
-									  , rs.getString("MEM_PIC")
-									  , rs.getInt("BOARD_NO")
-									  , rs.getString("BRE_CONTENT")
-									  , rs.getString("BRE_DATE")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		
-		return replyList;
-		
-	}
-
-	/**
-	 * 최상단 댓글 확인
-	 * @param conn
-	 * @param bno
-	 * @return
-	 */
-	public int replyTopNo(Connection conn, int bno) {
-		
-		int topReplyNo = 0;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		String sql = prop.getProperty("replyTopNo");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, bno);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				topReplyNo = rs.getInt(1);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		return topReplyNo;
 	}
 
 }

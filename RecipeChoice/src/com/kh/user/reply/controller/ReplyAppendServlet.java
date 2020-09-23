@@ -1,4 +1,4 @@
-package com.kh.user.board.controller;
+package com.kh.user.reply.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.kh.user.board.model.service.BoardService;
-import com.kh.user.board.model.vo.Reply;
+import com.kh.user.reply.model.service.ReplyService;
+import com.kh.user.reply.model.vo.Reply;
 
 /**
  * Servlet implementation class ReplyAppendServlet
  */
-@WebServlet("/replyAppend.bo")
+@WebServlet("/replyAppend.re")
 public class ReplyAppendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,25 +38,27 @@ public class ReplyAppendServlet extends HttpServlet {
 		int replyCount = Integer.parseInt(request.getParameter("replyCount"));
 		int maxReply = Integer.parseInt(request.getParameter("maxReply"));
 		
+		String boardType = request.getParameter("boardType");
+		
 		ArrayList<Reply> replyList = new ArrayList<Reply>();
 		
-		int replyCountUpdate = new BoardService().replyMaxCount(bno);
+		int replyCountUpdate = new ReplyService().replyMaxCount(bno, boardType);
 		
 		request.setAttribute("replyCount", replyCountUpdate);
 		
 		if(replyCount == replyCountUpdate) {
-			int topReplyNoUpdate = new BoardService().replyTopNo(bno);
+			int topReplyNoUpdate = new ReplyService().replyTopNo(bno, boardType);
 			
 			if(topReplyNo == topReplyNoUpdate) {
-				replyList = new BoardService().selectReplyList(bno, maxReply + 1, maxReply + 10);
+				replyList = new ReplyService().selectReplyList(bno, boardType, maxReply + 1, maxReply + 10);
 			} else {
 				topReplyNo = topReplyNoUpdate;
-				replyList = new BoardService().selectReplyList(bno, 1, maxReply + 10);
+				replyList = new ReplyService().selectReplyList(bno, boardType, 1, maxReply + 10);
 			}
 			
 		} else {
 			replyCount = replyCountUpdate;
-			replyList = new BoardService().selectReplyList(bno, 1, maxReply + 10);
+			replyList = new ReplyService().selectReplyList(bno, boardType, 1, maxReply + 10);
 		}
 		
 		Gson gson = new Gson();

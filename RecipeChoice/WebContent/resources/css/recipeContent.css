@@ -1,0 +1,226 @@
+@charset "UTF-8";
+
+.contents {
+	margin-top: 160px;
+}
+
+.content {
+	width: 900px;
+	height: 2500px;
+	margin: auto;
+}
+
+#pageTitle {
+	color: rgb(39, 174, 96);
+	padding: 5px;
+}
+
+#titleImg {
+	width: 350px;
+	height: 350px;
+}
+
+#userPic {
+	border: 1px solid grey;
+	border-radius: 50%;
+	margin-top: -50px;
+}
+
+.tb_Content {
+	height: auto;
+}
+
+.leftContent {
+	box-sizing: border-box;
+	width: 50%;
+}
+
+.rightContent {
+	box-sizing: border-box;
+	width: 50%;
+	padding: 60px;
+}
+
+.bottomContent {
+	box-sizing: border-box;
+}
+
+#text {
+	vertical-align: middle;
+	padding: 18px;
+	right: 30%;
+}
+
+.detailWriter {
+	padding: 10px;
+}
+
+.dot {
+	height: 25px;
+	width: 25px;
+	background-color: rgb(39, 174, 96);
+	color: white;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+#editRecipe {
+	border: none;
+	background: rgb(39, 174, 96);
+	font-size: 16px;
+	color: white;
+	border-radius: 4px;
+	width: 100px;
+	height: 40px;
+}
+
+#insertRecipe:hover {
+	cursor: pointer;
+	opacity: 0.75;
+}
+
+#recipeTitle {
+	color: rgb(39, 174, 96);
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#recipeSubTitle {
+	color: grey;
+	font-size: 12px;
+	border: none;
+	width: 300px;
+	font-style: italic;
+}
+
+#recipeScrap_Report td>button {
+	border: none;
+	cursor: pointer;
+	font-size: 14px;
+	background: white;
+}
+
+#recipeScrap_Report td {
+	padding: 10px 30px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+#recipeList {
+	border: none;
+	background: rgb(236, 233, 233);
+	width: 340px;
+	height: auto;
+	font-size: 14px;
+}
+
+#recipeList li {
+	padding: 3px;
+}
+
+.tagList {
+	background: rgb(236, 233, 233);
+	width: 340px;
+	height: auto;
+	font-size: 14px;
+	padding: 15px;
+}
+
+.tagList tr li {
+	float: left;
+	border-radius: 50%;
+	background: rgb(39, 174, 96);
+	color: white;
+	list-style-type: none;
+	margin: 5px 12px;
+	padding: 10px 25px;
+}
+
+.tipRelation {
+	background: rgb(236, 233, 233);
+	width: 340px;
+	height: 130px;
+	font-size: 14px;
+	padding: 15px;
+	list-style-type: none;
+}
+
+.tipRelation img {
+	float: left;
+	margin: 5px;
+}
+
+.tipRelation a {
+	float: left;
+	color: black;
+	font-size: 30px;
+	text-decoration: none;
+}
+
+.recipe_detail_content {
+	border: 1px solid red;
+}
+
+#pagebottomTitle {
+	padding: 20px;
+	color: rgb(39, 174, 96);
+}
+
+.cookContent {
+	width: 350px;
+	height: auto;
+	border: none;
+}
+
+.cookOrder {
+	padding: 20px;
+	text-align: center;
+}
+
+.bottom_tipRelation {
+	background: rgb(236, 233, 233);
+	width: auto;
+	height: 180px;
+	font-size: 14px;
+	list-style-type: none;
+	text-align: center;
+}
+
+.bottom_tipRelation img {
+	float: left;
+	margin: 8px;
+}
+
+.bottom_tipRelation a {
+	float: left;
+	padding-top: 50px;
+	color: black;
+	font-size: 30px;
+	text-decoration: none;
+	padding: 5px;
+}
+
+.replytitle {
+	font-weight: bold;
+	color: rgb(9, 175, 79);
+	padding-left: 100px;
+}
+
+.replyArea>textarea {
+	vertical-align: middle;
+	resize: none;
+	width: 400px;
+	display: inline-block;
+}
+
+.replyBtn {
+	width: 130px;
+	height: 86px;
+	background: rgb(39, 174, 96);
+	border-color: rgb(9, 175, 79);
+}
+
+.replyBtn:hover {
+	background-color: rgb(9, 175, 79);
+	border-color: rgb(9, 175, 79);
+}
