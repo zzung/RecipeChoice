@@ -5,7 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="resources/css/recipeContent.css">
+<link rel="stylesheet" href="resources/css/bootstrap.css" />
+<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
 <title>Insert title here</title>
+
 </head>
 <body>
 	<%@include file="../common/menubar.jsp" %>
@@ -14,7 +17,8 @@
 		<div class="content">
 			<div class="w3-container w3-border-bottom w3-border-grey">
 				<p id="pageTitle">
-					<b><big>레시피 작성하기</big></b>
+					<!-- 레시피제목자져오기 -->
+					<b><big>김치찌게</big></b>
 				</p>
 			</div>
 			
@@ -94,8 +98,8 @@
 						</p>
 						<div class="tipRelation">
 							<li><a href="#">&laquo;</a></li>
-							<li><img src=" " width="125px" height="90px" /></li>
-							<li><img src=" " width="125px" height="90px" /></li>
+							<li><a href="#"><img src=" " width="125px" height="90px" /></a></li>
+               			 	<li><a href="#"><img src=" " width="125px" height="90px" /></a></li>
 							<li><a href="#">&raquo;</a></li>
 						</div>
 					</td>
@@ -184,7 +188,7 @@
 
 				<textarea class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
 
-				<input type="button" class="btn btn-primary replyBtn" value="등록">
+				<input type="button" class="btn btn-success replyBtn" value="등록">
 
 				<br>
 				<br>
@@ -285,7 +289,10 @@
 						</td>
 					</tr>
 				</table>
-
+				 <br><br>
+		          <div align="right">
+		            <button type="submit" id="editRecipe">수정하기</button>
+          		</div>
 			</div>
 		</div>
 	</div>
