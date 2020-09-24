@@ -50,7 +50,7 @@ public class ReplyDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, bno);
-			pstmt.setString(2, boardType);
+			pstmt.setInt(2, Integer.parseInt(boardType));
 			
 			rs = pstmt.executeQuery();
 			
@@ -88,7 +88,7 @@ public class ReplyDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, bno);
-			pstmt.setString(2, boardType);
+			pstmt.setInt(2, Integer.parseInt(boardType));
 			pstmt.setInt(3, start);
 			pstmt.setInt(4, maxReply);
 			
@@ -135,7 +135,7 @@ public class ReplyDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, bno);
-			pstmt.setString(2, boardType);
+			pstmt.setInt(2, Integer.parseInt(boardType));
 			
 			rs = pstmt.executeQuery();
 			
@@ -196,6 +196,35 @@ public class ReplyDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, replyNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+
+	public int replyWrite(Connection conn, int userNo, int bno, String memName, String content, int boardType) {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("replyWrite");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setString(2, memName);
+			pstmt.setInt(3, bno);
+			pstmt.setString(4, content);
+			pstmt.setInt(5, boardType);
 			
 			result = pstmt.executeUpdate();
 			

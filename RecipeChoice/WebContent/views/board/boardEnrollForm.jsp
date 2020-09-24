@@ -67,7 +67,7 @@
     			<% servletPath = "boardUpdate.bo"; %>
 	   			$("#categorySelect").children().each(function () {
 	   				var category = "<%= b.getCategory() %>";
-	   				if($(this).val() == category) {
+	   				if($(this).text() == category) {
 	   					$(this).prop("selected", true);
 	   				}
 	   			});
@@ -101,7 +101,7 @@
 
         <form action="<%= servletPath %>" id="insertForm" method="post">
 			
-			<!-- 2는 테스트용 로그인과 세션 구현시 실제 로그인한 유저의 번호 -->			
+			<% // TODO 2는 테스트용 로그인과 세션 구현시 실제 로그인한 유저의 번호 %>	
 			<input type="hidden" name="userNo" value="2">
 			
             <table style="margin: 0px auto;">
@@ -110,8 +110,8 @@
                     <th width="70px">카테고리</th>
                     <td width="500">
                         <select id="categorySelect" class="custom-select" name="category">
-                            <option value="일상" selected>일상</option>
-                            <option value="후기">후기</option>
+                            <option value="1" selected>일상</option>
+                            <option value="2">후기</option>
                         </select>
                     </td>
                 </tr>
@@ -168,7 +168,7 @@
             <br>
 
             <div align="right" style="width: 890px;">
-            	<% // TODO 버튼 색갈 변경 필요 %>
+            	<% // TODO 버튼 색깔 변경 필요 %>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkModal">등록하기</button>
             </div>
 

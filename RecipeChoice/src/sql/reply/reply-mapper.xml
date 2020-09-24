@@ -54,4 +54,26 @@
 		 WHERE BRE_NO = ?
 	</entry>
 	
+	<entry key="replyWrite">
+		INSERT
+		  INTO REPLY
+		  (
+		    BRE_NO
+		  , USER_NO
+		  , MEM_NAME
+		  , BOARD_NO
+		  , BRE_CONTENT
+		  , BOARD_TYPE
+		  )
+		  VALUES
+		  (
+		    SEQ_BRENO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  )
+	</entry>
+	
 </properties>

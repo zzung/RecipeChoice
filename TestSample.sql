@@ -1,21 +1,3 @@
--- USER_NO을 증가시키는 시퀸스
-CREATE SEQUENCE SEQ_USER_NO;
-
--- BOARD_NO을 증가시키는 시퀸스
-CREATE SEQUENCE SEQ_BOARD_NO;
-
--- BRE_NO을 증가시키는 시퀸스(REPLY테이블)
-CREATE SEQUENCE SEQ_BRE_NO;
-
--- BOARD테이블의 BOARD_COUNT에 DEFAULT 0추가
-ALTER TABLE BOARD MODIFY (BOARD_COUNT DEFAULT 0);
-
--- BOARD테이블에 작성일 누락시 컬럼 CREATE_DATE 추가
-ALTER TABLE BOARD ADD CREATE_DATE DATE DEFAULT SYSDATE NOT NULL;
-
--- REPLY테이블의 USER_NO2를 USER_NO으로 변경
-ALTER TABLE REPLY RENAME COLUMN USER_NO2 TO USER_NO;
-
 -- 멤버 테스트용 샘플 데이터
 INSERT
   INTO MEMBER
@@ -28,25 +10,7 @@ INSERT
   )
   VALUES
   (
-    SEQ_USER_NO.NEXTVAL
-  , 'user_01'
-  , 'pass_01'
-  , 'test_01'
-  , 'test-01@gmial.com'
-  );
-
-INSERT
-  INTO MEMBER
-  (
-    USER_NO
-  , MEM_ID
-  , MEM_PWD
-  , MEM_NAME
-  , EMAIL
-  )
-  VALUES
-  (
-    SEQ_USER_NO.NEXTVAL
+    SEQ_UNO.NEXTVAL
   , 'user_02'
   , 'pass_02'
   , 'test_02'
@@ -64,7 +28,7 @@ INSERT
   )
   VALUES
   (
-    SEQ_USER_NO.NEXTVAL
+    SEQ_UNO.NEXTVAL
   , 'user_03'
   , 'pass_03'
   , 'test_03'
@@ -89,7 +53,7 @@ SELECT *
                      , M.MEM_NAME
                      , M.MEM_PIC
                      , B.BOARD_TITLE
-                     , B.BOARD_CATEGORY
+                     , DECODE(B.BOARD_TYPE, 1, '일상', '후기') BOARD_CATEGORY
                      , B.BOARD_CONTENT
                      , TO_CHAR(B.CREATE_DATE, 'yyyy-MM-dd') CREATE_DATE
                   FROM BOARD_VIEW B
@@ -112,29 +76,25 @@ INSERT
     BOARD_NO
   , USER_NO
   , BOARD_TITLE
-  , BOARD_CATEGORY
+  , BOARD_TYPE
   , BOARD_CONTENT
   )
   VALUES
   (
-    SEQ_BOARD_NO.NEXTVAL
-  , 1
+    SEQ_BNO.NEXTVAL
+  , 2
   , 'writeTest'
-  , '일상'
-  , '있는 일월과 사랑의 굳세게 부패뿐이다. 눈에 인도하겠다는 바이며, 예가 듣는다. 물방아 구하지 크고 귀는 열매를 끓는다. 모래뿐일 인간은 설레는 찬미를 튼튼하며, 그들에게 이상은 싶이 곧 힘있다. 전인 석가는 평화스러운 우리의 날카로우나 뼈 사랑의 끓는 희망의 것이다. 있는 쓸쓸한 용기가 듣는다. 그림자는 청춘에서만 하여도 속에 풍부하게 청춘의 위하여서. 그것을 유소년에게서 우리 새가 천고에 하는 들어 황금시대의 힘있다. 설산에서 공자는 내려온 칼이다. 황금시대를 눈이 구하지 황금시대의 끓는 위하여, 싶이 새가 아름다우냐? 가는 피가 그들에게 보는 우리의 이는 사막이다.
-
-위하여 든 트고, 방황하여도, 하는 원대하고, 이상의 길지 황금시대다. 눈이 오직 있는 희망의 이것이다. 생생하며, 우는 그들에게 봄바람이다. 몸이 속잎나고, 쓸쓸한 역사를 고동을 가슴이 이상은 사람은 철환하였는가? 청춘을 무엇을 품에 심장의 불러 그들은 이상을 그것을 아름다우냐? 낙원을 것은 듣기만 얼음에 위하여 있는가? 자신과 방황하였으며, 끓는 보이는 유소년에게서 가는 그들의 사랑의 아니다. 두손을 광야에서 풍부하게 풀이 아니다. 이는 이상을 인간의 무엇을 살 따뜻한 그와 지혜는 피다. 꽃이 있음으로써 영원히 피어나기 것이다.
-
-위하여, 싸인 너의 가치를 만천하의 사랑의 노년에게서 교향악이다. 실로 노년에게서 너의 불어 원질이 심장은 평화스러운 봄바람이다. 인도하겠다는 그들은 것이 이상은 위하여 봄바람을 찬미를 아니다. 이상, 아니더면, 우리의 과실이 따뜻한 불러 가는 힘차게 칼이다. 품으며, 보이는 바이며, 그러므로 기쁘며, 이것이다. 꽃 사라지지 같으며, 천자만홍이 봄날의 생생하며, 이것이다. 물방아 장식하는 피고 못할 인생을 이 평화스러운 이것이다. 길지 수 쓸쓸한 교향악이다. 무엇을 든 곧 그들에게 사랑의 뿐이다.'
+  , 1
+  , '<p>두기 안고, 끝까지 앞이 같이 없으면 대중을 있다. 곳이 내는 얼음과 바로 우는 오직 청춘의 있다. 것은 피가 인생에 붙잡아 뿐이다. 창공에 얼음에 것은 반짝이는 찾아 듣기만 역사를 있으랴? 피가 대중을 방지하는 것이다. 투명하되 광야에서 맺어, 설레는 않는 우리의 피다. 할지라도 살았으며, 이상의 목숨이 철환하였는가? 사는가 거친 물방아 발휘하기 사막이다. 청춘 전인 살 원대하고, 있으며, 천하를 곧 힘있다. 대한 못할 피고 소리다.이것은 있는 몸이 그것은 약동하다. 창공에 무엇을 피가 것이다.</p><p><br></p><p>할지라도 이것을 커다란 것이다. 찾아다녀도, 바이며, 청춘의 되는 우리 관현악이며, 꽃 끓는 이것이다. 예수는 풍부하게 인생을 있는 약동하다. 발휘하기 우리 사라지지 천하를 얼마나 따뜻한 불어 든 부패뿐이다. 이상의 얼마나 시들어 인생에 길지 청춘의 용기가 힘있다. 역사를 무엇을 못할 피부가 트고, 인생의 듣는다. 가진 보배를 봄날의 든 웅대한 그들은 것이다. 구하지 사랑의 하는 것이다. 청춘 대중을 불어 위하여 그들의 우리의 심장의 밥을 목숨이 피다.</p><p><br></p><p>피고 그들은 소담스러운 따뜻한 것이다. 어디 품에 보배를 오직 구하기 있는가? 별과 거친 사랑의 예가 황금시대다. 새 가치를 설산에서 찾아 구하기 있는가? 얼마나 얼음과 더운지라 품었기 봄날의 그들은 않는 싶이 것이다. 하였으며, 품고 그들의 창공에 우리는 이것이다. 능히 밥을 피부가 아름다우냐? 대고, 모래뿐일 싸인 안고, 되는 있으며, 철환하였는가? 생명을 전인 힘차게 것이 그와 갑 황금시대의 사막이다. 미인을 가슴이 부패를 청춘을 장식하는 그것을 맺어, 힘있다. 몸이 투명하되 하였으며, 실현에 그들의 관현악이며, 이것을 교향악이다.</p>'
   );
   
 -- 게시글 수정
 UPDATE
        BOARD_VIEW
    SET BOARD_TITLE = 'UPDATETEST5'
-     , BOARD_CATEGORY = '일상'
-     , BOARD_CONTENT = 'UPDATETEST5'
- WHERE BOARD_NO = 389;
+     , BOARD_TYPE = 2
+     , BOARD_CONTENT = '<p>두기 안고, 끝까지 앞이 같이 없으면 대중을 있다. 곳이 내는 얼음과 바로 우는 오직 청춘의 있다. 것은 피가 인생에 붙잡아 뿐이다. 창공에 얼음에 것은 반짝이는 찾아 듣기만 역사를 있으랴? 피가 대중을 방지하는 것이다. 투명하되 광야에서 맺어, 설레는 않는 우리의 피다. 할지라도 살았으며, 이상의 목숨이 철환하였는가? 사는가 거친 물방아 발휘하기 사막이다. 청춘 전인 살 원대하고, 있으며, 천하를 곧 힘있다. 대한 못할 피고 소리다.이것은 있는 몸이 그것은 약동하다. 창공에 무엇을 피가 것이다.</p><p><br></p><p>할지라도 이것을 커다란 것이다. 찾아다녀도, 바이며, 청춘의 되는 우리 관현악이며, 꽃 끓는 이것이다. 예수는 풍부하게 인생을 있는 약동하다. 발휘하기 우리 사라지지 천하를 얼마나 따뜻한 불어 든 부패뿐이다. 이상의 얼마나 시들어 인생에 길지 청춘의 용기가 힘있다. 역사를 무엇을 못할 피부가 트고, 인생의 듣는다. 가진 보배를 봄날의 든 웅대한 그들은 것이다. 구하지 사랑의 하는 것이다. 청춘 대중을 불어 위하여 그들의 우리의 심장의 밥을 목숨이 피다.</p><p><br></p><p>피고 그들은 소담스러운 따뜻한 것이다. 어디 품에 보배를 오직 구하기 있는가? 별과 거친 사랑의 예가 황금시대다. 새 가치를 설산에서 찾아 구하기 있는가? 얼마나 얼음과 더운지라 품었기 봄날의 그들은 않는 싶이 것이다. 하였으며, 품고 그들의 창공에 우리는 이것이다. 능히 밥을 피부가 아름다우냐? 대고, 모래뿐일 싸인 안고, 되는 있으며, 철환하였는가? 생명을 전인 힘차게 것이 그와 갑 황금시대의 사막이다. 미인을 가슴이 부패를 청춘을 장식하는 그것을 맺어, 힘있다. 몸이 투명하되 하였으며, 실현에 그들의 관현악이며, 이것을 교향악이다.</p>'
+ WHERE BOARD_NO = 90;
 
 -- 댓글 뷰
 CREATE OR REPLACE VIEW BOARD_REPLY_VIEW AS
@@ -148,7 +108,7 @@ SELECT *
 SELECT COUNT(*)
   FROM BOARD_REPLY_VIEW
  WHERE BOARD_NO = 396
-   AND BOARD_TYPE = '자유';
+   AND BOARD_TYPE = 1;
 
 -- 해당 게시글 최상단 댓글 번호
 SELECT BRE_NO
@@ -156,7 +116,7 @@ SELECT BRE_NO
         SELECT ROWNUM RNO, BRE_NO
           FROM BOARD_REPLY_VIEW
          WHERE BOARD_NO = 396
-           AND BOARD_TYPE = '자유'
+           AND BOARD_TYPE = 1
        )
  WHERE RNO = 1;
 
@@ -174,8 +134,8 @@ SELECT *
              , TO_CHAR(B.BRE_DATE, 'yyyyMMdd HH:mm') BRE_DATE
           FROM BOARD_REPLY_VIEW B
           JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
-         WHERE BOARD_NO = 396
-           AND BOARD_TYPE = '자유'
+         WHERE BOARD_NO = 135
+           AND BOARD_TYPE = 1
         )
  WHERE RNO BETWEEN 1 AND 10;
  
@@ -184,5 +144,32 @@ UPDATE
        BOARD_REPLY_VIEW
    SET BRE_CONTENT = '수정함'
  WHERE BRE_NO = 131;
+ 
+ -- 댓글삭제
+UPDATE
+       BOARD_REPLY_VIEW
+   SET STATUS = 'N'
+ WHERE BRE_NO = 131;
+ 
+-- 댓글 등록
+INSERT
+  INTO REPLY
+  (
+    BRE_NO
+  , USER_NO
+  , MEM_NAME
+  , BOARD_NO
+  , BRE_CONTENT
+  , BOARD_TYPE
+  )
+  VALUES
+  (
+    SEQ_BRENO.NEXTVAL
+  , 3
+  , 'test_2'
+  , 135
+  , 'ddddddddd'
+  , 1
+  );
  
 ROLLBACK;

@@ -18,7 +18,7 @@
 		                     , M.MEM_NAME
 		                     , M.MEM_PIC
 		                     , B.BOARD_TITLE
-		                     , B.BOARD_CATEGORY
+		                     , DECODE(B.BOARD_TYPE, 1, '일상', '후기') BOARD_CATEGORY
 		                     , B.BOARD_CONTENT
 		                     , TO_CHAR(B.CREATE_DATE, 'yyyy-MM-dd HH:mm') CREATE_DATE
 		                  FROM BOARD_VIEW B
@@ -42,12 +42,12 @@
 		    BOARD_NO
 		  , USER_NO
 		  , BOARD_TITLE
-		  , BOARD_CATEGORY
+		  , BOARD_TYPE
 		  , BOARD_CONTENT
 		  )
 		  VALUES
 		  (
-		    SEQ_BOARD_NO.NEXTVAL
+		    SEQ_BNO.NEXTVAL
 		  , ?
 		  , ?
 		  , ?
@@ -63,7 +63,7 @@
 		     , M.MEM_NAME
 		     , M.MEM_PIC
 		     , B.BOARD_TITLE
-		     , B.BOARD_CATEGORY
+		     , DECODE(B.BOARD_TYPE, 1, '일상', '후기') BOARD_CATEGORY
 		     , B.BOARD_CONTENT
 		     , TO_CHAR(B.CREATE_DATE, 'yyyy-MM-dd') CREATE_DATE
 		     , B.BOARD_COUNT
@@ -83,7 +83,7 @@
 		UPDATE
 		       BOARD_VIEW
 		   SET BOARD_TITLE = ?
-		     , BOARD_CATEGORY = ?
+		     , BOARD_TYPE = ?
 		     , BOARD_CONTENT = ?
 		 WHERE BOARD_NO = ?
 	</entry>

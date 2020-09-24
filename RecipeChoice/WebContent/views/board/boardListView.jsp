@@ -19,6 +19,7 @@
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
 	
 %>    
 <!DOCTYPE html>
@@ -149,7 +150,7 @@
     		
     		if(alertMsg != "null") {
     			alert(alertMsg);
-    			<% session.removeAttribute("alertMsg"); %>
+    			alertMsg = "null";
     		}
     	});
     </script>

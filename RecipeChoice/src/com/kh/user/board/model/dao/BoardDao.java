@@ -126,7 +126,7 @@ public class BoardDao {
 			
 			pstmt.setInt(1, writed.getUserNo());
 			pstmt.setString(2, writed.getBoardTitle());
-			pstmt.setString(3, writed.getCategory());
+			pstmt.setInt(3, Integer.parseInt(writed.getCategory()));
 			pstmt.setString(4, writed.getBoardContent());
 			
 			result = pstmt.executeUpdate();
@@ -234,7 +234,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, update.getBoardTitle());
-			pstmt.setString(2, update.getCategory());
+			pstmt.setInt(2, Integer.parseInt(update.getCategory()));
 			pstmt.setString(3, update.getBoardContent());
 			pstmt.setInt(4, update.getBoardNo());
 

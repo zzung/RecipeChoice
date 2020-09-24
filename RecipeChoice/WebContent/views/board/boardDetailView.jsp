@@ -124,7 +124,7 @@
 		var maxReply = 0;
 		var replyCount = 0;
 		var topReplyNo = 0;
-		var type = '자유';
+		var type = 1;
 		
 		var contextPath = "<%= request.getContextPath() %>";
 		
@@ -186,7 +186,7 @@
                     '</textarea>' +
                     '<div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>' +
                     '<input id="changeReplyNo" type="hidden" value="' + replyNo + '">' +
-                    '<input type="button" class="btn btn-primary reChangebtn" value="등록" onclick="replyChangeAjax()">' +
+                    '<input type="button" class="btn btn-primary reChangebtn" value="등록" onclick="replyChange()">' +
                 '</td>'
             );
 
@@ -300,7 +300,7 @@
         }
         
         // 댓글 수정
-        function replyChangeAjax() {
+        function replyChange() {
         	
         	var changeContent = $("#reChangeArea").val();
         	
@@ -346,6 +346,38 @@
 					} else {
 						alert("댓글 삭제에 실패했습니다.");
 					}
+					
+					selectReply();
+					
+				},
+				error: function () {
+					console.log("통신 실패");	
+				}
+			});
+        	
+		}
+        
+        // 댓글 작성
+        function replyWrite() {
+			
+        	<% // TODO data부분은 로그인 구현후 로그인한 사용자의 값을 세션에서 가져옴 %>
+        	$.ajax({
+				url: 'replyWrite.re',
+				data: {
+					userNo:3,
+					bno:<%= b.getBoardNo() %>,
+					memName:'test_3',
+					replyContent:$("#replyEnrollForm").val(),
+					boardType:1
+				},
+				type: 'post',
+				success: function (result) {
+					
+					if(result <= 0) {
+						alert("댓글 작성에 실패했습니다.");
+					}
+					
+					$("#replyEnrollForm").val("");
 					
 					selectReply();
 					
@@ -435,9 +467,9 @@
 		<!-- 댓글 -->
         <div class="replyArea" align="center">
 
-            <textarea class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
+            <textarea id="replyEnrollForm" class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
 
-            <input type="button" class="btn btn-primary replyBtn" value="등록">
+            <input type="button" class="btn btn-primary replyBtn" value="등록" onclick="replyWrite()">
 
             <br><br>
 

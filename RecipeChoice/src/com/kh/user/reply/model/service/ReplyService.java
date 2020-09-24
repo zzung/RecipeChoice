@@ -77,5 +77,23 @@ public class ReplyService {
 		
 		return result;
 	}
+
+	public int replyWrite(int userNo, int bno, String memName, String content, int boardType) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ReplyDao().replyWrite(conn, userNo, bno, memName, content, boardType);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollBack(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
 	
 }
