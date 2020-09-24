@@ -18,7 +18,7 @@
             /* margin: auto; */
         }
           #login_form_etc a, a:hover{
-              color: black;
+             color: black;
             text-decoration: none;
             vertical-align: middle;
             font-size: 15px;
