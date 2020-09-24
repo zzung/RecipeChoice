@@ -60,5 +60,22 @@ public class ReplyService {
 		
 		return result;
 	}
+
+	public int deleteReply(int replyNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ReplyDao().deleteReply(conn, replyNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollBack(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
 }

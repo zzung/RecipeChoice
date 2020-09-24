@@ -155,10 +155,10 @@
         	return Object.keys(e).length() === 0 && e.constructor === Object;
         }
         
-        function modalGetEl(e) {
+        function deleteReplyNoSet(e) {
             $("#deleteReplyNo").val($(e).data("no"));
         }
-
+        
         function callChangeForm(e) {
 
             preHtml = $(e).parents('tr').html();
@@ -267,7 +267,7 @@
 			                    '   		<b style="color: rgb(9, 175, 79); margin-right: 20px;" id="writerNickName">' + replyList[i].memName + '</b>' +
 			                    			replyList[i].createDate + 
 			                    '        	| <a onclick="callChangeForm(this)" data-no="' + replyList[i].boardReplyNo + '" style="color: gray; cursor: pointer;">수정</a>' +
-			                    '        	| <a href="#replyDeleteModal" data-toggle="modal" data-target="#replyDeleteModal" data-no="' + replyList[i].boardReplyNo + '" onclick="modalGetEl(this)" style="color: gray">삭제</a>' +
+			                    '        	| <a href="#replyDeleteModal" data-toggle="modal" data-target="#replyDeleteModal" data-no="' + replyList[i].boardReplyNo + '" onclick="deleteReplyNoSet(this)" style="color: gray">삭제</a>' +
 			                    '        	| <a href="#reportModal" data-toggle="modal" data-target="#reportModal" data-no="' + replyList[i].boardReplyNo + '" onclick="reportContent(this)" style="color: gray">신고</a>' +
 			                    '   	</div>' +
 			                    '    	<div id="replyContent">' +
@@ -329,6 +329,34 @@
 				}
 			});
 		}
+        
+        // 댓글 삭제
+        function deleteReply() {
+        	
+        	$.ajax({
+				url: 'replyDelete.re',
+				data: {
+					replyNo:$("#deleteReplyNo").val()
+				},
+				type: 'post',
+				success: function (result) {
+					
+					if(result > 0) {
+						alert("댓글이 삭제되었습니다.");
+					} else {
+						alert("댓글 삭제에 실패했습니다.");
+					}
+					
+					selectReply();
+					
+				},
+				error: function () {
+					console.log("통신 실패");	
+				}
+			});
+        	
+		}
+        
     </script>
 </head>
 <body>
@@ -383,7 +411,7 @@
                     </a>
                 </td>
                 <td width="5%">
-                    <a href="#deleteCheckModal" data-toggle="modal" data-target="#deleteCheckModal" onclick="modalGetEl(this)">
+                    <a href="#deleteCheckModal" data-toggle="modal" data-target="#deleteCheckModal">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32" fill="#000000" data-svg-content="true"><g><path d="M 26,2l-4,0 c0-1.104-0.896-2-2-2L 14,0 C 12.896,0, 12,0.896, 12,2L 8,2 C 6.896,2, 6,2.896, 6,4l 22,0 C 28,2.896, 27.104,2, 26,2zM 6,30c0,1.104, 0.896,2, 2,2l 18,0 c 1.104,0, 2-0.896, 2-2L 28,6 L 6,6 L 6,30 z M 8,8l 18,0 l0,22 L 8,30 L 8,8 zM 11,10C 10.448,10, 10,10.448, 10,11l0,16 C 10,27.552, 10.448,28, 11,28S 12,27.552, 12,27l0-16 C 12,10.448, 11.552,10, 11,10zM 17,10C 16.448,10, 16,10.448, 16,11l0,16 C 16,27.552, 16.448,28, 17,28S 18,27.552, 18,27l0-16 C 18,10.448, 17.552,10, 17,10zM 23,10C 22.448,10, 22,10.448, 22,11l0,16 c0,0.552, 0.448,1, 1,1s 1-0.448, 1-1l0-16 C 24,10.448, 23.552,10, 23,10z"></path></g></svg>
                     </a>
                 </td>
@@ -449,26 +477,23 @@
         </form>
 
         <!-- 댓글삭제모달 -->
-        <form action="">
-            <div class="modal fade" id="replyDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal fade" id="replyDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
                     <div class="modal-content">
-                        <div class="modal-content">
-                            <!-- Modal body -->
-                            <div class="modal-body" align="center">
-                                
-                                <p>삭제하시겠습니까?</p>
-                                <input id="deleteReplybno" type="hidden" name="bno" value="이글의 번호">
-                                <input id="deleteReplyNo" type="hidden" name="no" value="댓글번호">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                                <button type="submit" class="btn btn-primary">삭제</button>
-    
-                            </div>
+                        <!-- Modal body -->
+                        <div class="modal-body" align="center">
+                            
+                            <p>삭제하시겠습니까?</p>
+                            <input id="deleteReplyNo" type="hidden" name="no" value="">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="deleteReply()">삭제</button>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
         
         <!-- 신고모달 -->
         <form action="">
@@ -543,7 +568,7 @@
                                 <input id="reportContentNo" type="hidden" name="bno" value="<%= b.getBoardNo() %>">
                                 <input id="reportReplyNo" type="hidden" name="no" value="">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                                <button type="submit" class="btn btn-primary">신고하기</button>
+                                <button type="submit" class="btn btn-primary" data-dismiss="modal">신고하기</button>
     
                             </div>
                         </div>

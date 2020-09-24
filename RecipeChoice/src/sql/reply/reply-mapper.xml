@@ -47,4 +47,11 @@
 		 WHERE BRE_NO = ?
 	</entry>
 	
+	<entry key="replyDelete">
+		UPDATE
+		       BOARD_REPLY_VIEW
+		   SET STATUS = 'N'
+		 WHERE BRE_NO = ?
+	</entry>
+	
 </properties>

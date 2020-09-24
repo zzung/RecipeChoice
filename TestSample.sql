@@ -1,22 +1,22 @@
--- USER_NOÀ» Áõ°¡½ÃÅ°´Â ½ÃÄý½º
+-- USER_NOì„ ì¦ê°€ì‹œí‚¤ëŠ” ì‹œí€¸ìŠ¤
 CREATE SEQUENCE SEQ_USER_NO;
 
--- BOARD_NOÀ» Áõ°¡½ÃÅ°´Â ½ÃÄý½º
+-- BOARD_NOì„ ì¦ê°€ì‹œí‚¤ëŠ” ì‹œí€¸ìŠ¤
 CREATE SEQUENCE SEQ_BOARD_NO;
 
--- BRE_NOÀ» Áõ°¡½ÃÅ°´Â ½ÃÄý½º(REPLYÅ×ÀÌºí)
+-- BRE_NOì„ ì¦ê°€ì‹œí‚¤ëŠ” ì‹œí€¸ìŠ¤(REPLYí…Œì´ë¸”)
 CREATE SEQUENCE SEQ_BRE_NO;
 
--- BOARDÅ×ÀÌºíÀÇ BOARD_COUNT¿¡ DEFAULT 0Ãß°¡
+-- BOARDí…Œì´ë¸”ì˜ BOARD_COUNTì— DEFAULT 0ì¶”ê°€
 ALTER TABLE BOARD MODIFY (BOARD_COUNT DEFAULT 0);
 
--- BOARDÅ×ÀÌºí¿¡ ÀÛ¼ºÀÏ ´©¶ô½Ã ÄÃ·³ CREATE_DATE Ãß°¡
+-- BOARDí…Œì´ë¸”ì— ìž‘ì„±ì¼ ëˆ„ë½ì‹œ ì»¬ëŸ¼ CREATE_DATE ì¶”ê°€
 ALTER TABLE BOARD ADD CREATE_DATE DATE DEFAULT SYSDATE NOT NULL;
 
--- REPLYÅ×ÀÌºíÀÇ USER_NO2¸¦ USER_NOÀ¸·Î º¯°æ
+-- REPLYí…Œì´ë¸”ì˜ USER_NO2ë¥¼ USER_NOìœ¼ë¡œ ë³€ê²½
 ALTER TABLE REPLY RENAME COLUMN USER_NO2 TO USER_NO;
 
--- ¸â¹ö Å×½ºÆ®¿ë »ùÇÃ µ¥ÀÌÅÍ
+-- ë©¤ë²„ í…ŒìŠ¤íŠ¸ìš© ìƒ˜í”Œ ë°ì´í„°
 INSERT
   INTO MEMBER
   (
@@ -73,7 +73,7 @@ INSERT
   
 COMMIT;
 
--- °Ô½ÃÆÇ ¸®½ºÆ® Á¶È¸ ¼¿·ºÆ®¹®
+-- ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ ì…€ë ‰íŠ¸ë¬¸
 CREATE OR REPLACE VIEW BOARD_VIEW AS
 SELECT *
   FROM BOARD
@@ -100,12 +100,12 @@ SELECT *
        )
  WHERE RNO BETWEEN 1 AND 10;
  
--- °Ô½Ã±Û ÃÑ °³¼ö
+-- ê²Œì‹œê¸€ ì´ ê°œìˆ˜
 SELECT COUNT(*) MAX
   FROM BOARD_VIEW;
 
 
--- °Ô½Ã±Û µî·Ï
+-- ê²Œì‹œê¸€ ë“±ë¡
 INSERT
   INTO BOARD
   (
@@ -120,23 +120,23 @@ INSERT
     SEQ_BOARD_NO.NEXTVAL
   , 1
   , 'writeTest'
-  , 'ÀÏ»ó'
-  , 'ÀÖ´Â ÀÏ¿ù°ú »ç¶ûÀÇ ±»¼¼°Ô ºÎÆÐ»ÓÀÌ´Ù. ´«¿¡ ÀÎµµÇÏ°Ú´Ù´Â ¹ÙÀÌ¸ç, ¿¹°¡ µè´Â´Ù. ¹°¹æ¾Æ ±¸ÇÏÁö Å©°í ±Í´Â ¿­¸Å¸¦ ²ú´Â´Ù. ¸ð·¡»ÓÀÏ ÀÎ°£Àº ¼³·¹´Â Âù¹Ì¸¦ Æ°Æ°ÇÏ¸ç, ±×µé¿¡°Ô ÀÌ»óÀº ½ÍÀÌ °ð ÈûÀÖ´Ù. ÀüÀÎ ¼®°¡´Â ÆòÈ­½º·¯¿î ¿ì¸®ÀÇ ³¯Ä«·Î¿ì³ª »À »ç¶ûÀÇ ²ú´Â Èñ¸ÁÀÇ °ÍÀÌ´Ù. ÀÖ´Â ¾µ¾µÇÑ ¿ë±â°¡ µè´Â´Ù. ±×¸²ÀÚ´Â Ã»Ãá¿¡¼­¸¸ ÇÏ¿©µµ ¼Ó¿¡ Ç³ºÎÇÏ°Ô Ã»ÃáÀÇ À§ÇÏ¿©¼­. ±×°ÍÀ» À¯¼Ò³â¿¡°Ô¼­ ¿ì¸® »õ°¡ Ãµ°í¿¡ ÇÏ´Â µé¾î È²±Ý½Ã´ëÀÇ ÈûÀÖ´Ù. ¼³»ê¿¡¼­ °øÀÚ´Â ³»·Á¿Â Ä®ÀÌ´Ù. È²±Ý½Ã´ë¸¦ ´«ÀÌ ±¸ÇÏÁö È²±Ý½Ã´ëÀÇ ²ú´Â À§ÇÏ¿©, ½ÍÀÌ »õ°¡ ¾Æ¸§´Ù¿ì³Ä? °¡´Â ÇÇ°¡ ±×µé¿¡°Ô º¸´Â ¿ì¸®ÀÇ ÀÌ´Â »ç¸·ÀÌ´Ù.
+  , 'ì¼ìƒ'
+  , 'ìžˆëŠ” ì¼ì›”ê³¼ ì‚¬ëž‘ì˜ êµ³ì„¸ê²Œ ë¶€íŒ¨ë¿ì´ë‹¤. ëˆˆì— ì¸ë„í•˜ê² ë‹¤ëŠ” ë°”ì´ë©°, ì˜ˆê°€ ë“£ëŠ”ë‹¤. ë¬¼ë°©ì•„ êµ¬í•˜ì§€ í¬ê³  ê·€ëŠ” ì—´ë§¤ë¥¼ ë“ëŠ”ë‹¤. ëª¨ëž˜ë¿ì¼ ì¸ê°„ì€ ì„¤ë ˆëŠ” ì°¬ë¯¸ë¥¼ íŠ¼íŠ¼í•˜ë©°, ê·¸ë“¤ì—ê²Œ ì´ìƒì€ ì‹¶ì´ ê³§ íž˜ìžˆë‹¤. ì „ì¸ ì„ê°€ëŠ” í‰í™”ìŠ¤ëŸ¬ìš´ ìš°ë¦¬ì˜ ë‚ ì¹´ë¡œìš°ë‚˜ ë¼ˆ ì‚¬ëž‘ì˜ ë“ëŠ” í¬ë§ì˜ ê²ƒì´ë‹¤. ìžˆëŠ” ì“¸ì“¸í•œ ìš©ê¸°ê°€ ë“£ëŠ”ë‹¤. ê·¸ë¦¼ìžëŠ” ì²­ì¶˜ì—ì„œë§Œ í•˜ì—¬ë„ ì†ì— í’ë¶€í•˜ê²Œ ì²­ì¶˜ì˜ ìœ„í•˜ì—¬ì„œ. ê·¸ê²ƒì„ ìœ ì†Œë…„ì—ê²Œì„œ ìš°ë¦¬ ìƒˆê°€ ì²œê³ ì— í•˜ëŠ” ë“¤ì–´ í™©ê¸ˆì‹œëŒ€ì˜ íž˜ìžˆë‹¤. ì„¤ì‚°ì—ì„œ ê³µìžëŠ” ë‚´ë ¤ì˜¨ ì¹¼ì´ë‹¤. í™©ê¸ˆì‹œëŒ€ë¥¼ ëˆˆì´ êµ¬í•˜ì§€ í™©ê¸ˆì‹œëŒ€ì˜ ë“ëŠ” ìœ„í•˜ì—¬, ì‹¶ì´ ìƒˆê°€ ì•„ë¦„ë‹¤ìš°ëƒ? ê°€ëŠ” í”¼ê°€ ê·¸ë“¤ì—ê²Œ ë³´ëŠ” ìš°ë¦¬ì˜ ì´ëŠ” ì‚¬ë§‰ì´ë‹¤.
 
-À§ÇÏ¿© µç Æ®°í, ¹æÈ²ÇÏ¿©µµ, ÇÏ´Â ¿ø´ëÇÏ°í, ÀÌ»óÀÇ ±æÁö È²±Ý½Ã´ë´Ù. ´«ÀÌ ¿ÀÁ÷ ÀÖ´Â Èñ¸ÁÀÇ ÀÌ°ÍÀÌ´Ù. »ý»ýÇÏ¸ç, ¿ì´Â ±×µé¿¡°Ô º½¹Ù¶÷ÀÌ´Ù. ¸öÀÌ ¼ÓÀÙ³ª°í, ¾µ¾µÇÑ ¿ª»ç¸¦ °íµ¿À» °¡½¿ÀÌ ÀÌ»óÀº »ç¶÷Àº Ã¶È¯ÇÏ¿´´Â°¡? Ã»ÃáÀ» ¹«¾ùÀ» Ç°¿¡ ½ÉÀåÀÇ ºÒ·¯ ±×µéÀº ÀÌ»óÀ» ±×°ÍÀ» ¾Æ¸§´Ù¿ì³Ä? ³«¿øÀ» °ÍÀº µè±â¸¸ ¾óÀ½¿¡ À§ÇÏ¿© ÀÖ´Â°¡? ÀÚ½Å°ú ¹æÈ²ÇÏ¿´À¸¸ç, ²ú´Â º¸ÀÌ´Â À¯¼Ò³â¿¡°Ô¼­ °¡´Â ±×µéÀÇ »ç¶ûÀÇ ¾Æ´Ï´Ù. µÎ¼ÕÀ» ±¤¾ß¿¡¼­ Ç³ºÎÇÏ°Ô Ç®ÀÌ ¾Æ´Ï´Ù. ÀÌ´Â ÀÌ»óÀ» ÀÎ°£ÀÇ ¹«¾ùÀ» »ì µû¶æÇÑ ±×¿Í ÁöÇý´Â ÇÇ´Ù. ²ÉÀÌ ÀÖÀ½À¸·Î½á ¿µ¿øÈ÷ ÇÇ¾î³ª±â °ÍÀÌ´Ù.
+ìœ„í•˜ì—¬ ë“  íŠ¸ê³ , ë°©í™©í•˜ì—¬ë„, í•˜ëŠ” ì›ëŒ€í•˜ê³ , ì´ìƒì˜ ê¸¸ì§€ í™©ê¸ˆì‹œëŒ€ë‹¤. ëˆˆì´ ì˜¤ì§ ìžˆëŠ” í¬ë§ì˜ ì´ê²ƒì´ë‹¤. ìƒìƒí•˜ë©°, ìš°ëŠ” ê·¸ë“¤ì—ê²Œ ë´„ë°”ëžŒì´ë‹¤. ëª¸ì´ ì†ìžŽë‚˜ê³ , ì“¸ì“¸í•œ ì—­ì‚¬ë¥¼ ê³ ë™ì„ ê°€ìŠ´ì´ ì´ìƒì€ ì‚¬ëžŒì€ ì² í™˜í•˜ì˜€ëŠ”ê°€? ì²­ì¶˜ì„ ë¬´ì—‡ì„ í’ˆì— ì‹¬ìž¥ì˜ ë¶ˆëŸ¬ ê·¸ë“¤ì€ ì´ìƒì„ ê·¸ê²ƒì„ ì•„ë¦„ë‹¤ìš°ëƒ? ë‚™ì›ì„ ê²ƒì€ ë“£ê¸°ë§Œ ì–¼ìŒì— ìœ„í•˜ì—¬ ìžˆëŠ”ê°€? ìžì‹ ê³¼ ë°©í™©í•˜ì˜€ìœ¼ë©°, ë“ëŠ” ë³´ì´ëŠ” ìœ ì†Œë…„ì—ê²Œì„œ ê°€ëŠ” ê·¸ë“¤ì˜ ì‚¬ëž‘ì˜ ì•„ë‹ˆë‹¤. ë‘ì†ì„ ê´‘ì•¼ì—ì„œ í’ë¶€í•˜ê²Œ í’€ì´ ì•„ë‹ˆë‹¤. ì´ëŠ” ì´ìƒì„ ì¸ê°„ì˜ ë¬´ì—‡ì„ ì‚´ ë”°ëœ»í•œ ê·¸ì™€ ì§€í˜œëŠ” í”¼ë‹¤. ê½ƒì´ ìžˆìŒìœ¼ë¡œì¨ ì˜ì›ížˆ í”¼ì–´ë‚˜ê¸° ê²ƒì´ë‹¤.
 
-À§ÇÏ¿©, ½ÎÀÎ ³ÊÀÇ °¡Ä¡¸¦ ¸¸ÃµÇÏÀÇ »ç¶ûÀÇ ³ë³â¿¡°Ô¼­ ±³Çâ¾ÇÀÌ´Ù. ½Ç·Î ³ë³â¿¡°Ô¼­ ³ÊÀÇ ºÒ¾î ¿øÁúÀÌ ½ÉÀåÀº ÆòÈ­½º·¯¿î º½¹Ù¶÷ÀÌ´Ù. ÀÎµµÇÏ°Ú´Ù´Â ±×µéÀº °ÍÀÌ ÀÌ»óÀº À§ÇÏ¿© º½¹Ù¶÷À» Âù¹Ì¸¦ ¾Æ´Ï´Ù. ÀÌ»ó, ¾Æ´Ï´õ¸é, ¿ì¸®ÀÇ °ú½ÇÀÌ µû¶æÇÑ ºÒ·¯ °¡´Â ÈûÂ÷°Ô Ä®ÀÌ´Ù. Ç°À¸¸ç, º¸ÀÌ´Â ¹ÙÀÌ¸ç, ±×·¯¹Ç·Î ±â»Ú¸ç, ÀÌ°ÍÀÌ´Ù. ²É »ç¶óÁöÁö °°À¸¸ç, ÃµÀÚ¸¸È«ÀÌ º½³¯ÀÇ »ý»ýÇÏ¸ç, ÀÌ°ÍÀÌ´Ù. ¹°¹æ¾Æ Àå½ÄÇÏ´Â ÇÇ°í ¸øÇÒ ÀÎ»ýÀ» ÀÌ ÆòÈ­½º·¯¿î ÀÌ°ÍÀÌ´Ù. ±æÁö ¼ö ¾µ¾µÇÑ ±³Çâ¾ÇÀÌ´Ù. ¹«¾ùÀ» µç °ð ±×µé¿¡°Ô »ç¶ûÀÇ »ÓÀÌ´Ù.'
+ìœ„í•˜ì—¬, ì‹¸ì¸ ë„ˆì˜ ê°€ì¹˜ë¥¼ ë§Œì²œí•˜ì˜ ì‚¬ëž‘ì˜ ë…¸ë…„ì—ê²Œì„œ êµí–¥ì•…ì´ë‹¤. ì‹¤ë¡œ ë…¸ë…„ì—ê²Œì„œ ë„ˆì˜ ë¶ˆì–´ ì›ì§ˆì´ ì‹¬ìž¥ì€ í‰í™”ìŠ¤ëŸ¬ìš´ ë´„ë°”ëžŒì´ë‹¤. ì¸ë„í•˜ê² ë‹¤ëŠ” ê·¸ë“¤ì€ ê²ƒì´ ì´ìƒì€ ìœ„í•˜ì—¬ ë´„ë°”ëžŒì„ ì°¬ë¯¸ë¥¼ ì•„ë‹ˆë‹¤. ì´ìƒ, ì•„ë‹ˆë”ë©´, ìš°ë¦¬ì˜ ê³¼ì‹¤ì´ ë”°ëœ»í•œ ë¶ˆëŸ¬ ê°€ëŠ” íž˜ì°¨ê²Œ ì¹¼ì´ë‹¤. í’ˆìœ¼ë©°, ë³´ì´ëŠ” ë°”ì´ë©°, ê·¸ëŸ¬ë¯€ë¡œ ê¸°ì˜ë©°, ì´ê²ƒì´ë‹¤. ê½ƒ ì‚¬ë¼ì§€ì§€ ê°™ìœ¼ë©°, ì²œìžë§Œí™ì´ ë´„ë‚ ì˜ ìƒìƒí•˜ë©°, ì´ê²ƒì´ë‹¤. ë¬¼ë°©ì•„ ìž¥ì‹í•˜ëŠ” í”¼ê³  ëª»í•  ì¸ìƒì„ ì´ í‰í™”ìŠ¤ëŸ¬ìš´ ì´ê²ƒì´ë‹¤. ê¸¸ì§€ ìˆ˜ ì“¸ì“¸í•œ êµí–¥ì•…ì´ë‹¤. ë¬´ì—‡ì„ ë“  ê³§ ê·¸ë“¤ì—ê²Œ ì‚¬ëž‘ì˜ ë¿ì´ë‹¤.'
   );
   
--- °Ô½Ã±Û ¼öÁ¤
+-- ê²Œì‹œê¸€ ìˆ˜ì •
 UPDATE
        BOARD_VIEW
    SET BOARD_TITLE = 'UPDATETEST5'
-     , BOARD_CATEGORY = 'ÀÏ»ó'
+     , BOARD_CATEGORY = 'ì¼ìƒ'
      , BOARD_CONTENT = 'UPDATETEST5'
  WHERE BOARD_NO = 389;
 
--- ÀÏ¹Ý°Ô½ÃÆÇ ´ñ±Û ºä
+-- ëŒ“ê¸€ ë·°
 CREATE OR REPLACE VIEW BOARD_REPLY_VIEW AS
 SELECT *
   FROM REPLY
@@ -144,23 +144,23 @@ SELECT *
  ORDER
     BY BRE_DATE DESC;
   
--- ÇØ´ç °Ô½Ã±ÛÀÇ ´ñ±Û °³¼ö¸¦ °¡Á®¿È
+-- í•´ë‹¹ ê²Œì‹œê¸€ì˜ ëŒ“ê¸€ ê°œìˆ˜ë¥¼ ê°€ì ¸ì˜´
 SELECT COUNT(*)
   FROM BOARD_REPLY_VIEW
  WHERE BOARD_NO = 396
-   AND BOARD_TYPE = 'ÀÚÀ¯';
+   AND BOARD_TYPE = 'ìžìœ ';
 
--- ÇØ´ç °Ô½Ã±Û ÃÖ»ó´Ü ´ñ±Û ¹øÈ£
+-- í•´ë‹¹ ê²Œì‹œê¸€ ìµœìƒë‹¨ ëŒ“ê¸€ ë²ˆí˜¸
 SELECT BRE_NO
   FROM (
         SELECT ROWNUM RNO, BRE_NO
           FROM BOARD_REPLY_VIEW
          WHERE BOARD_NO = 396
-           AND BOARD_TYPE = 'ÀÚÀ¯'
+           AND BOARD_TYPE = 'ìžìœ '
        )
  WHERE RNO = 1;
 
--- ´ñ±Û ¸®½ºÆ® Á¶È¸
+-- ëŒ“ê¸€ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 SELECT *
   FROM (
         SELECT
@@ -175,14 +175,14 @@ SELECT *
           FROM BOARD_REPLY_VIEW B
           JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
          WHERE BOARD_NO = 396
-           AND BOARD_TYPE = 'ÀÚÀ¯'
+           AND BOARD_TYPE = 'ìžìœ '
         )
  WHERE RNO BETWEEN 1 AND 10;
  
--- ´ñ±Û º¯°æ
+-- ëŒ“ê¸€ ë³€ê²½
 UPDATE
        BOARD_REPLY_VIEW
-   SET BRE_CONTENT = '¼öÁ¤ÇÔ'
+   SET BRE_CONTENT = 'ìˆ˜ì •í•¨'
  WHERE BRE_NO = 131;
  
 ROLLBACK;
