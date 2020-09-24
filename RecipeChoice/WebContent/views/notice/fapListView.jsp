@@ -51,8 +51,8 @@
 	#menu_2{cursor: pointer;}
 	#menu_2:hover{color: rgb(39, 174, 96);}
 	#t1{
-		width:40%;
-		height:10%;
+		width:45%;
+		height:auto;;
 	    margin-top: 8px;
 	    line-height: 30px;
 		border:1px solid lightslategrey;
@@ -61,6 +61,9 @@
 	 p.a{
         cursor:pointer;
         font-weight:bold;
+    }
+	p.b{
+        text-decoration:underline;
     }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -100,26 +103,29 @@ $(document).ready(function(){
             </div>
             <div id="content_2">
 	
-				<br><br>
+				<br>
                 <h1>자주 묻는 질문
                     &nbsp;<img src="resources/image/admin/faq.jpg">
                 </h1>
                 <h2>FAQ</h2>
                 <hr>
-
+				<br>
 				<div id="t1">
-					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요? ⌄</p>
+					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
+					 <p class="b">&nbsp; 아이디와 비밀번호 찾기는 로그인 창 옆에</p>
+				</div>
+				<br>
+				<div id="t1">
+					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
 					 <p class="b"></p>
 				</div>
+				<br>
 				<div id="t1">
-					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요? ⌄</p>
-					 <p class="b"></p>
-				</div>
-				<div id="t1">
-					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요? ⌄</p>
+					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
 					 <p class="b"></p>
 				</div>
 				
+				<br>
 				<hr>
 			</div>
     
