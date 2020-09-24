@@ -1,5 +1,10 @@
+<%@page import="com.kh.admin.notice.model.vo.Notice"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Notice> noticeList = (ArrayList<Notice>)request.getAttribute("noticeList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,36 +151,30 @@ div{
                 <h4>&nbsp;&nbsp;&nbsp;&nbsp;츄레 공지사항 <img src="resources/image/admin/noticeEmo.png" style="width: 40px; height: 40px;"></h4>
                 <hr>
                 <table class="tb1">
-                    <tr>
-                        <td>공지</td>
-                        <td> 공지사항 제목1 </td>
-                        <td> 2020-09-01</td>
-                    </tr>
-                    <tr>
-                        <td>공지</td>
-                        <td>공지사항 제목2 </td>
-                        <td> 2020-09-01</td>
-                    </tr>
-                    <tr>
-                        <td>공지</td>
-                        <td> 공지사항 제목3</td>
-                        <td> 2020-09-01</td>
-                    </tr>
-                    <tr>
-                        <td>공지</td>
-                        <td> 공지사항 제목4</td>
-                        <td> 2020-09-01</td>
-                    </tr>
-                    <tr>
-                        <td>공지</td>
-                        <td> 공지사항 제목5</td>
-                        <td> 2020-09-01</td>
-                    </tr>
+                	<% if(noticeList.isEmpty()) { %>
+                	<tr>
+                		<td></td>
+                		<td colspan="2"> 공지사항이 없습니다. </td>
+                	</tr>
+                	<%} else{ %>
+	                	<% for (Notice n : noticeList) { %>
+	                    <tr>
+	                    	<% if (n.getNoticeImportant().equals("Y")){ %>
+	                        	<td>공지</td>
+	                        <% } else{ %>
+	                        	<td><%= n.getNoticeNo() %></td>
+	                        <% } %>
+		                        <td> <%= n.getNoticeTitle() %> </td>
+		                        <td> <%= n.getNoticeDate() %></td>
+	                    <% } %>
+	                    </tr>
+	                <% } %>
                 </table>
 				
             </div>
             <div id="content_3"></div>
         </div>
+        
         <div id="footer">
   				<div class="pagination" align="center">
 	                <a href="#">&laquo;</a> 
