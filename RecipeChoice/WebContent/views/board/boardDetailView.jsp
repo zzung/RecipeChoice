@@ -11,16 +11,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <title>Document</title>
     <style>
         a, a:hover {
-            color: black;
-            text-decoration: none;
-            vertical-align: middle
+            color: black!important;
+            text-decoration: none!important;
+            vertical-align: middle!important;
         }
 
         form>div>a {
@@ -31,13 +28,13 @@
             border-radius: 100px;
         }
 
-        .outer {
+        .outerForm {
             width: 1000px;
-            height: 550px;
             background: none;
             color: black;
             margin: auto;
-            margin-top: 50px;
+            margin-top: 160px;
+            margin-bottom: 100px;
         }
         .contentTable {
             border: 2px solid gray;
@@ -45,63 +42,66 @@
         }
 
         .contentTable>tbody>tr {
-            border-bottom: 1px solid gray;
+            border-bottom: 1px solid gray!important;
             display: inline-table;
-            width: 100%;
-            height: 50px;
+            width: 100%!important;
+            height: 50px!important;
         }
 
         .contentTable th {
-            color: rgb(94, 94, 94);
+            color: rgb(94, 94, 94)!important;
         }
 
         .content-title {
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
+            overflow: hidden!important;
+            display: -webkit-box!important;
+            -webkit-line-clamp: 1!important;
+            -webkit-box-orient: vertical!important;
         }
 
         .contentArea {
-            margin: 50px;
+            margin: 50px!important;
         }
 
         .title {
-            font-size: 36px;
-            font-weight: bold;
-            padding-left: 100px;
-            color: rgb(9, 175, 79);
+            font-size: 36px!important;
+            font-weight: bold!important;
+            padding-left: 100px!important;
+            color: rgb(9, 175, 79)!important;
         }
-
+		.title:hover {
+       		color: rgb(9, 175, 79)!important;
+       	}
+       	
         .replytitle {
-            font-weight: bold;
-            color: rgb(9, 175, 79);
-            padding-left: 100px;
+            font-weight: bold!important;
+            color: rgb(9, 175, 79)!important;
+            padding-left: 100px!important;
         }
 
         .replyArea>textarea {
-            vertical-align: middle;
-            resize: none;
-            width: 670px;
-            display: inline-block;
+            vertical-align: middle!important;
+            resize: none!important;
+            width: 670px!important;
+            display: inline-block!important;
         }
 
         .replyBtn {
-            width: 130px;
-            height: 86px;
-            background: rgb(39, 174, 96);
-            border-color: rgb(9, 175, 79);
+            width: 120px!important;
+            height: 79px!important;
+            background: rgb(39, 174, 96)!important;
+            border-color: rgb(9, 175, 79)!important;
         }
 
         .replyBtn:hover {
-            background-color:rgb(9, 175, 79);
-            border-color: rgb(9, 175, 79);
+            background-color:rgb(9, 175, 79)!important;
+            border-color: rgb(9, 175, 79)!important;
         }
 
         .reChangebtn {
-            background: rgb(39, 174, 96);
-            border-color: rgb(9, 175, 79);
-            margin-left: 660px;
+            background: rgb(39, 174, 96)!important;
+            border-color: rgb(9, 175, 79)!important;
+            margin-left: 660px!important;
         }
 
         input[type=radio]{
@@ -262,13 +262,13 @@
 			                    '	<td width="10%" align="center">' +
 			                    '		<img src=' + '"' + picPath + '"' + ' class="profileImg" width="50px" height="50px">' +
 			                    '	</td>' +
-				                '	<td width="90%" style="padding-right: 30px;">' +
-			                    '   	<div align="left" style="color: gray;">' +
-			                    '   		<b style="color: rgb(9, 175, 79); margin-right: 20px;" id="writerNickName">' + replyList[i].memName + '</b>' +
+				                '	<td width="90%" style="padding-right: 30px!important;">' +
+			                    '   	<div align="left" style="color: gray!important; width: 100%;">' +
+			                    '   		<b style="color: rgb(9, 175, 79)!important; margin-right: 20px!important;" id="writerNickName">' + replyList[i].memName + '</b>' +
 			                    			replyList[i].createDate + 
-			                    '        	| <a onclick="callChangeForm(this)" data-no="' + replyList[i].boardReplyNo + '" style="color: gray; cursor: pointer;">수정</a>' +
-			                    '        	| <a href="#replyDeleteModal" data-toggle="modal" data-target="#replyDeleteModal" data-no="' + replyList[i].boardReplyNo + '" onclick="deleteReplyNoSet(this)" style="color: gray">삭제</a>' +
-			                    '        	| <a href="#reportModal" data-toggle="modal" data-target="#reportModal" data-no="' + replyList[i].boardReplyNo + '" onclick="reportContent(this)" style="color: gray">신고</a>' +
+			                    '        	| <a onclick="callChangeForm(this)" data-no="' + replyList[i].boardReplyNo + '" style="color: gray!important; cursor: pointer;">수정</a>' +
+			                    '        	| <a href="#replyDeleteModal" data-toggle="modal" data-target="#replyDeleteModal" data-no="' + replyList[i].boardReplyNo + '" onclick="deleteReplyNoSet(this)" style="color: gray!important">삭제</a>' +
+			                    '        	| <a href="#reportModal" data-toggle="modal" data-target="#reportModal" data-no="' + replyList[i].boardReplyNo + '" onclick="reportContent(this)" style="color: gray!important">신고</a>' +
 			                    '   	</div>' +
 			                    '    	<div id="replyContent">' +
 			                    			replyList[i].replyContent +
@@ -392,9 +392,10 @@
     </script>
 </head>
 <body>
-    <!-- 메뉴바 추가 -->
 
-    <div class="outer">
+	<%@ include file="../common/menubar.jsp" %>
+	
+    <div class="outerForm">
 
         <div align="right" style="width: 900px;">
 
@@ -406,12 +407,12 @@
             
             &lt;
 
-            <a href="">자유게시판</a>
+            <a href="board.bo">자유게시판</a>
 
         </div>
 
         <br>
-        <div class="title">자유게시판</div>
+        <a href="board.bo" class="title">자유게시판</a>
         <br><br><br>
 
 
@@ -434,7 +435,7 @@
                 <td width="45%" align="right">조회수</td>
                 <td width="10%" style="padding-right: 30px;"><%= b.getBoardCount() %></td>
             </tr>
-            <tr style="border: none;">
+            <tr style="border: none!important;">
                 
                 <!-- 수정과 삭제버튼은 로그인시에만 보이도록 수정 -->
                 <td width="87%" align="right">
@@ -448,7 +449,7 @@
                     </a>
                 </td>
                 <td width="10%" align="left">
-                    <a href="#reportModal" data-toggle="modal" data-target="#reportModal" style="color: gray" onclick="reportContent(this)">신고</a>
+                    <a href="#reportModal" data-toggle="modal" data-target="#reportModal" style="color: gray!important;" onclick="reportContent(this)">신고</a>
                 </td>
 
             </tr>
@@ -642,7 +643,7 @@
             </div>
         </form>
 
-    <!-- footer 추가 -->
+	<%@ include file="../common/footer.jsp" %>
     
 </body>
 </html>

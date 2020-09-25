@@ -46,11 +46,19 @@ public class BoardDao {
 		
 		String orderType = null;
 		String category = pi.getCategory();
+		String searchType = null;
 		
 		switch(pi.getOrder()) {
 		case "writer": orderType = "ORDER BY M.MEM_NAME"; break;
 		case "count": orderType = "ORDER BY B.BOARD_COUNT DESC"; break;
-		default: orderType = "ORDER BY B.CREATE_DATE DESC"; break;
+		default: orderType = "ORDER BY B.CREATE_DATE DESC";
+		}
+		
+		switch(pi.getSearchType()) {
+		case "content": searchType = "BOARD_CONTENT LIKE ? "; break;
+		case "writer": searchType = "MEM_NAME LIKE ? "; break;
+		case "title": searchType = "BOARD_TITLE LIKE ? "; break;
+		default: searchType = "";
 		}
 		
 		StringBuilder sql = new StringBuilder();
@@ -59,11 +67,18 @@ public class BoardDao {
 		
 		if(!category.equals("all")) {
 			sql.append(prop.getProperty("selectBoardListByPagePart2"));
+			
+			if(!pi.getSearchType().equals("")) {
+				sql.append("AND " + searchType);
+			}
+		} else {
+			if(!pi.getSearchType().equals("")) {
+				sql.append("WHERE " + searchType);
+			}
 		}
 		
 		sql.append(orderType);
 		sql.append(prop.getProperty("selectBoardListByPagePart3"));
-		
 		
 		int maxRownum = pi.getCurrentPage() * 10; 
 		
@@ -74,6 +89,10 @@ public class BoardDao {
 			
 			if(!category.equals("all")) {
 				pstmt.setInt(i++, Integer.parseInt(category));
+			}
+			
+			if(!pi.getSearchType().equals("")) {
+				pstmt.setString(i++, "%" + pi.getKeyword() + "%");
 			}
 			
 			pstmt.setInt(i++, maxRownum - 9);

@@ -8,8 +8,10 @@ public class PageInfo {
 	private int maxPage;
 	private String category;
 	private String order;
+	private String searchType;
+	private String keyword;
 	
-	public PageInfo(int currentPage, String category, String order) {
+	public PageInfo(int currentPage, String category, String order, String searchType, String keyword) {
 		super();
 		
 		this.currentPage = currentPage;
@@ -28,6 +30,18 @@ public class PageInfo {
 			this.order = order;
 		}
 		
+		if(keyword == null || keyword.equals("")) {
+			this.keyword = "";
+			this.searchType = "";
+		} else {
+			this.keyword = keyword;
+
+			switch(searchType) {
+			case "content":
+			case "writer": this.searchType = searchType; break;
+			default: this.searchType = "title";
+			}
+		}
 	}
 
 	public int getCurrentPage() {
@@ -76,6 +90,22 @@ public class PageInfo {
 
 	public void setOrder(String order) {
 		this.order = order;
+	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	
 }

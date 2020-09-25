@@ -39,13 +39,15 @@ public class BoardListServlet extends HttpServlet {
 		String page = request.getParameter("p");
 		String category = request.getParameter("category");
 		String order = request.getParameter("order");
+		String searchType = request.getParameter("searchType");
+		String keyword = request.getParameter("keyword");
 		
 		// 넘겨받은 p값이 널인지 0인지 또는 숫자가 아닌값이 들어왔는지 확인
 		if(page == null || !Pattern.matches(regex, page) || page.equals("0")) {
 			page = "1";
 		}
 		
-		PageInfo pi = new PageInfo(Integer.parseInt(page), category, order);
+		PageInfo pi = new PageInfo(Integer.parseInt(page), category, order, searchType, keyword);
 		
 		new BoardService().getMaxPage(pi);
 

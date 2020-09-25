@@ -23,9 +23,9 @@
     <title>Document</title>
     <style>
         a, a:hover {
-            color: black;
-            text-decoration: none;
-            vertical-align: middle
+            color: black!important;
+            text-decoration: none!important;
+            vertical-align: middle!important;
         }
 
         th {
@@ -33,23 +33,26 @@
         }
 
         .title {
-            font-size: 36px;
-            font-weight: bold;
-            padding-left: 100px;
-            color: rgb(9, 175, 79);
+            font-size: 36px!important;;
+            font-weight: bold!important;;
+            padding-left: 100px!important;;
+            color: rgb(9, 175, 79)!important;;
         }
-
-        .outer {
+		.title:hover {
+       		color: rgb(9, 175, 79)!important;
+       	}
+       	
+        .outerForm {
             width: 1000px;
-            height: 550px;
             background: none;
             color: black;
             margin: auto;
-            margin-top: 50px;
+            margin-top: 160px;
+            margin-bottom: 100px;
         }
 
         .custom-select {
-            width: 100px;
+            width: 100px!important;
         }
 
         #checkModal div{
@@ -76,9 +79,8 @@
     </script>
 </head>
 <body>
-    <!-- 메뉴바 추가 -->
-    
-    <div class="outer">
+
+    <div class="outerForm">
 
         <div align="right" style="width: 900px;">
 
@@ -90,12 +92,12 @@
             
             &lt;
 
-            <a href="">자유게시판</a>
+            <a href="board.bo">자유게시판</a>
 
         </div>
 
         <br>
-        <div class="title">자유게시판</div>
+        <a href="board.bo" class="title">자유게시판</a>
         <br><br><br>
 
 
@@ -192,10 +194,6 @@
             </div>
         </form>
     </div>
-    
 
-
-    <!-- footer 추가 -->
-    
 </body>
 </html>
