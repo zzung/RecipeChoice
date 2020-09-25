@@ -5,13 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+</head>
+<body>
+    <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <style>
-     #top{
-            background:rgb(238, 237, 237);
-            margin-top:auto;
-            height:50px;
-            
-        }
 	div{
 	    box-sizing: border-box;
 	}
@@ -36,7 +39,6 @@
 	}
 	#content_1{ width:18%; margin-right: 40px;}
 	#content_2{ width:75%}
-	#content_3{ width:3%}
 	
 	#menu_1{
 	    height: 30%;
@@ -61,36 +63,33 @@
 	}
 	#menu_2{cursor: pointer;}
 	#menu_2:hover{color: rgb(39, 174, 96);}
-	
-    .detailArea {border-collapse: collapse;}
-	.detailArea{
+    
+    .answer {border-collapse: collapse;}
+	.answer{
     box-sizing: border-box;
     width: 90%;
-    height: 20px;
+    height: 40px;
     }
-    .detailArea td:first-child{
+    .answer td:first-child{
     font-weight: bolder;
-    text-align: center;
+     text-align: center;
     }
-    .detailArea tr {
+    .answer tr {
     border-bottom: 1px solid gray;
-    }
-    .detailArea td{
+    width: 100%;
+    height: 30px;
+     }
+    .answer td{
 		line-height: 30px;
-     }
-
-    a:hover {
-        color: black;
-        text-decoration: none;
-        vertical-align: middle
-     }
+    }
+  
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-	  <!--메뉴바 추가-->
-        <%@include file="../common/menubar.jsp" %>
-	             
+	 <!--메뉴바 추가-->
+    <%@include file="../common/menubar.jsp" %>
+	       
     <div class="wrap">
         <div id="header">
             <div id="header_1"></div>
@@ -115,66 +114,52 @@
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;신고 관리</div>
                
             </div>
-            
             <div id="content_2">
 	
 				<br><br>
-                <h1>1:1 문의
-                    &nbsp;<img src="resources/image/admin/inquiry.jpg">
-				 </h1>
-                <h3>&nbsp;1:1 문의하기
-                </h3>
+                <h1>1:1 문의 조회
+                    &nbsp;<img src="resources/image/admin/inquiry.jpg" align="center">
+				</h1>
                 <hr>
-
                 <form action="" method=""> 
-                 <table class="detailArea">
-                    <tr>
-                        <th ><h2>제목</h2></th>
-                        <td colspan="4" ><input type="text" name="title" style="width:80%;" placeholder="내용을 입력하세요"required style="height:22px;"></td>
-                    </tr>
-                    <tr>
-                        <th><h2>문의 분류</h2></th>
-                        <td >
-                            <select name="category"style="height:25px; width:110px;"  >
-                                <option value="10" float="">레시피 문의</option>
-                                <option value="20">신고 문의</option>
-                                <option value="30">기타 문의</option>
-                             </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><h2>내용</h2></td>
-                        <td>
-                           <textarea cols="70" rows="13" style="resize:none; margin-top:10px; margin-bottom:10px;" required></textarea>
-                        </td>
-                    </tr>
-              </table>  
-              <br> 
-              <hr>    
-            <br>
-            <div align="right">
-                <button type="submit" class="btn" onclick="EnrollConfirm();"> 답변하기</button>
-                &nbsp;&nbsp;&nbsp;
-                <button type="button" onclick="history.back();">취소</button>
-            </div>
-        </div>  
-        </form>
-        <script>
-        function EnrollConfirm(){
+                    <table class="answer">
+                       <tr>
+                           <th ><h2>제목</h2></th>
+                           <td colspan="4" ><input type="text" name="title" value="re:" style="width:80%;"required style="height:22px;"></td>
+                       </tr>
+                       <tr>
+                           <td><h2>내용</h2></td>
+                           <td>
+                              <textarea cols="70" rows="13" style="resize:none; margin-top:10px; margin-bottom:10px;" required></textarea>
+                           </td>
+                       </tr>
+                 </table>  
+                 <br>    
+               <br>
+               <div align="center">
+                   <button type="submit" class="btn" onclick="answerConfirm();"> 답변하기</button>
+                   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                   <button type="button" onclick="history.back();">뒤로가기</button>
+               </div>
+           </div>  
+       </form>
+       <script>
+        function answerConfirm(){
             if(confirm("등록하시겠습니까?")){
                 location.href='./inquiryEnroll.no';
             }else{
                 return false;
              } 
             }
-     </script>
-        </div>
-            <div id="content_3"></div>
-        </div>
+       </script>
+           </div>
         <div id="footer"></div>
     </div>
     
-    <!-- 푸터 추가-->
-    <%@include file="../common/footer.jsp" %>
+    
+     <!-- footer 추가-->
+     <%@include file="../common/footer.jsp" %>
+</body>
+</html>
 </body>
 </html>

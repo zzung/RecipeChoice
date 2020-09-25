@@ -164,7 +164,8 @@
                         <td>관리자</td>
                         <td>2020-08-24</td>
                         <td><img id="img"onclick="deleteConfirm();"src="resources/image/admin/recyclebin.jpg" align="center">
-                            <img id="img"onclick="modifyConfirm();"src="resources/image/navbar/recyclebin.jpg" align="center"></td>                      
+                            &nbsp;&nbsp;
+                            <img id="img"onclick="modifyConfirm();"src="resources/image/navbar/pencil.jpg" align="center"></td>                      
                         </tr>
                     
                  </tbody>
@@ -179,6 +180,13 @@
                        }
              
                </script>
+               <script>
+                function modifyConfirm(){
+                     location.href="";
+                  
+                   }
+         
+           </script>
                  <!--1:1문의 답변조회 페이지용-->
                  <script>
                     $(function(){

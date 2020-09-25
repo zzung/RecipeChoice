@@ -50,21 +50,25 @@
 	}
 	#menu_2{cursor: pointer;}
 	#menu_2:hover{color: rgb(39, 174, 96);}
-	#t1{
-		width:45%;
-		height:auto;;
-	    margin-top: 8px;
-	    line-height: 30px;
-		border:1px solid lightslategrey;
-		border-radius: 5px;
-	}
-	 p.a{
-        cursor:pointer;
-        font-weight:bold;
+	.faq {border-collapse: collapse;}
+	.faq{
+    box-sizing: border-box;
+    width: 90%;
+    height: 40px;
     }
-	p.b{
-        text-decoration:underline;
+    .faq td:first-child{
+    font-weight: bolder;
+     text-align: center;
     }
+    .faq tr {
+    border-bottom: 1px solid gray;
+    width: 100%;
+    height: 30px;
+     }
+    .faq td{
+		line-height: 30px;
+    }
+  
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -109,27 +113,34 @@ $(document).ready(function(){
                 </h1>
                 <h2>FAQ</h2>
                 <hr>
-				<br>
-				<div id="t1">
-					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
-					 <p class="b">&nbsp; 아이디와 비밀번호 찾기는 로그인 창 옆에</p>
-				</div>
-				<br>
-				<div id="t1">
-					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
-					 <p class="b"></p>
-				</div>
-				<br>
-				<div id="t1">
-					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
-					 <p class="b"></p>
-				</div>
-				
-				<br>
-				<hr>
-			</div>
-    
-    
+                <form action="" method=""> 
+                    <table class="faq">
+                       <tr>
+                           <th ><h2>제목</h2></th>
+                           <td colspan="4" ><input type="text" name="title" style="width:80%;" placeholder="내용을 입력하세요"required style="height:22px;"></td>
+                       </tr>
+                       <tr>
+                           <td><h2>내용</h2></td>
+                           <td>
+                              <textarea cols="70" rows="13" style="resize:none; margin-top:10px; margin-bottom:10px;" required></textarea>
+                           </td>
+                       </tr>
+                 </table>  
+                 <br>    
+               <br>
+               <div align="center">
+                   <button type="submit" class="btn" onclick="addConfirm();">추가하기</button>
+                   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                   <button type="button" onclick="history.back();">뒤로가기</button>
+               </div>
+           </div>  
+       </form>
+       <script>
+        function addConfirm(){
+             location.href='./faqEnroll.no';
+            }
+       </script>
+          </div>
     <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>
 </body>
