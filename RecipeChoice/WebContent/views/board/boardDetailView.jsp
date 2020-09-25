@@ -11,7 +11,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <title>Document</title>
     <style>
         a, a:hover {
@@ -201,9 +205,14 @@
             var replyNum = $(e).data('no');
 
             var writer = "";
+            var writerNo = "";
 
             if(replyNum != null) {
                 writer = $(e).siblings("#writerNickName").text();
+                writerNo = $(e).siblings("#replyUserNo").val();
+                
+                $("#reportedMemNo").val(writerNo);
+                
             } else {
                 writer = $("#contentWriter").text();
             }
@@ -269,6 +278,7 @@
 			                    '        	| <a onclick="callChangeForm(this)" data-no="' + replyList[i].boardReplyNo + '" style="color: gray!important; cursor: pointer;">수정</a>' +
 			                    '        	| <a href="#replyDeleteModal" data-toggle="modal" data-target="#replyDeleteModal" data-no="' + replyList[i].boardReplyNo + '" onclick="deleteReplyNoSet(this)" style="color: gray!important">삭제</a>' +
 			                    '        	| <a href="#reportModal" data-toggle="modal" data-target="#reportModal" data-no="' + replyList[i].boardReplyNo + '" onclick="reportContent(this)" style="color: gray!important">신고</a>' +
+			                    '             <input type="hidden" id="replyUserNo" value="' + replyList[i].userNo + '">' +	
 			                    '   	</div>' +
 			                    '    	<div id="replyContent">' +
 			                    			replyList[i].replyContent +
@@ -389,11 +399,41 @@
         	
 		}
         
+        function reportRequest() {
+			
+            <% // TODO 로그인기능 추가시 로그인유저의 번호로 수정 %>
+        	$.ajax({
+				url: 'reportContent.re',
+				data: {
+					reporterNo:3,
+					reportedMemNo:$("#reportedMemNo").val(),
+					reason:$("input:radio[name=reportType]:checked").val(),
+					boardType:1,
+					bno:<%= b.getBoardNo() %>,
+					replyNo:$("#reportReplyNo").val()
+				},
+				type: 'post',
+				success: function (result) {
+					
+					if(result > 0) {
+						alert("신고되었습니다.");
+					} else {
+						alert("신고에 실패했습니다. 잠시후 다시 시도해주세요.");
+					}
+					
+				},
+				error: function () {
+					console.log("통신 실패");	
+				}
+			});
+        	
+		}
+        
     </script>
 </head>
 <body>
 
-	<%@ include file="../common/menubar.jsp" %>
+	<%@ include file="../common/menubarTemp.jsp" %>
 	
     <div class="outerForm">
 
@@ -529,99 +569,32 @@
         </div>
         
         <!-- 신고모달 -->
-        <form action="">
-            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
                     <div class="modal-content">
-                        <div class="modal-content">
-                            <!-- Modal body -->
-                            <div class="modal-body" align="center">
-                                
+                        <!-- Modal body -->
+                        <div class="modal-body" align="center">
+                            
 
-                                    <table>
-    
-                                        <tr>
-                                            <td style="background: gray;" id="reportWriter"></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="background: gray;" id="reportContentTitle">제목 : </td>
-                                        </tr>
-                                        <tr>
-    
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <br>
-                                                <label for="report1" style="width: 90%;">부적절한 게시물</label>
-                                                <input type="radio" name="reportType" id="report1" value="부적절한 게시물">
-                                                <label for="report1"></label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label for="report2" style="width: 90%;">음란 또는 청소년에게 부적합한 내용</label>
-                                                <input type="radio" name="reportType" id="report2" value="음란 또는 청소년에게 부적합한 내용">
-                                                <label for="report2"></label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label for="report3" style="width: 90%;">기타</label>
-                                                <input type="radio" name="reportType" id="report3" value="" onchange="">
-                                                <label for="report3"></label>
-                                                <div id="reportReason"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>신고하기전에 잠깐?</th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div style="color: gray;">게시물로 인해 개인(단체)이 명예훼손 피해를 입었거나 저작권을 침해 당한
-                                                    경우에는 게시중단 서비스를 통해 신고해 주시기 바랍니다.</div>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                <input id="reportContentNo" type="hidden" name="bno" value="<%= b.getBoardNo() %>">
-                                <input id="reportReplyNo" type="hidden" name="no" value="">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                                <button type="submit" class="btn btn-primary" data-dismiss="modal">신고하기</button>
-    
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <!-- 신고 기타 사유 작성 모달 -->
-        <form action="">
-            <div class="modal fade" id="etcReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-content">
-                            <!-- Modal body -->
-                            <div class="modal-body" align="center">
-                                
                                 <table>
+
                                     <tr>
-                                        <td>기타사유</td>
+                                        <td style="background: gray;" id="reportWriter"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="background: gray;" id="reportContentTitle">제목 : </td>
+                                    </tr>
+                                    <tr>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <br>
+                                            <label for="report1" style="width: 90%;">부적절한 게시물</label>
+                                            <input type="radio" name="reportType" id="report1" value="부적절한 게시물">
+                                            <label for="report1"></label>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">
@@ -629,21 +602,84 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><textarea id="reportReasonArea" cols="50" rows="4" style="resize: none;"></textarea></td>
+                                        <td>
+                                            <label for="report2" style="width: 90%;">음란 또는 청소년에게 부적합한 내용</label>
+                                            <input type="radio" name="reportType" id="report2" value="음란 또는 청소년에게 부적합한 내용">
+                                            <label for="report2"></label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="report3" style="width: 90%;">기타</label>
+                                            <input type="radio" name="reportType" id="report3" value="">
+                                            <label for="report3"></label>
+                                            <div id="reportReason"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>신고하기전에 잠깐?</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="color: gray;">게시물로 인해 개인(단체)이 명예훼손 피해를 입었거나 저작권을 침해 당한
+                                                경우에는 게시중단 서비스를 통해 신고해 주시기 바랍니다.</div>
+                                        </td>
                                     </tr>
                                 </table>
 
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="getReason()">확인</button>
-    
-                            </div>
+                            <input id="reportReplyNo" type="hidden" name="no" value="">
+                            <input id="reportedMemNo" type="hidden" name="no" value="<%= b.getUserNo() %>">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="reportRequest()">신고하기</button>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
 
-	<%@ include file="../common/footer.jsp" %>
+        <!-- 신고 기타 사유 작성 모달 -->
+        <div class="modal fade" id="etcReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-content">
+                        <!-- Modal body -->
+                        <div class="modal-body" align="center">
+                            
+                            <table>
+                                <tr>
+                                    <td>기타사유</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div data-image-content="false" style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><textarea id="reportReasonArea" cols="50" rows="4" style="resize: none;"></textarea></td>
+                                </tr>
+                            </table>
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="getReason()">확인</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+	<%@ include file="../common/footerTemp.jsp" %>
     
 </body>
 </html>

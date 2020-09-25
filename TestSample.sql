@@ -55,11 +55,12 @@ SELECT *
                      , B.BOARD_TITLE
                      , DECODE(B.BOARD_TYPE, 1, '일상', '후기') BOARD_CATEGORY
                      , B.BOARD_CONTENT
+                     , B.BOARD_COUNT
                      , TO_CHAR(B.CREATE_DATE, 'yyyy-MM-dd') CREATE_DATE
                   FROM BOARD_VIEW B
                   JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
                  ORDER
-                    BY B.CREATE_DATE DESC
+                    BY B.BOARD_COUNT DESC
                ) B
        )
  WHERE RNO BETWEEN 1 AND 10;
@@ -171,5 +172,28 @@ INSERT
   , 'ddddddddd'
   , 1
   );
- 
+
+-- 신고 insert
+INSERT
+  INTO REPORT
+  (
+    REP_NO
+  , REP_WRITER_NO
+  , REP_TARGET_NO
+  , REP_REASON
+  , BOARD_TYPE
+  , REP_CONTENT_NO
+  , REP_REPLY
+  )
+  VALUES
+  (
+    SEQ_REPNO.NEXTVAL
+  , 3
+  , 2
+  , 'ddddddddddd'
+  , 1
+  , 134
+  , null
+  );
+
 ROLLBACK;

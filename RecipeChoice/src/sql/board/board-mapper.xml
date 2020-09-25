@@ -102,4 +102,28 @@
 		 WHERE BOARD_NO = ?
 	</entry>
 
+	<entry key="reportInsert">
+		INSERT
+		  INTO REPORT
+		  (
+		    REP_NO
+		  , REP_WRITER_NO
+		  , REP_TARGET_NO
+		  , REP_REASON
+		  , BOARD_TYPE
+		  , REP_CONTENT_NO
+		  , REP_REPLY
+		  )
+		  VALUES
+		  (
+		    SEQ_REPNO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  )
+	</entry>
+
 </properties>

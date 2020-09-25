@@ -80,6 +80,9 @@
 </head>
 <body>
 
+	<%@ include file="../common/menubarTemp.jsp" %>
+
+
     <div class="outerForm">
 
         <div align="right" style="width: 900px;">
@@ -194,6 +197,9 @@
             </div>
         </form>
     </div>
+
+	<%@ include file="../common/footerTemp.jsp" %>
+	
 
 </body>
 </html>

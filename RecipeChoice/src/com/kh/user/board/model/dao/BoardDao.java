@@ -9,11 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.user.board.model.vo.Board;
 import com.kh.user.board.model.vo.PageInfo;
+import com.kh.user.board.model.vo.Report;
 
 public class BoardDao {
 	
@@ -321,6 +323,42 @@ public class BoardDao {
 		}
 		
 		return result;
+	}
+
+	public int reportInsert(Connection conn, Report report) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("reportInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, report.getReporterNo());
+			pstmt.setInt(2, report.getReportedMemNo());
+			pstmt.setString(3, report.getReason());
+			pstmt.setInt(4, report.getBoardType());
+			pstmt.setInt(5, report.getBno());
+
+			String replyNo = report.getReplyNo();
+			if(replyNo.equals("")) {
+				pstmt.setNull(6, Types.INTEGER);
+			} else {
+				pstmt.setInt(6, Integer.parseInt(replyNo));
+			}
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 
 }

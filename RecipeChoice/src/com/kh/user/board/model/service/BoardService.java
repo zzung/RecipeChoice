@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.kh.user.board.model.dao.BoardDao;
 import com.kh.user.board.model.vo.Board;
 import com.kh.user.board.model.vo.PageInfo;
+import com.kh.user.board.model.vo.Report;
 
 public class BoardService {
 
@@ -107,6 +108,24 @@ public class BoardService {
 		close(conn);
 		
 		return result;
+	}
+
+	public int reportInsert(Report report) {
+		
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().reportInsert(conn, report);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollBack(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
 	}
 
 
