@@ -149,7 +149,7 @@
                 <div class="w3-container w3-border-bottom w3-border-grey"></div>
                 <p id="pageTitle">
                   <b><big>조리 사진 첨부 </big></b>
-                  <button id="addRow">
+                  <button class="addRow" type="button">
                     <i class="fa fa-plus" style="font-size: 14px"></i>
                   </button>
                 </p>
@@ -160,15 +160,15 @@
             <tr id="cookDetail">
             <!-- 작성하는거 하나씩 줄이기 (반복문필요)-->
               <td align="center">
-                <button id="removeRow">
+                <button class="removeRow a" type="button" disabled>
                   <i class="fa fa-minus" style="font-size: 14px"></i>
                 </button>
                 &nbsp;&nbsp;
-                <img src="" id="detailImg" />
+                <img src="" class="detailImg" />
               </td>
               <td align="center">
-                <span class="dot">1</span>&nbsp;&nbsp;
-                <textarea name="recipeDetail" id="text" cols="40" rows="5" style="resize: none"></textarea>
+                <span class="dot countIng">1</span>&nbsp;&nbsp;
+                <textarea name="recipeDetail" class="text" cols="40" rows="5" style="resize: none"></textarea>
               </td>
             </tr>
             <tr>
@@ -242,24 +242,44 @@
           </script>
           
           <!-- 조리 디테일 증가 시키기/ 이미지 input 수정후 remove에 포함 시켜야함. -->
-           <script>
-           $("#addRow").on("click", function () {
-               $("tbody").append(`<tr class="cookDetail">
-                 <td align="center">
-                   <button id="minusExtra" class="removeCookDetail">
-                     <i class="fa fa-minus" style="font-size: 14px"></i>
-                  </button>&nbsp;&nbsp;
-                    <img src="" id="detailImg" width="200" height="150" />
-                 </td>
-                 <td align="center">
-                   <span class="dot" id="countIng">` + ++rowIdx + `</span>&nbsp;&nbsp;
-                 <textarea name="" id="text" cols="40" rows="5" style="resize: none"></textarea>
-                 </td>
-               </tr>`);
-             });
+         <script>
+            $(document).ready(function () {
+              rowIdx = 1;
+
+              $(".addRow").on("click", function () {
+                $("tbody").append(`<tr>
+                  <td align="center">
+                    <button class="removeRow" type="button">
+                      <i class="fa fa-minus" style="font-size: 14px"></i>
+                   </button>&nbsp;&nbsp;
+                     <img src="" class="detailImg"/>
+                  </td>
+                  <td align="center" class="row-index">
+                    <span class="dot countIng">`+ ++rowIdx +`</span>&nbsp;&nbsp;
+                  <textarea name="" class="text" cols="40" rows="5" style="resize: none"></textarea>
+                  </td>
+                </tr>`);
+              });
+
+              //제이커리 버튼 클립이벤트 줄 제거
+              $("tbody").on("click", ".removeRow", function () {
+                $(this).closest("tr").remove();
+
+                $(".countIng").text(function () {
+                  if ($(this).text() == 1 || $(this).text() == 2) {
+                    return $(this).text();
+                  } else {
+                    return Number($(this).text()) - 1;
+                  }
+                });
+
+                rowIdx--;
+              });
+            });
           </script>
           
           <script>
+          $(function(){
               //재료 리스트 추가
               $(".addIngredientList").click(function () {
                       $("#ingList").clone().attr("id", "newText").appendTo(".addIngList");
