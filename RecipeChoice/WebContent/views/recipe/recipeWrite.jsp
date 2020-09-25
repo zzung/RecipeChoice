@@ -164,7 +164,7 @@
                   <i class="fa fa-minus" style="font-size: 14px"></i>
                 </button>
                 &nbsp;&nbsp;
-                <img src="" class="detailImg" />
+                <img src="" class="detailImg" id="detailImg1" />
               </td>
               <td align="center">
                 <span class="dot countIng">1</span>&nbsp;&nbsp;
@@ -177,14 +177,20 @@
             
           </table>
            <div class="fileArea">
-            <input type="file" id="recipeWrite_mainPic" name="recipeWrite_mainPic" onchange="loadImg(this,1);" required/>
-            <input type="file" id="recipeWrite_detailPic" name="recipeWrite_detailPic" onchange="loadImg(this,2);">
+            <input type="file" id="recipeWrite_mainPic" name="recipeWrite_mainPic" onchange="loadImg(this,100);" required/>
+           
+            <input type="file" id="recipeWrite_detailPic" name="recipeWrite_detailPic" onchange="loadImg(this,1);">
+            
           </div>
           <!-- 레시피작성 대표이미지 등록 -->
           <script>
             $(function () {
               $("#titleImg").click(function () {
                 $("#recipeWrite_mainPic").click();
+              });
+              
+              $("#detailImg1").click(function(){
+            	 $("#recipeWrite_detailPic").click(); 
               });
             });
 
@@ -195,9 +201,16 @@
                 reader.onload = function (e) {
 
                   switch(num) {
-                  case 1:
+                  case 100 :
                     $("#titleImg").attr("src", e.target.result);
                     break;
+                  case 1:
+                  	$("#detailImg1").attr("src", e.target.result);
+                  	break; 
+                  default:
+                	  console.log("load -> " + "#detailImg"+num)
+                	$("#detailImg"+num).attr("src", e.target.result);
+                	break;  
                   }
                 };
               } else {
@@ -205,46 +218,26 @@
                 case 1:
                   $("#titleImg").attr("src", null);
                   break;
+                case 10 :
+                	$("#detailImg").attr("src", null);
+                	break;  
                 }
               }
             }
           </script>
           
-          <!-- 레시피작성 조리법 이미지 등록 -->
-          <script>
-          	$(function(){
-          		$("#detailImg").click(function(){
-          			$("#recipeWrite_detailPic").click();
-          		});
-          	});
-          		
-          		function loadImg(inputFile,num){
-          			if(inputFile.files.length == 1){
-          				var reader = new FileReader();
-          				reader.readAsDataURL(inputFile.files[0]);
-          				reader.onload = function(e){
-          					
-          					switch(num){
-          					case 2: 
-          						$("#detailImg").attr("src",e.target.result);
-          						break;
-          					}
-          					
-          				};
-          			}else{
-          				switch(num){
-          					case 2:
-          						$("#detailImg").attr("src",null);
-          						break; 
-          				}
-          			}
-          		}
-          </script>
           
           <!-- 조리 디테일 증가 시키기/ 이미지 input 수정후 remove에 포함 시켜야함. -->
          <script>
+         
+         function clickBtn(num){
+         	  $("#detailBtn" + num).click();
+           }
+         
             $(document).ready(function () {
-              rowIdx = 1;
+         
+           	rowIdx = 1;
+            count = 1
 
               $(".addRow").on("click", function () {
                 $("tbody").append(`<tr>
@@ -252,14 +245,18 @@
                     <button class="removeRow" type="button">
                       <i class="fa fa-minus" style="font-size: 14px"></i>
                    </button>&nbsp;&nbsp;
-                     <img src="" class="detailImg"/>
+                     <img src="" class="detailImg" id="detailImg` + ++count + `" onclick="clickBtn(`+ count + `);" />
                   </td>
                   <td align="center" class="row-index">
                     <span class="dot countIng">`+ ++rowIdx +`</span>&nbsp;&nbsp;
                   <textarea name="" class="text" cols="40" rows="5" style="resize: none"></textarea>
-                  </td>
+                  
+                  <div class="fileArea">
+                  <input type="file" class="recipeWrite_detailPic" id="detailBtn` + count + `" name="recipeWrite_detailPic" onchange="loadImg(this,`+ count +` );">
+                  </div></td>
                 </tr>`);
               });
+
 
               //제이커리 버튼 클립이벤트 줄 제거
               $("tbody").on("click", ".removeRow", function () {
@@ -269,8 +266,11 @@
                   if ($(this).text() == 1 || $(this).text() == 2) {
                     return $(this).text();
                   } else {
-                    return Number($(this).text()) - 1;
+                	  return Number($(this).text()) - 1;
                   }
+                  
+                  
+                  
                 });
 
                 rowIdx--;
