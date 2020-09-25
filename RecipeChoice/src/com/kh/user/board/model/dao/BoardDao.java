@@ -34,25 +34,50 @@ public class BoardDao {
 	/**
 	 * 게시글 목록 가져오기
 	 * @param conn
-	 * @param currentPage			현재페이지 정보
+	 * @param pi			현재페이지 정보
 	 * @return
 	 */
-	public ArrayList<Board> selectBoardList(Connection conn, int currentPage) {
+	public ArrayList<Board> selectBoardList(Connection conn, PageInfo pi) {
 		
 		ArrayList<Board> boardList = new ArrayList<Board>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = prop.getProperty("selectBoardListByPage");
+		String orderType = null;
+		String category = pi.getCategory();
 		
-		int maxRownum = currentPage * 10; 
+		switch(pi.getOrder()) {
+		case "writer": orderType = "ORDER BY M.MEM_NAME"; break;
+		case "count": orderType = "ORDER BY B.BOARD_COUNT DESC"; break;
+		default: orderType = "ORDER BY B.CREATE_DATE DESC"; break;
+		}
+		
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append(prop.getProperty("selectBoardListByPagePart1"));
+		
+		if(!category.equals("all")) {
+			sql.append(prop.getProperty("selectBoardListByPagePart2"));
+		}
+		
+		sql.append(orderType);
+		sql.append(prop.getProperty("selectBoardListByPagePart3"));
+		
+		
+		int maxRownum = pi.getCurrentPage() * 10; 
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
+			int i = 1;
 			
-			pstmt.setInt(1, maxRownum - 9);
-			pstmt.setInt(2, maxRownum);
+			pstmt = conn.prepareStatement(sql.toString());
+			
+			if(!category.equals("all")) {
+				pstmt.setInt(i++, Integer.parseInt(category));
+			}
+			
+			pstmt.setInt(i++, maxRownum - 9);
+			pstmt.setInt(i++, maxRownum);
 			
 			rs = pstmt.executeQuery();
 			
@@ -64,7 +89,8 @@ public class BoardDao {
 						              , rs.getString("BOARD_TITLE")
 						              , rs.getString("BOARD_CATEGORY")
 						              , rs.getString("BOARD_CONTENT")
-						              , rs.getString("CREATE_DATE")));
+						              , rs.getString("CREATE_DATE")
+						              , rs.getInt("BOARD_COUNT")));
 			}
 			
 		} catch (SQLException e) {

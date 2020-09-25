@@ -11,11 +11,11 @@ import com.kh.user.board.model.vo.PageInfo;
 
 public class BoardService {
 
-	public ArrayList<Board> selectBoardList(int currentPage) {
+	public ArrayList<Board> selectBoardList(PageInfo pi) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Board> boardList = new BoardDao().selectBoardList(conn, currentPage);
+		ArrayList<Board> boardList = new BoardDao().selectBoardList(conn, pi);
 		
 		close(conn);
 		

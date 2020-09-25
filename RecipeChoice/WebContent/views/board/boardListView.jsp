@@ -21,7 +21,7 @@
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	session.removeAttribute("alertMsg");
 	
-%>    
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,7 +152,20 @@
     			alert(alertMsg);
     			alertMsg = "null";
     		}
+    		
+    		$("#orderType").children().each(function () {
+   				var order = "<%= pi.getOrder() %>";
+   				if($(this).val() == order) {
+   					$(this).prop("selected", true);
+   				}
+   			});
+    		
     	});
+    	
+    	function orderChange(e) {
+			var url = "<%= request.getContextPath() %>/board.bo?p=1&category=<%= pi.getCategory() %>&order=" + $(e).val();
+			location.href=url;
+		}
     </script>
 </head>
 <body>
@@ -181,9 +194,11 @@
         <form action="/search.bo" method="GET" style="margin-bottom: 10px;">
             <div align="right" style="width: 900px;">
                 
-                <a href="">일상</a>
+                <a href="<%= request.getContextPath() %>/board.bo?p=1&category=all&order=<%= pi.getOrder() %>">전체</a>
+                
+                <a href="<%= request.getContextPath() %>/board.bo?p=1&category=1&order=<%= pi.getOrder() %>">일상</a>
 
-                <a href="">후기</a>
+                <a href="<%= request.getContextPath() %>/board.bo?p=1&category=2&order=<%= pi.getOrder() %>">후기</a>
 
                 <select class="custom-select" name="searchType">
                     <option value="title" selected>제목</option>
@@ -195,10 +210,10 @@
 
                 <button type="submit" class="btnSearch"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32.24800109863281" height="32.24800109863281" viewBox="0 0 32.24800109863281 32.24800109863281" fill="rgb(46, 204, 113)" data-svg-content="true"><g><path d="M 19,0C 11.82,0, 6,5.82, 6,13c0,3.090, 1.084,5.926, 2.884,8.158l-8.592,8.592c-0.54,0.54-0.54,1.418,0,1.958 c 0.54,0.54, 1.418,0.54, 1.958,0l 8.592-8.592C 13.074,24.916, 15.91,26, 19,26c 7.18,0, 13-5.82, 13-13S 26.18,0, 19,0z M 19,24 C 12.934,24, 8,19.066, 8,13S 12.934,2, 19,2S 30,6.934, 30,13S 25.066,24, 19,24z"></path></g></svg></button>
 
-                <!-- AJAX로 정렬 -->
-                <select class="custom-select" name="orderType">
-                    <option value="dateDESC" selected>최신순</option>
-                    <option value="writerName">작성자</option>
+                <select class="custom-select" id="orderType" onchange="orderChange(this)">
+                    <option value="date">최신순</option>
+                    <option value="writer">작성자</option>
+                    <option value="count">조회순</option>
                 </select>
             </div>
         </form>
@@ -247,16 +262,16 @@
             
             <% if(pi.getCurrentPage() != 1) { %>
             <!-- 맨 처음으로 (<<) -->
-            <a href="<%= request.getContextPath() %>/board.bo?p=1" class="btn btn-secondry"> &lt;&lt; </a>
+            <a href="<%= request.getContextPath() %>/board.bo?p=1&category=<%= pi.getCategory() %>&order=<%= pi.getOrder() %>" class="btn btn-secondry"> &lt;&lt; </a>
             <!-- 이전페이지로 (<) -->
-            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() - 1 %>"class="btn btn-secondry"> &lt; </a>
+            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() - 1 %>&category=<%= pi.getCategory() %>&order=<%= pi.getOrder() %>"class="btn btn-secondry"> &lt; </a>
          	<% } %>
          	
             <% for(int i = pi.getStartPage(), last = pi.getLastPage(); i <= last; i++) { %>
             	<% if(i == pi.getCurrentPage()) { %>
                 <a class="btn btnDisabled"><%= i %></a>
             	<% } else { %>
-            	<a href="<%= request.getContextPath() %>/board.bo?p=<%= i %>"class="btn btn-secondry pagebtn"><%= i %></a>
+            	<a href="<%= request.getContextPath() %>/board.bo?p=<%= i %>&category=<%= pi.getCategory() %>&order=<%= pi.getOrder() %>"class="btn btn-secondry pagebtn"><%= i %></a>
             	<% } %>
             	
             	<% 
@@ -268,9 +283,9 @@
             
             <% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
             <!-- 다음페이지로 (>) -->
-            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() + 1 %>"class="btn btn-secondry"> &gt; </a>
+            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() + 1 %>&category=<%= pi.getCategory() %>&order=<%= pi.getOrder() %>"class="btn btn-secondry"> &gt; </a>
             <!-- 맨 끝으로 (>>) -->
-            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getMaxPage() %>" class="btn btn-secondry"> &gt;&gt; </a>
+            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getMaxPage() %>&category=<%= pi.getCategory() %>&order=<%= pi.getOrder() %>" class="btn btn-secondry"> &gt;&gt; </a>
             <% } %>
         </div>
     </div>

@@ -35,7 +35,7 @@ public class Board {
 
 
 	public Board(int boardNo, int userNo, String memName, String memPic, String boardTitle, String category,
-			String boardContent, String createDate) {
+			String boardContent, String createDate , int boardCount) {
 		super();
 		this.boardNo = boardNo;
 		this.userNo = userNo;

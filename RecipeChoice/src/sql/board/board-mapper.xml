@@ -7,7 +7,7 @@
 		사이에 문자열을 더해줄것
 		prop.getProperty() + 정렬기준 + prop.getProperty()	
 	</comment>
-	<entry key="selectBoardListByPage">
+	<entry key="selectBoardListByPagePart1">
 		SELECT *
 		  FROM (
 		        SELECT ROWNUM RNO, B.*
@@ -21,14 +21,21 @@
 		                     , DECODE(B.BOARD_TYPE, 1, '일상', '후기') BOARD_CATEGORY
 		                     , B.BOARD_CONTENT
 		                     , TO_CHAR(B.CREATE_DATE, 'yyyy-MM-dd HH:mm') CREATE_DATE
+		                     , B.BOARD_COUNT
 		                  FROM BOARD_VIEW B
 		                  JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
-		                 ORDER
-		                    BY B.CREATE_DATE DESC
+	</entry>
+	
+	<entry key="selectBoardListByPagePart2">
+		 WHERE BOARD_TYPE = ?
+	</entry>
+	
+	<entry key="selectBoardListByPagePart3">
 		               ) B
 		       )
 		 WHERE RNO BETWEEN ? AND ?
 	</entry>
+	
 
 	<entry key="getMaxPage">
 		SELECT COUNT(*) MAX
