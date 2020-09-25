@@ -10,6 +10,12 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style>
+.paging{
+	margin-left:300px;
+}
+
+</style>
 </head>
 <body>
 	<body>
@@ -80,7 +86,7 @@
                 <table class="table table">
                     <thead>
                       <tr>
-                        <th  colspan="2"> 최근 본 게시물</th>
+                        <th  colspan="2"> 내가 작성한 게시물</th>
                       </tr>
                     </thead>
                   </table>
@@ -117,14 +123,7 @@
             </div>
          
             <div class="content2_2">
-                <table class="table table-striped" id="dd">
-                    <thead>
-                      <tr>
-                        <th scope="col" colspan="2"> 작성글</th>
-                        <th scope="col"></th>
-                      </tr>
-                    </thead>
-                  </table>
+               
                 <div class="content2_2_1">
                     <div class="card" style="width: 10rem;">
                         <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
@@ -155,21 +154,12 @@
                         </div>
                     </div>
                 </div>   
-                <div class="content2_2_2">
-                    <a href="" id="moreBtn" class="btn btn-light">more</a>
-                </div>
+                
             </div>
             <div class="content2_3">
-                <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col" colspan="2"> 스크랩한 게시글 보기</th>
-                        <th scope="col"></th>
-                      </tr>
-                    </thead>
-                  </table>
+                
                 <div class="content2_3_1">
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width: 10rem; margin-top:10px;">
                         <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
@@ -199,14 +189,30 @@
                     </div>
                 </div>   
              
-                <div class="content2_3_2">
-                    <a href="" id="moreBtn" class="btn btn-light">more</a>
-                </div>
+             	<div class="content2_3_1">
+             		<nav aria-label="Page navigation example" class="paging">
+						  <ul class="pagination">
+						    <li class="page-item">
+						      <a class="page-link" href="#"aria-label="Previous">
+						        <span aria-hidden="true">&laquo;</span>
+						      </a>
+						    </li>
+						    <li class="page-item"><a class="page-link" href="#">1</a></li>
+						    <li class="page-item"><a class="page-link" href="#">2</a></li>
+						    <li class="page-item"><a class="page-link" href="#">3</a></li>
+						    <li class="page-item">
+						      <a class="page-link" href="#" aria-label="Next">
+						        <span aria-hidden="true">&raquo;</span>
+						      </a>
+						    </li>
+						  </ul>
+					</nav>
+             	</div>
             </div>
-
+			
   
         </div>
-
+		
 
     </div>
 </body>
