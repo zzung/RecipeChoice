@@ -159,13 +159,9 @@ div{
                 	<%} else{ %>
 	                	<% for (Notice n : noticeList) { %>
 	                    <tr>
-	                    	<% if (n.getNoticeImportant().equals("Y")){ %>
-	                        	<td>공지</td>
-	                        <% } else{ %>
-	                        	<td><%= n.getNoticeNo() %></td>
-	                        <% } %>
-		                        <td> <%= n.getNoticeTitle() %> </td>
-		                        <td> <%= n.getNoticeDate() %></td>
+                        	<td><%= n.getNoticeNo() %></td>
+	                        <td><%= n.getNoticeTitle() %></td>
+	                        <td><%= n.getNoticeDate() %></td>
 	                    <% } %>
 	                    </tr>
 	                <% } %>
@@ -195,13 +191,17 @@ div{
             
                 <%-- 일반 공지사항일때 --%>
                 $('.tb1 td:nth-child(1)').addClass( 'notice-normal' );
-           
+
                 <%-- 제목 클릭시 상세페이지로 이동--%>
-                $(".listArea>tbody>tr").click(function(){
-                	var nno = $(this).children().eq(0).text();
-                	location.href = "<%= contextPath %>/detail.no?nno=" + nno;
-				});
+	            $(".tb1 tr").click(function(){
+	            	var nno = $(this).children().eq(0).text();
+	            	location.href = "<%= contextPath %>/noticeDetail.no?nno="+ nno;
+	            	console.log(nno);
+	            });
+           
             });
+
+            
             
         </script>
 

@@ -19,8 +19,8 @@
             height:800px;
             margin: auto;
         }
-        #header{height:20%;} 
-        #content{height:70%}
+        #header{height:20%; margin-bottom:20px;} 
+        #content{height:70%; margin-top:20px;}
         #footer{height:10%; }
         #content>div{
             height:100%;
@@ -72,38 +72,31 @@
 </head>
 <body>
 	<!-- 메뉴바 추가 -->
-	
 	<%@include file="../common/menubar.jsp" %>
+	
 	<div class="wrap">
         <div id="header">
             <div id="header_1"></div>
             <div id="header_2"></div>
             <div id="header_3"></div>
         </div>
+        <div class="nav">
+            <div class="menu"></div>
+        </div>
         <div id="content">
             <div id="content_1">
-                <div id="menu_1">고객센터</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/notice.no'">&nbsp;&nbsp;공지사항</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;1:1 문의</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;개인정보취급방침</div>
-                <div id="menu_3">
-                    <br>&nbsp;&nbsp;고객센터
-                    <br>&nbsp;&nbsp;1234-5678
-                    <br>&nbsp;&nbsp;평일 10:00 ~ 18:00
-                    <br>&nbsp;&nbsp;(토,일 공휴일은 휴무)
-                </div>
+                <div id="menu_1">관리자</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeManagement.no'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;공지사항관리</div>
+                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
+                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
+                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
+                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
+                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
+                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
+                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;신고 관리</div>
             </div>
             <div id="content_2">
-                <div id="contentTop" align="right" style="margin-top:20px; margin-bottom:20px">
-		            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48" data-svg-content="true" fill="#000000" style="vertical-align: middle;">
-		                <path d="M20 40V28h8v12h10V24h6L24 6 4 24h6v16z"></path>
-		            </svg>
-		            <a href="<%=contextPath%>/serviceCenter.no">고객센터</a>
-		            &lt;
-		            <a href="<%=contextPath%>/notice.no">공지사항</a>
-		        </div>
-		        
+                
                 <hr>
                 <div id="noticeTitle">No.<%=n.getNoticeNo()%>&nbsp;&nbsp;<%= n.getNoticeTitle() %></div>
                 <hr>
@@ -118,16 +111,17 @@
                 <br><br><br><br><br><br><br>
                 <hr>
                 
-                <div align="center"><a href="<%=contextPath%>/notice.no" class="btn btn-success">목록으로</a></div>
-	        
+                <div  align="center">
+	                <a href="<%=contextPath%>/notice.mn" class="btn btn-dark">목록으로</a>
+	                <a href="<%=contextPath%>/Update.mn" class="btn btn-primary">수정하기</a>
+	                <a href="<%=contextPath%>/" class="btn btn-danger">삭제하기</a>
+                </div>
+	        	
             </div>
             
             <div id="content_3"></div>
-        </div>
+        
+        
     </div>
-    
-    <!-- 푸터 추가-->
-    <%@include file="../common/footer.jsp" %>
-    
 </body>
 </html>

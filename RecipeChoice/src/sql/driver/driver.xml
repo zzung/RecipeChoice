@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-
+<!--
 	<entry key="driver">oracle.jdbc.driver.OracleDriver</entry>
 	<entry key="url">jdbc:oracle:thin:@localhost:1521:xe</entry>
 	<entry key="username">RECIPE</entry>
 	<entry key="password">RECIPE</entry>
+-->
 
 
-
-<!-- 승희꺼 
+ 
+<!--승희꺼 --> 
 	<entry key="driver">oracle.jdbc.driver.OracleDriver</entry>
 	<entry key="url">jdbc:oracle:thin:@localhost:1521:xe</entry>
 	<entry key="username">C##RECIPE</entry>
 	<entry key="password">RECIPE</entry>
--->
+
 
 </properties>

@@ -20,6 +20,15 @@ public class NoticeService {
 		return noticeList;
 	}
 
+	public Notice selectNotice(int nno) {
+
+		Connection conn = getConnection();
+		Notice n = new NoticeDao().selectNotice(conn, nno);
+		close(conn);
+		
+		return n;
+	}
+
 	
 	
 	

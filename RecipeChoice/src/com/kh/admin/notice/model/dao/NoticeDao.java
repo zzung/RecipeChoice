@@ -3,6 +3,7 @@ package com.kh.admin.notice.model.dao;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -55,6 +56,35 @@ public class NoticeDao {
 		}
 		
 		return noticeList;
+	}
+
+
+	public Notice selectNotice(Connection conn, int nno) {
+		
+		Notice n = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, nno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				n = new Notice(rs.getInt("NOT_NO"), rs.getString("NOT_TITLE"),
+							   rs.getString("NOT_CONTENT"),rs.getString("NOT_IMPORTANT"),
+							   rs.getDate("NOT_DATE"), rs.getString("STATUS"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return n;
 	}
 	
 	
