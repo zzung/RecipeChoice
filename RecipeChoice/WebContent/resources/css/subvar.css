@@ -87,8 +87,10 @@
         font-size: 15px;
     
         }
-        .clickLink{
-        
-            margin-left: 760px;
-         }
+    .clickLink{
     
+        margin-left: 760px;
+     }
+       .table{
+        width: 752px;
+    }
