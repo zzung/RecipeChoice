@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
 <link rel="stylesheet" href="resources/css/recipeWrite.css">
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -50,23 +51,20 @@
                 <!--반복문 돌려야함-->
                 <p style="font-size: 20px">
                   <b>재료 List</b>
-                  <button id="addExtra">
+                  <button id="addExtra"  class="addIngredientList">
                     <i class="fa fa-plus" style="font-size: 14px"></i>
                   </button>
                 </p>
-                <textarea name="ingredient" cols="12" rows="1" style="resize: none; font-size: 14px" placeholder="재료명">
-                </textarea>
-                <textarea name="measurement" cols="25" rows="1" placeholder="정확한 계량을 입력해주세요(ex.200g, 1tsp)"
-                 	style="resize: none; font-size: 14px">
-                </textarea>
-                <textarea name="ingredient" cols="12" rows="1" placeholder="재료명" 
-                	style="resize: none; font-size: 14px">
-                </textarea>
-                <textarea name="measurement" cols="25" rows="1" placeholder="정확한 계량을 입력해주세요(ex.200g, 1tsp)"
-                 	style="resize: none; font-size: 14px">
-                </textarea>
                 
+               <div id="ingList">
+                  <textarea name="" id="" cols="12" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
+                  <textarea name="" id="" cols="25" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
+                </div>
+                  <textarea name="" id="" cols="12" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
+                  <textarea name="" id="" cols="25" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
+                <div class="addIngList"></div>
                 <br /><br />
+ 
                 <p style="font-size: 20px"><b>요리 종류 선택</b><br /></p>
                 <select name="" id="" style="font-size: 15px">
                   <option value="defaul">종류별</option>
@@ -79,14 +77,16 @@
                 </select>
                 <br /><br />
 
-                <!--반복문 돌려야함-->
+                <!--태그별-->
                 <p style="font-size: 20px">
                   <b>태그선택</b>
-                  <button id="addExtra">
+                  <button id="addExtra" class="addTag">
                     <i class="fa fa-plus" style="font-size: 14px"></i>
                   </button>
                 </p>
-                <select name="" id="" style="font-size: 15px">
+               
+                <div id="tagList">
+                <select name="tag" id="" style="font-size: 15px">
                   <option value="default">재료선택</option>
                   <option value="beef">소고기</option>
                   <option value="pork">돼지고기</option>
@@ -139,59 +139,9 @@
                   <option value="flour">밀가루</option>
                   <option value="processedFood">가공식품</option>
                 </select>
-                <br />
-                <select name="" id="" style="font-size: 15px">
-                  <option value="default">재료선택</option>
-                  <option value="beef">소고기</option>
-                  <option value="pork">돼지고기</option>
-                  <option value="chicken">닭고기</option>
-                  <option value="duck">오리고기</option>
-                  <option value="seafood">해물류</option>
-                  <option value="driedFish">건어물류</option>
-                  <option value="nuts">콩/견과류</option>
-                  <option value="dairy">달걀/유제품</option>
-                  <option value="vegi">체소류</option>
-                  <option value="fruit">과일류</option>
-                  <option value="mushroom">버섯류</option>
-                  <option value="grain">곡류</option>
-                  <option value="flour">밀가루</option>
-                  <option value="processedFood">가공식품</option>
-                </select>
-                <select name="" id="" style="font-size: 15px">
-                  <option value="default">재료선택</option>
-                  <option value="beef">소고기</option>
-                  <option value="pork">돼지고기</option>
-                  <option value="chicken">닭고기</option>
-                  <option value="duck">오리고기</option>
-                  <option value="seafood">해물류</option>
-                  <option value="driedFish">건어물류</option>
-                  <option value="nuts">콩/견과류</option>
-                  <option value="dairy">달걀/유제품</option>
-                  <option value="vegi">체소류</option>
-                  <option value="fruit">과일류</option>
-                  <option value="mushroom">버섯류</option>
-                  <option value="grain">곡류</option>
-                  <option value="flour">밀가루</option>
-                  <option value="processedFood">가공식품</option>
-                </select>
-                <select name="" id="" style="font-size: 15px">
-                  <option value="default">재료선택</option>
-                  <option value="beef">소고기</option>
-                  <option value="pork">돼지고기</option>
-                  <option value="chicken">닭고기</option>
-                  <option value="duck">오리고기</option>
-                  <option value="seafood">해물류</option>
-                  <option value="driedFish">건어물류</option>
-                  <option value="nuts">콩/견과류</option>
-                  <option value="dairy">달걀/유제품</option>
-                  <option value="vegi">체소류</option>
-                  <option value="fruit">과일류</option>
-                  <option value="mushroom">버섯류</option>
-                  <option value="grain">곡류</option>
-                  <option value="flour">밀가루</option>
-                  <option value="processedFood">가공식품</option>
-                </select>
-              </td>
+                </div>
+                 <div class="returnCopy"></div>
+          	 </td>
             </tr>
 
             <tr class="bottomContent">
@@ -199,17 +149,18 @@
                 <div class="w3-container w3-border-bottom w3-border-grey"></div>
                 <p id="pageTitle">
                   <b><big>조리 사진 첨부 </big></b>
-                  <button id="addExtra">
+                  <button id="addRow">
                     <i class="fa fa-plus" style="font-size: 14px"></i>
                   </button>
                 </p>
                 <br />
               </td>
             </tr>
-            <tr>
+            
+            <tr id="cookDetail">
             <!-- 작성하는거 하나씩 줄이기 (반복문필요)-->
               <td align="center">
-                <button id="minusExtra">
+                <button id="removeRow">
                   <i class="fa fa-minus" style="font-size: 14px"></i>
                 </button>
                 &nbsp;&nbsp;
@@ -220,12 +171,14 @@
                 <textarea name="recipeDetail" id="text" cols="40" rows="5" style="resize: none"></textarea>
               </td>
             </tr>
-            
+            <tr>
+              <td id="tbody" colspan="2"></td>
+            </tr>
             
           </table>
            <div class="fileArea">
             <input type="file" id="recipeWrite_mainPic" name="recipeWrite_mainPic" onchange="loadImg(this,1);" required/>
-            <input type="file" id="recipeWrite_detailPic" name="recipeWrite_detailPic" onchange="loadImg(this,1);">
+            <input type="file" id="recipeWrite_detailPic" name="recipeWrite_detailPic" onchange="loadImg(this,2);">
           </div>
           <!-- 레시피작성 대표이미지 등록 -->
           <script>
@@ -241,13 +194,17 @@
                 reader.readAsDataURL(inputFile.files[0]);
                 reader.onload = function (e) {
 
-                  if (num == 1) {
+                  switch(num) {
+                  case 1:
                     $("#titleImg").attr("src", e.target.result);
+                    break;
                   }
                 };
               } else {
-                if (num == 1) {
+                switch(num) {
+                case 1:
                   $("#titleImg").attr("src", null);
+                  break;
                 }
               }
             }
@@ -268,7 +225,7 @@
           				reader.onload = function(e){
           					
           					switch(num){
-          					case 1: 
+          					case 2: 
           						$("#detailImg").attr("src",e.target.result);
           						break;
           					}
@@ -276,13 +233,47 @@
           				};
           			}else{
           				switch(num){
-          					case 1:
+          					case 2:
           						$("#detailImg").attr("src",null);
           						break; 
           				}
           			}
           		}
           </script>
+          
+          <!-- 조리 디테일 증가 시키기/ 이미지 input 수정후 remove에 포함 시켜야함. -->
+           <script>
+           $("#addRow").on("click", function () {
+               $("tbody").append(`<tr class="cookDetail">
+                 <td align="center">
+                   <button id="minusExtra" class="removeCookDetail">
+                     <i class="fa fa-minus" style="font-size: 14px"></i>
+                  </button>&nbsp;&nbsp;
+                    <img src="" id="detailImg" width="200" height="150" />
+                 </td>
+                 <td align="center">
+                   <span class="dot" id="countIng">` + ++rowIdx + `</span>&nbsp;&nbsp;
+                 <textarea name="" id="text" cols="40" rows="5" style="resize: none"></textarea>
+                 </td>
+               </tr>`);
+             });
+          </script>
+          
+          <script>
+              //재료 리스트 추가
+              $(".addIngredientList").click(function () {
+                      $("#ingList").clone().attr("id", "newText").appendTo(".addIngList");
+                    });
+              
+              
+              //태그선택 증가식
+              $(".addTag").click(function () {
+                  $("#tagList").clone().attr("id", "newOptions").appendTo(".returnCopy");
+                });
+            });
+          </script>
+          
+         
           <br><br>
           <div align="right">
             <button type="submit" id="insertRecipe">등록하기</button>
