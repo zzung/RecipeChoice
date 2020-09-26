@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%
 	ArrayList<Notice> noticeList = (ArrayList<Notice>)request.getAttribute("noticeList"); 
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -154,12 +155,17 @@
 	                       <td><%= n.getNoticeNo()%></td>
 	                       <td><%= n.getNoticeTitle() %></td>
 	                       <td><%= n.getNoticeDate() %></td>
-	                       <td><a href="#" onclick="noticeUpdate();">수정</a>&nbsp;&nbsp;<a href="#" onclick="noticeDelete();">삭제</a></td>
+	                       <td>
+		                       <a id="noticeUpdate" onclick="return noticeUpdate();">수정</a>&nbsp;&nbsp;
+		                       <a id="noticeDelete" onclick="return noticeDelete();">삭제</a>
+	                       </td>
 	                 	 </tr>
                         <% } %>
                     </tbody>
                 </table>
+                
                 <hr>
+                <div align="right"><a href="<%=contextPath %>/enrollForm.mn" class="btn btn-secondary">글 작성</a></div>
             </div>
             <div id="content_3"></div>
         </div>
@@ -181,38 +187,50 @@
     <%@include file="../common/footer.jsp" %>
     
     <script>
-    
     	$(function(){
+    		
+    		$("#noticeUpdate").click(function noticeUpdate(){
+    			var answer = confirm("수정하시겠습니까 ?");
+                if(answer){
+                	var nno = $(this).parents().parents().children().eq(0).text();
+                    console.log(nno);
+                    // 수정페이지로 이동
+                    location.href="update.mn?nno="+nno;
+                }else{
+                    return;
+                }
+                event.stopPropagation();
+    		});
+    		
+    		$("#noticeDelete").click(function noticeDelete(){
+    			var answer = confirm("삭제하시겠습니까 ?");
+                if(answer){
+                	var nno = $(this).parents().parents().children().eq(0).text();
+                    console.log(nno);
+                    // 삭제 진행
+                    
+                    
+                }else{
+	                return;
+                }
+                event.stopPropagation();
+    		});
+    		
     		
     		$(".tb1>tbody>tr").click(function(){
     			var nno = $(this).children().eq(0).text();
-				location.href="<%=contextPath%>/Detail.mn?nno=" + nno;    	
+				location.href="<%=contextPath%>/detail.mn?nno="+ nno;    	
 				console.log(nno);
     		});
     		
     	});
-    
-            function noticeUpdate(){
-                var answer = confirm("수정하시겠습니까 ?");
-                if(answer){
-                    // 수정페이지로 이동
-                     <%-- locaion.href="<%=contextPath%>/noticeUpdate.no?bno="; --%>
-                	alert("수정 완료 !");
-                }else{
-                    return;
-                }
-            };
-
-            function noticeDelete(){
-                var answer = confirm("삭제하시겠습니까 ?");
-                if(answer){
-                    // 삭제
-                    alert("삭제 완료 !");
-                }else{
-                    return;
-                }
-            };
+            
 
     </script>
+    
+    
+    
+    
+    
 </body>
 </html>

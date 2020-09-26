@@ -7,17 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/serviceCenter.no")
-public class ServiceCenterMainServlet extends HttpServlet {
+@WebServlet("/update.mn")
+public class NoticeUpdateManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ServiceCenterMainServlet() {
+    public NoticeUpdateManagementServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.getRequestDispatcher("views/notice/serviceCenterMainPage.jsp").forward(request, response);
+		
 	
 	}
 

@@ -44,14 +44,19 @@ public class LoginServlet extends HttpServlet {
 		
 				//if(loginUser !=null) { //로그인 성공 => index페이지
 					
-				
 //					HttpSession session = request.getSession();
 //					session.setAttribute("loginUser", loginUser);
 //					
-					
-					RequestDispatcher view = request.getRequestDispatcher("views/member/loginForm.jsp");
-					view.forward(request, response);
-					
+//				*** 관리자 일떄 페이지 이동
+//					if(userId.equals("admin")) { // 관리자가 로그인했을 경우
+//						request.getRequestDispatcher("views/common/adminMainPage.jsp").forward(request, response);
+//					} else { // 회원이 로그인했을경우
+						
+						RequestDispatcher view = request.getRequestDispatcher("views/member/loginForm.jsp");
+						view.forward(request, response);
+						
+//					}
+						
 //				}else { // 로그인 실패 => 에러페이지
 //					
 //					// 응답할 뷰에 필요한 데이터 request의 attribute에 담기

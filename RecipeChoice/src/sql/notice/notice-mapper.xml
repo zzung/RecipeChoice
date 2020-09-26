@@ -27,4 +27,25 @@
 		   AND STATUS='Y'
 	 </entry>
 
+	<entry key="insertNotice">
+		INSERT 
+			  INTO NOTICE
+			  (
+			     NOT_NO
+			   , NOT_TITLE
+			   , NOT_CONTENT
+			   , NOT_IMPORTANT
+			   , NOT_DATE
+			   , STATUS
+			  )
+			  VALUES
+			  (
+			      SEQ_NOTNO.NEXTVAL
+			    , ?
+			    , ?
+			    , ?
+			    , SYSDATE
+			    , DEFAULT
+  		      )
+	</entry>
 </properties>
