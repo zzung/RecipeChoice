@@ -208,17 +208,16 @@
                   	$("#detailImg1").attr("src", e.target.result);
                   	break; 
                   default:
-                	  console.log("load -> " + "#detailImg"+num)
                 	$("#detailImg"+num).attr("src", e.target.result);
                 	break;  
                   }
                 };
               } else {
                 switch(num) {
-                case 1:
+                case 100:
                   $("#titleImg").attr("src", null);
                   break;
-                case 10 :
+                case 1 :
                 	$("#detailImg").attr("src", null);
                 	break;  
                 }

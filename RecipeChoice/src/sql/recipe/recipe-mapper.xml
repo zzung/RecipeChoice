@@ -1,1 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="insertRecipe">
+	INSERT
+	  INTO RECIPE
+	     (
+	       RCP_NO
+	     , USER_NO
+	     , RCP_TITLE
+	     , RCP_DISH_TYPE
+	     , RCP_TAG
+	     , RCP_TIME
+	     , RCP_CONTENT
+	     , RCP_PIC
+	     , CREATE_DATE
+	     , RCP_TYPE
+	     )
+	 VALUES 
+	     (
+	        SEQ_RCPNO.NEXTVAL
+	      , ?
+	      , ?
+	      , ?
+	      , ?
+	      , ?
+	      , ?
+	      , ?
+	      , SYSDATE
+	      , DEFAULT
+     )
+	
+	</entry>
+	
+	<entry key="insertIngredientList">
+		INSERT 
+		  INTO INGREDIENT_LIST
+		     (
+		       INC_NO
+		     , RCP_NO
+		     , ING_DISH
+		     , ING_METERING
+		     )
+		VALUES 
+		     (
+		       SEQ_INGNO.NEXTVAL
+		     , SEQ_RCPNO.CURRVAL
+		     , ?
+		     , ?
+		     )
+	</entry>
+</properties>

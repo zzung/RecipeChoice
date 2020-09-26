@@ -2,25 +2,35 @@ package com.kh.user.recipe.model.vo;
 
 public class IngredientList {
 	
-	private int rcpNo2;
+	private int ingNo;
+	private int rcpNo;
 	private String ingDish;
 	private String ingMetering; 
+	
+	public IngredientList() {}
 
-	public IngredientList(){}
-
-	public IngredientList(int rcpNo2, String ingDish, String ingMetering) {
+	public IngredientList(int ingNo, int rcpNo, String ingDish, String ingMetering) {
 		super();
-		this.rcpNo2 = rcpNo2;
+		this.ingNo = ingNo;
+		this.rcpNo = rcpNo;
 		this.ingDish = ingDish;
 		this.ingMetering = ingMetering;
 	}
 
-	public int getRcpNo2() {
-		return rcpNo2;
+	public int getIngNo() {
+		return ingNo;
 	}
 
-	public void setRcpNo2(int rcpNo2) {
-		this.rcpNo2 = rcpNo2;
+	public void setIngNo(int ingNo) {
+		this.ingNo = ingNo;
+	}
+
+	public int getRcpNo() {
+		return rcpNo;
+	}
+
+	public void setRcpNo(int rcpNo) {
+		this.rcpNo = rcpNo;
 	}
 
 	public String getIngDish() {
@@ -38,6 +48,7 @@ public class IngredientList {
 	public void setIngMetering(String ingMetering) {
 		this.ingMetering = ingMetering;
 	}
+	
 	
 	
 }

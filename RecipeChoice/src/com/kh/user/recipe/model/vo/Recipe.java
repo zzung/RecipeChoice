@@ -8,7 +8,7 @@ public class Recipe {
 	private int rcpNo; 
 	private int userNo; 
 	private String memName;
-	private String rcpTitlt; 
+	private String rcpTitle; 
 	private String rcpDishType;
 	private String rcpTag;
 	private int rcpTime;
@@ -22,14 +22,14 @@ public class Recipe {
 	
 	public Recipe() {}
 
-	public Recipe(int rcpNo, int userNo, String memName, String rcpTitlt, String rcpDishType, String rcpTag,
+	public Recipe(int rcpNo, int userNo, String memName, String rcpTitle, String rcpDishType, String rcpTag,
 			int rcpTime, String rcpContent, String rcpPic, Date createDate, int count, int scrapCount, String status,
 			String rcpType) {
 		super();
 		this.rcpNo = rcpNo;
 		this.userNo = userNo;
 		this.memName = memName;
-		this.rcpTitlt = rcpTitlt;
+		this.rcpTitle = rcpTitle;
 		this.rcpDishType = rcpDishType;
 		this.rcpTag = rcpTag;
 		this.rcpTime = rcpTime;
@@ -40,6 +40,18 @@ public class Recipe {
 		this.scrapCount = scrapCount;
 		this.status = status;
 		this.rcpType = rcpType;
+	}
+
+	public Recipe(int userNo, String rcpTitle, String rcpDishType, String rcpTag, int rcpTime, String rcpContent,
+			String rcpPic) {
+		super();
+		this.userNo = userNo;
+		this.rcpTitle = rcpTitle;
+		this.rcpDishType = rcpDishType;
+		this.rcpTag = rcpTag;
+		this.rcpTime = rcpTime;
+		this.rcpContent = rcpContent;
+		this.rcpPic = rcpPic;
 	}
 
 	public int getRcpNo() {
@@ -66,12 +78,12 @@ public class Recipe {
 		this.memName = memName;
 	}
 
-	public String getRcpTitlt() {
-		return rcpTitlt;
+	public String getRcpTitle() {
+		return rcpTitle;
 	}
 
-	public void setRcpTitlt(String rcpTitlt) {
-		this.rcpTitlt = rcpTitlt;
+	public void setRcpTitle(String rcpTitle) {
+		this.rcpTitle = rcpTitle;
 	}
 
 	public String getRcpDishType() {
@@ -156,3 +168,4 @@ public class Recipe {
 	
 	
 }
+	
