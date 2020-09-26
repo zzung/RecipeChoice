@@ -14,10 +14,9 @@
 	    height:800px;
 	    margin: auto;
 	}
-	#header{height:20%} 
-   
-	#navigator{height:5%}
-	#content{height:70%}
+	#header{height:20%;} 
+   	#navigator{height:5%}
+	#content{height:70%; margin-top: 30px;}
 	#footer{height:10%}
 	#content>div{
 	    height:100%;
@@ -25,8 +24,7 @@
 	}
 	#content_1{ width:18%; margin-right: 40px;}
 	#content_2{ width:75%}
-	#content_3{ width:3%}
-	
+
 	#menu_1{
 	    height: 30%;
 	    background: rgb(39, 174, 96);
@@ -101,10 +99,10 @@ $(document).ready(function(){
             <div id="content_2">
 	
 				<br>
-                <h1>자주 묻는 질문
+                <h2>자주 묻는 질문
                     &nbsp;<img src="resources/image/admin/faq.jpg">
-                </h1>
-                <h2>FAQ</h2>
+                </h2>
+                <h3>FAQ</h3>
                 <hr>
 				<br>
 				<div>
@@ -126,13 +124,17 @@ $(document).ready(function(){
                     <p class="b"></p>
 				</div>
 			</div>
-				<br><hr><br>
-				<div align="center">
-					<button type="submit" class="btn" onclick="answerConfirm();"> 답변하기</button>
-				</div>
+			<br><hr>
+			<div align="center">
+				<button type="submit" class="btn" onclick="answerConfirm();"> 문의하기</button>
 			</div>
-				
-    
+			<script>
+			function answerConfirm(){
+				 location.href='./faqEnroll.fa';
+				}
+		   </script>
+			</div>	
+    	<br><br><br>
     <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>
 </body>
