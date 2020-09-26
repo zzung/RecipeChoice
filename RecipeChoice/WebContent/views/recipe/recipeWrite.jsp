@@ -22,12 +22,12 @@
             <b><big>레시피 작성하기 </big></b>
           </p>
         </div>
-        <form action="" id="writeRecipe" method="POST" enctype="multipart/form-data">
+        <form action="<%=contextPath %>/enrollForm.rp" id="writeRecipe" method="POST" enctype="multipart/form-data">
           <table class="tb_writeRecipe">
             <tr>
             <!-- 왼쪽컬럼 -->
               <td class="leftContent" align="center">
-                <img src="" id="titleImg" /><br />
+                <img src="" id="titleImg" name="upfile" /><br />
                 <div class="userImg">
                   <img src="resources/image/logo/churro.png" id="userPic" style="width: 90px"/>
                   <br><br>
@@ -57,16 +57,16 @@
                 </p>
                 
                <div id="ingList">
-                  <textarea name="" id="" cols="12" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
-                  <textarea name="" id="" cols="25" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
+                  <textarea name="dish" id="" cols="12" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
+                  <textarea name="metering" id="" cols="25" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
                 </div>
-                  <textarea name="" id="" cols="12" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
-                  <textarea name="" id="" cols="25" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
+                  <textarea name="dish" id="" cols="12" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
+                  <textarea name="metering" id="" cols="25" rows="1" placeholder="재료명" style="resize: none; font-size: 14px"></textarea>
                 <div class="addIngList"></div>
                 <br /><br />
  
                 <p style="font-size: 20px"><b>요리 종류 선택</b><br /></p>
-                <select name="" id="" style="font-size: 15px">
+                <select name="dishType" id="" style="font-size: 15px">
                   <option value="defaul">종류별</option>
                   <option value="rice">밥종류</option>
                   <option value="soup">찌개</option>
@@ -104,7 +104,7 @@
                   <option value="processedFood">가공식품</option>
                 </select>
 
-                <select name="" id="" style="font-size: 15px">
+                <select name="tag" id="" style="font-size: 15px">
                   <option value="default">재료선택</option>
                   <option value="beef">소고기</option>
                   <option value="pork">돼지고기</option>
@@ -122,7 +122,7 @@
                   <option value="processedFood">가공식품</option>
                 </select>
 
-                <select name="" id="" style="font-size: 15px">
+                <select name="tag" id="" style="font-size: 15px">
                   <option value="default">재료선택</option>
                   <option value="beef">소고기</option>
                   <option value="pork">돼지고기</option>
@@ -167,7 +167,8 @@
                 <img src="" class="detailImg" id="detailImg1" />
               </td>
               <td align="center">
-                <span class="dot countIng">1</span>&nbsp;&nbsp;
+                <span class="dot countIng" >1</span>&nbsp;&nbsp;
+                <input type="hidden" name="order" value="1">
                 <textarea name="recipeDetail" class="text" cols="40" rows="5" style="resize: none"></textarea>
               </td>
             </tr>
@@ -177,9 +178,9 @@
             
           </table>
            <div class="fileArea">
-            <input type="file" id="recipeWrite_mainPic" name="recipeWrite_mainPic" onchange="loadImg(this,100);" required/>
+            <input type="file" id="recipeWrite_mainPic" name="recipeWritePic" onchange="loadImg(this,100);" required/>
            
-            <input type="file" id="recipeWrite_detailPic" name="recipeWrite_detailPic" onchange="loadImg(this,1);">
+            <input type="file" id="recipeWrite_detailPic" name="recipeWritePic" onchange="loadImg(this,1);">
             
           </div>
           <!-- 레시피작성 대표이미지 등록 -->
@@ -248,10 +249,11 @@
                   </td>
                   <td align="center" class="row-index">
                     <span class="dot countIng">`+ ++rowIdx +`</span>&nbsp;&nbsp;
-                  <textarea name="" class="text" cols="40" rows="5" style="resize: none"></textarea>
+                    <input type="hidden" name="order" value="`+ rowIdx +`">
+                  <textarea name="recipeDetail" class="text" cols="40" rows="5" style="resize: none"></textarea>
                   
                   <div class="fileArea">
-                  <input type="file" class="recipeWrite_detailPic" id="detailBtn` + count + `" name="recipeWrite_detailPic" onchange="loadImg(this,`+ count +` );">
+                  <input type="file" class="recipeWrite_detailPic" id="detailBtn` + count + `" name="recipeWritePic" onchange="loadImg(this,`+ count +` );">
                   </div></td>
                 </tr>`);
               });

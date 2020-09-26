@@ -1,16 +1,21 @@
 package com.kh.user.recipe.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.user.common.MyFileRenamePolicy;
+import com.kh.user.recipe.model.service.RecipeService;
+import com.kh.user.recipe.model.vo.Cook;
 import com.kh.user.recipe.model.vo.IngredientList;
 import com.kh.user.recipe.model.vo.Recipe;
 import com.oreilly.servlet.MultipartRequest;
@@ -46,34 +51,90 @@ public class RecipeInsertServlet extends HttpServlet {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
 			//1.
-			int userNo = Integer.parseInt(multiRequest.getParameter("userNo")); //"1"
-			String rcpTitle = multiRequest.getParameter("rcpTitle");
-			String rcpDishType = multiRequest.getParameter("rcpDishType");
-			String[] rcpTags = multiRequest.getParameterValues("rcpTag");
+			//int userNo = Integer.parseInt(multiRequest.getParameter("userNo")); //"1"
+			String rcpTitle = multiRequest.getParameter("title");
+			System.out.println(rcpTitle);
+			
+			String rcpDishType = multiRequest.getParameter("dishType");
+			System.out.println(rcpDishType);
+			
+			String[] rcpTags = multiRequest.getParameterValues("tag");
 			String rcpTag = "";
 			if(rcpTags != null) {
 				rcpTag = String.join(",", rcpTags);
 			}
+			System.out.println(rcpTag);
 			
-			int rcpTime = Integer.parseInt(multiRequest.getParameter("rcpTime"));
-			String rcpContent = multiRequest.getParameter("rcpContent");
+			int rcpTime = Integer.parseInt(multiRequest.getParameter("time"));
+			System.out.println(rcpTime);
+			
+			String rcpContent = multiRequest.getParameter("content");
+			System.out.println(rcpContent);
+			
 			String rcpPic = multiRequest.getFilesystemName("upfile"); // 대표이미지
+			System.out.println(rcpPic);
 
 			
-			Recipe r = new Recipe(userNo,rcpTitle,rcpDishType,rcpTag,rcpTime,rcpContent,rcpPic);
+			Recipe r = new Recipe(/*userNo,*/rcpTitle,rcpDishType,rcpTag,rcpTime,rcpContent,rcpPic);
 			
 			//2.
-			String ingDish = multiRequest.getParameter("ingDish");
-			String ingMetering = multiRequest.getParameter("ingMetering");
+			String ingDish = multiRequest.getParameter("dish");
+			String ingMetering = multiRequest.getParameter("metering");
 			
 			IngredientList ingredient = new IngredientList();
 			ingredient.setIngDish(ingDish);
 			ingredient.setIngMetering(ingMetering);
 			
 			//3.
+			String[] cookContents = multiRequest.getParameterValues("recipeDetail");
+			String cookContent= "";
+			if(cookContents != null) {
+				cookContent = String.join(",", cookContents);
+			}
+			System.out.println(cookContent);
 			
+			int cookOrder = Integer.parseInt(multiRequest.getParameter("order"));
+			System.out.println(cookOrder);
 			
+			String cookPic = multiRequest.getFilesystemName("recipeWritePic");
+			System.out.println(cookPic);
 			
+			ArrayList<Cook> list = new ArrayList<>();
+			
+			Cook c = new Cook();
+			c.setCookContent(cookContent);
+			c.setCookOrder(cookOrder);
+			c.setCookPic(cookPic);
+			
+			list.add(c); 
+			
+			int result = new RecipeService().insertRecipe(r, ingredient, list);	
+			
+			if(result > 0) {
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("alertMsg", "게시글 등록 완료되었습니다.");
+				
+				response.sendRedirect(request.getContextPath() + "/recipeView.rp");
+				
+				
+				
+			}else {
+				
+				request.setAttribute("alertMsg", "작성글 등록에 실패하였습니다.");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				
+				if(r != null) {
+					File failedFile = new File(r.getRcpPic());
+					failedFile.delete();
+				}
+				
+				for(int i=0; i<list.size(); i++) {
+					File failedFile = new File(list.get(i).getCookPic());
+					failedFile.delete();
+				}
+				
+			}//e.if
 		}
 	}
 

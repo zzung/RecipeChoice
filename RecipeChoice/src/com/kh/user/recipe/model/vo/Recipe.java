@@ -1,6 +1,6 @@
 package com.kh.user.recipe.model.vo;
 
-import static com.kh.user.common.JDBCTemplate.*;
+
 
 import java.sql.Date;
 public class Recipe {
@@ -42,10 +42,10 @@ public class Recipe {
 		this.rcpType = rcpType;
 	}
 
-	public Recipe(int userNo, String rcpTitle, String rcpDishType, String rcpTag, int rcpTime, String rcpContent,
+	public Recipe(/*int userNo,*/String rcpTitle, String rcpDishType, String rcpTag,int rcpTime, String rcpContent,
 			String rcpPic) {
 		super();
-		this.userNo = userNo;
+		//this.userNo = userNo;
 		this.rcpTitle = rcpTitle;
 		this.rcpDishType = rcpDishType;
 		this.rcpTag = rcpTag;

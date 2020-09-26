@@ -19,7 +19,7 @@
 	 VALUES 
 	     (
 	        SEQ_RCPNO.NEXTVAL
-	      , ?
+	      , 1
 	      , ?
 	      , ?
 	      , ?
@@ -45,6 +45,26 @@
 		     (
 		       SEQ_INGNO.NEXTVAL
 		     , SEQ_RCPNO.CURRVAL
+		     , ?
+		     , ?
+		     )
+	</entry>
+	
+	<entry key="insertCookDetail">
+		INSERT 
+		  INTO COOK
+		     (
+		       COOK_NO
+		     , RCP_NO
+		     , COOK_CONTENT
+		     , COOK_ORDER
+		     , COOK_PIC
+		     )
+		VALUES
+		     (
+		       SEQ_CNO.NEXTVAL
+		     , RCP_NO.CURRVAL
+		     , ?
 		     , ?
 		     , ?
 		     )
