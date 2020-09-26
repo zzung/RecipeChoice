@@ -51,7 +51,7 @@
     }
     .content2_1 div{
         float:left;
-        margin:0px 15px;
+        margin:0px 15px 12px;
     }
     .content2_2 div{
         float:left;
@@ -70,7 +70,7 @@
         margin-bottom: 26px;
     }
     .content2_2_1 .card{
-        margin-bottom: 8px;
+        margin-bottom: 20px;
     }
     #moreBtn{
         height: 28px;
@@ -91,6 +91,5 @@
     
         margin-left: 760px;
      }
-       .table{
-        width: 752px;
-    }
+     
+ 

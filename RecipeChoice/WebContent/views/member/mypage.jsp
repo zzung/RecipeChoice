@@ -10,6 +10,11 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<style>
+
+  
+</style>
 </head>
 <body>
 	<body>
@@ -85,28 +90,28 @@
                     </thead>
                   </table>
                 <div class="content2_1_1">
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width: 10.8rem;">
                         <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
                             <p>작성일 : 2020-01-01</p>
                         </div>
                     </div>
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width: 10.8rem;">
                         <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
                             <p>작성일 : 2020-01-01</p>
                         </div>
                     </div>
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width: 10.8rem;">
                         <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
                             <p>작성일 : 2020-01-01</p>
                         </div>
                     </div>
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width: 10.8rem;">
                         <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
@@ -126,28 +131,28 @@
                     </thead>
                   </table>
                 <div class="content2_2_1">
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width:10.8rem;">
                         <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
                             <p>작성일 : 2020-01-01</p>
                         </div>
                     </div>
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width:10.8rem;">
                         <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
                             <p>작성일 : 2020-01-01</p>
                         </div>
                     </div>
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width:10.8rem;">
                         <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
                             <p>작성일 : 2020-01-01</p>
                         </div>
                     </div>
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width:10.8rem;">
                         <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
@@ -169,28 +174,28 @@
                     </thead>
                   </table>
                 <div class="content2_3_1">
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width:10.8rem;">
                         <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
                             <p>작성일 : 2020-01-01</p>
                         </div>
                     </div>
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width:10.8rem;">
                         <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
                             <p>작성일 : 2020-01-01</p>
                         </div>
                     </div>
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width: 10.8rem;">
                         <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
                             <p>작성일 : 2020-01-01</p>
                         </div>
                     </div>
-                    <div class="card" style="width: 10rem;">
+                    <div class="card" style="width: 10.8rem;">
                         <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
                         <div class="body" style="height: 45px; ">
                             <p><b>글제목</b></p>
