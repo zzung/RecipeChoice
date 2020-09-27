@@ -142,10 +142,11 @@
                 <thead>
                     <th width="80">NO.</th>
                     <th>   </th>
-                    <th width="400">content</th>
-                    <th width=300">Name</th>
+                    <th width="300">Content</th>
+                    <th width="400"> Title</th>
+                    <th width=200">Name</th>
                     <th width="200">Date</th>
-                    <th width="200">  </th>
+                    <th width="200">Status</th>
                 </thead>
                 <tbody>
                    <!--자기꺼만 삭제할 수 있도록 보여지기 삭제아이콘-->
@@ -153,7 +154,8 @@
                         <td>1002</td>
                         <td>🔒</td>
                         <td>re:기타 문의</td>
-                        <td>홍길동</td>
+                        <td>냐냐냐냔냐냐냐</td>
+                        <td>관리자</td>
                         <td>2020-08-26</td>
                         <td></td>
                     </tr>
@@ -161,12 +163,11 @@
                         <td>1001</td>
                         <td>🔒</td>
                         <td>기타 문의</td>
-                        <td>관리자</td>
+                        <td>냐냐냐냐냐냐냐냐냔냐</td>
+                        <td>홍길동</td>
                         <td>2020-08-24</td>
                         <td><img id="img"onclick="deleteConfirm();"src="resources/image/admin/recyclebin.jpg" align="center">
-                            &nbsp;&nbsp;
-                            <img id="img"onclick="modifyConfirm();"src="resources/image/navbar/pencil.jpg" align="center"></td>                      
-                        </tr>
+                    </tr>
                     
                  </tbody>
                 </table>
@@ -180,13 +181,7 @@
                        }
              
                </script>
-               <script>
-                function modifyConfirm(){
-                     location.href="";
-                  
-                   }
-         
-           </script>
+              
                  <!--1:1문의 답변조회 페이지용-->
                  <script>
                     $(function(){
@@ -195,14 +190,14 @@
                     });
                     
                 </script>
-               
-           
                 <br>
+           		<!-- 로그인한 회원만 글작성이 보여짐 -->
+                <% if(loginUser != null && loginUser.getUserId().equals("admin")){ %>
                 <div id="content_3" align="right" style="width:710px;">
                 <button>글작성</button>
                     <br><br>
-               
-        </div>
+                </div>
+                <% } %>
         <div id="footer">
             <div class="pagination">
                 <a href="#">&laquo;</a> 

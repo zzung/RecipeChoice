@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="selectContactList">
+	SELECT /* com.kh.model.dao.contactDao#selectContactList()*/
+       CON_NO 
+     , CON_TITLE
+     , USER_NO
+     , CON_DATE
+  FROM CONTACT C
+ WHERE C.STATUS='Y'
+ ORDER 
+ 	BY CON_NO DESC
+	
+</entry>
+</properties>

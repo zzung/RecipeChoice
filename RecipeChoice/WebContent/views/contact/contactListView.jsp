@@ -130,8 +130,9 @@
                 <thead>
                     <th width="80">NO.</th>
                     <th>   </th>
-                    <th width="400">content</th>
-                    <th width=300">NickName</th>
+                    <th width="300">Content</th>
+                    <th width="400">Title</th>
+                    <th width=200">NickName</th>
                     <th width="200">Date</th>
                     <th width="200">Status</th>
                 </thead>
@@ -140,6 +141,7 @@
                         <td>1004</td>
                         <td>🔒</td>
                         <td>레시피 문의</td>
+                        <td>냐냐냔야야냥ㅇ</td>
                         <td>뭐먹을지정해조</td>
                         <td>2020-08-26</td>
                         <td>미답변</td>
@@ -148,6 +150,7 @@
                         <td>1003</td>
                         <td>🔒</td>
                         <td>기타 문의</td>
+                        <td>뇽녕뇽녕닝</td>
                         <td>홍길동</td>
                         <td>2020-08-26</td>
                         <td>답변완료</td>
@@ -156,6 +159,7 @@
                         <td>1002</td>
                         <td>🔒</td>
                         <td>re:기타 문의</td>
+                        <td>란란나나난난</td>
                         <td>관리자</td>
                         <td>2020-08-24</td>
                         <td><a onclick="modifyConfirm();">수정</a>&nbsp;&nbsp;<a onclick="deleteConfirm();">삭제</a></td>
@@ -165,6 +169,7 @@
                         <td>1001</td>
                         <td>🔒</td>
                         <td>신고 문의</td>
+                        <td>뇽냥닐낭냥녕</td>
                         <td>유저1</td>
                         <td>2020-08-24</td>
                         <td>답변완료</td>
