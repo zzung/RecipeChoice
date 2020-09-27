@@ -21,5 +21,6 @@ public class ContactService {
 		ArrayList<Contact> list = new ContactDao().selectContactList(conn);
 		
 		close(conn);
+		return list;
 	}
 }

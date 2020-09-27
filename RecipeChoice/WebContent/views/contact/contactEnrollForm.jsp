@@ -108,7 +108,7 @@
                 </h3>
                 <hr>
 
-                <form action="" method=""> 
+                <form action="" method="post"> 
                  <table class="EnrollArea">
                     <tr>
                         <th ><h2>제목&nbsp;</h2></th>

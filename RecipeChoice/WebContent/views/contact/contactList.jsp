@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.admin.contact.model.vo.Contact" %>    
+<%  
+	ArrayList<Contact> list =(ArrayList<Contact>)request.getAttribute("list");//조회된 1:1문의 리스트가 담김
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -150,6 +154,13 @@
                 </thead>
                 <tbody>
                    <!--자기꺼만 삭제할 수 있도록 보여지기 삭제아이콘-->
+                   <!-- 리스트가 비어있을 경우 -->
+                   <% if(list.isEmpty()){ %>
+                   <tr>
+                   		<td colspan="7">존재하는 1:1문의가 없습니다.</td>
+                   </tr>
+                   <% }else { %>
+                   <!-- 리스트가 비어있지 않을 경우 -->
                     <tr>
                         <td>1002</td>
                         <td>🔒</td>
@@ -159,16 +170,18 @@
                         <td>2020-08-26</td>
                         <td></td>
                     </tr>
+                   <% for(Contact c: list) { %>
                     <tr>
-                        <td>1001</td>
+                        <td><%=c.getConNo() %></td>
                         <td>🔒</td>
-                        <td>기타 문의</td>
-                        <td>냐냐냐냐냐냐냐냐냔냐</td>
-                        <td>홍길동</td>
-                        <td>2020-08-24</td>
+                        <td><%=c.getConType() %></td>
+                        <td><%=c.getConTitle() %></td>
+                        <td><%=c.getUserNo() %></td>
+                        <td><%=c.getConDate() %></td>
                         <td><img id="img"onclick="deleteConfirm();"src="resources/image/admin/recyclebin.jpg" align="center">
                     </tr>
-                    
+                    <% } %>   
+                 <% } %>
                  </tbody>
                 </table>
                 <script>
