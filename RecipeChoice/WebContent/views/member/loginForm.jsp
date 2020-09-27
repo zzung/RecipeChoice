@@ -14,7 +14,7 @@
         .wrap{
             width:1000px;
             height:1000px;
-            padding:100px 10px 300px 510px;
+            padding:100px 5px 300px 510px;
             /* margin: auto; */
         }
           #login_form_etc a, a:hover{
@@ -101,7 +101,7 @@
 	            <!-- 2_2. 회원가입페이지, ID/PWD 찾기 페이지 이동용 a 가 들어갈 영역-->
 	            <div id="login_form_etc" align="center">
 	                <a href="">회원가입 |</a> 
-	                <a href="">ID 찾기 |</a> 
+	                <a href="<%=contextPath%>/searchIdForm.me">ID 찾기 |</a> 
 	                <a href="">PWD 찾기 </a>
 	            </div>
 	    

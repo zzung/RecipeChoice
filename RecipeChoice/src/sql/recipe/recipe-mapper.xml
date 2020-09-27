@@ -7,6 +7,7 @@
 	     (
 	       RCP_NO
 	     , USER_NO
+	     , MEM_NAME
 	     , RCP_TITLE
 	     , RCP_DISH_TYPE
 	     , RCP_TAG
@@ -14,12 +15,12 @@
 	     , RCP_CONTENT
 	     , RCP_PIC
 	     , CREATE_DATE
-	     , RCP_TYPE
 	     )
 	 VALUES 
 	     (
 	        SEQ_RCPNO.NEXTVAL
 	      , 1
+	      , '관리자'
 	      , ?
 	      , ?
 	      , ?
@@ -27,8 +28,7 @@
 	      , ?
 	      , ?
 	      , SYSDATE
-	      , DEFAULT
-     )
+	     )
 	
 	</entry>
 	
@@ -36,7 +36,7 @@
 		INSERT 
 		  INTO INGREDIENT_LIST
 		     (
-		       INC_NO
+		       ING_NO
 		     , RCP_NO
 		     , ING_DISH
 		     , ING_METERING
@@ -63,7 +63,7 @@
 		VALUES
 		     (
 		       SEQ_CNO.NEXTVAL
-		     , RCP_NO.CURRVAL
+		     , SEQ_RCPNO.CURRVAL
 		     , ?
 		     , ?
 		     , ?

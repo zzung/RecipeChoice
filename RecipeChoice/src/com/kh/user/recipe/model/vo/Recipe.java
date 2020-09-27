@@ -42,17 +42,6 @@ public class Recipe {
 		this.rcpType = rcpType;
 	}
 
-	public Recipe(/*int userNo,*/String rcpTitle, String rcpDishType, String rcpTag,int rcpTime, String rcpContent,
-			String rcpPic) {
-		super();
-		//this.userNo = userNo;
-		this.rcpTitle = rcpTitle;
-		this.rcpDishType = rcpDishType;
-		this.rcpTag = rcpTag;
-		this.rcpTime = rcpTime;
-		this.rcpContent = rcpContent;
-		this.rcpPic = rcpPic;
-	}
 
 	public int getRcpNo() {
 		return rcpNo;

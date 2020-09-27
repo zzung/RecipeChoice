@@ -15,14 +15,14 @@ import com.kh.user.member.model.vo.Member;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login.me")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/loginForm.me")
+public class LoginFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public LoginFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

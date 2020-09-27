@@ -40,7 +40,8 @@ public class RecipeDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			//pstmt.setInt(1, r.getUserNo());
+			// pstmt.setInt(1, r.getUserNo());
+			// pstmt.setString(2, r.getMemName());
 			pstmt.setString(1, r.getRcpTitle());
 			pstmt.setString(2, r.getRcpDishType());
 			pstmt.setString(3, r.getRcpTag());
@@ -59,7 +60,7 @@ public class RecipeDao {
 
 	}// e.insertRecipe
 
-	public int insertIngredientList(Connection conn, IngredientList ingredient) {
+	public int insertIngredientList(Connection conn, ArrayList<IngredientList> ingList) {
 		int result2 = 0;
 
 		PreparedStatement pstmt = null;
@@ -67,12 +68,19 @@ public class RecipeDao {
 		String sql = prop.getProperty("insertIngredientList");
 
 		try {
-			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, ingredient.getIngDish());
-			pstmt.setString(2, ingredient.getIngMetering());
+			for (IngredientList ingredient : ingList) {
+				pstmt = conn.prepareStatement(sql);
 
-			result2 = pstmt.executeUpdate();
+				pstmt.setString(1, ingredient.getIngDish());
+				pstmt.setString(2, ingredient.getIngMetering());
+
+				result2 = pstmt.executeUpdate();
+				
+				if (result2 == 0) {
+					return 0;
+				}
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,14 +90,14 @@ public class RecipeDao {
 		return result2;
 	}// e.insertIngredientList
 
-	public int insertCookDetail(Connection conn, ArrayList<Cook> list) {
+	public int insertCookDetail(Connection conn, ArrayList<Cook> cookList) {
 		int result3 = 0;
 
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertCookDetail");
 
 		try {
-			for (Cook c : list) {
+			for (Cook c : cookList) {
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, c.getCookContent());
