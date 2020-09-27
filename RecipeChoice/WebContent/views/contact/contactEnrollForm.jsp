@@ -108,11 +108,12 @@
                 </h3>
                 <hr>
 
-                <form action="" method="post"> 
+                <form action="<%=contextPath %>/insert.co" method="post"> 
+                <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
                  <table class="EnrollArea">
                     <tr>
                         <th ><h2>제목&nbsp;</h2></th>
-                        <td colspan="4" ><input type="text" name="title"placeholder="내용을 입력하세요"required style="height:22px;"></td>
+                        <td colspan="4" ><input type="text" name="title" placeholder="내용을 입력하세요"required style="height:22px;"></td>
                     </tr>
                     <tr>
                         <th><h2>분야 &nbsp;</h2></th>
@@ -127,7 +128,7 @@
                     <tr>
                         <td><h2>내용&nbsp;</h2></td>
                         <td>
-                           <textarea cols="70" rows="13" style="resize:none; margin-top:10px; margin-bottom:10px; "></textarea>
+                           <textarea name="content" cols="70" rows="13" style="resize:none; margin-top:10px; margin-bottom:10px; "></textarea>
                         </td>
                     </tr>
             </table> 

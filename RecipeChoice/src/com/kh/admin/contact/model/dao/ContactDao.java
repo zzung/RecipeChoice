@@ -1,15 +1,16 @@
 package com.kh.admin.contact.model.dao;
 
+import static com.kh.user.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
-
-import static com.kh.user.common.JDBCTemplate.*;
 
 import com.kh.admin.contact.model.vo.Contact;
 
@@ -38,6 +39,7 @@ public class ContactDao {
 		String sql = prop.getProperty("selectContactList");
 		
 		try {
+			
 			stmt = conn.createStatement();
 			
 			rset = stmt.executeQuery(sql);//sql문 전달하면서 실행 그래서 완성형태여야함
@@ -58,5 +60,32 @@ public class ContactDao {
 		}
 		
 		return list;
+	}
+	public int insertContact(Connection conn, Contact c) {
+		//insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertContact");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, c.getConTitle());
+			pstmt.setString(2, c.getConContent());
+			pstmt.setString(3, c.getConType());
+			pstmt.setInt(4, Integer.parseInt(c.getUserNo()));//"1" -> 1
+			//완성형태 만듬
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result; // 서비스에 리턴
+		
 	}
 }
