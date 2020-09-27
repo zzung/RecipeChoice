@@ -1,4 +1,4 @@
-package com.kh.admin.inquiry.controller;
+package com.kh.admin.contact.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class InquiryListServlet
  */
-@WebServlet("/inquiry.in")
-public class InquiryListServlet extends HttpServlet {
+@WebServlet("/contact.co")
+public class ContactListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InquiryListServlet() {
+    public ContactListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class InquiryListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("views/inquiry/inquiryList.jsp").forward(request, response);
+		request.getRequestDispatcher("views/contact/contactList.jsp").forward(request, response);
 	}
 
 	/**
