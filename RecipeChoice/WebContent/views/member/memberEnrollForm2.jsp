@@ -136,34 +136,34 @@
 	                <table id="enrollFormTable">
 	                    <tr>
 	                        <td style="width:200px;"> 닉네임</td>
-	                        <td><input type="text" name="userName" maxlength="5" placeholder=" 6~12자 (한글, 영문자, 숫자)"required></td>
+	                        <td><input type="text" id="userName" name="userName" maxlength="12" placeholder=" 6~12자 (한글, 영문자, 숫자)"required></td>
 	                        <td><button type="button" class="btn btn-success">중복확인</button></td>
 	                    </tr>
 	                    <tr>
 	                        <td> 아이디</td>
-	                        <td><input type="text" name="userId" maxlength="12" placeholder=" 8~12자 (영문자, 숫자)"required></td>
+	                        <td><input type="text" id="userId"name="userId" maxlength="12" placeholder=" 6~12자 (영문자, 숫자)"required></td>
 	                        <td><button type="button" class="btn btn-success">중복확인</button></td>
 	                    </tr>
 	                    <tr>
 	                        <td> 비밀번호</td>
-	                        <td><input type="password" name="userPwd" maxlength="15" placeholder=" 6~16자 (영문자, 숫자, 특수문자)"required></td>
+	                        <td><input type="password" id="userPwd"name="userPwd" maxlength="15" placeholder=" 6~16자 (영문자, 숫자, 특수문자)"required></td>
 	                        <td></td>
 	                    </tr>
 	                    <tr>
 	                        <td> 비밀번호확인</td>
-	                        <td><input type="password" name="checkPwd" maxlength="15" placeholder="비밀번호를 한번 더 입력해주세요"required></td>
+	                        <td><input type="password" id="checkPwd"name="checkPwd" maxlength="15" placeholder="비밀번호를 한번 더 입력해주세요"required></td>
 	                        <td></td>
 	                    </tr>
 	                    <tr>
 	                        <td> 이메일</td>
-	                        <td><input type="email" name="email" placeholder="이메일을 입력해주세요"></td>
+	                        <td><input type="email" id="userEmail"name="email" placeholder="이메일을 입력해주세요"></td>
 	                        <td><button type="button" class="btn btn-success">중복확인</button></td>
 	                    </tr>
 	                  
 	            
 	                </table>
 	
-	                <a href="<%=contextPath%>/enrollForm3.me" type="submit" id="nextBtn" class="btn btn-success">다음</a>
+	                <a onclick="return validate();"type="submit" id="nextBtn" class="btn btn-success">다음</a>
 	             </form>
 	            </div>
 
@@ -171,5 +171,63 @@
   		  </div>
   	</div>
   	<!-- 닉네임, 아이디, 비밀번호 중복체크 ajax 사용  -->
+  	<script>
+  	 function validate(){
+         // 유효성 검사 : 아이디, 비밀번호, 비밀번호일치, 이름 
+         var userName = document.getElementById("userName");
+         var userId = document.getElementById("userId");
+         var userPwd = document.getElementById("userPwd");
+         var userPwd2 = document.getElementById("checkPwd");
+    	 var email = document.getElementById("userEmail");
+         
+         var id = /^[a-z][a-z\d]{5,11}$/;
+         var pwd1 = /^[a-z\d!@#$%^&*]{5,15}$/i;  //특수문자(!@#$%^&*)
+         var name = /^[가-힣a-z\d]{5,12}$/;
+		 var email = /^[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-_.]?[0-9a-z])*.[a-z]{2,3}$/i;
+	
+         if(!name.test(userName.value)){
+             alert("닉네임을 정확하게 기입해주세요.");
+             userName.value ="";
+             userName.focus(); 
+
+             return false; 
+         }
+         if(!id.test(userId.value)){ //잘 입력했다고 보여 줄 필요 없음. 
+             alert("유효한 아이디 입력하세요.")
+             
+             userId.value = "";  // 입력했던 값들 삭제시켜줌
+             userId.focus();     // 어떤 부분이 틀렸는지 깜빡깜빡 보여주기. 
+
+             return false; //--> 빠져나가서 함수 호출한것으로 나가기. --> validate으로 빠짐 
+         }
+
+         if(!pwd1.test(userPwd.value)){
+             alert("유효한 비밀번호를 입력하세요.");
+
+             userPwd.value ="";
+             userPwd.focus(); 
+             
+             return false; 
+         }
+         
+         
+         if(userPwd.value != userPwd2.value){
+             alert("동일한 비밀번호를 입력하세요!");
+             userPwd2.value = "";
+             userPwd2.focus(); 
+
+             return false; 
+         }
+         
+         if(!email.test(userEmail.value)){
+        	 alert("이메일을 다시 입력해주세요");
+       	     email.value = "";
+       	     email.focus ="";
+       		  return false; 
+         }
+         
+         location.href="<%=contextPath%>/enrollForm3.me";
+  	 }
+  	</script>
 </body>
 </html>

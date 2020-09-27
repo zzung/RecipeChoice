@@ -82,14 +82,40 @@
                     </tr>
                   
                     <tr>
-                        <td colspan="3"><input type="submit"class="btn btn-success" id="search_btn" value="찾기">
+                        <td colspan="3"><input type="submit"class="btn btn-success" id="search_btn" value="찾기" data-toggle="modal" data-target="#exampleModal">
                         </td>
                     </tr>
                 </table>
             </form>
-       
-    
+      
         </div>
+         <!-- Modal -->
+		  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <h5 class="modal-title" id="exampleModalLabel">ID 찾기</h5>
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		        </div>
+		        <div class="modal-body">
+		    		      입력하신 이메일 : 
+		         <br><br> 가입 한 아이디 :
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" id="loginBtn"class="btn btn-success" data-dismiss="modal">로그인 하기 </button><br>
+		          <button type="button" class="btn btn-secondary">비밀번호 찾기</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		  
+		  <script>
+		      $("#loginBtn").click(function(){
+		        location.href="<%=contextPath%>/loginForm.me";
+		      });
+		  </script>
 
 	</div>
 </body>

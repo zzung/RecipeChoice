@@ -131,6 +131,22 @@
 	    
 	        <a href="<%=contextPath%>/enrollForm2.me" type="button" id="agree_btn" class="btn btn-success">다음</a>
     </div>
+   <script>
+ 
+		// 약관 동의 부분 
+	   $("#agree_btn").click(function(){
+	       if($("#contractCheck").is(':checked') && $("#contractCheck2").is(':checked')){
+	           location.href="<%=contextPath%>/enrollForm2.me";
+	       }else{
+	           alert("약관을 읽어보시고 동의하셔야 합니다!");
+	           return false;
+	       }
+	   
+	   });
+	
+
    
+   
+   </script>
 </body>
 </html>
