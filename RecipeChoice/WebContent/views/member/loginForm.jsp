@@ -14,7 +14,7 @@
         .wrap{
             width:1000px;
             height:1000px;
-            padding:100px 10px 300px 510px;
+            padding:100px 5px 300px 510px;
             /* margin: auto; */
         }
           #login_form_etc a, a:hover{

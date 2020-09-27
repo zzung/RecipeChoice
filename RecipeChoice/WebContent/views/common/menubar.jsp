@@ -49,7 +49,7 @@
 					</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="<%=contextPath%>/enrollForm.me">회원가입</a>
-						<a class="dropdown-item" href="<%=contextPath%>/login.me">로그인</a>
+						<a class="dropdown-item" href="<%=contextPath%>/loginForm.me">로그인</a>
 						<!-- 로그인 회원 -->
 						<a class="dropdown-item" href="<%=contextPath%>/mypage.me">마이페이지</a>
 					</div>
