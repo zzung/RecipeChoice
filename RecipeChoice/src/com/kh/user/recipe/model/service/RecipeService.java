@@ -20,12 +20,12 @@ public class RecipeService {
 	 * @param c				재료 순서 등 디데일 내용 
 	 * @return
 	 */
-	public int insertRecipe(Recipe r, IngredientList ingredient, ArrayList<Cook> list) {
+		public int insertRecipe(Recipe r, ArrayList<IngredientList> ingList, ArrayList<Cook> cookList) {
 		Connection conn = getConnection();
 		
 		int result1 = new RecipeDao().insertRecipe(conn, r);
-		int result2 = new RecipeDao().insertIngredientList(conn, ingredient);
-		int result3 = new RecipeDao().insertCookDetail(conn, list); 
+		int result2 = new RecipeDao().insertIngredientList(conn, ingList);
+		int result3 = new RecipeDao().insertCookDetail(conn, cookList); 
 		
 		
 		if(result1>0 && result2>0 && result3>0) {
@@ -35,5 +35,5 @@ public class RecipeService {
 		}
 		
 		return result1*result2*result3;
-	}//e.insertRecipe
+	}// e.insertRecipe
 }
