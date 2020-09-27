@@ -37,37 +37,36 @@
                 <div class="profile">
                     <img src="resources/image/mypage/cat.jpg" align="center"id="profileImg"  style="width:160px;height:130px;">
                     <!-- <h4 align="center">xxx님 반갑습니다 :) </h4 -->
-                     <!-- <svg width="120px" height="120px" viewBox="0 0 16 16" id="noImage"class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                     <!--    <svg width="120px" height="100px" viewBox="0 0 16 16" id="noImage"class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                        </svg>  -->
+                        </svg> --> 
                     <p style="font-size:12px;"align="center"><b>뭐해먹지 님<br>
                         가입일 : 2020-08-01</b></p>
                     
                 </div>
                 <div class="memInfo">
                     <table class="menutable table-hover">
-                    
-                        <tbody>
+                      <tbody>
 
-                        <tr>
-                            <th scope="row" colspan="3">개인 정보 수정</th>
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="3">내 문의 확인</th>
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me'";>작성 게시글 보기 </th>
-                            
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="3">스크랩한 게시글 보기 </th>
-                            
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/deleteForm.me'";>회원 탈퇴 </th>
-                            
-                        </tr>
-                        </tbody>
+                       <tr>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/updateForm.me'";>개인 정보 수정</th>
+                       </tr>
+                       <tr>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/'";>내 문의 확인</th>
+                       </tr>
+                       <tr>
+                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me'";>작성 게시글 보기 </th>
+                           
+                       </tr>
+                       <tr>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/writtenBoard.me'";>스크랩한 게시글 보기 </th>
+                           
+                       </tr>
+                       <tr>
+                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/deleteForm.me'";>회원 탈퇴 </th>
+                           
+                       </tr>
+                       </tbody>
                     </table>
                
             </div>

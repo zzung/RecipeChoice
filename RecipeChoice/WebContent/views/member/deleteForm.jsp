@@ -56,27 +56,27 @@
                 <div class="memInfo">
                     <table class="menutable table-hover">
                     
-                        <tbody>
+                         <tbody>
 
-                        <tr>
-                            <th scope="row" colspan="3">개인 정보 수정</th>
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="3">내 문의 확인</th>
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="3">작성 게시글 보기 </th>
-                            
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="3">스크랩한 게시글 보기 </th>
-                            
-                        </tr>
-                        <tr>
-                             <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/deleteForm.me'";>회원 탈퇴 </th>
-                            
-                        </tr>
-                        </tbody>
+                       <tr>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/updateForm.me'";>개인 정보 수정</th>
+                       </tr>
+                       <tr>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/'";>내 문의 확인</th>
+                       </tr>
+                       <tr>
+                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me'";>작성 게시글 보기 </th>
+                           
+                       </tr>
+                       <tr>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/writtenBoard.me'";>스크랩한 게시글 보기 </th>
+                           
+                       </tr>
+                       <tr>
+                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/deleteForm.me'";>회원 탈퇴 </th>
+                           
+                       </tr>
+                       </tbody>
                     </table>
                
             </div>
