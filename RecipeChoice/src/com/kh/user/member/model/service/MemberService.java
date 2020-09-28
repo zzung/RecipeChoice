@@ -1,7 +1,8 @@
 package com.kh.user.member.model.service;
 
-import static com.kh.user.common.JDBCTemplate.close;
+import static com.kh.user.common.JDBCTemplate.*;
 import static com.kh.user.common.JDBCTemplate.getConnection;
+import static com.kh.user.common.JDBCTemplate.rollBack;
 
 import java.sql.Connection;
 
@@ -24,7 +25,27 @@ public class MemberService {
 		/*JDBCTemplate.*/close(conn);
 	
 		return loginUser;
-	
 		
+	}
+	/**
+	 * 회원가입 서비스 pje
+	 * @param m 
+	 * @return
+	 */
+	public int insertMember(Member m) {
+		
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().insertMember(conn, m);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
 	}
 }

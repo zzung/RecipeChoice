@@ -54,6 +54,7 @@
 						<%}else{ %>
 						<!-- 로그인 회원 -->
 						<a class="dropdown-item" href="<%=contextPath%>/mypage.me">마이페이지</a>
+						<a class="dropdown-item" href="<%=contextPath%>/logout.me">로그아웃</a>
 						<%} %>
 					</div>
 				</li>

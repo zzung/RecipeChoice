@@ -131,39 +131,54 @@
 	        
 	
 	        <div id="content1">
-	            <form action="" id="enrollForm" method="post">
+	            <form action="insert.me" id="enrollForm" method="post">
 	
 	                <table id="enrollFormTable">
 	                    <tr>
 	                        <td style="width:200px;"> 닉네임</td>
-	                        <td><input type="text" id="userName" name="userName" maxlength="12" placeholder=" 6~12자 (한글, 영문자, 숫자)"required></td>
+	                        <td><input type="text" id="userName" name="userName" maxlength="12" placeholder=" 6~12자 (한글, 영문자, 숫자)"required autofocus></td>
 	                        <td><button type="button" class="btn btn-success">중복확인</button></td>
+	                    </tr>
+	                    <tr>
+	                    	<td colspan="3"></td>
 	                    </tr>
 	                    <tr>
 	                        <td> 아이디</td>
 	                        <td><input type="text" id="userId"name="userId" maxlength="12" placeholder=" 6~12자 (영문자, 숫자)"required></td>
 	                        <td><button type="button" class="btn btn-success">중복확인</button></td>
 	                    </tr>
+	                     <tr>
+	                    	<td colspan="3"></td>
+	                    </tr>
 	                    <tr>
 	                        <td> 비밀번호</td>
 	                        <td><input type="password" id="userPwd"name="userPwd" maxlength="15" placeholder=" 6~16자 (영문자, 숫자, 특수문자)"required></td>
 	                        <td></td>
+	                    </tr>
+	                     <tr>
+	                    	<td colspan="3"></td>
 	                    </tr>
 	                    <tr>
 	                        <td> 비밀번호확인</td>
 	                        <td><input type="password" id="checkPwd"name="checkPwd" maxlength="15" placeholder="비밀번호를 한번 더 입력해주세요"required></td>
 	                        <td></td>
 	                    </tr>
+	                     <tr>
+	                    	<td colspan="3"></td>
+	                    </tr>
 	                    <tr>
 	                        <td> 이메일</td>
-	                        <td><input type="email" id="userEmail"name="email" placeholder="이메일을 입력해주세요"></td>
+	                        <td><input type="email" id="email"name="email" placeholder="이메일을 입력해주세요"></td>
 	                        <td><button type="button" class="btn btn-success">중복확인</button></td>
+	                    </tr>
+	                     <tr>
+	                    	<td colspan="3"></td>
 	                    </tr>
 	                  
 	            
 	                </table>
-	
-	                <a onclick="return validate(); insertMember();"type="submit" id="nextBtn" class="btn btn-success">다음</a>
+	                <input type="submit" onclick="return validate();" type="submit" id="nextBtn" class="btn btn-success" value="가입"></input>
+	                
 	             </form>
 	            </div>
 
@@ -171,6 +186,8 @@
   		  </div>
   	</div>
   	<!-- 닉네임, 아이디, 비밀번호 중복체크 ajax 사용  -->
+  	
+  	
   	<script>
   	 function validate(){
          // 유효성 검사 : 아이디, 비밀번호, 비밀번호일치, 이름 
@@ -192,7 +209,7 @@
 
              return false; 
          }
-         if(!id.test(userId.value)){ //잘 입력했다고 보여 줄 필요 없음. 
+         if(!id.test(userId.value)){ 
              alert("유효한 아이디 입력하세요.")
              
              userId.value = "";  // 입력했던 값들 삭제시켜줌

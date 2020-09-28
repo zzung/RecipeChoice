@@ -17,6 +17,25 @@
 			   AND MEM_ID = ?
 			   AND MEM_PWD = ?
 	</entry>
+	<entry key="insertMember">
+		INSERT /* com.kh.member.model.dao.MemberDao#insertMember() */
+		  INTO MEMBER
+		  (
+		      USER_NO
+		    , MEM_ID
+		    , MEM_PWD
+		    , MEM_NAME
+		    , EMAIL
+		  ) 
+		  VALUES
+		  (
+		    SEQ_UNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , ?
 
-
+		  )
+	
+	</entry>
 </properties>
