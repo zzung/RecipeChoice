@@ -135,6 +135,7 @@
                         $('#summernote').summernote({
                             placeholder: '내용을 입력해주세요.',
                             tabsize: 2,
+                            width:710,
                             height: 400
                         });
                         </script>

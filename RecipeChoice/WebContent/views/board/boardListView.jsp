@@ -2,6 +2,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.kh.user.board.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
+<%@ include file="../common/menubar.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -18,7 +19,6 @@
 	
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	
-	String alertMsg = (String)session.getAttribute("alertMsg");
 	session.removeAttribute("alertMsg");
 	
 	String orderUrl = "&order=" + pi.getOrder() + "&searchType=" + pi.getSearchType() + "&keyword=" + pi.getKeyword();
@@ -139,7 +139,7 @@
 		}
 		
 		.btnDisabled:hover {
-			cursor: none;
+			cursor: auto;
 		}
         
         .pagebtn {
@@ -186,8 +186,6 @@
     </script>
 </head>
 <body>
-
-	<%@ include file="../common/menubar.jsp" %>
 
     <div class="outerForm">
 
@@ -293,32 +291,36 @@
 		<!-- 페이징 -->
         <div class="pagingArea" align="center">
             
-            <% if(pi.getCurrentPage() != 1) { %>
-            <!-- 맨 처음으로 (<<) -->
-            <a href="<%= request.getContextPath() %>/board.bo?p=1&category=<%= pi.getCategory() %><%= orderUrl %>" class="btn btn-secondry"> &lt;&lt; </a>
-            <!-- 이전페이지로 (<) -->
-            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() - 1 %>&category=<%= pi.getCategory() %><%= orderUrl %>"class="btn btn-secondry"> &lt; </a>
-         	<% } %>
-         	
-            <% for(int i = pi.getStartPage(), last = pi.getLastPage(); i <= last; i++) { %>
-            	<% if(i == pi.getCurrentPage()) { %>
-                <a class="btn btnDisabled"><%= i %></a>
-            	<% } else { %>
-            	<a href="<%= request.getContextPath() %>/board.bo?p=<%= i %>&category=<%= pi.getCategory() %><%= orderUrl %>"class="btn btn-secondry pagebtn"><%= i %></a>
-            	<% } %>
-            	
-            	<% 
-            	if(i == pi.getMaxPage()) {
-					break;            		
-            	}
-            	%>
-            <% } %>
-            
-            <% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
-            <!-- 다음페이지로 (>) -->
-            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() + 1 %>&category=<%= pi.getCategory() %><%= orderUrl %>"class="btn btn-secondry"> &gt; </a>
-            <!-- 맨 끝으로 (>>) -->
-            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getMaxPage() %>&category=<%= pi.getCategory() %><%= orderUrl %>" class="btn btn-secondry"> &gt;&gt; </a>
+            <% if(pi.getMaxPage() == 0) { %>
+            <a href="<%= request.getContextPath() %>/board.bo">1</a>
+            <% } else { %>
+	            <% if(pi.getCurrentPage() != 1) { %>
+	            <!-- 맨 처음으로 (<<) -->
+	            <a href="<%= request.getContextPath() %>/board.bo?p=1&category=<%= pi.getCategory() %><%= orderUrl %>" class="btn btn-secondry"> &lt;&lt; </a>
+	            <!-- 이전페이지로 (<) -->
+	            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() - 1 %>&category=<%= pi.getCategory() %><%= orderUrl %>"class="btn btn-secondry"> &lt; </a>
+	         	<% } %>
+	         	
+	            <% for(int i = pi.getStartPage(), last = pi.getLastPage(); i <= last; i++) { %>
+	            	<% if(i == pi.getCurrentPage()) { %>
+	                <a class="btn btnDisabled"><%= i %></a>
+	            	<% } else { %>
+	            	<a href="<%= request.getContextPath() %>/board.bo?p=<%= i %>&category=<%= pi.getCategory() %><%= orderUrl %>"class="btn btn-secondry pagebtn"><%= i %></a>
+	            	<% } %>
+	            	
+	            	<% 
+	            	if(i == pi.getMaxPage()) {
+						break;            		
+	            	}
+	            	%>
+	            <% } %>
+	            
+	            <% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
+	            <!-- 다음페이지로 (>) -->
+	            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() + 1 %>&category=<%= pi.getCategory() %><%= orderUrl %>"class="btn btn-secondry"> &gt; </a>
+	            <!-- 맨 끝으로 (>>) -->
+	            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getMaxPage() %>&category=<%= pi.getCategory() %><%= orderUrl %>" class="btn btn-secondry"> &gt;&gt; </a>
+	            <% } %>
             <% } %>
         </div>
     </div>
