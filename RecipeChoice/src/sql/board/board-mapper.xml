@@ -39,7 +39,8 @@
 
 	<entry key="getMaxPage">
 		SELECT COUNT(*) MAX
-  		  FROM BOARD_VIEW
+  		  FROM BOARD_VIEW B
+  		  JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
 	</entry>
 	
 	<entry key="writeBoardContent">

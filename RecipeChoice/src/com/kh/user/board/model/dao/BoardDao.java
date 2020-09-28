@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -98,7 +97,7 @@ public class BoardDao {
 			}
 			
 			pstmt.setInt(i++, maxRownum - 9);
-			pstmt.setInt(i++, maxRownum);
+			pstmt.setInt(i, maxRownum);
 			
 			rs = pstmt.executeQuery();
 			
@@ -131,25 +130,60 @@ public class BoardDao {
 	 */
 	public void getMaxPage(Connection conn, PageInfo pi) {
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = prop.getProperty("getMaxPage");
+		String category = pi.getCategory();
+		String searchType = null;
+		
+		switch(pi.getSearchType()) {
+		case "content": searchType = "BOARD_CONTENT LIKE ? "; break;
+		case "writer": searchType = "MEM_NAME LIKE ? "; break;
+		case "title": searchType = "BOARD_TITLE LIKE ? "; break;
+		default: searchType = "";
+		}
+		
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append(prop.getProperty("getMaxPage"));
+		
+		if(!category.equals("all")) {
+			sql.append(prop.getProperty("selectBoardListByPagePart2")); // sql.append("WHERE BOARD_TYPE = ?");
+			
+			if(!pi.getSearchType().equals("")) {
+				sql.append("AND " + searchType);
+			}
+		} else {
+			if(!pi.getSearchType().equals("")) {
+				sql.append("WHERE " + searchType);
+			}
+		}
 		
 		try {
-			stmt = conn.createStatement();
+			int i = 1;
 			
-			rs = stmt.executeQuery(sql);
+			pstmt = conn.prepareStatement(sql.toString());
+			
+			if(!category.equals("all")) {
+				pstmt.setInt(i++, Integer.parseInt(category));
+			}
+			
+			if(!pi.getSearchType().equals("")) {
+				pstmt.setString(i, "%" + pi.getKeyword() + "%");
+			}
+			
+			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				int max = rs.getInt("MAX");
 				pi.setMaxPage((max % 10 == 0)? max / 10:max / 10 + 1 );
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(stmt);
+			close(pstmt);
 		}
 		
 	}
