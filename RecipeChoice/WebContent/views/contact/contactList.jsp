@@ -204,10 +204,11 @@
                     
                 </script>
                 <br>
-           		<!-- 로그인한 회원만 글작성이 보여짐 -->
+           		<!-- 로그인한 회원만 글작성이 보여짐,, -->
                 <% if(loginUser != null && loginUser.getUserId().equals("admin")){ %>
                 <div id="content_3" align="right" style="width:710px;">
-                <button>글작성</button>
+                <button onclick="location.href='<%=contextPath%>/contact.en';">글작성</button>
+                <!--  <a href="<%=contextPath%>/enrollForm.co %>" class="btn btn-secondary">글작성</a>-->
                     <br><br>
                 </div>
                 <% } %>
