@@ -163,7 +163,7 @@
 	            
 	                </table>
 	
-	                <a onclick="return validate();"type="submit" id="nextBtn" class="btn btn-success">다음</a>
+	                <a onclick="return validate(); insertMember();"type="submit" id="nextBtn" class="btn btn-success">다음</a>
 	             </form>
 	            </div>
 

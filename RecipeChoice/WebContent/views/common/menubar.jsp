@@ -48,10 +48,13 @@
 						<img src="resources/image/navbar/user.png" alt="logo" style="width: 30px;">
 					</a>
 					<div class="dropdown-menu">
+						<%if(loginUser == null) {%>
 						<a class="dropdown-item" href="<%=contextPath%>/enrollForm.me">회원가입</a>
 						<a class="dropdown-item" href="<%=contextPath%>/loginForm.me">로그인</a>
+						<%}else{ %>
 						<!-- 로그인 회원 -->
 						<a class="dropdown-item" href="<%=contextPath%>/mypage.me">마이페이지</a>
+						<%} %>
 					</div>
 				</li>
 				<li class="nav-item margin-top">
