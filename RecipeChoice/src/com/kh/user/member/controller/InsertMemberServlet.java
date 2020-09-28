@@ -53,7 +53,7 @@ public class InsertMemberServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "성공적으로 회원가입되었습니다.");
 			
-			response.sendRedirect(request.getContextPath()+"/views/member/memberEnrollForm3.jsp");
+			response.sendRedirect(request.getContextPath()+"/enrollForm3.me");
 			
 		}else {
 			

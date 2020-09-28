@@ -38,4 +38,17 @@
 		  )
 	
 	</entry>
+	<entry key="idCheck">
+			SELECT
+		       COUNT(*)
+		  FROM MEMBER
+		 WHERE MEM_ID = ?
+	</entry>
+	<entry key="nameCheck">
+		SELECT
+		       COUNT(*)
+		  FROM MEMBER
+		 WHERE MEM_NAME = ?
+	
+	</entry>
 </properties>

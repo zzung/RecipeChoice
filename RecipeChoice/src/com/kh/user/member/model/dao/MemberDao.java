@@ -91,4 +91,65 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	public int idCheck(Connection conn, String checkId) {
+		// select문 
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		 
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, checkId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return count;
+		
+		
+	}
+	public int nameCheck(Connection conn, String checkName) {
+		// select문 
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		 
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("nameCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, checkName);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return count;
+		
+		
+	}
 }

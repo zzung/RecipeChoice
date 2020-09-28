@@ -96,6 +96,7 @@
      font-size:14px;
      text-align:center;
     }
+  
     </style>
 </head>
 <body>
@@ -137,18 +138,20 @@
 	                    <tr>
 	                        <td style="width:200px;"> 닉네임</td>
 	                        <td><input type="text" id="userName" name="userName" maxlength="12" placeholder=" 6~12자 (한글, 영문자, 숫자)"required autofocus></td>
-	                        <td><button type="button" class="btn btn-success">중복확인</button></td>
+	                        <td><button type="button" onclick="nameCheck();" class="btn btn-success">중복확인</button></td>
 	                    </tr>
 	                    <tr>
-	                    	<td colspan="3"></td>
+	                    	<td></td>
+	                    	<td colspan="2"  id="checkName"></td>
 	                    </tr>
 	                    <tr>
 	                        <td> 아이디</td>
 	                        <td><input type="text" id="userId"name="userId" maxlength="12" placeholder=" 6~12자 (영문자, 숫자)"required></td>
-	                        <td><button type="button" class="btn btn-success">중복확인</button></td>
+	                        <td><button type="button" onclick="idCheck();" class="btn btn-success">중복확인</button></td>
 	                    </tr>
 	                     <tr>
-	                    	<td colspan="3"></td>
+	                     	<td></td>
+	                    	<td colspan="2" id="checkId" ></td>
 	                    </tr>
 	                    <tr>
 	                        <td> 비밀번호</td>
@@ -185,10 +188,59 @@
 
   		  </div>
   	</div>
-  	<!-- 닉네임, 아이디, 비밀번호 중복체크 ajax 사용  -->
+  	<!-- 닉네임, 아이디, 중복체크 ajax 사용  -->
   	
   	
   	<script>
+  	function nameCheck(){
+  		var $userName = $("#enrollFormTable input[name=userName]");
+  		
+  		$.ajax({
+  			url:"<%=contextPath%>/nameCheck.me",
+  			type:"get",
+  			data:{checkName:$userName.val()},
+  			success:function(count){
+  				if(count == "fail"){
+  				
+  					$("#checkName").text("이미 존재하는 닉네임입니다.").css("color","red","font-size","9.5px;");
+  					$userId.focus();
+  				}else{
+  					$("#checkName").text("사용 가능한 닉네임 입니다.").css("color","yellowgreen", "font-size","9.5px");
+  					$userId.attr("readonly", true);
+  				}
+  			}, error:function(){
+  				console.log("ajax 통신 실패 !");
+  			}
+  			
+  		});
+  		
+  	}
+  	
+  	// 중복체크 ajax
+  	function idCheck(){
+  		
+  		var $userId = $("#enrollFormTable input[name=userId]");
+  		
+  		$.ajax({
+  			url:"<%=contextPath%>/idCheck.me",
+  			type:"get",
+  			data:{checkId:$userId.val()},
+  			success:function(result){
+  				if(result == "fail"){
+  				
+  					$("#checkId").text("이미 존재하는 아이디 입니다.").css("color","red","font-size","10px;");
+  					$userId.focus();
+  				}else{
+  					$("#checkId").text("사용가능한 아이디 입니다.").css("color","yellowgreen", "font-size","10px");
+  					$userId.attr("readonly", true);
+  				}
+  			}, error:function(){
+  				console.log("ajax 통신 실패 !");
+  			}
+  			
+  		});
+  	}
+  	
   	 function validate(){
          // 유효성 검사 : 아이디, 비밀번호, 비밀번호일치, 이름 
          var userName = document.getElementById("userName");

@@ -102,7 +102,7 @@
 	            <h6 align="center">바로 로그인 하시려면 아래 로그인버튼을 눌러주세요</h6><br>
 	        </div>
 	       
-	        <a href="<%=contextPath%>/login.me" id="login_btn" class="btn btn-success">로그인</a>
+	        <a href="<%=contextPath%>/loginForm.me" id="login_btn" class="btn btn-success">로그인</a>
 	    </div>
 	 </div>
 </body>

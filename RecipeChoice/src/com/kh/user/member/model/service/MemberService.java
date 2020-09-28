@@ -48,4 +48,28 @@ public class MemberService {
 		
 		return result;
 	}
+	/**
+	 * 아이디 중복체크 
+	 * @param checkId
+	 * @return
+	 */
+	public int idCheck(String checkId) {
+		
+		Connection conn = getConnection();
+		
+		int count = new MemberDao().idCheck(conn,checkId);
+		
+		close(conn);
+		return count;
+	}
+	
+	public int nameCheck(String checkName) {
+		
+		Connection conn = getConnection();
+		
+		int count = new MemberDao().nameCheck(conn,checkName);
+		
+		close(conn);
+		return count;
+	}
 }
