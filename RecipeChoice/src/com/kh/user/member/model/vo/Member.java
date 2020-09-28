@@ -12,6 +12,7 @@ public class Member {
 	private Date enrollDate;		// 회원가입일
 	private String status;			// 상태값(y/n) 탈퇴, 정상
 	
+	
 	public Member() {}
 	
 	public int getUserNo() {

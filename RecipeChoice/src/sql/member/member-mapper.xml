@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<!-- recipe loginMember -->
+<properties>
+
+	<entry key="loginMember">
+		SELECT /* com.kh.member.model.dao.MemberDao#loginMember() */
+					USER_NO
+				  , MEM_ID
+				  , MEM_PWD
+				  , MEM_NAME
+				  , EMAIL
+				  , ENROLL_DATE
+				  , STATUS
+			  FROM MEMBER
+			 WHERE STATUS ='Y'
+			   AND MEM_ID = ?
+			   AND MEM_PWD = ?
+	</entry>
+
+
+</properties>

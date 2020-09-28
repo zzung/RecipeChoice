@@ -77,7 +77,7 @@
 	        <div id="login_form">
 	            <h3 align="center"><b>로그인</b></h3>
 	            <!-- 2_1. 입력을 받는 input요소들이 위치할 영역 -->
-	            <form action="" id="login_form_input">
+	            <form action="login.me" id="login_form_input" method="post">
 	    
 	                <!-- 3_1. ID/PWD input요소가 들어갈 div -->
 	                <table align="center">
@@ -100,9 +100,9 @@
 	    
 	            <!-- 2_2. 회원가입페이지, ID/PWD 찾기 페이지 이동용 a 가 들어갈 영역-->
 	            <div id="login_form_etc" align="center">
-	                <a href="">회원가입 |</a> 
+	                <a href="<%=contextPath%>loginform.me">회원가입 |</a> 
 	                <a href="<%=contextPath%>/searchIdForm.me">ID 찾기 |</a> 
-	                <a href="">PWD 찾기 </a>
+	                <a href="<%=contextPath%>/searchPwdForm.me">PWD 찾기 </a>
 	            </div>
 	    
 	        </div>

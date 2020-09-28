@@ -10,13 +10,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <style>
+
     .outer{
     
         width:600px;
         height:800px;
         /* border:solid 1px; */
         margin: auto;
-        margin-top: 50px;
+        margin-top: 230px;
         
     }
     a, a:hover {
@@ -39,7 +40,7 @@
        padding: 0px 0px 10px 5px;
     }
     #id_search{
-        margin-top: 100px;
+        margin-top: 130px;
         border: solid 1px green;
         padding: 20px;
         width:550px;
@@ -51,11 +52,13 @@
     #checkNumBtn{
         font-size: 13px;
     }
-    </style>
+ 
+ </style>
 </head>
 <body>
 <body>
 
+<%@include file="../common/menubar.jsp" %>
 
     <div class="outer">
         <div align="right" class="click_link" style="width: 900px;">
@@ -103,6 +106,45 @@
        
     
         </div>
+          <script>
+      	  $("#search_btn").click(function(){
+		    	  $userEmail = $("#userEmail").val();
+		    	  console.log($userEmail);
+		    	  $("#email2").text($userEmail);
+		    	  $("#id2").text("일단아이디");
+		      });
+        </script>
+        
+         <!-- Modal -->
+		  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <h5 class="modal-title" id="exampleModalLabel">PWD 찾기</h5>
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		        </div>
+		        <div class="modal-body">
+		    		      입력하신 이메일 :<p id="email2"></p>
+		         <br> 가입 한 아이디 : <p id="id2">아이디</p>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" id="loginBtn"class="btn btn-success" data-dismiss="modal">로그인 하기 </button><br>
+		          <button type="button" class="btn btn-secondary">비밀번호 찾기</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		  
+		  <script>
+		      $("#loginBtn").click(function(){
+		        location.href="<%=contextPath%>/loginForm.me";
+		      });
+		      
+		  
+		  </script>
+        
     </div>
 
 </body>
