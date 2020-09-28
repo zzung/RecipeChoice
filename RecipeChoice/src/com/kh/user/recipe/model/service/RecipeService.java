@@ -3,6 +3,7 @@ package com.kh.user.recipe.model.service;
 import static com.kh.user.common.JDBCTemplate.commit;
 import static com.kh.user.common.JDBCTemplate.getConnection;
 import static com.kh.user.common.JDBCTemplate.rollBack;
+import static com.kh.user.common.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -34,6 +35,17 @@ public class RecipeService {
 			rollBack(conn); 
 		}
 		
+			close(conn); 
 		return result1*result2*result3;
 	}// e.insertRecipe
+		
+		public Recipe selectRecipeList(int rcpNo) {
+			Connection conn = getConnection();
+			
+			Recipe r = new RecipeDao().selectRecipeList(conn, rcpNo);
+			
+			close(conn); 
+			
+			return r; 
+		}
 }

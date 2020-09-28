@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 메뉴바 포함하고 빼줄것 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- include summernote css/js -->
@@ -132,12 +132,7 @@
                     <td>
                         <textarea id="summernote" name="content"></textarea>
                         <script>
-                        $('#summernote').summernote({
-                            placeholder: '내용을 입력해주세요.',
-                            tabsize: 2,
-                            width:710,
-                            height: 400
-                        });
+	                        
                         </script>
                     </td>
                 </tr>
@@ -148,7 +143,6 @@
                     	<input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
                     	<input class="form-control" type="text" name="title" placeholder="제목을 입력해주세요" value="<%= b.getBoardTitle() %>" required>
                     </td>
-                    
                 </tr>
         
                 <tr>
@@ -156,20 +150,50 @@
                     <td>
                         <textarea id="summernote" name="content"></textarea>
                         <script>
-                        
-                        $('#summernote').summernote({
-                            tabsize: 2,
-                            width:710,
-                            height: 400
-                        });
-                        
-						$("#summernote").summernote('code', '<%= b.getBoardContent() %>');
+	                        
+							$("#summernote").summernote('code', '<%= b.getBoardContent() %>');
                         
                         </script>
                     </td>
                 </tr>
         		<% } %>
             </table>
+        
+        	<script>
+	        	$('#summernote').summernote({
+	                placeholder: '내용을 입력해주세요.',
+	                tabsize: 2,
+	                width:710,
+	                height: 400,
+	                callbacks: {
+		                onImageUpload: function(files, editor) {
+		                    sendFile(files[0], this);
+		                }
+	                }
+	            });
+	        	
+	        	function sendFile(file, editor) {
+	        		
+	        		console.log("작동");
+	        		data = new FormData();
+	    	 	    data.append("uploadFile", file);
+	                $.ajax({
+	                    url: "editorImageUpload.bo",
+	                    data: data,
+	                    type: "POST",
+	                    cache: false,
+	                    contentType: false,
+	                    processData: false,
+	                    success: function(url) {
+	                    	console.log(url);
+	                    	$(editor).summernote('editor.insertImage', url);
+	                    },
+	                    error: function() {
+	                    	console.log("통신 실패");
+	                    }
+	                });
+	            }
+        	</script>
         
             <br>
 

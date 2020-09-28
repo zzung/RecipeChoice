@@ -17,29 +17,29 @@
 	<div class="contents">
 		<div class="content">
 			<div class="selectRecipe">
-				<form action="">
+				<form action="<%=contextPath%>/searchBar.rp">
 					<table class="tb_list">
 						<tr>
 							<th width="90">종류별</th>
 							<td>
 								<ul>
-									<li><input type="checkbox" id="rice" name="recipe"
-										value="rice"> <label for="rice" id="recipe"><p>밥종류</p></label>
+									<li><input type="checkbox" id="rice" name="dishType"
+										value="밥종류"> <label for="rice" id="recipe"><p>밥종류</p></label>
 									</li>
-									<li><input type="checkbox" id="soup" name="recipe"
-										value="soup"> <label for="soup" id="recipe"><p>찌게</p></label>
+									<li><input type="checkbox" id="soup" name="dishType"
+										value="찌게"> <label for="soup" id="recipe"><p>찌게</p></label>
 									</li>
-									<li><input type="checkbox" id="stew" name="recipe"
-										value="stew"> <label for="stew" id="recipe"><p>탕</p></label>
+									<li><input type="checkbox" id="stew" name="dishType"
+										value="탕"> <label for="stew" id="recipe"><p>탕</p></label>
 									</li>
-									<li><input type="checkbox" id="steamed" name="recipe"
-										value="steamed"> <label for="steamed" id="recipe"><p>찜</p></label>
+									<li><input type="checkbox" id="steamed" name="dishType"
+										value="찜"> <label for="steamed" id="recipe"><p>찜</p></label>
 									</li>
-									<li><input type="checkbox" id="stir" name="recipe"
-										value="stir"> <label for="stir" id="recipe"><p>볶음</p></label>
+									<li><input type="checkbox" id="stir" name="dishType"
+										value="볶음"> <label for="stir" id="recipe"><p>볶음</p></label>
 									</li>
-									<li><input type="checkbox" id="side" name="recipe"
-										value="side"> <label for="side" id="recipe"><p>밑반찬</p></label>
+									<li><input type="checkbox" id="side" name="dishType"
+										value="밑반찬"> <label for="side" id="recipe"><p>밑반찬</p></label>
 									</li>
 								</ul>
 							</td>
@@ -54,35 +54,35 @@
 					<td> 
 						<ul>
 							<li>
-								<input type="checkbox" id="beef" name="recipe" value="beef">
+								<input type="checkbox" id="beef" name="tag" value="소고기">
 									<label for="beef" class="recipe">소고기</label>
 							</li>
 							<li>
-								<input type="checkbox" id="pork" name="recipe" value="pork">
+								<input type="checkbox" id="pork" name="tag" value="돼지고기">
 								<label for="pork" class="recipe">돼지고기</label>
 							</li>
 							<li>
-								<input type="checkbox" id="chicken" name="recipe" value="chicken">
+								<input type="checkbox" id="chicken" name="tag" value="닭고기">
 								<label for="chicken" class="recipe">닭고기</label>
 							</li>
 							<li>
-								<input type="checkbox" id="duck" name="recipe" value="duck">
+								<input type="checkbox" id="duck" name="tag" value="오리">
 								<label for="duck" class="recipe">오리</label>
 							</li>
 							<li>
-								<input type="checkbox" id="seafood" name="recipe" value="seafood">
+								<input type="checkbox" id="seafood" name="tag" value="해물류">
 								<label for="seafood" class="recipe">해물류</label>
 							</li>
 							<li>
-								<input type="checkbox" id="driedFish" name="recipe" value="driedFish">
+								<input type="checkbox" id="driedFish" name="tag" value="건어물류">
 								<label for="driedFish" class="recipe">건어물류</label>
 							</li>
 							<li>
-								<input type="checkbox" id="nuts" name="recipe" value="nuts">
+								<input type="checkbox" id="nuts" name="tag" value="콩/견과류">
 								<label for="nuts" class="recipe">콩/견과류</label>
 							</li>
 							<li>
-								<input type="checkbox" id="dairy" name="recipe" value="dairy">
+								<input type="checkbox" id="dairy" name="tag" value="달걀/유제품">
 								<label for="dairy" class="recipe">달걀/유제품</label>
 							</li>
 						</ul>
@@ -92,23 +92,23 @@
 						
 							<td>
 								<ul>
-									<li><input type="checkbox" id="vegi" name="recipe"
-										value="vegi"> <label for="vegi" class="recipe">체소류</label>
+									<li><input type="checkbox" id="vegi" name="tag"
+										value="체소류"> <label for="vegi" class="recipe">체소류</label>
 									</li>
-									<li><input type="checkbox" id="fruit" name="recipe"
-										value="fruit"> <label for="fruit" class="recipe">과일류</label>
+									<li><input type="checkbox" id="fruit" name="tag"
+										value="과일류"> <label for="fruit" class="recipe">과일류</label>
 									</li>
-									<li><input type="checkbox" id="mushroom" name="recipe"
-										value="mushroom"> <label for="mushroom" class="recipe">버섯류</label>
+									<li><input type="checkbox" id="mushroom" name="tag"
+										value="버섯류"> <label for="mushroom" class="recipe">버섯류</label>
 									</li>
-									<li><input type="checkbox" id="grain" name="recipe"
-										value="grain"> <label for="grain" class="recipe">곡류</label>
+									<li><input type="checkbox" id="grain" name="tag"
+										value="곡류"> <label for="grain" class="recipe">곡류</label>
 									</li>
-									<li><input type="checkbox" id="flour" name="recipe"
-										value="flour"> <label for="flour" class="recipe">밀가루</label>
+									<li><input type="checkbox" id="flour" name="tag"
+										value="밀가루"> <label for="flour" class="recipe">밀가루</label>
 									</li>
 									<li><input type="checkbox" id="processedFood"
-										name="recipe" value="processedFood"> <label
+										name="tag" value="가공식품"> <label
 										for="processedFood" class="recipe">가공식품</label></li>
 								</ul>
 							</td>
@@ -124,7 +124,7 @@
 							<td>
 								<ul>
 									<li><input type="range" min="10" max="60" step="10"
-										name="분"></li>
+										name="time" value="분"></li>
 								</ul>
 							</td>
 						</tr>
@@ -150,7 +150,8 @@
 							$p.slideUp();
 						}
 					});
-				});
+					
+				
 			</script>
 			
 			<div class="listArea">
@@ -172,11 +173,10 @@
 			</div>
 			<br><br>
 			<!--썸네일-->
+				<!-- 반복문 -->
 				<div class="thumbnail" align="center">
-				<!-- 링크 수정 필요 일단 화면에 보기 위해서 그냥 넘김.  -->
-					<a href="<%=contextPath%>/recipeContent.rp">
-						<img src="resources/image/log/churro.png" width="200px" height="150px" />
-					</a>
+					<input type="hidden" name="rcp_no">
+						<img src="" width="200px" height="150px" />
 					<br />
 					<div class="w3-container w3-border-bottom w3-border-teamColor">
 						레시피 제목입니다. <br /> 
@@ -184,35 +184,13 @@
 					</div>
 					<p align="left">사용자닉네임</p>
 				</div>
-				<div class="thumbnail" align="center">
-					<a href=""><img src="resources/image/log/churro.png" width="200px" height="150px" /></a>
-					<br />
-
-					<div class="w3-container w3-border-bottom w3-border-teamColor">
-						레시피 제목입니다. <br /> 
-						<small>간단한설명</small>
-					</div>
-					<p align="left">사용자닉네임</p>
-
-				</div>
-				<div class="thumbnail" align="center">
-					<a href=""><img src="resources/image/log/churro.png" width="200px" height="150px" /></a>
-					<br />
-					<div class="w3-container w3-border-bottom w3-border-teamColor">
-						레시피 제목입니다. <br /> 
-						<small>간단한설명</small>
-					</div>
-					<p align="left">사용자닉네임</p>
-				</div>
-				<div class="thumbnail" align="center">
-					<a href=""><img src="resources/image/log/churro.png" width="200px" height="150px" /></a>
-					<br />
-					<div class="w3-container w3-border-bottom w3-border-teamColor">
-						레시피 제목입니다. <br /> 
-						<small>간단한설명</small>
-					</div>
-					<p align="left">사용자닉네임</p>
-				</div>
+				<script>
+					$(function(){
+						$(".thumbnail").click(function(){
+							location.href="<%=contextPath%>/detail.rp?rcpNo="+$(this).children().eq(0).val();
+						});
+					});
+				</script>
 				<div class="pagination" align="center">
 					<a href="#">&laquo;</a> 
 					<a href="#">1</a> 

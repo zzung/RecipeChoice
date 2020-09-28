@@ -43,6 +43,15 @@ public class Recipe {
 	}
 
 
+	public Recipe(int rcpNo, String memName, String rcpTitle, String rcpContent, String rcpPic) {
+		super();
+		this.rcpNo = rcpNo;
+		this.memName = memName;
+		this.rcpTitle = rcpTitle;
+		this.rcpContent = rcpContent;
+		this.rcpPic = rcpPic;
+	}
+
 	public int getRcpNo() {
 		return rcpNo;
 	}
