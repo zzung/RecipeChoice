@@ -50,7 +50,7 @@ public class MemberDao {
 							   rs.getString("mem_pwd"),
 							   rs.getString("mem_name"),
 							   rs.getString("email"),
-							   rs.getDate("enrollDate"),
+							   rs.getDate("enroll_Date"),
 							   rs.getString("status")
 						
 						);

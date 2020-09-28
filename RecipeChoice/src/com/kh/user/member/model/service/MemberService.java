@@ -19,11 +19,11 @@ public class MemberService {
 		
 		
 		Connection conn = /*JDBCTemplate.*/getConnection();
-		Member loginMember = new MemberDao().loginMember(conn, userId, userPwd);  // m 아니라 다른걸로 바꿔도됨
+		Member loginUser = new MemberDao().loginMember(conn, userId, userPwd);  
 		
 		/*JDBCTemplate.*/close(conn);
-		
-		return loginMember;
+	
+		return loginUser;
 	
 		
 	}
