@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <entry key="selectContactList">
-	SELECT /* com.kh.model.dao.contactDao#selectContactList()*/
+	SELECT /* com.kh.admin.contact.model.dao.contactDao#selectContactList()*/
        CON_NO 
      , CON_TYPE  
      , CON_TITLE
@@ -13,5 +13,24 @@
  ORDER 
  	BY CON_NO DESC
 	
+</entry>
+<entry key="insertContact">
+	INSERT /*com.kh.admin.contact.model.dao.ContactDao#insertContact()*/
+  INTO CONTACT
+  (
+    CON_NO 
+  , CON_TITLE
+  , CON_TYPE
+  , CON_CONTENT
+  , USER_NO
+  )
+  VALUES
+  (
+    SEQ_CNO.NEXTVAL
+  , ?
+  , ?
+  , ?
+  , ?
+  )
 </entry>
 </properties>

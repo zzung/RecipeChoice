@@ -54,7 +54,7 @@
     .EnrollArea {border-collapse: collapse;}
 	.EnrollArea{
     box-sizing: border-box;
-    width: 90%;
+    width: 100%;
     height: 40px;
     }
     .EnrollArea td:first-child{
@@ -104,25 +104,24 @@
                 <h1>1:1 문의
                     &nbsp;<img src="resources/image/admin/inquiry.jpg" >
 				 </h1>
-                <h3>&nbsp;1:1 문의하기
-                </h3>
+                <h3>&nbsp;1:1 상세보기</h3>
                 <hr>
 
-                <form action="<%=contextPath %>/insert.co" method="post"> 
-                <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
-                 <table class="EnrollArea">
+                <table class="EnrollArea">
                     <tr>
                         <th ><h2>제목&nbsp;</h2></th>
-                        <td colspan="4" ><input type="text" name="title" placeholder="내용을 입력하세요"required style="height:22px;"></td>
+                        <td colspan="4" >해당 1:1문의 제목 들어감</td>
+                    </tr>
+                    <tr>
+                        <th>작성자</th>
+                        <td>sidsid</td>
+                        <th>작성일</th>
+                        <td>2020-08-01</td>
                     </tr>
                     <tr>
                         <th><h2>분야 &nbsp;</h2></th>
                         <td >
-                            <select name="category"style="height:25px; width:110px;"  >
-                                <option value="10" float="">레시피 문의</option>
-                                <option value="20">신고 문의</option>
-                                <option value="30">기타 문의</option>
-                             </select>
+                            분야 들어감
                         </td>
                     </tr>
                     <tr>
@@ -140,8 +139,7 @@
                 <button type="button" onclick="history.back();">뒤로가기</button>
             </div>
         </div>  
-    </form>
-       
+
          </div>
             <div id="content_3"></div>
         </div>

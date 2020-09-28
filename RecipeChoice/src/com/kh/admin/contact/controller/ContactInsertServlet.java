@@ -49,8 +49,9 @@ public class ContactInsertServlet extends HttpServlet {
 		
 		if(result > 0) {//성공 ==> 1:1문의 리스트 페이지
 			
-			RequestDispatcher view = request.getRequestDispatcher("views/contact/contactList.jsp");
-			view.forward(request,response);
+			request.getSession().setAttribute("alertMsg", "문의 등록 완료!");
+			
+			response.sendRedirect(request.getContextPath() + "/list.co");
 			
 		}else { // 실패 ==> 에러페이지
 			
