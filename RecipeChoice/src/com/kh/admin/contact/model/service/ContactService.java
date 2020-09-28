@@ -2,7 +2,6 @@ package com.kh.admin.contact.model.service;
 
 import static com.kh.user.common.JDBCTemplate.*;
 
-
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -39,11 +38,12 @@ public class ContactService {
 		if(result > 0) {
 			commit(conn);
 		}else {
-			rollback(conn);
+			rollBack(conn);
 		}
 		
 		close(conn);
 		
 		return result;
 	}
+
 }

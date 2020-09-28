@@ -34,13 +34,14 @@ public class ContactDao {
 		ArrayList<Contact> list = new ArrayList<>();
 		
 		Statement stmt = null;
+		
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectContactList");
 		
 		try {
 			
-			stmt = conn.createStatement();
+			stmt = conn.createStatement(); //완성된 sql??
 			
 			rset = stmt.executeQuery(sql);//sql문 전달하면서 실행 그래서 완성형태여야함
 			
@@ -48,7 +49,7 @@ public class ContactDao {
 				list.add(new Contact(rset.getInt("con_no"),
 									 rset.getString("con_type"),
 								     rset.getString("con_title"),
-								     rset.getString("user_no"),
+								     rset.getString("mem_id"),
 								     rset.getDate("con_date")));
 			}
 			
