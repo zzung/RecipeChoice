@@ -128,7 +128,7 @@
                     <tr>
                         <td><h2>내용&nbsp;</h2></td>
                         <td>
-                           <textarea name="content" cols="70" rows="13" style="resize:none; margin-top:10px; margin-bottom:10px; "></textarea>
+                           <textarea name="content" cols="70" rows="13" style="resize:none; margin-top:10px;"></textarea>
                         </td>
                     </tr>
             </table> 

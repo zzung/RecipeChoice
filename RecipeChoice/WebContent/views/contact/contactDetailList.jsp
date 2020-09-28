@@ -107,36 +107,37 @@
                 <h3>&nbsp;1:1 상세보기</h3>
                 <hr>
 
-                <table class="EnrollArea">
+                <table class="EnrollArea" >
                     <tr>
-                        <th ><h2>제목&nbsp;</h2></th>
+                        <th >제목 | </th>
                         <td colspan="4" >해당 1:1문의 제목 들어감</td>
                     </tr>
                     <tr>
-                        <th>작성자</th>
+                        <th>작성자 |</th>
                         <td>sidsid</td>
-                        <th>작성일</th>
+                        <th>작성일 |</th>
                         <td>2020-08-01</td>
                     </tr>
                     <tr>
-                        <th><h2>분야 &nbsp;</h2></th>
+                        <th><h3>분야 |&nbsp;</h3></th>
                         <td >
                             분야 들어감
                         </td>
                     </tr>
                     <tr>
-                        <td><h2>내용&nbsp;</h2></td>
+                        <td><h3>내용&nbsp;</h3></td>
                         <td>
-                           <textarea name="content" cols="70" rows="13" style="resize:none; margin-top:10px; margin-bottom:10px; "></textarea>
+                           <textarea name="content" cols="70" rows="13" style="resize:none; margin-top:10px;">이거로하자</textarea>
                         </td>
                     </tr>
             </table> 
             <br> 
             <hr>     
              <div align="right">
-                <button type="submit">문의등록</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" onclick="history.back();">뒤로가기</button>
+                <button>목록가기</button>
+                <!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우-->
+                <button>수정하기</button>
+                <button>삭제하기</button>
             </div>
         </div>  
 

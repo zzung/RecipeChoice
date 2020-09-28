@@ -152,11 +152,14 @@
               <br> 
               <hr>    
             <br>
+            <!-- 로그인한 회원 중 관리자 -->
+            <% if(loginUser != null && loginUser.getMemId().equals("admin")){ %>
             <div align="right">
                 <button type="submit" class="btn" onclick="EnrollConfirm();"> 답변하기</button>
                 &nbsp;&nbsp;&nbsp;
                 <button type="button" onclick="history.back();">취소</button>
             </div>
+            <% } %>
         </div>  
         </form>
         <script>

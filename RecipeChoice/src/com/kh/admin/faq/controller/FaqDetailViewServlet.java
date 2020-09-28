@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class faqDetailListView
+ * Servlet implementation class FaqDetailViewServlet
  */
 @WebServlet("/faqDetail.fa")
-public class faqDetailListView extends HttpServlet {
+public class FaqDetailViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public faqDetailListView() {
+    public FaqDetailViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +26,8 @@ public class faqDetailListView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("views/faq/faqDetailView.jsp").forward(request, response);
-		
+	
+		request.getRequestDispatcher("views/faq/faqDetailView.jsp").forward(request, response);	
 	}
 
 	/**

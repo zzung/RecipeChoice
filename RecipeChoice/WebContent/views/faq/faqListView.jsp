@@ -62,25 +62,45 @@
 		border:1px solid lightslategrey;
 		border-radius: 5px;
 	}
-	p#a{
+	p#a1{
+        cursor:pointer;
+        font-weight:bold;
+    }
+    p#a2{
         cursor:pointer;
         font-weight:bold;
     }
     .t1>#img{
         float:right;
-        }
+    }
+    .t2>#img{
+    float:right;
+    }
     #img{
     cursor:pointer;
+    }
+    .tt1{
+        width:800px;
+        height:400px;
+        border:1px solid black;
+        
     }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
-        $('p#a').click(function(){
-            $('p#b').toggle('slow');
+        $('p#a1').click(function(){
+            $('p#b1').toggle('slow');
         });
     });
      </script>
+     <script>
+        $(document).ready(function(){
+            $('p#a2').click(function(){
+                $('p#b2').toggle('slow');
+            });
+        });
+         </script>
 </head>
 <body>
 	 <!--메뉴바 추가-->
@@ -118,25 +138,35 @@
                 <h2>FAQ</h2>
                 <hr>
 				<br>
-				<div>
+				<div class="tt1">
 				<div class="t1">
-                    <p id="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
+                    <p id="a1">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
                      <img id="img"onclick="deleteConfirm();"src="resources/image/navbar/pencil.jpg">
                      <img id="img"onclick="modifyConfirm();"src="resources/image/navbar/pencil.jpg">                                 
                     <hr style="width:93%;">
-                    <p id="b">&nbsp; 아이디와 비밀번호 찾기는 로그인 창 옆에</p>
+                    <p id="b1">&nbsp; 아이디와 비밀번호 찾기는 로그인 창 옆에</p>
 				</div>
 				<br>
 				<div class="t1">
-					<p id="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
+					<p id="a1">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
                     <hr style="width:93%;">
-                    <p id="b"></p>
+                    <p id="b1"></p>
 				</div>
 				<br>
 				<div class="t1">
-					<p id="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
+					<p id="a1">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
                     <hr style="width:93%;">
-                    <p id="b"></p>
+                    <p id="b1"></p>
+                </div>
+                <div class="t2" align="right">
+					<p id="a2">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
+                    <hr style="width:93%;">
+                    <p id="b2"></p>
+                </div>
+                <div class="t2" lign="right">
+					<p id="a2">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
+                    <hr style="width:93%;">
+                    <p id="b2"></p>
 				</div>
             </div>
 				<br><hr><br>

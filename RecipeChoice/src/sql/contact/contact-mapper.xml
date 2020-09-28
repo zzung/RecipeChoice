@@ -2,16 +2,16 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <entry key="selectContactList">
-	SELECT /* com.kh.admin.contact.model.dao.contactDao#selectContactList()*/
-       CON_NO 
-     , CON_TYPE  
-     , CON_TITLE
-     , USER_NO
-     , CON_DATE
-  FROM CONTACT C
- WHERE C.STATUS='Y'
- ORDER 
- 	BY CON_NO DESC
+	SELECT/* com.kh.admin.contact.model.dao.contactDao#selectContactList()*/ 
+	       CON_NO
+	     , CON_TYPE
+	     , CON_TITLE
+	     , M.MEM_ID
+	     , CON_DATE
+	  FROM CONTACT C
+	  JOIN MEMBER M ON (M.USER_NO = C.USER_NO)
+	 WHERE C.STATUS='Y'
+	 ORDER BY CON_NO DESC
 	
 </entry>
 <entry key="insertContact">

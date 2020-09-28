@@ -124,8 +124,8 @@
             <div id="content_1">
                 <div id="menu_1">고객센터</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1 문의</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath%>/faqDetail.fa'">&nbsp;&nbsp;&nbsp;FAQ</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/list.co'">&nbsp;&nbsp;&nbsp;1:1 문의</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;개인정보취급방침</div>
                 <div id="menu_3">
                     <br><b>&nbsp;&nbsp;고객센터</b><br>
@@ -161,15 +161,6 @@
                    </tr>
                    <% }else { %>
                    <!-- 리스트가 비어있지 않을 경우 -->
-                    <tr>
-                        <td>1002</td>
-                        <td>🔒</td>
-                        <td>re:기타 문의</td>
-                        <td>냐냐냐냔냐냐냐</td>
-                        <td>관리자</td>
-                        <td>2020-08-26</td>
-                        <td></td>
-                    </tr>
                    <% for(Contact c: list) { %>
                     <tr>
                         <td><%=c.getConNo() %></td>
@@ -185,6 +176,12 @@
                  </tbody>
                 </table>
                 <script>
+                	$(function(){
+                		$(".inq>tbody>tr").click(function(){
+                		});
+                	});
+                </script>
+                <script>
                     function deleteConfirm(){
                        if(confirm("삭제하시겠습니까?")){
                            location.href="";
@@ -199,13 +196,16 @@
                  <script>
                     $(function(){
                         $(".inq>tbody>tr").click(function(){
-                       });
+                        	var nno = $(this).children().eq(0).text();//text로 inner값 가져올 수 있다. 첫번째 그 뮨의번호 //클릭이벤트 발생한 요소<tr> $(this)
+                       
+                        	location.href = "<%=contextPath%>/detail.co?nno=" + nno;
+                        });
                     });
                     
                 </script>
                 <br>
-           		<!-- 로그인한 회원만 글작성이 보여짐,, -->
-                <% if(loginUser != null && loginUser.getUserId().equals("admin")){ %>
+           		<!-- 로그인한 회원만 글작성이 보여짐,,관리자x -->
+                <% if(loginUser != null && !(loginUser.getMemId().equals("admin"))){ %>
                 <div id="content_3" align="right" style="width:710px;">
                 <button onclick="location.href='<%=contextPath%>/contact.en';">글작성</button>
                 <!--  <a href="<%=contextPath%>/enrollForm.co %>" class="btn btn-secondary">글작성</a>-->

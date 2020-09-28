@@ -11,6 +11,7 @@ public class Contact {
 	private String conContent;
 	private Date conProcessDate;
 	private Date conDate;
+	private String conReply;
 	private String answer;
 	private String status;
 	
@@ -20,7 +21,7 @@ public class Contact {
 	}
 
 	public Contact(int conNo, String userNo, String conType, String conTitle, String conContent, Date conProcessDate,
-			Date conDate, String answer, String status) {
+			Date conDate, String conReply, String answer, String status) {
 		super();
 		this.conNo = conNo;
 		this.userNo = userNo;
@@ -29,6 +30,7 @@ public class Contact {
 		this.conContent = conContent;
 		this.conProcessDate = conProcessDate;
 		this.conDate = conDate;
+		this.conReply = conReply;
 		this.answer = answer;
 		this.status = status;
 	}
@@ -100,6 +102,14 @@ public class Contact {
 		this.conDate = conDate;
 	}
 
+	public String getConReply() {
+		return conReply;
+	}
+
+	public void setConReply(String conReply) {
+		this.conReply = conReply;
+	}
+
 	public String getAnswer() {
 		return answer;
 	}
@@ -120,8 +130,7 @@ public class Contact {
 	public String toString() {
 		return "Contact [conNo=" + conNo + ", userNo=" + userNo + ", conType=" + conType + ", conTitle=" + conTitle
 				+ ", conContent=" + conContent + ", conProcessDate=" + conProcessDate + ", conDate=" + conDate
-				+ ", answer=" + answer + ", status=" + status + "]";
+				+ ", conReply=" + conReply + ", answer=" + answer + ", status=" + status + "]";
 	}
-	
-	
 }
+	
