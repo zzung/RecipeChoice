@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String alertMsg = (String)session.getAttribute("alertMsg");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,17 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
 
-<script>
-	$(function(){
-		var msg = "<%= alertMsg %>";
-		
-		if(msg != "null"){  //null로 비교하면 XX
- 		alert(msg);
-			<% session.removeAttribute("alertMsg"); %>
-		}
-	});
-</script>
-    <style>
+   <style>
     div{
 	    box-sizing: border-box;
 	}

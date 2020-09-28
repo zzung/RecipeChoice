@@ -1,6 +1,9 @@
+<%@page import="com.kh.admin.notice.model.vo.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%
+	Notice n = (Notice)request.getAttribute("n");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +14,11 @@
             box-sizing: border-box;
         }
         .wrap{
-            width:1000px;
-            height:1000px;
-            margin: auto;
-        }
-        #header{height:20%;} 
+		    width:1000px;
+		    height:1000px;
+		    margin: auto;
+		}
+         #header{height:20%;} 
         #content{height:70%; margin-top: 30px;}
         #footer{height:10%; margin-bottom: 30px;}
         .nav{background:rgb(39, 174, 96);}
@@ -60,14 +63,13 @@
         width: 100%;
         height: 40px;
         margin: 30px;
+        margin-bottom: 100px;
         }
-    
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-
-	<!--메뉴바 추가-->
+	<!-- 메뉴바 추가 -->
 	<%@include file="../common/menubar.jsp" %>
 	
 	<div class="wrap">
@@ -82,7 +84,7 @@
         <div id="content">
             <div id="content_1">
                 <div id="menu_1">관리자</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/notice.mn'">&nbsp;&nbsp;&nbsp;공지사항관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/notice.mn'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;공지사항관리</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
@@ -92,41 +94,62 @@
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;신고 관리</div>
             </div>
             <div id="content_2">
-                
-                <p style="font-weight: bolder; font-size: 18px;">공지사항 등록하기</p>
+                <br><br>
+                <p style="font-weight: bolder; font-size: 18px;">공지사항 수정하기</p>
                 <hr>
                  
-                <form id="noticeEnrollForm" action="<%=contextPath%>/insert.mn" method="post">
+                <form id="updateForm" action="<%=contextPath%>/update.mn" method="post">
+                	<input type="hidden" id="noticeNo" name="noticeNo" value="<%=n.getNoticeNo() %>">
 	                <table class="tb1">
 		                <tr>
 		                    <th width="70" >제목</th>
 		                    <td>
-		                        <input name="noticeTitle" type="text" style=" width: 300px; height:30px; float: left; padding-top: 5px; margin-top: 10px; margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;
-		                        <input name="noticeImportant" id="noticeImportant" type="checkbox" style="margin-top: 15px;"> 중요공지사항
+		                        <input name="noticeTitle" id="noticeTitle" type="text" value="<%=n.getNoticeTitle()%>"style=" width: 300px; height:30px; float: left; padding-top: 5px; margin-top: 10px; margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;
+		                        <input name="noticeImportant" id="noticeImportant" onclick="doOpenCheck(this);" value="Y" type="checkbox" style="margin-top: 15px;"> 중요공지 &nbsp;
+		                        <input name="noticeImportant" id="noticeImportant" onclick="doOpenCheck(this);" value="N" type="checkbox"> 일반공지
 		                    </td>
 		                </tr>
 		                <tr>
 		                    <th>글쓰기</th>
 		                    <td>
-		                        <textarea id="textarea" name="noticeContent" style="resize: none; width: 550px; height: 300px; float: left; padding-top: 5px; margin-top:10px; margin-bottom: 20px; font-size: 15px;"></textarea>
-		                    	<p id="text"></p>
+		                        <textarea id="noticeContent" name="noticeContent" style="resize: none; width: 550px; height: 300px; float: left; padding-top: 5px; margin-top:10px; margin-bottom: 20px; font-size: 15px;"><%= n.getNoticeContent()%></textarea>
+		                    	<!-- <p id="text"></p> -->
 		                    </td>
 		                </tr>
 	                </table>
 	                <script>
-	                	if ($("input[id='noticeImportant']").is(":checked")){
+		                function doOpenCheck(chk){
+		                    var obj = document.getElementsByName("noticeImportant");
+		                    for(var i=0; i<obj.length; i++){
+		                        if(obj[i] != chk){
+		                            obj[i].checked = false;
+		                        }
+		                    }
+		                }
+	                <%--  
+	                	if ($("#noticeImportant").prop("checked")){
 	                		$("#noticeImportant").val('Y');
 	                	}else{
 	                		$("#noticeImportant").val('N');
 	                	}
+	                --%>
+	                <%--
+	                	var chk = document.getElementsByName("noticeImportant");
+	                	if(chk[0].checked) {
+	                		chk[0].value = "Y";
+	                	}else{
+	                		chk[0].value="N";
+	                	}
+	                	console.log(chk[0].value);
+	                --%>	
 	                	
 	                </script>
+	                
 	                <script>
 	                	// 줄바꿈 처리
-		                var str = document.getElementById("textarea").value;
+		                var str = document.getElementById("noticeContent").value;
 	                	str = str.replace("\n","<br>");
 	                	document.getElementById("text").innerHTML = str;
-	                	
 	                </script>
 	                
 	                <hr>
@@ -134,15 +157,13 @@
 	                	<input type="submit" class="btn btn-success" value="등록">
 	                	<input type="button" onclick="history.back();" class="btn btn-secondary" value="뒤로">
 	                </div>
-				</form>
-                
-
+	        	</form>
+	        	
             </div>
+            
             <div id="content_3"></div>
-        </div>
-        <div id="footer"></div>
+        
+    	</div>    
     </div>
-    
-
 </body>
 </html>

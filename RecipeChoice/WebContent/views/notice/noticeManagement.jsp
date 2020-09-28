@@ -4,7 +4,6 @@
     pageEncoding="UTF-8"%>
 <%
 	ArrayList<Notice> noticeList = (ArrayList<Notice>)request.getAttribute("noticeList"); 
-	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,11 +16,11 @@
 	}
 	.wrap{
 	    width:1000px;
-	    height:800px;
+	    height:1000px;
 	    margin: auto;
 	}
 	#header{height:20%;} 
-	#content{height:70%; margin-top: 30px;}
+	#content{/* height:70%; */ margin-top: 30px;}
 	#footer{height:10%; margin-bottom: 30px;}
     .nav{background:rgb(39, 174, 96);}
         .menu{
@@ -88,7 +87,7 @@
 	tbody>tr {cursor: pointer;}
 	tbody>tr:hover{ background: #f3f3f3;}
     .pagination {
-	    display: inline-block;
+	    text-align: center;
         margin-left: 40%;
     }
     .pagination a {
@@ -140,46 +139,52 @@
                 <br>
                 <p style="font-size:18px; font-weight: bolder;">공지사항 관리</p>
                 <hr>
-                <table class="tb1">
-                	<thead>
-                        <tr>
-                            <th width="80" >NO.</th>
-                            <th width="500">content</th>
-                            <th width="150">Date</th>
-                            <th width="200">Setting</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    	<% for(Notice n : noticeList){ %>
-	                    <tr>
-	                       <td><%= n.getNoticeNo()%></td>
-	                       <td><%= n.getNoticeTitle() %></td>
-	                       <td><%= n.getNoticeDate() %></td>
-	                       <td>
-		                       <a id="noticeUpdate" onclick="return noticeUpdate();">수정</a>&nbsp;&nbsp;
-		                       <a id="noticeDelete" onclick="return noticeDelete();">삭제</a>
-	                       </td>
-	                 	 </tr>
-                        <% } %>
-                    </tbody>
-                </table>
                 
+                <% if(!noticeList.isEmpty()) { %>
+	                <table class="tb1">
+	                	<thead>
+	                        <tr>
+	                            <th width="80" >NO.</th>
+	                            <th width="500">content</th>
+	                            <th width="150">Date</th>
+	                            <th width="200">Setting</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                    	<% for(Notice n : noticeList){ %>
+		                    <tr>
+		                       <td><%= n.getNoticeNo()%></td>
+		                       <td><%= n.getNoticeTitle() %></td>
+		                       <td><%= n.getNoticeDate() %></td>
+		                       <td>
+			                       <a id="noticeUpdate" onclick="return noticeUpdate();">수정</a>&nbsp;&nbsp;
+			                       <a id="noticeDelete" onclick="return noticeDelete();">삭제</a>
+		                       </td>
+		                 	 </tr>
+	                        <% } %>
+	                    </tbody>
+	                </table>
+                <% } else{ %>
+                	<div style="font-size: 18px;"><b>공지사항이 없습니다.</b></div>
+                <% } %>
                 <hr>
                 <div align="right"><a href="<%=contextPath %>/enrollForm.mn" class="btn btn-secondary">글 작성</a></div>
+                <div class="pagination" style="margin-left: 25%">
+	                <a href="#">&laquo;</a> 
+	                <a href="#">1</a> 
+	                <a href="#">2</a> 
+	                <a href="#">3</a> 
+	                <a href="#">4</a> 
+	                <a href="#">5</a> 
+	                <a href="#">6</a>
+	                <a href="#">&raquo;</a>
+           		</div>
             </div>
             <div id="content_3"></div>
         </div>
+        
         <div id="footer">
-            <div class="pagination">
-                <a href="#">&laquo;</a> 
-                <a href="#">1</a> 
-                <a href="#">2</a> 
-                <a href="#">3</a> 
-                <a href="#">4</a> 
-                <a href="#">5</a> 
-                <a href="#">6</a>
-                <a href="#">&raquo;</a>
-            </div>
+            
         </div>
     </div>
     

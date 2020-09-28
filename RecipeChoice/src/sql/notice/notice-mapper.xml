@@ -48,4 +48,25 @@
 			    , DEFAULT
   		      )
 	</entry>
+	
+	<entry key="updateNotice">
+		UPDATE
+		       NOTICE
+		   SET NOT_TITLE = ?
+		     , NOT_CONTENT = ?
+		     , NOT_IMPORTANT = ?
+		     , NOT_DATE = SYSDATE
+		 WHERE NOT_NO = ?
+		   AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="deleteNotice">
+		UPDATE
+		       NOTICE
+		   SET STATUS ='N'
+		 WHERE NOT_NO = ?
+	</entry>
+	
+	
+	
 </properties>

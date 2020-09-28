@@ -12,15 +12,14 @@
 <style>
         div{
             box-sizing: border-box;
-            /* border: 1px solid red */
         }
         .wrap{
-            width:1000px;
-            height:800px;
-            margin: auto;
-        }
-        #header{height:20%; margin-bottom:20px;} 
-        #content{height:70%; margin-top:20px;}
+		    width:1000px;
+		    height:1000px;
+		    margin: auto;
+		}
+        #header{height:20%; margin-bottom:10px;} 
+        #content{ margin-top:20px;}
         #footer{height:10%; }
         #content>div{
             height:100%;
@@ -66,6 +65,7 @@
         }
         #noticeContent{
             margin-bottom: 10%;
+            height: 350px;
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -96,25 +96,22 @@
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;신고 관리</div>
             </div>
             <div id="content_2">
-                
+
                 <hr>
                 <div id="noticeTitle">No.<%=n.getNoticeNo()%>&nbsp;&nbsp;<%= n.getNoticeTitle() %></div>
                 <hr>
                 <div id="noticeDate"><%= n.getNoticeDate() %></div>
-                <br><br><br>
+                <br><br><br><br>
 
-                <span id="noticeContent">
+                <div id="noticeContent">
 					<%= n.getNoticeContent() %>   
-              	 	<br><br><br><br><br><br>
-                </span>
-                
-                <br><br><br><br><br><br><br>
+				</div>
+				                
                 <hr>
-                
                 <div  align="center">
 	                <a href="<%=contextPath%>/notice.mn" class="btn btn-dark">목록으로</a>
-	                <a href="<%=contextPath%>/update.mn?nno=<%=n.getNoticeNo()%>" class="btn btn-primary">수정하기</a>
-	                <a href="<%=contextPath%>/" class="btn btn-danger">삭제하기</a>
+	                <a href="<%=contextPath%>/updateForm.mn?nno=<%=n.getNoticeNo()%>" class="btn btn-primary">수정하기</a>
+	                <a href="<%=contextPath%>/delete.mn?nno=<%=n.getNoticeNo()%>" class="btn btn-danger">삭제하기</a>
                 </div>
 	        	
             </div>
