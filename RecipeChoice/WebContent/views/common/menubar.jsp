@@ -19,6 +19,17 @@
 </head>
 <body>
 <%@ include file="preloader.jsp" %>
+<script>
+	$(function(){
+		var msg = "<%=alertMsg%>"; 
+
+		if(msg != "null"){ // 메세지가 담겨있을 경우 
+			alert(msg);
+			// 메세지 지우기 
+			<%session.removeAttribute("alertMsg"); %>
+		}
+	});
+</script>
 <!-- start navbar -->
 <div class="outer fixed-top">
 		<nav class="navbar navbar-expand-sm bg-white navbar-light justify-content-center">
