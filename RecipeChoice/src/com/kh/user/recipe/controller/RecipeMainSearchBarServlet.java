@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class RecipeContentServlet
+ * Servlet implementation class RecipeMainSearchBarServlet
  */
-@WebServlet("/detail.rp")
-public class RecipeContentServlet extends HttpServlet {
+@WebServlet("/searchBar.rp")
+public class RecipeMainSearchBarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecipeContentServlet() {
+    public RecipeMainSearchBarServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +26,13 @@ public class RecipeContentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String[] rcpDishTypes = request.getParameterValues("dishType");
+		String[] rcpTags = request.getParameterValues("tag");
+		int rcpTime = Integer.parseInt(request.getParameter("time"));
 		
-		request.setCharacterEncoding("UTF-8");
-		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response);
+		
+		
 	}
 
 	/**

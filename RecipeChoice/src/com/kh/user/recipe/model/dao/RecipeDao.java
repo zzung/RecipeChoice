@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -118,4 +119,36 @@ public class RecipeDao {
 		}
 		return result3;
 	}// e.insertCookDetail
+	
+	public Recipe selectRecipeList(Connection conn, int rcpNo) {
+		Recipe r = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectRecipeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rcpNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				r = new Recipe(rs.getInt("RCP_NO"),
+							   rs.getString("MEM_NAME"),
+							   rs.getString("RCP_TITLE"),
+							   rs.getString("RCP_CONTENT"),
+							   rs.getString("RCP_PIC"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return r; 
+	}
 }

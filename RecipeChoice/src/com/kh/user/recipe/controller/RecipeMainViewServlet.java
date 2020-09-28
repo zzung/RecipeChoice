@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.user.recipe.model.service.RecipeService;
+import com.kh.user.recipe.model.vo.Recipe;
+
 /**
  * Servlet implementation class RecipeMainView
  */
@@ -31,6 +34,10 @@ public class RecipeMainViewServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
+		int rcpNo = Integer.parseInt(request.getParameter("rcpNo")); 
+		
+		Recipe r = new RecipeService().selectRecipeList(rcpNo); 
+	
 		RequestDispatcher view = request.getRequestDispatcher("views/recipe/recipeMainView.jsp");
 		view.forward(request, response);
 	}

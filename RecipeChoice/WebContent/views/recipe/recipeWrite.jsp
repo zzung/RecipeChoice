@@ -89,7 +89,7 @@
 
 							<div id="tagList">
 								<select name="tag" id="" style="font-size: 15px">
-									<option value="재료선택">재료선택</option>
+									<option value="">재료선택</option>
 									<option value="소고기">소고기</option>
 									<option value="돼지고기">돼지고기</option>
 									<option value="닭고기">닭고기</option>
@@ -105,40 +105,6 @@
 									<option value="밀가루">밀가루</option>
 									<option value="가공식품">가공식품</option>
 								</select> 
-								<select name="tag" id="" style="font-size: 15px">
-									<option value="재료선택">재료선택</option>
-									<option value="소고기">소고기</option>
-									<option value="돼지고기">돼지고기</option>
-									<option value="닭고기">닭고기</option>
-									<option value="오리고기">오리고기</option>
-									<option value="해물류">해물류</option>
-									<option value="건어물류">건어물류</option>
-									<option value="건어물류">콩/견과류</option>
-									<option value="달걀/유제품">달걀/유제품</option>
-									<option value="체소류">체소류</option>
-									<option value="과일류">과일류</option>
-									<option value="버섯류">버섯류</option>
-									<option value="곡류">곡류</option>
-									<option value="밀가루">밀가루</option>
-									<option value="가공식품">가공식품</option>
-								</select> 
-								<select name="tag" id="" style="font-size: 15px">
-									<option value="재료선택">재료선택</option>
-									<option value="소고기">소고기</option>
-									<option value="돼지고기">돼지고기</option>
-									<option value="닭고기">닭고기</option>
-									<option value="오리고기">오리고기</option>
-									<option value="해물류">해물류</option>
-									<option value="건어물류">건어물류</option>
-									<option value="건어물류">콩/견과류</option>
-									<option value="달걀/유제품">달걀/유제품</option>
-									<option value="체소류">체소류</option>
-									<option value="과일류">과일류</option>
-									<option value="버섯류">버섯류</option>
-									<option value="곡류">곡류</option>
-									<option value="밀가루">밀가루</option>
-									<option value="가공식품">가공식품</option>
-								</select>
 							</div>
 							<div id="returnCopy"></div>
 						</td>
@@ -290,9 +256,8 @@
               $(".addTag").click(function () {
             	  var contents = '';
             	  
-            	  for(var i=0; i<3; i++){
             		contents += ' <select name="tag" id="" style="font-size: 15px">'
-            		contents += '<option value="재료선택">재료선택</option>'
+            		contents += '<option value="">재료선택</option>'
     				contents += '<option value="소고기">소고기</option>'
     				contents += '<option value="돼지고기">돼지고기</option>'
     				contents += '<option value="닭고기">닭고기</option>'
@@ -308,9 +273,9 @@
     				contents += '<option value="밀가루">밀가루</option>'
     				contents += '<option value="가공식품">가공식품</option>'
     				contents +=	'</select>';
-            	  }
             	  
-                  $("#returnCopy").append(contents);
+            	  
+                  $("#tagList").append(contents);
               });
             });
           </script>

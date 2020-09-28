@@ -69,4 +69,16 @@
 		     , ?
 		     )
 	</entry>
+	
+	<entry key="selectRecipeList">
+		SELECT
+	       RCP_NO
+	     , MEM_NAME
+	     , RCP_TITLE
+	     , RCP_CONTENT
+	     , RCP_PIC
+	 FROM RECIPE
+	WHERE RCP_NO = ?
+	  AND STATUS = 'Y'
+	</entry>
 </properties>
