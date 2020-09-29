@@ -122,6 +122,10 @@
         input[type=radio]:checked + label{
             background-image: url("<%= request.getContextPath() %>/resources/image/board/checkedImage.PNG");
         }
+        
+        .btn-primary {
+        	background-color:rgb(9, 175, 79)!important;
+        }
     </style>
     <script>
         var preHtml = "";

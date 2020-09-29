@@ -62,6 +62,10 @@
         #checkModal button {
             width: 100px;
         }
+        
+        .btn-primary {
+        	background-color:rgb(9, 175, 79)!important;
+        }
 
     </style>
     <script>
@@ -126,16 +130,6 @@
                     <th>제목</th>
                     <td><input class="form-control" type="text" name="title" placeholder="제목을 입력해주세요" required></td>
                 </tr>
-        
-                <tr>
-                    <th>내용</th>
-                    <td>
-                        <textarea id="summernote" name="content"></textarea>
-                        <script>
-	                        
-                        </script>
-                    </td>
-                </tr>
                 <% } else { %>
         		<tr>
                     <th>제목</th>
@@ -144,19 +138,14 @@
                     	<input class="form-control" type="text" name="title" placeholder="제목을 입력해주세요" value="<%= b.getBoardTitle() %>" required>
                     </td>
                 </tr>
+        		<% } %>
         
                 <tr>
                     <th>내용</th>
                     <td>
                         <textarea id="summernote" name="content"></textarea>
-                        <script>
-	                        
-							$("#summernote").summernote('code', '<%= b.getBoardContent() %>');
-                        
-                        </script>
                     </td>
                 </tr>
-        		<% } %>
             </table>
         
         	<script>
@@ -168,9 +157,22 @@
 	                callbacks: {
 		                onImageUpload: function(files, editor) {
 		                    sendFile(files[0], this);
-		                }
+		                },
+			        	onPaste: function (e) {
+							var clipboardData = e.originalEvent.clipboardData;
+							if (clipboardData && clipboardData.items && clipboardData.items.length) {
+								var item = clipboardData.items[0];
+								if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+									e.preventDefault();
+								}
+							}
+						}
 	                }
 	            });
+	        	
+	        	<% if(b != null) { %>
+	        	$("#summernote").summernote('code', '<%= b.getBoardContent() %>');
+	        	<% } %>
 	        	
 	        	function sendFile(file, editor) {
 	        		
@@ -198,7 +200,6 @@
             <br>
 
             <div align="right" style="width: 890px;">
-            	<% // TODO 버튼 색깔 변경 필요 %>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkModal">등록하기</button>
             </div>
 
