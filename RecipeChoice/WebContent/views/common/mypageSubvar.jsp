@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +16,13 @@
 </head>
 <body>
 <%@include file="../common/menubar.jsp" %>
-
-    <!-- <div class="wrap">  -->
+<%
+  	String userId = loginUser.getMemId();
+  	String userName = loginUser.getMemName();
+  	String email = loginUser.getEmail();
+  	Date enrollDate = loginUser.getEnrollDate();
+ %> 
+ <!-- <div class="wrap">  -->
     
             <span class="clickLink">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"viewBox="0 0 48 48" data-svg-content="true" fill="#000000" style="vertical-align: middle;">
@@ -34,8 +40,8 @@
                     <!--    <svg width="120px" height="100px" viewBox="0 0 16 16" id="noImage"class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                         </svg> --> 
-                    <p style="font-size:12px;"align="center"><b>뭐해먹지 님<br>
-                        가입일 : 2020-08-01</b></p>
+                    <p style="font-size:12px;"align="center"><b><%=userName %> 님<br>
+                        가입일 : <%=enrollDate %></b></p>
                     
                 </div>
                 <div class="memInfo">
@@ -67,6 +73,6 @@
             </div>
         </div>
 
-  <!-- </div> -->  
+<!-- </div>  -->	
 </body>
 </html>

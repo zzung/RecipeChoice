@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,12 +8,11 @@
 <title>Insert title here</title>
  <link rel="stylesheet" href="resources/css/subvar.css">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     
     <style>
-    	.table{
+   .table{
         width: 752px;
     }
 
@@ -45,7 +45,12 @@
 </head>
 <body>
 <%@include file="../common/menubar.jsp" %>
-
+	 <%
+    	String userId = loginUser.getMemId();
+    	String userName = loginUser.getMemName();
+    	String email = loginUser.getEmail();
+    	Date enrollDate = loginUser.getEnrollDate();
+    %> 
      <div class="wrap">
     
             <span class="clickLink">
@@ -64,8 +69,8 @@
                     <!--    <svg width="120px" height="100px" viewBox="0 0 16 16" id="noImage"class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                         </svg> --> 
-                    <p style="font-size:12px;"align="center"><b>뭐해먹지 님<br>
-                        가입일 : 2020-08-01</b></p>
+                    <p style="font-size:12.5px;"align="center"><b><%=userName%> 님<br>
+                        가입일 : <%=enrollDate %></b></p>
                     
                 </div>
                 <div class="memInfo">
@@ -97,21 +102,17 @@
             </div>
         </div>
         <script>
-            $(function(){
-                $(".memInfo>tbody>tr").click(function(){
-                    location.href = "<%= contextPath %>/" ;
-                });
-            });
+        
             
             </script>
         <div class="content2">
             <div id="content2_1">
-                <form action="" id="updateForm" method="post">
+                <form action="update.me" id="updateForm" method="post">
                     <h3 align="Center" style="margin-bottom: 30px;"><b>개인 정보 수정</b></h3>
                     <table id="updateFormTable">
                         <tr>
                             <td> 닉네임</td>
-                            <td><input type="text" class="form-control form-control-sm" name="userName" maxlength="5" required></td>
+                            <td><input type="text" class="form-control form-control-sm" name="userName" id="userName" maxlength="12" required value="<%=userName%>"></td>
                             <td><button type="button" class="btn btn-outline-success">중복확인</button></td>
                         </tr>
                         <tr>
@@ -120,7 +121,7 @@
                         </tr>
                         <tr>
                             <td> 아이디</td>
-                            <td colspan="2"><input type="text" name="userId" class="form-control form-control-sm"maxlength="12" readonly></td>
+                            <td colspan="2"><input type="text" name="userId" id="userId" class="form-control form-control-sm"maxlength="12" readonly  value="<%=userId%>"></td>
                           
                         </tr>
                         <tr>
@@ -129,7 +130,7 @@
                         </tr>
                         <tr>
                             <td> 비밀번호</td>
-                            <td colspan="2"><input type="password" name="userPwd"class="form-control form-control-sm" maxlength="15" required></td>
+                            <td colspan="2"><input type="password" name="userPwd" id="userPwd" class="form-control form-control-sm" maxlength="15" required></td>
                          
                         </tr>
                         <tr>
@@ -138,7 +139,7 @@
                         </tr>
                         <tr>
                             <td> 비밀번호 확인</td>
-                            <td colspan="2"><input type="password" class="form-control form-control-sm"name="checkPwd" maxlength="15" required></td>
+                            <td colspan="2"><input type="password" name="checkPwd" id="checkPwd"class="form-control form-control-sm"name="checkPwd" maxlength="15" required></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -146,7 +147,7 @@
                         </tr>
                         <tr>
                             <td> 이메일</td>
-                            <td><input type="email" name="email" class="form-control form-control-sm"></td>
+                            <td><input type="email" name="email" class="form-control form-control-sm" value="<%=email%>"></td>
                             <td><button type="button" class="btn btn-outline-success">중복확인</button></td>
                         </tr>
                         <tr>
@@ -164,15 +165,82 @@
                 
                     </table>
     
-                    <button type="submit" id="updateBtn" class="btn btn-success">수정</button>
+                    <button type="submit" onclick="validate();" id="updateBtn" class="btn btn-success" >수정</button>
                  </form>
 
             	</div>
-        
-           
+        			
         </div>
 
-
     </div>
+    <script>
+ 	 function validate(){
+         // 유효성 검사 :  이메일, 비밀번호일치, 닉네임
+         var userName = document.getElementById("userName");
+         var userPwd = document.getElementById("userPwd");
+         var userPwd2 = document.getElementById("checkPwd");
+    	 var email = document.getElementById("userEmail");
+         
+        
+         var pwd1 = /^[a-z\d!@#$%^&*]{5,15}$/i;  //특수문자(!@#$%^&*)
+         var name = /^[가-힣a-z\d]{5,12}$/;
+		 var email = /^[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-_.]?[0-9a-z])*.[a-z]{2,3}$/i;
+	
+         if(!name.test(userName.value)){
+             alert("닉네임을 정확하게 기입해주세요.");
+             userName.value ="";
+             userName.focus(); 
+
+             return false; 
+         }
+      
+         if(!pwd1.test(userPwd.value)){
+             alert("유효한 비밀번호를 입력하세요.");
+
+             userPwd.value ="";
+             userPwd.focus(); 
+             
+             return false; 
+         }
+         
+         
+         if(userPwd.value != userPwd2.value){
+             alert("동일한 비밀번호를 입력하세요!");
+             userPwd2.value = "";
+             userPwd2.focus(); 
+
+             return false; 
+         }
+         
+         if(!email.test(userEmail.value)){
+        	 alert("이메일을 다시 입력해주세요");
+       	     email.value = "";
+       	     email.focus ="";
+       		  return false; 
+         }
+         
+  	 }
+    
+    </script>
+    
+       <!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">정말 수정 하시겠습니까?</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			    
+			      <div class="modal-footer">
+			      
+			        <button type="button" class="btn btn-success">수정하기</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		<!-- Modal -->
 </body>
 </html>
