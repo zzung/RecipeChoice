@@ -3,6 +3,7 @@ package com.kh.admin.contact.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +38,8 @@ public class ContactListServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		
-		request.getRequestDispatcher("views/contact/contactList.jsp").forward(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("views/contact/contactList.jsp");
+		view.forward(request, response);
 	}
 
 	/**

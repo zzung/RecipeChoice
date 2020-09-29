@@ -1,6 +1,6 @@
 package com.kh.admin.contact.model.dao;
 
-import static com.kh.user.common.JDBCTemplate.close;
+import static com.kh.user.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class ContactDao {
 		
 		Statement stmt = null;
 		
-		ResultSet rset = null;
+		ResultSet rs = null;
 		
 		String sql = prop.getProperty("selectContactList");
 		
@@ -43,20 +43,20 @@ public class ContactDao {
 			
 			stmt = conn.createStatement(); //완성된 sql??
 			
-			rset = stmt.executeQuery(sql);//sql문 전달하면서 실행 그래서 완성형태여야함
+			rs = stmt.executeQuery(sql);//sql문 전달하면서 실행 그래서 완성형태여야함
 			
-			while(rset.next()) {//매개변수이용
-				list.add(new Contact(rset.getInt("con_no"),
-									 rset.getString("con_type"),
-								     rset.getString("con_title"),
-								     rset.getString("mem_id"),
-								     rset.getDate("con_date")));
+			while(rs.next()) {//매개변수이용
+				list.add(new Contact(rs.getInt("con_no"),
+									 rs.getString("con_type"),
+								     rs.getString("con_title"),
+								     rs.getString("mem_id"),
+								     rs.getDate("con_date")));
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close(rset);
+			close(rs);
 			close(stmt);
 		}
 		
