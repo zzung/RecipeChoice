@@ -201,10 +201,10 @@
   			success:function(count){
   				if(count == "fail"){
   				
-  					$("#checkName").text("이미 존재하는 닉네임입니다.").css("color","red","font-size","9.5px;");
+  					$("#checkName").text("이미 존재하는 닉네임입니다.").css("color","red","font-size","9px;");
   					$userId.focus();
   				}else{
-  					$("#checkName").text("사용 가능한 닉네임 입니다.").css("color","yellowgreen", "font-size","9.5px");
+  					$("#checkName").text("사용 가능한 닉네임 입니다.").css("color","green").css("font-size","9px;");
   					$userId.attr("readonly", true);
   				}
   			}, error:function(){
