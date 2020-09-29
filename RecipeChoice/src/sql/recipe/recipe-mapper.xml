@@ -71,14 +71,18 @@
 	</entry>
 	
 	<entry key="selectRecipeList">
-		SELECT
-	       RCP_NO
-	     , MEM_NAME
-	     , RCP_TITLE
-	     , RCP_CONTENT
-	     , RCP_PIC
-	 FROM RECIPE
-	WHERE RCP_NO = ?
-	  AND STATUS = 'Y'
-	</entry>
+		<![CDATA[SELECT *
+		  FROM (
+		  		SELECT
+		               RCP_NO
+		             , MEM_NAME
+		             , RCP_TITLE
+		             , RCP_CONTENT
+		             , RCP_PIC
+		         FROM RECIPE
+		        WHERE STATUS='Y'
+		        ORDER BY DBMS_RANDOM.RANDOM
+		        )
+		  WHERE ROWNUM < 5]]>
+	 </entry>
 </properties>

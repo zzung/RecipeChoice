@@ -1,11 +1,16 @@
 package com.kh.user.recipe.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.user.recipe.model.service.RecipeService;
+import com.kh.user.recipe.model.vo.IngredientList;
 
 /**
  * Servlet implementation class RecipeContentServlet
@@ -28,6 +33,13 @@ public class RecipeContentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+		ArrayList<IngredientList> ingredient = new RecipeService().recipeDetailList(); 
+		
+		request.setAttribute("ingredient", ingredient);
+		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response); 
+		
+		
+		
 		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response);
 	}
 

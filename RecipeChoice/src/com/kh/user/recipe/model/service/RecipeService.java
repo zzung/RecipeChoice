@@ -39,13 +39,13 @@ public class RecipeService {
 		return result1*result2*result3;
 	}// e.insertRecipe
 		
-		public Recipe selectRecipeList(int rcpNo) {
+		public ArrayList<Recipe> selectRecipeList() {
 			Connection conn = getConnection();
 			
-			Recipe r = new RecipeDao().selectRecipeList(conn, rcpNo);
+			ArrayList<Recipe> list = new RecipeDao().selectRecipeList(conn);
 			
 			close(conn); 
 			
-			return r; 
-		}
+			return list; 
+		}//e. selectRecipeList
 }

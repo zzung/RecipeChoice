@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.kh.user.recipe.model.vo.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%
+	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -174,16 +179,18 @@
 			<br><br>
 			<!--썸네일-->
 				<!-- 반복문 -->
-				<div class="thumbnail" align="center">
-					<input type="hidden" name="rcp_no">
-						<img src="" width="200px" height="150px" />
+				<%for(Recipe r : list){ %>
+				<div class="thumbnail" align="center" style="width:200px; height:300px">
+					<input type="hidden" name="<%=r.getRcpNo()%>">
+						<img src="<%=contextPath %>/resources/recipe_upfiles/<%=r.getRcpPic() %>" width="200px" height="150px" />
 					<br />
 					<div class="w3-container w3-border-bottom w3-border-teamColor">
-						레시피 제목입니다. <br /> 
-						<small>간단한설명</small>
+						"<%=r.getRcpContent() %>" <br /> <br>
+						<small><p style="font-style:italic"><%=r.getRcpTitle() %></p></small>
 					</div>
-					<p align="left">사용자닉네임</p>
+					<p align="left"><%=r.getMemName() %></p>
 				</div>
+				<%} %>
 				<script>
 					$(function(){
 						$(".thumbnail").click(function(){

@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -120,35 +121,33 @@ public class RecipeDao {
 		return result3;
 	}// e.insertCookDetail
 	
-	public Recipe selectRecipeList(Connection conn, int rcpNo) {
-		Recipe r = null;
+	public ArrayList<Recipe> selectRecipeList(Connection conn) {	
+		ArrayList<Recipe> list = new ArrayList<>(); 
 		
-		PreparedStatement pstmt = null;
+		Statement stmt = null; 
 		ResultSet rs = null;
 		
 		String sql = prop.getProperty("selectRecipeList");
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
 			
-			pstmt.setInt(1, rcpNo);
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				r = new Recipe(rs.getInt("RCP_NO"),
-							   rs.getString("MEM_NAME"),
-							   rs.getString("RCP_TITLE"),
-							   rs.getString("RCP_CONTENT"),
-							   rs.getString("RCP_PIC"));
+				while(rs.next()) {
+				list.add(new Recipe(rs.getInt("RCP_NO"),
+									rs.getString("MEM_NAME"),
+									rs.getString("RCP_TITLE"),
+									rs.getString("RCP_CONTENT"),
+									rs.getString("RCP_PIC")));
+		
+				
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(pstmt);
+			close(stmt);
 		}
-		return r; 
+		return list; 
 	}
 }

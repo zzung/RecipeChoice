@@ -1,6 +1,7 @@
 package com.kh.user.recipe.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,34 +19,40 @@ import com.kh.user.recipe.model.vo.Recipe;
 @WebServlet("/recipeView.rp")
 public class RecipeMainViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RecipeMainViewServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
-		
-		int rcpNo = Integer.parseInt(request.getParameter("rcpNo")); 
-		
-		Recipe r = new RecipeService().selectRecipeList(rcpNo); 
-	
-		RequestDispatcher view = request.getRequestDispatcher("views/recipe/recipeMainView.jsp");
-		view.forward(request, response);
+	public RecipeMainViewServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
+	
+		ArrayList<Recipe> list = new RecipeService().selectRecipeList();
+		
+
+			request.setAttribute("list", list);
+			
+			RequestDispatcher view = request.getRequestDispatcher("views/recipe/recipeMainView.jsp");
+			view.forward(request, response);
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
