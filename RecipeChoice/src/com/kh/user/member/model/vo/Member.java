@@ -25,7 +25,7 @@ public class Member {
 		this.email = email;
 	}
 
-	public Member(int userNo, String memId, String memPwd, String mem_name, String email, Date enrollDate, String status) {
+	public Member(int userNo, String memId, String memPwd, String memName, String email, Date enrollDate, String status) {
 		this.userNo = userNo;
 		this.memId = memId;
 		this.memPwd = memPwd;

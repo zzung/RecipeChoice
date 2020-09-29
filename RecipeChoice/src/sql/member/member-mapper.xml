@@ -51,6 +51,13 @@
 		 WHERE MEM_NAME = ?
 	
 	</entry>
+	<entry key="emailCheck">
+		SELECT
+		       COUNT(*)
+		  FROM MEMBER
+		 WHERE EMAIL = ?
+	
+	</entry>
 	<entry key="selectMemberList">
 		SELECT
 		       M.USER_NO

@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <link rel="stylesheet" href="resources/css/subvar.css">
+
+ 
+  <link rel="stylesheet" href="resources/css/subvar.css">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
     
     <style>
    .table{
@@ -70,7 +71,7 @@
                         <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                         </svg> --> 
                     <p style="font-size:12.5px;"align="center"><b><%=userName%> 님<br>
-                        가입일 : <%=enrollDate %></b></p>
+                     	   가입일 : <%=enrollDate %></b></p>
                     
                 </div>
                 <div class="memInfo">
@@ -112,8 +113,8 @@
                     <table id="updateFormTable">
                         <tr>
                             <td> 닉네임</td>
-                            <td><input type="text" class="form-control form-control-sm" name="userName" id="userName" maxlength="12" required value="<%=userName%>"></td>
-                            <td><button type="button" class="btn btn-outline-success">중복확인</button></td>
+                            <td><input type="text" class="form-control form-control-sm" name="userName" id="userName" maxlength="12" value="<%=userName%>"></td>
+                            <td><button type="button"  onclick="nameCheck();"class="btn btn-outline-success">중복확인</button></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -148,7 +149,7 @@
                         <tr>
                             <td> 이메일</td>
                             <td><input type="email" name="email" class="form-control form-control-sm" value="<%=email%>"></td>
-                            <td><button type="button" class="btn btn-outline-success">중복확인</button></td>
+                            <td><button type="button" onclick="emailCheck();" class="btn btn-outline-success">중복확인</button></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -184,12 +185,33 @@
 	  			data:{checkName:$userName.val()},
 	  			success:function(count){
 	  				if(count == "fail"){
+	  					alert("이미 존재 하는 닉네임입니다.")
+	  					$userName.focus().setCursorPosition(last);
 	  				
-	  					$("#checkName").text("이미 존재하는 닉네임입니다.").css("color","red","font-size","9.5px;");
-	  					$userId.focus();
 	  				}else{
-	  					$("#checkName").text("사용 가능한 닉네임 입니다.").css("color","yellowgreen", "font-size","9.5px");
-	  					$userId.attr("readonly", true);
+	  				
+	  				}
+	  			}, error:function(){
+	  				console.log("ajax 통신 실패 !");
+	  			}
+	  			
+	  		});
+	  		
+	  	}
+		function emailCheck(){
+	  		var $email = $("#updateFormTable input[name=email]");
+	  		
+	  		$.ajax({
+	  			url:"<%=contextPath%>/emailCheck.me",
+	  			type:"get",
+	  			data:{checkEmail:$email.val()},
+	  			success:function(count){
+	  				if(count == "fail"){
+	  					alert("이미 존재 하는 이메일입니다.")
+	  					$email.focus();
+	  				
+	  				}else{
+	  				
 	  				}
 	  			}, error:function(){
 	  				console.log("ajax 통신 실패 !");
@@ -208,7 +230,7 @@
          
         
          var pwd1 = /^[a-z\d!@#$%^&*]{5,15}$/i;  //특수문자(!@#$%^&*)
-         var name = /^[가-힣a-z\d]{5,12}$/;
+         var name = /^[가-힣a-z\d]{3,12}$/;
 		 var email = /^[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-_.]?[0-9a-z])*.[a-z]{2,3}$/i;
 	
          if(!name.test(userName.value)){

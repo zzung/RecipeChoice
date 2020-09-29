@@ -74,6 +74,16 @@ public class MemberService {
 		return count;
 	}
 	
+	public int emailCheck(String email) {
+		
+		Connection conn = getConnection();
+		
+		int count = new MemberDao().emailCheck(conn,email);
+		
+		close(conn);
+		return count;
+	}
+	
 	// 관리자 페이지에서 전체 회원 조회하기
 	public ArrayList<Member> selectMemberList() {
 

@@ -65,7 +65,7 @@ public class MemberDao {
 			close(rs);
 			close(pstmt);
 		}
-		
+	
 		return m;
 	}
 	public int insertMember(Connection conn, Member m) {
@@ -138,6 +138,36 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, checkName);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return count;
+		
+		
+	}
+	public int emailCheck(Connection conn, String email) {
+		// select문 
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		 
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("emailCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
