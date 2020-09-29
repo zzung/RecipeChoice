@@ -205,7 +205,7 @@
                 </script>
                 <br>
            		<!-- 로그인한 회원만 글작성이 보여짐,,관리자x -->
-                <% if(loginUser != null && !(loginUser.getMemId().equals("admin"))){ %>
+                <% if(loginUser != null ){ %>
                 <div id="content_3" align="right" style="width:710px;">
                 <button onclick="location.href='<%=contextPath%>/contact.en';">글작성</button>
                 <!--  <a href="<%=contextPath%>/enrollForm.co %>" class="btn btn-secondary">글작성</a>-->

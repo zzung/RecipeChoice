@@ -51,7 +51,7 @@ public class ReportDao {
 		
 		Statement stmt = null;
 		
-		ResultSet rset = null;
+		ResultSet rs = null;
 		
 		String sql = prop.getProperty("selectReportList");
 		
@@ -63,7 +63,12 @@ public class ReportDao {
 			rs = stmt.executeQuery(sql); 
 			
 			while(rs.next()) {
-				list.add(new Report(re.getInt))
+				list.add(new Report(re.getInt()
+									re.getString()
+									re.getString(),
+									re.getString(),
+									));
+									
 			}
 			
 		} catch (SQLException e) {
