@@ -51,4 +51,53 @@
 		 WHERE MEM_NAME = ?
 	
 	</entry>
+	<entry key="selectMemberList">
+		SELECT
+		       M.USER_NO
+		     , MEM_ID
+		     , MEM_PWD
+		     , MEM_NAME
+		     , EMAIL
+		     , MEM_PIC
+		     , ENROLL_DATE
+		     , MEM_REP_COUNT
+		     , M.STATUS
+		     , (SELECT COUNT(*) FROM BOARD WHERE USER_NO = M.USER_NO) BOARD_COUNT
+		  FROM
+		       MEMBER M
+		 WHERE NOT USER_NO=1
+	</entry>
+	<entry key="selectBlackList">
+		SELECT
+		       M.USER_NO
+		     , MEM_ID
+		     , MEM_PWD
+		     , MEM_NAME
+		     , EMAIL
+		     , MEM_PIC
+		     , ENROLL_DATE
+		     , MEM_REP_COUNT
+		     , M.STATUS
+		     , (SELECT COUNT(*) FROM BOARD WHERE USER_NO = M.USER_NO) BOARD_COUNT
+		  FROM
+		       MEMBER M
+		 WHERE NOT USER_NO=1
+		   AND M.STATUS = 'B'
+	</entry>
+	<entry key="selectMember">
+		SELECT
+		       M.USER_NO
+		     , MEM_ID
+		     , MEM_PWD
+		     , MEM_NAME
+		     , EMAIL
+		     , MEM_PIC
+		     , ENROLL_DATE
+		     , MEM_REP_COUNT
+		     , M.STATUS
+		     , (SELECT COUNT(*) FROM BOARD WHERE USER_NO = M.USER_NO) BOARD_COUNT
+		  FROM
+		       MEMBER M
+		 WHERE M.USER_NO = ?
+	</entry>
 </properties>

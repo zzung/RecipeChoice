@@ -53,52 +53,33 @@ div{
 	}
 	#menu_2{cursor: pointer;}
 	#menu_2:hover{color: rgb(39, 174, 96);}
-    .tb1{border-collapse: collapse;}
+    .tb1{border-collapse: collapse; margin: 10px; width: 700px; text-align: center;}
     tr{
-        box-sizing: border-box;
-        border-radius: 10px;
         border: 1px solid lightgray;
-        float: left;
-        width: 95%;
-        height: 40px;
-        margin: 5px;
-        
+        border-radius: 10px;
+       line-height: 40px;
+       cursor: pointer;
+       margin-top: 8px;
+       float: left;
+       height: 40px;
     }
-   	.tb1 td:first-child{
-        font-weight: bolder;
-        line-height: 20px;
-        padding: 5px;
-        text-align: center;
-    }
-   
-    .tb1 td{
-		line-height: 40px;
-        padding-left: 40px;
-    }
-    .tb1 td:last-child{
-        padding-left: 400px;
-        padding-right: 10px;
-    }
-    .notice-normal{
-    	line-height: 20px;
-        padding: 5px;
-        font-weight: bolder;
-    	font-size: 15px;
-		margin-top: 10px;
-		padding-left: 20px;
-    } 
-    .notice-important{
-        background: orangered;
-        color: white;
+    tr:hover{background: rgb(243, 243, 243)}
+    .tb1 td:first-child{
         font-size: 12px;
         font-weight: bolder;
-        line-height: 10px;
-        border-radius: 10px;
-        float: left;
-        margin: 5px 5px 5px 5px;
     }
-    tr {cursor: pointer;}
-    tr:hover{background: rgb(243, 243, 243)}
+    #important{
+        background-color: orangered;
+        border: 1px solid orangered;
+        color: white;
+        height: 30px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: bolder;
+       	margin-top: 2px;
+       	line-height: 15px;
+    }
+
     
     .pagination {
 		display: inline-block;
@@ -135,7 +116,7 @@ div{
         <div id="content">
             <div id="content_1">
                 <div id="menu_1">고객센터</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/notice.no'">&nbsp;&nbsp;공지사항</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/notice.no'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;공지사항</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;FAQ</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;1:1 문의</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;개인정보취급방침</div>
@@ -148,22 +129,29 @@ div{
             </div>
             <div id="content_2">
                 
-                <h4>&nbsp;&nbsp;&nbsp;&nbsp;츄레 공지사항 <img src="resources/image/admin/noticeEmo.png" style="width: 40px; height: 40px;"></h4>
+                <p style="font-size:18px; font-weight: bolder;">
+                	&nbsp;&nbsp;츄레 공지사항
+                	<img src="resources/image/admin/noticeEmo.png" style="width: 40px; height: 40px;">
+                </p>
                 <hr>
+                
                 <table class="tb1">
                 	<% if(noticeList.isEmpty()) { %>
                 	<tr>
-                		<td></td>
-                		<td colspan="2"> 공지사항이 없습니다. </td>
+                		<td colspan="3" width="700px"> 공지사항이 없습니다. </td>
                 	</tr>
                 	<%} else{ %>
 	                	<% for (Notice n : noticeList) { %>
 	                    <tr>
-                        	<td><%= n.getNoticeNo() %></td>
-	                        <td><%= n.getNoticeTitle() %></td>
-	                        <td><%= n.getNoticeDate() %></td>
-	                    <% } %>
+	                    	<% if(n.getNoticeImportant().equals("Y")){ %>
+	                    	<td width="55px"><button id="important">공지</button></td>
+	                    	<% } else{ %>
+                        	<td width="55px"><%= n.getNoticeNo() %></td>
+                        	<% } %>
+	                        <td width="500px"><%= n.getNoticeTitle() %></td>
+	                        <td width="145px"><%= n.getNoticeDate() %></td>
 	                    </tr>
+	                    <% } %>
 	                <% } %>
                 </table>
 				
@@ -186,21 +174,16 @@ div{
 
         <script>
             $(function(){
-                <%-- 중요 공지사항 일때 --%>
-                $('.tb1 td:nth-child(1)').addClass( 'notice-important' ); 
-            
-                <%-- 일반 공지사항일때 --%>
-                $('.tb1 td:nth-child(1)').addClass( 'notice-normal' );
-
                 <%-- 제목 클릭시 상세페이지로 이동--%>
 	            $(".tb1 tr").click(function(){
 	            	var nno = $(this).children().eq(0).text();
 	            	location.href = "<%= contextPath %>/noticeDetail.no?nno="+ nno;
 	            	console.log(nno);
 	            });
+	            <%-- 중요공지사항일때 상세페이지 주소'nno=공지' 로 넘어가는거 수정 --%>
            
             });
-
+            
             
             
         </script>

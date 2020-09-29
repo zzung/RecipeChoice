@@ -5,6 +5,7 @@ import static com.kh.user.common.JDBCTemplate.getConnection;
 import static com.kh.user.common.JDBCTemplate.rollBack;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.user.member.model.dao.MemberDao;
 import com.kh.user.member.model.vo.Member;
@@ -71,5 +72,35 @@ public class MemberService {
 		
 		close(conn);
 		return count;
+	}
+	
+	// 관리자 페이지에서 전체 회원 조회하기
+	public ArrayList<Member> selectMemberList() {
+
+		Connection conn = getConnection();
+		ArrayList<Member> memberList = new MemberDao().selectMemberList(conn);
+		close(conn);
+		
+		return memberList;
+	}
+	
+	// 관리자 페이지에서 블랙리스트 조회하기
+	public ArrayList<Member> selectBlackList() {
+
+		Connection conn = getConnection();
+		ArrayList<Member> blackList = new MemberDao().selectBlackList(conn);
+		close(conn);
+		
+		return blackList;
+	}
+	
+	// 관리자 페이지에서 회원 상세조회
+	public Member selectMember(int userNo) {
+
+		Connection conn = getConnection();
+		Member m = new MemberDao().selectMember(conn, userNo);
+		close(conn);
+		
+		return m;
 	}
 }

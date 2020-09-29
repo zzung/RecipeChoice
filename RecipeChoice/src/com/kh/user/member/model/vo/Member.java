@@ -9,9 +9,13 @@ public class Member {
 	private String memPwd;
 	private String memName; 	// 닉네임
 	private String email;		// 이메일
-	private Date enrollDate;		// 회원가입일
-	private String status;			// 상태값(y/n) 탈퇴, 정상
+	private String memPic;		// 마이페이지 사진
+	private Date enrollDate;	// 회원가입일
+	private int memReportCount; // 신고받은횟수
+	private String status;		// 상태값(y/n) 탈퇴, 정상
+	private int boardCount;		// 올린 게시글 수
 	
+	public Member() {}
 	
 	public Member(String memId, String memPwd, String memName, String email) {
 		super();
@@ -21,8 +25,46 @@ public class Member {
 		this.email = email;
 	}
 
-	public Member() {}
+	public Member(int userNo, String memId, String memPwd, String mem_name, String email, Date enrollDate, String status) {
+		this.userNo = userNo;
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.email = email;
+		this.enrollDate = enrollDate;
+		this.status = status;
+	}
 	
+	public Member(int userNo, String memId, String memPwd, String memName, String email, String memPic, Date enrollDate,
+			int memReportCount, String status) {
+		super();
+		this.userNo = userNo;
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.email = email;
+		this.memPic = memPic;
+		this.enrollDate = enrollDate;
+		this.memReportCount = memReportCount;
+		this.status = status;
+	}
+	
+
+	public Member(int userNo, String memId, String memPwd, String memName, String email, String memPic, Date enrollDate,
+			int memReportCount, String status, int boardCount) {
+		super();
+		this.userNo = userNo;
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.email = email;
+		this.memPic = memPic;
+		this.enrollDate = enrollDate;
+		this.memReportCount = memReportCount;
+		this.status = status;
+		this.boardCount = boardCount;
+	}
+
 	public int getUserNo() {
 		return userNo;
 	}
@@ -78,19 +120,30 @@ public class Member {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public Member(int userNo, String memId, String memPwd, String memName, String email, Date enrollDate,
-			String status) {
-		super();
-		this.userNo = userNo;
-		this.memId = memId;
-		this.memPwd = memPwd;
-		this.memName = memName;
-		this.email = email;
-		this.enrollDate = enrollDate;
-		this.status = status;
+	
+	public String getMemPic() {
+		return memPic;
 	}
 
+	public void setMemPic(String memPic) {
+		this.memPic = memPic;
+	}
+
+	public int getMemReportCount() {
+		return memReportCount;
+	}
+
+	public void setMemReportCount(int memReportCount) {
+		this.memReportCount = memReportCount;
+	}
+
+	public int getBoardCount() {
+		return boardCount;
+	}
+
+	public void setBoardCount(int boardCount) {
+		this.boardCount = boardCount;
+	}
 
 	@Override
 	public String toString() {
