@@ -4,6 +4,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%
 	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
+	Count ct = (Count)request.getAttribute("ct");
 %>
 <!DOCTYPE html>
 <html>
@@ -163,7 +164,7 @@
 			<!--검색후 보여질 결과(if문처리)-->
 			<div align="center">
 				<p>
-					<b style="color: rgb(39, 174, 96)"><big>총 126개</big></b>
+					<b style="color: rgb(39, 174, 96)"><big>총 <%=ct.getTotalCount() %>개</big></b>
 					의 레시피가 검색되었습니다.
 				</p>
 			</div>

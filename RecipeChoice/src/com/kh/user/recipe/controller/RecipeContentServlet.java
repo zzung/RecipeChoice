@@ -33,7 +33,9 @@ public class RecipeContentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		ArrayList<IngredientList> ingredient = new RecipeService().recipeDetailList(); 
+		
+		ArrayList<Recipe> recipe = new RecipeService().
+		ArrayList<IngredientList> ingredient = new RecipeService().selectRecipeDetailList(); 
 		
 		request.setAttribute("ingredient", ingredient);
 		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response); 

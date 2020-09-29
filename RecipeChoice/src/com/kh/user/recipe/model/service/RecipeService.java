@@ -48,4 +48,14 @@ public class RecipeService {
 			
 			return list; 
 		}//e. selectRecipeList
+		
+		public int totalCount() {
+			Connection conn = getConnection();
+			
+			int totalCount = new RecipeDao().totalCount(conn);
+			
+			close(conn);
+			
+			return totalCount; 
+		}
 }

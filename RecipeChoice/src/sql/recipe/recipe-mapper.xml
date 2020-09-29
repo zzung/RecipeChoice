@@ -85,4 +85,10 @@
 		        )
 		  WHERE ROWNUM < 5]]>
 	 </entry>
+	 
+	 <entry key="totalCount">
+		SELECT COUNT(RCP_NO) TOTAL
+		  FROM RECIPE
+		 WHERE STATUS = 'Y'
+	 </entry>
 </properties>

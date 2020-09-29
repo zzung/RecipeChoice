@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.user.recipe.model.service.RecipeService;
+import com.kh.user.recipe.model.vo.Count;
 import com.kh.user.recipe.model.vo.Recipe;
 
 /**
@@ -36,14 +37,20 @@ public class RecipeMainViewServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-	
-		ArrayList<Recipe> list = new RecipeService().selectRecipeList();
 		
+		
+		int totalCount = new RecipeService().totalCount();
+		
+		Count ct = new Count(totalCount);
 
-			request.setAttribute("list", list);
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/recipe/recipeMainView.jsp");
-			view.forward(request, response);
+
+		ArrayList<Recipe> list = new RecipeService().selectRecipeList();
+		request.setAttribute("list", list);
+		request.setAttribute("ct", ct); 
+
+
+		RequestDispatcher view = request.getRequestDispatcher("views/recipe/recipeMainView.jsp");
+		view.forward(request, response);
 
 	}
 

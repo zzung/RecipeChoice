@@ -149,5 +149,31 @@ public class RecipeDao {
 			close(stmt);
 		}
 		return list; 
+	}//e.ArrayList<Recipe>
+	
+	public int totalCount(Connection conn) {
+		int totalCount = 0; 
+		
+		Statement stmt = null;
+		ResultSet rs = null; 
+		
+		String sql = prop.getProperty("totalCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				totalCount = rs.getInt("TOTAL");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return totalCount; 
 	}
+	
 }

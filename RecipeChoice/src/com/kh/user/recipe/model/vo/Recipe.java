@@ -20,6 +20,7 @@ public class Recipe {
 	private String status;
 	private String rcpType;
 	
+	
 	public Recipe() {}
 
 	public Recipe(int rcpNo, int userNo, String memName, String rcpTitle, String rcpDishType, String rcpTag,
@@ -163,7 +164,7 @@ public class Recipe {
 	public void setRcpType(String rcpType) {
 		this.rcpType = rcpType;
 	}
-	
+
 	
 }
 	
