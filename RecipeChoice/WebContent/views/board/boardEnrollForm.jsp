@@ -156,7 +156,7 @@
 	                height: 400,
 	                callbacks: {
 		                onImageUpload: function(files, editor) {
-		                    sendFile(files[0], this);
+		                    sendFile(files, this);
 		                },
 			        	onPaste: function (e) {
 							var clipboardData = e.originalEvent.clipboardData;
@@ -174,11 +174,13 @@
 	        	$("#summernote").summernote('code', '<%= b.getBoardContent() %>');
 	        	<% } %>
 	        	
-	        	function sendFile(file, editor) {
+	        	function sendFile(files, editor) {
 	        		
 	        		console.log("작동");
 	        		data = new FormData();
-	    	 	    data.append("uploadFile", file);
+	        		for (var i = 0, max = files.length; i < max; i++) {
+						data.append("file" + (i + 1), files[i]);						
+					}
 	                $.ajax({
 	                    url: "editorImageUpload.bo",
 	                    data: data,
@@ -186,9 +188,10 @@
 	                    cache: false,
 	                    contentType: false,
 	                    processData: false,
-	                    success: function(url) {
-	                    	console.log(url);
-	                    	$(editor).summernote('editor.insertImage', url);
+	                    success: function(urlList) {
+	                    	for (var i = 0, max = urlList.length; i < max; i++) {
+	                    		$(editor).summernote('editor.insertImage', urlList[i]);
+	    					}
 	                    },
 	                    error: function() {
 	                    	console.log("통신 실패");

@@ -1,6 +1,7 @@
 package com.kh.user.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.kh.user.common.MyFileRenamePolicy;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -39,12 +42,19 @@ public class EditorImageUploadServlet extends HttpServlet {
 		MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8", new MyFileRenamePolicy());
 		@SuppressWarnings("rawtypes")
 		Enumeration files = multi.getFileNames();
-		String file = (String)files.nextElement(); 
-		fileName = multi.getFilesystemName(file); 
 		
-		uploadPath = "resources/image/board/" + fileName;
+		ArrayList<String> urlList = new ArrayList<String>();
 		
-		response.getWriter().print(uploadPath);
+		while(files.hasMoreElements()) {
+			String file = (String)files.nextElement(); 
+			fileName = multi.getFilesystemName(file); 
+			urlList.add("resources/image/board/" + fileName);
+		}
+		
+		Gson gson = new Gson();
+		
+		response.setContentType("application/json; charset=utf-8");
+		response.getWriter().print(gson.toJson(urlList));
 		
 	}
 

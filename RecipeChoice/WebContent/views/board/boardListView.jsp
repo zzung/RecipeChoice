@@ -156,12 +156,6 @@
     </style>
     <script>
     	$(function () {
-    		var alertMsg = "<%= alertMsg %>";
-    		
-    		if(alertMsg != "null") {
-    			alert(alertMsg);
-    			alertMsg = "null";
-    		}
     		
     		$("#orderType").children().each(function () {
    				var order = "<%= pi.getOrder() %>";
