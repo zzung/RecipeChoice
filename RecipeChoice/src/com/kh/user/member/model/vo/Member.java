@@ -12,11 +12,32 @@ public class Member {
 	private String memPic;		// 마이페이지 사진
 	private Date enrollDate;	// 회원가입일
 	private int memReportCount; // 신고받은횟수
-	private String status;		// 상태값(y/n) 탈퇴, 정상
+	private String status;		// 상태값(y/n/b) 탈퇴, 정상
 	private int boardCount;		// 올린 게시글 수
 	
 	public Member() {}
 	
+
+	public Member(String memId, String memPwd, String memName, String email, String memPic, Date enrollDate) {
+		super();
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.email = email;
+		this.memPic = memPic;
+		this.enrollDate = enrollDate;
+	}
+	
+	public Member(String memId, String memPwd, String memName, String email, String memPic) {
+		super();
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.email = email;
+		this.memPic = memPic;
+	}
+
+
 	public Member(String memId, String memPwd, String memName, String email) {
 		super();
 		this.memId = memId;
@@ -24,6 +45,17 @@ public class Member {
 		this.memName = memName;
 		this.email = email;
 	}
+
+	// 이미지 없는 회원 조회
+	public Member(String memId, String memPwd, String memName, String email, Date enrollDate) {
+		super();
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.email = email;
+		this.enrollDate = enrollDate;
+	}
+
 
 	public Member(int userNo, String memId, String memPwd, String memName, String email, Date enrollDate, String status) {
 		this.userNo = userNo;

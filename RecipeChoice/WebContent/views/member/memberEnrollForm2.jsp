@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
 <style>
 
 	.wrap{
@@ -171,10 +170,11 @@
 	                    <tr>
 	                        <td> 이메일</td>
 	                        <td><input type="email" id="email"name="email" placeholder="이메일을 입력해주세요"></td>
-	                        <td><button type="button" class="btn btn-success">중복확인</button></td>
+	                        <td><button type="button" onclick="emailCheck();" class="btn btn-success">중복확인</button></td>
 	                    </tr>
 	                     <tr>
-	                    	<td colspan="3"></td>
+	                     	<td></td>
+	                    	<td colspan="2" id="checkEmail"></td>
 	                    </tr>
 	                  
 	            
@@ -201,10 +201,10 @@
   			success:function(count){
   				if(count == "fail"){
   				
-  					$("#checkName").text("이미 존재하는 닉네임입니다.").css("color","red","font-size","9px;");
+  					$("#checkName").text("이미 존재하는 닉네임입니다.").css("color","red").css("font-size","13px");
   					$userId.focus();
   				}else{
-  					$("#checkName").text("사용 가능한 닉네임 입니다.").css("color","green").css("font-size","9px;");
+  					$("#checkName").text("사용 가능한 닉네임 입니다.").css("color","lightgreen").css("font-size","13px");
   					$userId.attr("readonly", true);
   				}
   			}, error:function(){
@@ -227,10 +227,10 @@
   			success:function(result){
   				if(result == "fail"){
   				
-  					$("#checkId").text("이미 존재하는 아이디 입니다.").css("color","red","font-size","10px;");
+  					$("#checkId").text("이미 존재하는 아이디 입니다.").css("color","red").css("font-size","13px");
   					$userId.focus();
   				}else{
-  					$("#checkId").text("사용가능한 아이디 입니다.").css("color","yellowgreen", "font-size","10px");
+  					$("#checkId").text("사용가능한 아이디 입니다.").css("color","lightgreen").css("font-size","13px");
   					$userId.attr("readonly", true);
   				}
   			}, error:function(){
@@ -239,6 +239,29 @@
   			
   		});
   	}
+  	function emailCheck(){
+  		var $email = $("#enrollFormTable input[name=email]");
+  		
+  		$.ajax({
+  			url:"<%=contextPath%>/emailCheck.me",
+  			type:"get",
+  			data:{checkEmail:$email.val()},
+  			success:function(count){
+  				if(count == "fail"){
+  					$("#checkEmail").text("이미 존재하는 이메일 입니다.").css("color","red").css("font-size","13px");
+  					$userId.focus();
+  				}else{
+  					$("#checkEmail").text("사용가능한 이메일 입니다.").css("color","lightgreen").css("font-size","13px");
+  					$userId.attr("readonly", true);
+  				}
+  			}, error:function(){
+  				console.log("ajax 통신 실패 !");
+  			}
+  			
+  		});
+  		
+  	}
+  	
   	
   	 function validate(){
          // 유효성 검사 : 아이디, 비밀번호, 비밀번호일치, 이름 

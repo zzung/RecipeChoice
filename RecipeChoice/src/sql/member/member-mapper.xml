@@ -107,4 +107,26 @@
 		       MEMBER M
 		 WHERE M.USER_NO = ?
 	</entry>
+	<entry key="updateMember">
+		UPDATE  /* com.kh.member.model.dao.MemberDao#selectMember() */
+	           MEMBER 
+	       SET MEM_PWD= ?
+	         , MEM_NAME= ?
+	         , EMAIL = ?
+	         , MEM_PIC = ?
+	     WHERE MEM_ID = ?
+	</entry>
+	<entry key="selectUpdateMember">
+		SELECT
+		       MEM_ID
+		     , MEM_PWD
+		     , MEM_NAME
+		     , EMAIL
+		     , MEM_PIC
+		 
+		  FROM
+		       MEMBER 
+		 WHERE MEM_ID = ?
+	
+	</entry>
 </properties>

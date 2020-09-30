@@ -1,6 +1,9 @@
 package com.kh.user.member.model.service;
 
-import static com.kh.user.common.JDBCTemplate.*;
+import static com.kh.user.common.JDBCTemplate.close;
+import static com.kh.user.common.JDBCTemplate.commit;
+import static com.kh.user.common.JDBCTemplate.close;
+import static com.kh.user.common.JDBCTemplate.commit;
 import static com.kh.user.common.JDBCTemplate.getConnection;
 import static com.kh.user.common.JDBCTemplate.rollBack;
 
@@ -51,7 +54,7 @@ public class MemberService {
 	/**
 	 * 아이디 중복체크 
 	 * @param checkId
-	 * @return
+	 * @return count
 	 */
 	public int idCheck(String checkId) {
 		
@@ -62,7 +65,11 @@ public class MemberService {
 		close(conn);
 		return count;
 	}
-	
+	/**
+	 * 닉네임 중복체크
+	 * @param checkName
+	 * @return count
+	 */
 	public int nameCheck(String checkName) {
 		
 		Connection conn = getConnection();
@@ -72,7 +79,11 @@ public class MemberService {
 		close(conn);
 		return count;
 	}
-	
+	/**
+	 * 이메일 중복체크
+	 * @param email
+	 * @return count
+	 */
 	public int emailCheck(String email) {
 		
 		Connection conn = getConnection();
@@ -83,6 +94,33 @@ public class MemberService {
 		return count;
 	}
 	
-	
+	/**
+	 * 회원 정보 수정 
+	 * @param m 닉네임,아이디,비밀번호,이메일,(이미지파일)
+	 * @return
+	 */
+	public Member updateMember(Member m) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updateMember(conn,m);
+		
+		Member updateMem = null;
+		if(result > 0) { // update 성공했을경우
+			commit(conn);
+			
+			// 갱신된 회원 다시 조회해오기 
+			// 세션에 이전상태의 정보가 담겨있기 때문에!
+			updateMem = new MemberDao().selectUpdateMember(conn,m.getMemId());
+			
+		}else {// update실패했을 경우 
+			rollBack(conn);
+		}
+		
+		close(conn);
+		
+		return updateMem;  // 갱신된 회원객체 / null
+		
+	}
 	
 }
