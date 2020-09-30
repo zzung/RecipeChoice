@@ -181,8 +181,8 @@
 			<!--썸네일-->
 				<!-- 반복문 -->
 				<%for(Recipe r : list){ %>
-				<div class="thumbnail" align="center" style="width:200px; height:300px">
-					<input type="hidden" name="<%=r.getRcpNo()%>">
+				<div class="thumbnail" align="center" style="width:200px;">
+					<input type="hidden" name="rcpNo" value="<%=r.getRcpNo()%>">
 						<img src="<%=contextPath %>/resources/recipe_upfiles/<%=r.getRcpPic() %>" width="200px" height="150px" />
 					<br />
 					<div class="w3-container w3-border-bottom w3-border-teamColor">

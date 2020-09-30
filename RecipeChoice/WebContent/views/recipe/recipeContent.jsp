@@ -4,6 +4,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%
 	Recipe r = (Recipe)request.getAttribute("r");
+
+	String[] tagList = (String[])r.getRcpTag().split(",");
 %>
 <!DOCTYPE html>
 <html>
@@ -31,10 +33,10 @@
 			<table class="tb_Content">
 				<tr>
 					<td class="leftContent" align="center">
-					<img src="/<%=contextPath %>/recources/recipe_upfile/<%=r.getRcpPic() %>" id="titleImg" />
+					<img src="<%=contextPath %>/resources/recipe_upfiles/<%=r.getRcpPic() %>" id="titleImg" />
 					<br />
 						<div class="userImg">
-							<img src="/resources/image/logo/churro.png" id="userPic" style="width: 90px" /> 
+							<img src="resources/image/mypage/cat.jpg" id="userPic" style="width: 90px" /> 
 							<br /><br /> 
 							<span><%=r.getMemName() %></span>
 							<p id="recipeTitle"><%=r.getRcpTitle() %></p>
@@ -83,16 +85,9 @@
 							<table>
 								<tr>
 									<td>
-										<li>태그</li>
-										<li>태그</li>
-										<li>태크</li>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<li>태그</li>
-										<li>태그</li>
-										<li>태크</li>
+									<%for(int i=0; i<tagList.length; i++){ %>
+										<li><%=tagList[i] %></li>
+									<%} %>
 									</td>
 								</tr>
 							</table>

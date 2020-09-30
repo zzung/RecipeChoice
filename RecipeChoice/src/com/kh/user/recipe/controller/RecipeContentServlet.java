@@ -38,12 +38,13 @@ public class RecipeContentServlet extends HttpServlet {
 		
 		int rcpNo = Integer.parseInt(request.getParameter("rcpNo"));
 		Recipe r = new RecipeService().selectDetailRecipeList(rcpNo);
-		
-		//ArrayList<IngredientList> ingredient = new RecipeService().selectDetailIngList(rcpNo); 
+
+		ArrayList<IngredientList> ingredient = new RecipeService().selectDetailIngList(rcpNo); 
 		
 		//ArrayList<Cook> cook = new RecipeService().selectDetailCookList(rcpNo); 
 		
 		request.setAttribute("r", r );
+		request.setAttribute("ingredient", ingredient);
 		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response); 
 		
 	}

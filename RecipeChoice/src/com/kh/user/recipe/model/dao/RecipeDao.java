@@ -197,7 +197,7 @@ public class RecipeDao {
 								rs.getString("MEM_NAME"),
 								rs.getString("RCP_TITLE"),
 								rs.getString("RCP_DISH_TYPE"),
-								rs.getString("RCP_TAT"),
+								rs.getString("RCP_TAG"),
 								rs.getInt("RCP_TIME"),
 								rs.getString("RCP_CONTENT"),
 								rs.getString("RCP_PIC"),
@@ -216,5 +216,37 @@ public class RecipeDao {
 		return r; 
 		
 	}//e.selectDetailRecipeList
+	
+	public ArrayList<IngredientList> selectDetailIngList(Connection conn, int rcpNo){
+		
+		ArrayList<IngredientList> ingredient = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectDetailIngList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rcpNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ingredient.add(new IngredientList(rs.getInt("ING_NO"),
+												  rs.getInt("RCP_NO"),
+												  rs.getString("ING_DISH"),
+												  rs.getString("ING_METERING")
+												 ));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return ingredient; 
+	}
 	
 }

@@ -54,7 +54,7 @@ public class RecipeInsertServlet extends HttpServlet {
 					new MyFileRenamePolicy());
 
 			// 1.
-			int userNo = Integer.parseInt(multiRequest.getParameter("userNo")); //"1"
+			int userNo = Integer.parseInt(multiRequest.getParameter("userNo"));
 			String memName = multiRequest.getParameter("memName");
 			String rcpTitle = multiRequest.getParameter("title");
 			String rcpDishType = multiRequest.getParameter("dishType");
