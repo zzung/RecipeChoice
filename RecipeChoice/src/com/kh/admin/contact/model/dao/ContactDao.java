@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.admin.contact.model.vo.PageInfo;
 import com.kh.admin.contact.model.vo.Contact;
 
 public class ContactDao {
@@ -29,11 +30,43 @@ public class ContactDao {
 		}
 	}
 	
-	public ArrayList<Contact> selectContactList(Connection conn){
+	public int selectListCount(Connection conn) {
+		//select문 =>총 게시글 갯수(int)
+		int listCount = 0;
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			if(rs.next()) {
+				listCount = rs.getInt("LISTCOUNT");
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return listCount;
+		
+	}
+	
+	/**
+	 * 1:1 문의 전체 조회 리스트
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Contact> selectContactList(Connection conn, PageInfo pi){
 		//select문 => 여러행 조회
 		ArrayList<Contact> list = new ArrayList<>();
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		
 		ResultSet rs = null;
 		
@@ -41,9 +74,16 @@ public class ContactDao {
 		
 		try {
 			
-			stmt = conn.createStatement(); //완성된 sql??
+			pstmt = conn.prepareStatement(sql); 
 			
-			rs = stmt.executeQuery(sql);//sql문 전달하면서 실행 그래서 완성형태여야함
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			
+			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {//매개변수이용
 				list.add(new Contact(rs.getInt("con_no"),
@@ -57,11 +97,17 @@ public class ContactDao {
 			e.printStackTrace();
 		}finally {
 			close(rs);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return list;
 	}
+	/**
+	 * 
+	 * @param conn
+	 * @param c
+	 * @return
+	 */
 	public int insertContact(Connection conn, Contact c) {
 		//insert문 => 처리된 행 수
 		int result = 0;

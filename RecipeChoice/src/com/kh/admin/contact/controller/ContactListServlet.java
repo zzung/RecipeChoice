@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.contact.model.service.ContactService;
 import com.kh.admin.contact.model.vo.Contact;
+import com.kh.admin.contact.model.vo.PageInfo;
 
 /**
  * Servlet implementation class InquiryListServlet
@@ -34,14 +35,40 @@ public class ContactListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//페이징
-				int listCount; //현재 게시글 갯수
-				int currentPage; //현재 페이지 (요청 페이지)
-				int pageLimit; //한 페이지 하단에 보여질 페이지 최대 갯수
-				int boardLimit; // 한 페이지내에 보여질 게시글 최대갯수
-
+		int listCount; //현재 게시글 갯수
+		int currentPage; //현재 페이지 (요청 페이지)
+		int pageLimit; //한 페이지 하단에 보여질 페이지 최대 갯수
+		int boardLimit; // 한 페이지내에 보여질 게시글 최대갯수
 		
-		ArrayList<Contact> list = new ContactService().selectContactList();
+		int maxPage;  // 전체 페이지들 중 가장 마지막 페이지
+		int startPage; // 현재 페이지에 하단에 보여질 페이징 바의 시작 수
+		int endPage; // 현재 페이지에 하단에 보여질 페이징 바의 끝 수
 		
+		listCount = new ContactService().selectListCount(); //총 게시글 갯수
+		
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		pageLimit = 10;
+		
+		boardLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
+		//페이징 정보 한 공간 담아서 보냄
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		
+		ArrayList<Contact> list = new ContactService().selectContactList(pi);
+		
+		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
 		

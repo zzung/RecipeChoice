@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.admin.contact.model.vo.Contact" %>    
+<%@ page import="java.util.ArrayList, com.kh.admin.contact.model.vo.*" %>    
 <%  
 	ArrayList<Contact> list =(ArrayList<Contact>)request.getAttribute("list");//조회된 1:1문의 리스트가 담김
+    PageInfo pi = (PageInfo)request.getAttribute("pi");
+ 	
+ 	int listCount = pi.getListCount();
+ 	int currentPage = pi.getCurrentPage();
+ 	int startPage = pi.getStartPage();
+ 	int endPage = pi.getEndPage();
+ 	int maxPage = pi.getMaxPage();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -212,14 +220,23 @@
                     <br><br>
                 </div>
                 <% } %>
-        <div id="footer">
+        	<div id="footer">
             <div class="pagination">
-                <a href="#">&laquo;</a> 
-                <a href="#">1</a> 
-                <a href="#">2</a> 
-                <a href="#">3</a> 
-                <a href="#">4</a> 
-                <a href="#">&raquo;</a>
+         		<% if(currentPage != 1) {%>
+                <a href="location.href='<%=contextPath%>/report.re?currentPage=1';">&laquo;</a> 
+               <% } %>
+               
+               <%for(int p=startPage; p<=endPage; p++) { %> 
+               <% if(p != currentPage){ %>
+                <a href="location.href='<%=contextPath%>/report.re?currentPage=<%=p%>';"><%=p %></a> 
+               	<%}else{ %>
+               	<a disabled><%= p %></a>
+               	<%} %>
+               <% } %>
+               
+                <%if(currentPage != maxPage){ %>
+                <a href="#location.href='<%=contextPath%>/report.re?currentPage=<%= maxPage%>';">&raquo;</a>
+            	<% } %>
             </div>
         </div>
     </div>

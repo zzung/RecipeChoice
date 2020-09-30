@@ -63,7 +63,7 @@ public class ReportDao {
 	 * @param conn
 	 * @return
 	 */
-	public ArrayList<Report> selectList(Connection conn,PageInfo pi){
+	public ArrayList<Report> selectList(Connection conn, PageInfo pi){
 		//select문 => 여러행 조회
 		ArrayList<Report> list = new ArrayList<>();
 		
