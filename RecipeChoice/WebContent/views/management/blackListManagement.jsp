@@ -123,7 +123,7 @@
             </div>
             <div id="content_2">
                 
-                <p style="font-weight: bolder; font-size: 18px;">전체 회원 조회</p>
+                <p style="font-weight: bolder; font-size: 18px;">블랙리스트 조회</p>
                 <hr> 
                 <table class="tb1" border="1">
                     <thead>

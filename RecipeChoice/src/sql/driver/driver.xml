@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<!-- -->
+<!--
 	<entry key="driver">oracle.jdbc.driver.OracleDriver</entry>
 	<entry key="url">jdbc:oracle:thin:@localhost:1521:xe</entry>
 	<entry key="username">RECIPE</entry>
 	<entry key="password">RECIPE</entry>
-
+-->
 
 
  
-<!-- 승희꺼 제꺼 오라클 18c버전이라 이거 써야돼서 아이디 수정하지 말아주세용 !! 위에꺼 써주세요 ! 
+<!-- 승희꺼 제꺼 오라클 18c버전이라 이거 써야돼서 아이디 수정하지 말아주세용 !! 위에꺼 써주세요 ! --> 
 	<entry key="driver">oracle.jdbc.driver.OracleDriver</entry>
 	<entry key="url">jdbc:oracle:thin:@localhost:1521:xe</entry>
 	<entry key="username">C##RECIPE</entry>
 	<entry key="password">RECIPE</entry>
---> 
+
 
 </properties>

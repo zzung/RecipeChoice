@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.admin.management.model.service.ManagementService;
 import com.kh.user.member.model.service.MemberService;
 import com.kh.user.member.model.vo.Member;
 
@@ -22,7 +23,7 @@ public class MemberListManagementServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<Member> memberList = new MemberService().selectMemberList();
+		ArrayList<Member> memberList = new ManagementService().selectMemberList();
 		System.out.println(memberList);
 		
 		request.setAttribute("memberList", memberList);
