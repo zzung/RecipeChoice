@@ -54,8 +54,8 @@ public class RecipeInsertServlet extends HttpServlet {
 					new MyFileRenamePolicy());
 
 			// 1.
-			// int userNo = Integer.parseInt(multiRequest.getParameter("userNo")); //"1"
-			// String memName = multiRequest.getParameter("memName");
+			int userNo = Integer.parseInt(multiRequest.getParameter("userNo")); //"1"
+			String memName = multiRequest.getParameter("memName");
 			String rcpTitle = multiRequest.getParameter("title");
 			String rcpDishType = multiRequest.getParameter("dishType");
 
@@ -70,8 +70,8 @@ public class RecipeInsertServlet extends HttpServlet {
 			String rcpPic = multiRequest.getFilesystemName("upfile");
 
 			Recipe r = new Recipe();
-			// r.setUserNo(userNo);
-			// r.setMemName(memName);
+			r.setUserNo(userNo);
+			r.setMemName(memName);
 			r.setRcpTitle(rcpTitle);
 			r.setRcpDishType(rcpDishType);
 			r.setRcpTag(rcpTag);

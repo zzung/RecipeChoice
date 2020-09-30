@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.kh.user.recipe.model.vo.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%
+	Recipe r = (Recipe)request.getAttribute("r");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,29 +23,29 @@
 			<div class="w3-container w3-border-bottom w3-border-grey">
 				<p id="pageTitle">
 					<!-- 레시피제목자져오기 -->
-					<b><big>김치찌게</big></b>
+					<b><big><%= r.getRcpTitle() %></big></b>
 				</p>
 			</div>
 			
 			<!-- 화면 왼쪽에 보여지는 컨텐츠 -->
 			<table class="tb_Content">
 				<tr>
-					<td class="leftContent" align="center"><img src="" id="titleImg" />
+					<td class="leftContent" align="center">
+					<img src="/<%=contextPath %>/recources/recipe_upfile/<%=r.getRcpPic() %>" id="titleImg" />
 					<br />
 						<div class="userImg">
-							<img src="../../resources/image/logo/churro.png" id="userPic" style="width: 90px" /> 
+							<img src="/resources/image/logo/churro.png" id="userPic" style="width: 90px" /> 
 							<br /><br /> 
-							<span>사용자아이디</span>
-							<p id="recipeTitle">레시피 제목 제목 제목 제목</p>
+							<span><%=r.getMemName() %></span>
+							<p id="recipeTitle"><%=r.getRcpTitle() %></p>
 							<div id="recipeSubTitle">
-								<span> 다하지 별을 하나에 쓸쓸함과 벌써 했던 계십니다. 어머님, 밤이 어머니, 아무 새겨지는
-									듯합니다. 별빛이 토끼, 내 별 이국 새워 아침이 거외다. 이름을 옥 별 없이 이 거외다. </span>
+								<span><%=r.getRcpContent() %></span>
 							</div>
 							<br />
 							<br />
 							<div align="center">
 								<span style="color: rgb(39, 174, 96); font-size: 14px; font-weight: bold;">
-									스크랩수 19
+									스크랩수 <%=r.getScrapCount() %>
 								</span>
 							</div>
 							

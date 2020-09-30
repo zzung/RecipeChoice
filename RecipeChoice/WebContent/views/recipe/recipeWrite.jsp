@@ -29,10 +29,10 @@
 				<table class="tb_writeRecipe">
 					<tr>
 						<!-- 왼쪽컬럼 -->
-						<td class="leftContent" align="center"><img src=""
-							id="titleImg" /><br />
+						<td class="leftContent" align="center">
+						<img src="resources/image/logo/churro.png" id="titleImg" /><br />
 							<div class="userImg">
-								<img src="resources/image/logo/churro.png" id="userPic"
+								<img src="resources/image/mypage/cat.jpg" id="userPic"
 									style="width: 90px" /> <br>
 								<br> <span>사용자아이디</span>
 							</div></td>
@@ -127,7 +127,7 @@
 						<td align="center">
 							<button class="removeRow a" type="button" disabled>
 								<i class="fa fa-minus" style="font-size: 14px"></i>
-							</button> &nbsp;&nbsp; <img src="" class="detailImg" id="detailImg1" />
+							</button> &nbsp;&nbsp; <img src="resources/image/logo/churro.png" class="detailImg" id="detailImg1" />
 						</td>
 						<td align="center"><span class="dot countIng">1</span>&nbsp;&nbsp;
 							<input type="hidden" name="order" value="1"> 
@@ -205,7 +205,7 @@
                     <button class="removeRow" type="button">
                       <i class="fa fa-minus" style="font-size: 14px"></i>
                    </button>&nbsp;&nbsp;
-                     <img src="" class="detailImg" id="detailImg` + ++count + `" onclick="clickBtn(`+ count + `);" />
+                     <img src="resources/image/logo/churro.png" class="detailImg" id="detailImg` + ++count + `" onclick="clickBtn(`+ count + `);" />
                   </td>
                   <td align="center" class="row-index">
                     <span class="dot countIng">`+ ++rowIdx +`</span>&nbsp;&nbsp;

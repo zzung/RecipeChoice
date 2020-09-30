@@ -42,14 +42,14 @@ public class RecipeDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			// pstmt.setInt(1, r.getUserNo());
-			// pstmt.setString(2, r.getMemName());
-			pstmt.setString(1, r.getRcpTitle());
-			pstmt.setString(2, r.getRcpDishType());
-			pstmt.setString(3, r.getRcpTag());
-			pstmt.setInt(4, r.getRcpTime());
-			pstmt.setString(5, r.getRcpContent());
-			pstmt.setString(6, r.getRcpPic());
+			pstmt.setInt(1, r.getUserNo());
+			pstmt.setString(2, r.getMemName());
+			pstmt.setString(3, r.getRcpTitle());
+			pstmt.setString(4, r.getRcpDishType());
+			pstmt.setString(5, r.getRcpTag());
+			pstmt.setInt(6, r.getRcpTime());
+			pstmt.setString(7, r.getRcpContent());
+			pstmt.setString(8, r.getRcpPic());
 
 			result1 = pstmt.executeUpdate();
 
@@ -174,6 +174,47 @@ public class RecipeDao {
 			close(stmt);
 		}
 		return totalCount; 
-	}
+	}//e.totalCount
+	
+	public Recipe selectDetailRecipeList(Connection conn, int rcpNo){
+		Recipe r = new Recipe();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectDetailRecipeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rcpNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				r = new Recipe(rs.getInt("RCP_NO"),
+								rs.getInt("USER_NO"),
+								rs.getString("MEM_NAME"),
+								rs.getString("RCP_TITLE"),
+								rs.getString("RCP_DISH_TYPE"),
+								rs.getString("RCP_TAT"),
+								rs.getInt("RCP_TIME"),
+								rs.getString("RCP_CONTENT"),
+								rs.getString("RCP_PIC"),
+								rs.getInt("COUNT"),
+								rs.getInt("SCRAP_COUNT")
+								);
+			}
+			
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return r; 
+		
+	}//e.selectDetailRecipeList
 	
 }

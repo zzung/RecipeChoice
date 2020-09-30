@@ -53,6 +53,22 @@ public class Recipe {
 		this.rcpPic = rcpPic;
 	}
 
+	public Recipe(int rcpNo, int userNo, String memName, String rcpTitle, String rcpDishType, String rcpTag,
+			int rcpTime, String rcpContent, String rcpPic, int count, int scrapCount) {
+		super();
+		this.rcpNo = rcpNo;
+		this.userNo = userNo;
+		this.memName = memName;
+		this.rcpTitle = rcpTitle;
+		this.rcpDishType = rcpDishType;
+		this.rcpTag = rcpTag;
+		this.rcpTime = rcpTime;
+		this.rcpContent = rcpContent;
+		this.rcpPic = rcpPic;
+		this.count = count;
+		this.scrapCount = scrapCount;
+	}
+
 	public int getRcpNo() {
 		return rcpNo;
 	}

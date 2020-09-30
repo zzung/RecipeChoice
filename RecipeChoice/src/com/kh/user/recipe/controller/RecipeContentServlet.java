@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.user.recipe.model.service.RecipeService;
+import com.kh.user.recipe.model.vo.Cook;
 import com.kh.user.recipe.model.vo.IngredientList;
+import com.kh.user.recipe.model.vo.Recipe;
 
 /**
  * Servlet implementation class RecipeContentServlet
@@ -34,15 +36,16 @@ public class RecipeContentServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		ArrayList<Recipe> recipe = new RecipeService().
-		ArrayList<IngredientList> ingredient = new RecipeService().selectRecipeDetailList(); 
+		int rcpNo = Integer.parseInt(request.getParameter("rcpNo"));
+		Recipe r = new RecipeService().selectDetailRecipeList(rcpNo);
 		
-		request.setAttribute("ingredient", ingredient);
+		//ArrayList<IngredientList> ingredient = new RecipeService().selectDetailIngList(rcpNo); 
+		
+		//ArrayList<Cook> cook = new RecipeService().selectDetailCookList(rcpNo); 
+		
+		request.setAttribute("r", r );
 		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response); 
 		
-		
-		
-		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response);
 	}
 
 	/**

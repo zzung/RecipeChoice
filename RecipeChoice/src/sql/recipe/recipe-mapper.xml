@@ -19,8 +19,8 @@
 	 VALUES 
 	     (
 	        SEQ_RCPNO.NEXTVAL
-	      , 1
-	      , '관리자'
+	      , ?
+	      , ?
 	      , ?
 	      , ?
 	      , ?
@@ -90,5 +90,23 @@
 		SELECT COUNT(RCP_NO) TOTAL
 		  FROM RECIPE
 		 WHERE STATUS = 'Y'
+	 </entry>
+	 
+	 <entry key="selectDetailRecipeList">
+	 	SELECT
+		       R.RCP_NO
+		     , USER_NO
+		     , MEM_NAME
+		     , RCP_TITLE
+		     , RCP_DISH_TYPE
+		     , RCP_TAG
+		     , RCP_TIME
+		     , RCP_CONTENT
+		     , RCP_PIC
+		     , COUNT
+		     , SCRAP_COUNT
+		  FROM RECIPE R
+		 WHERE R.RCP_NO = ?
+		   AND R.STATUS = 'Y'
 	 </entry>
 </properties>

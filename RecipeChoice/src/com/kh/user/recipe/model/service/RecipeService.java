@@ -39,15 +39,16 @@ public class RecipeService {
 		return result1*result2*result3;
 	}// e.insertRecipe
 		
-		public ArrayList<Recipe> selectRecipeList() {
-			Connection conn = getConnection();
+		public ArrayList<Recipe> selectRecipeList(){
+			Connection conn = getConnection(); 
 			
 			ArrayList<Recipe> list = new RecipeDao().selectRecipeList(conn);
 			
-			close(conn); 
+			close(conn);
 			
 			return list; 
-		}//e. selectRecipeList
+			
+		}
 		
 		public int totalCount() {
 			Connection conn = getConnection();
@@ -57,5 +58,15 @@ public class RecipeService {
 			close(conn);
 			
 			return totalCount; 
-		}
+		} //e.totalCount
+		
+		public Recipe selectDetailRecipeList(int rcpNo) {
+			Connection conn = getConnection();
+			
+			Recipe r = new RecipeDao().selectDetailRecipeList(conn, rcpNo);
+			
+			close(conn); 
+			
+			return r; 
+		}//e. selectRecipeList
 }
