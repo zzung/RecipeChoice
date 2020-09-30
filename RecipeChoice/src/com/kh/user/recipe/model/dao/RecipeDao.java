@@ -287,15 +287,15 @@ public class RecipeDao {
 		ResultSet rs = null;
 		
 		String sql = prop.getProperty("tagSearch");
-		System.out.println(rcpTags);
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			for(int i=0; i<rcpTags.length; i++) {
-				pstmt.setString(i+1, rcpTags[i]);
+				pstmt.setString(i, rcpTags[i]);
 			}
-			for(int j=rcpTags.length; j<14; j++) {
-				pstmt.setString(j+1, null);
+			for(int j=rcpTags.length; j<=14; j++) {
+				pstmt.setString(j, null);
 			}
 			rs = pstmt.executeQuery();
 			

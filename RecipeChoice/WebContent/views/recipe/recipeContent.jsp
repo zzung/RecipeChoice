@@ -275,7 +275,7 @@
 				 <br><br>
 				 <%if(loginUser != null && loginUser.getUserNo()== r.getUserNo()) { %>
 		          <div align="right">
-		            <button type="submit" id="editRecipe">수정하기</button>
+		            <button id="editRecipe" onclick="href.location='<%=contextPath%>/updateForm.rp?rcpNo=<%=r.getRcpNo()%>';">수정하기</button>
           		</div>
           		<%} %>
           		<br><br>
