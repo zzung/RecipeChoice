@@ -68,7 +68,7 @@ public class RecipeService {
 		
 		/**
 		 * 레시피 디테일 뷰 에서 레시피 DB에서 가져오기 
-		 * @param rcpNo
+		 * @param rcpNo 레시피번호
 		 * @return
 		 */
 		public Recipe selectDetailRecipeList(int rcpNo) {
@@ -82,7 +82,7 @@ public class RecipeService {
 		}//e. selectRecipeList
 		/**
 		 * 레시피 디테일 뷰에서 DB 재료리스트에서 가져오기 
-		 * @param rcpNo
+		 * @param rcpNo 레시피번호
 		 * @return
 		 */
 		public ArrayList<IngredientList> selectDetailIngList(int rcpNo){
@@ -94,4 +94,30 @@ public class RecipeService {
 			
 			return ingredient; 
 		}//e.selectDetailIngList
+		
+		/**
+		 * 레시피 디테일 뷰에 DB 조리법 가져오기 
+		 * @param rcpNo 레시피번호 
+		 * @return
+		 */
+		public ArrayList<Cook> selectDetailCookList(int rcpNo){
+			Connection conn = getConnection();
+			
+			ArrayList<Cook> cook = new RecipeDao().selectDetailCookList(conn, rcpNo);
+			
+			close(conn);
+			
+			return cook; 
+			
+		}//e.
+		
+		public ArrayList<Recipe> tagSearch(String[] rcpTags){
+			Connection conn = getConnection();
+			
+			ArrayList<Recipe> tags = new RecipeDao().tagSearch(conn, rcpTags);
+			
+			close(conn);
+			
+			return tags; 
+		}
 }

@@ -4,8 +4,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%
 	Recipe r = (Recipe)request.getAttribute("r");
-
 	String[] tagList = (String[])r.getRcpTag().split(",");
+	
+	ArrayList<IngredientList> ing = (ArrayList<IngredientList>)request.getAttribute("ingredient");
+	ArrayList<Cook> cook = (ArrayList<Cook>)request.getAttribute("cook"); 
 %>
 <!DOCTYPE html>
 <html>
@@ -56,7 +58,7 @@
 							<div>
 								<table id="recipeScrap_Report">
 									<tr>
-										<td>조리시간</td>
+										<td><%=r.getRcpTime() %>분</td>
 										<td><button>스크랩</button></td>
 										<td><button>신고하기</button></td>
 									</tr>
@@ -72,9 +74,9 @@
 						</p>
 						<div id="recipeList">
 							<ul>
-								<li>고추가로 1tsp</li>
-								<li>간장 2tsp</li>
-								<li>설탕 1/2tsp</li>
+							<%for(IngredientList i : ing){ %>
+								<li><%=i.getIngDish() %> <%=i.getIngMetering() %></li>
+							<%} %>
 							</ul>
 						</div> <br />
 					<br />
@@ -117,39 +119,20 @@
 				</tr>
 				
 				<!-- 반복문 돌릴 예정 -->
+				<%for(Cook c : cook){ %>
 				<tr class="cookOrder">
 					<td>
-						<span class="dot" align="center">1</span>&nbsp;&nbsp; 
-						<img src="" id="detailImg" width="200" height="150" />
+						<span class="dot" align="center"><%=c.getCookOrder() %></span>&nbsp;&nbsp; 
+						<img src="<%=contextPath %>/resources/recipe_upfiles/<%=c.getCookPic() %>" id="detailImg" width="200" height="150" />
 					</td>
 					<td>
 						<p class="cookContent">
-							피어나는 얼음에 그들의 온갖 눈이 부패뿐이다. 하는 어디 이것을 듣는다. 청춘이 곳이 그것을 인도하겠다는 가지에 열락의 사막이다.
+							<%=c.getCookContent() %>
 						</p>
 					</td>
 				</tr>
-				<tr class="cookOrder">
-					<td>
-						<span class="dot" align="center">2</span>&nbsp;&nbsp; 
-						<img src="" id="detailImg" width="200" height="150" />
-					</td>
-					<td>
-						<p class="cookContent">
-							피어나는 얼음에 그들의 온갖 눈이 부패뿐이다. 하는 어디 이것을 듣는다. 청춘이 곳이 그것을 인도하겠다는 가지에 열락의 사막이다.
-						</p>
-					</td>
-				</tr>
-				<tr class="cookOrder">
-					<td>
-						<span class="dot" align="center">3</span>&nbsp;&nbsp; 
-						<img src="" id="detailImg" width="200" height="150" />
-					</td>
-					<td>
-						<p class="cookContent">
-							피어나는 얼음에 그들의 온갖 눈이 부패뿐이다. 하는 어디 이것을 듣는다. 청춘이 곳이 그것을 인도하겠다는 가지에 열락의 사막이다.
-						</p>
-					</td>
-				</tr>
+				<%} %>
+			
 				
 				<!-- 관련 레시피 썸네일 -->
 				<tr class="bottomContent">
@@ -290,9 +273,12 @@
 					</tr>
 				</table>
 				 <br><br>
+				 <%if(loginUser != null && loginUser.getUserNo()== r.getUserNo()) { %>
 		          <div align="right">
 		            <button type="submit" id="editRecipe">수정하기</button>
           		</div>
+          		<%} %>
+          		<br><br>
 			</div>
 		</div>
 	</div>

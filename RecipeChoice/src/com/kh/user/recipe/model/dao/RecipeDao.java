@@ -247,6 +247,76 @@ public class RecipeDao {
 			close(pstmt);
 		}
 		return ingredient; 
+	}//e.selectDetailIngList
+	
+	public ArrayList<Cook> selectDetailCookList(Connection conn, int rcpNo){
+		ArrayList<Cook> cook = new ArrayList<>(); 
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectDetailCookList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rcpNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				cook.add(new Cook(rs.getInt("COOK_NO"),
+								  rs.getInt("RCP_NO"),
+								  rs.getString("COOK_CONTENT"),
+								  rs.getInt("COOK_ORDER"),
+								  rs.getString("COOK_PIC")
+								 ));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cook; 
+	}//e.selectDetailCookList
+	
+	public ArrayList<Recipe> tagSearch(Connection conn, String[] rcpTags){
+		ArrayList<Recipe> tags = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("tagSearch");
+		System.out.println(rcpTags);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i=0; i<rcpTags.length; i++) {
+				pstmt.setString(i+1, rcpTags[i]);
+			}
+			for(int j=rcpTags.length; j<14; j++) {
+				pstmt.setString(j+1, null);
+			}
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				tags.add(new Recipe(rs.getInt("RCP_NO"),
+									rs.getString("MEM_NAME"),
+									rs.getString("RCP_TITLE"),
+									rs.getString("RCP_CONTENT"),
+									rs.getString("RCP_PIC")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		for(Recipe tag : tags) {
+			System.out.println(tag.toString());
+		}
+		return tags; 
 	}
 	
 }

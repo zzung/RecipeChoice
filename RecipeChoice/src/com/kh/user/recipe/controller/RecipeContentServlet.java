@@ -36,15 +36,19 @@ public class RecipeContentServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
+		//레시피작성 메인 부분
 		int rcpNo = Integer.parseInt(request.getParameter("rcpNo"));
 		Recipe r = new RecipeService().selectDetailRecipeList(rcpNo);
-
+		
+		//재료리스트
 		ArrayList<IngredientList> ingredient = new RecipeService().selectDetailIngList(rcpNo); 
 		
-		//ArrayList<Cook> cook = new RecipeService().selectDetailCookList(rcpNo); 
+		//조리
+		ArrayList<Cook> cook = new RecipeService().selectDetailCookList(rcpNo); 
 		
 		request.setAttribute("r", r );
 		request.setAttribute("ingredient", ingredient);
+		request.setAttribute("cook", cook);
 		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response); 
 		
 	}

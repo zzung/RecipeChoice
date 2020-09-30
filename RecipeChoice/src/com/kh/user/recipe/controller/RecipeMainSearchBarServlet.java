@@ -1,11 +1,16 @@
 package com.kh.user.recipe.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.user.recipe.model.service.RecipeService;
+import com.kh.user.recipe.model.vo.Recipe;
 
 /**
  * Servlet implementation class RecipeMainSearchBarServlet
@@ -27,9 +32,13 @@ public class RecipeMainSearchBarServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String[] rcpDishTypes = request.getParameterValues("dishType");
+		//String[] rcpDishTypes = request.getParameterValues("dishType");
 		String[] rcpTags = request.getParameterValues("tag");
-		int rcpTime = Integer.parseInt(request.getParameter("time"));
+		
+		ArrayList<Recipe> tags = new RecipeService().tagSearch(rcpTags);
+		
+		
+		//int rcpTime = Integer.parseInt(request.getParameter("time"));
 		
 		
 		

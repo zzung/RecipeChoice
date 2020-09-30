@@ -117,11 +117,41 @@
 
 	<entry key="selectDetailIngList">
 		SELECT
-		ING_NO
+		       ING_NO
 			 , RCP_NO
 			 , ING_DISH
 			 , ING_METERING
 		  FROM INGREDIENT_LIST
 		 WHERE RCP_NO = ?
+	</entry>
+	
+	<entry key="selectDetailCookList">
+		 SELECT
+		        COOK_NO
+		      , RCP_NO
+		      , COOK_CONTENT
+		      , COOK_ORDER
+		      , COOK_PIC
+		   FROM COOK
+		  WHERE RCP_NO=?
+	</entry>
+	
+	<entry key="tagSearch">
+		SELECT *
+		  FROM RECIPE
+		 WHERE RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
+		    OR RCP_TAG LIKE '%?%'
 	</entry>
 </properties>
