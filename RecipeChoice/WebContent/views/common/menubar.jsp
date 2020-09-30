@@ -80,7 +80,7 @@
 						<a class="dropdown-item" href="<%= contextPath %>/serviceCenter.no">이용 방법</a> 
 						<a class="dropdown-item" href="<%= contextPath%>/notice.no">공지사항</a> 
 						<a class="dropdown-item" href="<%= contextPath%>/faqDetail.fa">FAQ</a> 
-						<a class="dropdown-item" href="<%= contextPath%>/list.co">1:1 문의</a> 
+						<a class="dropdown-item" href="<%= contextPath%>/list.co?currentPage=1">1:1 문의</a> 
 						<a class="dropdown-item" href="#">개인정보취급방침</a>
 					</div>
 				</li>

@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ page import="java.util.ArrayList, com.kh.admin.report.model.vo.*, com.kh.user.member.model.vo.Member" %>
+ <%
+ 	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
+ 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+ 	
+ 	int listCount = pi.getListCount();
+ 	int currentPage = pi.getCurrentPage();
+ 	int startPage = pi.getStartPage();
+ 	int endPage = pi.getEndPage();
+ 	int maxPage = pi.getMaxPage();
+ %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,9 +90,28 @@
     line-height: 3px;
     text-align: center;
     }
+     .pagination {
+		display: inline-block;
+		margin-left: 40%;
+    }
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+    .pagination a.active {
+        background-color: rgb(39, 174, 96);
+        color: white;
+        border-radius: 5px;
+    }
+    .pagination a:hover:not(.active){
+        background-color: #ddd;
+        border-radius: 5px;
+    }
     
-tbody>tr {cursor: pointer;}
-tbody>tr:hover{background: rgb(243, 243, 243)}
+	tbody>tr {cursor: pointer;}
+	tbody>tr:hover{background: rgb(243, 243, 243)}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -111,7 +141,7 @@ tbody>tr:hover{background: rgb(243, 243, 243)}
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;신고 관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/report.re'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;신고 관리</div>
                
             </div>
             <div id="content_2">
@@ -131,44 +161,46 @@ tbody>tr:hover{background: rgb(243, 243, 243)}
                     <th width="200">신고일</th>
                 </thead>
                 <tbody>
+                <%if(list.isEmpty()){ %>
+        		<tr>
+        			<td colspan ="6">조회된 리스트가 없습니다.</td>
+       			</tr>
+        		<% }else { %>
+        	<%for(Report r: list) {%>
                     <tr>
-                        <td>1003</td>
-                        <td>내용내용내용내용</td>
-                        <td>user8</td>
-                        <td>user9</td>
-                        <td>부적절한 게시물</td>
-                        <td>2020-08-26</td>
+                        <td><%= r.getRepNo()%></td>
+                        <td><a href="<%=contextPath%>/신고된게시글">신고된게시글이동</a></td>
+                        <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=m.getUserNo()%>"><%= r.getRepWriterNo()%></a></td>
+                        <td><%= r.getRepWriterNo()%></td>
+                        <td><%= r.getRepTargetNo() %></td>
+                        <td><%= r.getRepReason()%></td>
+                        <td><%= r.getRepDate()%></td>
                     </tr>
-                    <tr>
-                        <td>1002</td>
-                        <td>내용내용내용내용</td>
-                        <td>sdsd</td>
-                        <td>ewfs</td>
-                        <td>부적절한 게시물</td>
-                        <td>2020-08-25</td>
-                    </tr>
-                    <tr>
-                        <td>1001</td>
-                        <td>내용내용내용내용</td>
-                        <td>user01</td>
-                        <td>user04</td>
-                        <td>부적절한 게시물</td>
-                        <td>2020-08-24</td>
-                    </tr>
+	                  <% } %> 
+	                <% } %>  
                	 </tbody>
     			</table>
-				 <!--신고 상세 페이지 이동-->
-              <script>
-                $(function(){
-                    $(".rep>tbody>tr").click(function(){
-                   });
-                });
-                
-            </script>
-              
             </div>
           
-        <div id="footer"></div>
+        <div id="footer">
+         <div class="pagination">
+         		<% if(currentPage != 1) {%>
+                <a href="location.href='<%=contextPath%>/report.re?currentPage=1';">&laquo;</a> 
+               <% } %>
+               
+               <%for(int p=startPage; p<=endPage; p++) { %> 
+               <% if(p != currentPage){ %>
+                <a href="location.href='<%=contextPath%>/report.re?currentPage=<%=p%>';"><%=p %></a> 
+               	<%}else{ %>
+               	<a disabled><%= p %></a>
+               	<%} %>
+               <% } %>
+               
+                <%if(currentPage != maxPage){ %>
+                <a href="#location.href='<%=contextPath%>/report.re?currentPage=<%= maxPage%>';">&raquo;</a>
+            	<% } %>
+            </div>
+        </div>
     </div>
     <!-- footer 추가-->
     <%@include file="../common/footer.jsp" %>

@@ -33,6 +33,13 @@ public class ContactListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//페이징
+				int listCount; //현재 게시글 갯수
+				int currentPage; //현재 페이지 (요청 페이지)
+				int pageLimit; //한 페이지 하단에 보여질 페이지 최대 갯수
+				int boardLimit; // 한 페이지내에 보여질 게시글 최대갯수
+
+		
 		ArrayList<Contact> list = new ContactService().selectContactList();
 		
 		request.setAttribute("list", list);

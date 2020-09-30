@@ -31,6 +31,17 @@ public class Report {
 		this.repContentNo = repContentNo;
 		this.repReply = repReply;
 	}
+	
+	
+
+	public Report(int repNo, String repWriterNo, String repTargetNo, String repReason, Date repDate) {
+		super();
+		this.repNo = repNo;
+		this.repWriterNo = repWriterNo;
+		this.repTargetNo = repTargetNo;
+		this.repReason = repReason;
+		this.repDate = repDate;
+	}
 
 	public int getRepNo() {
 		return repNo;
