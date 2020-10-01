@@ -129,4 +129,20 @@
 		 WHERE MEM_ID = ?
 	
 	</entry>
+	<entry key="selectBoardList">
+		SELECT 
+		       B.BOARD_NO
+		     , B.USER_NO
+		     , M.MEM_ID
+		     , M.MEM_NAME
+		     , M.MEM_PIC
+		     , B.BOARD_TITLE
+		     , DECODE(B.BOARD_TYPE, 1, '일상', '후기') BOARD_CATEGORY
+		     , B.BOARD_CONTENT
+		     , TO_CHAR(B.CREATE_DATE, 'yyyy-MM-dd') CREATE_DATE
+		     , B.BOARD_COUNT
+		  FROM BOARD B
+		  JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
+		 WHERE B.USER_NO = ?
+	</entry>
 </properties>

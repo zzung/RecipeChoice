@@ -1,8 +1,11 @@
+<%@page import="com.kh.user.board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.user.member.model.vo.Member"%>
 <%
 	Member m = (Member)request.getAttribute("m");
+	ArrayList<Board> boardList = (ArrayList<Board>)request.getAttribute("boardList");
 %>
 <!DOCTYPE html>
 <html>
@@ -148,23 +151,27 @@
                         <tbody id="con2">
                             <tr>
                                 <th width="150px">아이디</th>
-                                <td>user02</td>
+                                <td><%= m.getMemId() %></td>
                             </tr>
                             <tr>
                                 <th>가입일</th>
-                                <td>2020-09-22</td>
+                                <td><%= m.getEnrollDate() %></td>
                             </tr>
                             <tr>
                                 <th>게시글 </th>
-                                <td>9</td>
+                                <td><%= m.getBoardCount() %></td>
                             </tr>
                             <tr>
                                 <th>신고받은 횟수</th>
-                                <td>1</td>
+                                <td><%= m.getMemReportCount() %></td>
                             </tr>
                             <tr>
                                 <th>상태</th>
+                                <% if(m.getStatus().equals("N")){ %>
                                 <td>비활성</td>
+                                <% }else { %>
+                                <td>활성</td>
+                                <% } %>
                             </tr>
                         </tbody>
                     </table>
@@ -182,31 +189,27 @@
                     </thead>
                     
                     <tbody>
-                        <tr>
-                            <td >6</td>
-                            <td> 레시피 </td>
-                            <td>레시피 제목 2222222 </td>
-                            <td> 2020-09-01</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>후기</td>
-                            <td>레시피 제목 2222222 </td>
-                            <td> 2020-09-01</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>일상</td>
-                            <td>레시피 제목 2222222 </td>
-                            <td> 2020-09-01</td>
-                        </tr>
+                    	<% if(boardList.isEmpty()) { %>
+                    		<tr>
+                    			<td colspan="4"> 올린 게시글이 없습니다.</td>
+                    		</tr>
+                    	<% } else{ %>
+                    		<% for(Board b : boardList) { %>
+	                        <tr>
+	                            <td><%= b.getBoardNo()%></td>
+	                            <td><%= b.getCategory() %></td>
+	                            <td><%= b.getBoardTitle() %></td>
+	                            <td><%= b.getCreateDate() %></td>
+	                        </tr>
+                        	<% } %>
+                        <% } %>
                     </tbody>
                 </table>
                 
                 <hr>
                 <div align="right">
-	                <button>회원 활성화</button>
-	                <button>회원 비활성화</button>
+                	<a href="<%=contextPath%>/enabled.mn" class="btn btn-primary">회원 활성화</a>
+                	<a href="<%=contextPath%>/disabled.mn" class="btn btn-dark">회원 비활성화</a>
                 </div>
                 
             </div>
@@ -226,5 +229,15 @@
         </div>
     </div>
     
+
+    <script>
+    	$(function(){
+    		$(".tb2>tbody>tr").click(function(){
+    			var bno = $(this).children().eq(0).text();
+    			location.href="<%= contextPath%>/boardView.bo?bno="+bno;
+    		});
+    	});
+    </script>
+                
 </body>
 </html>

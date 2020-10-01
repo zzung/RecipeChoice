@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.user.board.model.vo.Board;
 import com.kh.user.member.model.dao.MemberDao;
 import com.kh.user.member.model.vo.Member;
 
@@ -123,5 +124,43 @@ public class ManagementDao {
 		}
 		
 		return m;
+	}
+
+
+
+	public ArrayList<Board> selectBoardList(Connection conn, int userNo) {
+
+		ArrayList<Board> boardList = new ArrayList<>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectBoardList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board b = new Board(rs.getInt("BOARD_NO"),
+									rs.getInt("USER_NO"),
+									rs.getString("MEM_ID"),
+									rs.getString("MEM_NAME"),
+									rs.getString("MEM_PIC"),
+									rs.getString("BOARD_TITLE"),
+									rs.getString("BOARD_CATEGORY"),
+									rs.getString("BOARD_CONTENT"),
+									rs.getString("CREATE_DATE"),
+									rs.getInt("BOARD_COUNT"));
+				boardList.add(b);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return boardList;
 	}
 }

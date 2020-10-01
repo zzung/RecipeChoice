@@ -47,6 +47,21 @@ public class Board {
 		this.createDate = createDate;
 	}
 
+	public Board(int boardNo, int userNo, String memId, String memName, String memPic, String boardTitle,
+			String category, String boardContent, String createDate, int boardCount) {
+		super();
+		this.boardNo = boardNo;
+		this.userNo = userNo;
+		this.memId = memId;
+		this.memName = memName;
+		this.memPic = memPic;
+		this.boardTitle = boardTitle;
+		this.category = category;
+		this.boardContent = boardContent;
+		this.createDate = createDate;
+		this.boardCount = boardCount;
+	}
+
 	public int getBoardNo() {
 		return boardNo;
 	}
