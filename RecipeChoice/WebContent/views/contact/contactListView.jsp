@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.admin.contact.model.vo.*" %>    
+<%
+	Contact c = (Contact)request.getAttribute("c");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,11 +144,11 @@
                     <tr>
                         <td>1004</td>
                         <td>🔒</td>
-                        <td>레시피 문의</td>
-                        <td>냐냐냔야야냥ㅇ</td>
-                        <td>뭐먹을지정해조</td>
-                        <td>2020-08-26</td>
-                        <td>미답변</td>
+                        <td><%= c.getConType() %></td>
+                        <td><%= c.getConTitle() %></td>
+                        <td><%= c.getUserNo() %></td>
+                        <td><%= c.getConDate() %></td>
+                        <td><%= c.getAnswer() %></td>
                     </tr>
                     <tr>
                         <td>1003</td>
@@ -178,6 +182,15 @@
                  </tbody>
     
                 </table>
+                <!-- 상세조회요청url 이동 -->
+                <script>
+                	$(function(){
+                		$(".inq_s>tbody>tr").click(function(){
+                			location.href="<%=contextPath%>/detail.mc?bno=" + $(this).children().eq(0).text();	
+                		});
+                	});
+                
+                </script>
                 <script>
                     function modifyConfirm(){
                          location.href='./inquirymodify.no';

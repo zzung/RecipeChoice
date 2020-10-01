@@ -30,7 +30,7 @@
    
 	#navigator{height:5%}
 	#content{height:70%}
-	#footer{height:10%}
+	#footer{height:10%;}
 	#content>div{
 	    height:100%;
 	    float:left;
@@ -133,7 +133,7 @@
                 <div id="menu_1">고객센터</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath%>/faqDetail.fa'">&nbsp;&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/list.co'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;1:1 문의</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.co?currentPage=1'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;1:1 문의</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;개인정보취급방침</div>
                 <div id="menu_3">
                     <br><b>&nbsp;&nbsp;고객센터</b><br>
@@ -145,9 +145,9 @@
             <div id="content_2">
 	
 				<br><br>
-                <h1>1:1 문의 조회
-                    &nbsp;<img src="resources/image/admin/inquiry.jpg" >
-				</h1>
+                <h3>1:1 문의 조회
+                    &nbsp;<img src="resources/image/admin/inquiry.jpg" style="width: 40px; height: 40px;">
+				</h3>
             
                 <hr>
                 <table class="inq">
@@ -170,6 +170,7 @@
                    <% }else { %>
                    <!-- 리스트가 비어있지 않을 경우 -->
                    <% for(Contact c: list) { %>
+                   <!-- 관리자랑 사용자랑 따로 ,,자기꺼 자기가 비밀번호쳐서 열기 아니면 누르면 이용권한이 없습니다. 문구 -->
                     <tr>
                         <td><%=c.getConNo() %></td>
                         <td>🔒</td>
@@ -215,34 +216,34 @@
            		<!-- 로그인한 회원만 글작성이 보여짐,,관리자x -->
                 <% if(loginUser != null ){ %>
                 <div id="content_3" align="right" style="width:710px;">
-                <button onclick="location.href='<%=contextPath%>/contact.en';">글작성</button>
-                <!--  <a href="<%=contextPath%>/enrollForm.co %>" class="btn btn-secondary">글작성</a>-->
-                    <br><br>
+                <button onclick="location.href='<%=contextPath%>/enrollForm.co';">글작성</button>
+                <br><br>
                 </div>
                 <% } %>
+                
+                
         	<div id="footer">
             <div class="pagination">
          		<% if(currentPage != 1) {%>
-                <a href="location.href='<%=contextPath%>/report.re?currentPage=1';">&laquo;</a> 
+                <a href="location.href='<%=contextPath%>/contactList.co?currentPage=1';">&laquo;</a> 
                <% } %>
                
                <%for(int p=startPage; p<=endPage; p++) { %> 
                <% if(p != currentPage){ %>
-                <a href="location.href='<%=contextPath%>/report.re?currentPage=<%=p%>';"><%=p %></a> 
+                <a href="location.href='<%=contextPath%>contactList.co?currentPage=<%=p%>';"><%=p %></a> 
                	<%}else{ %>
                	<a disabled><%= p %></a>
                	<%} %>
                <% } %>
                
                 <%if(currentPage != maxPage){ %>
-                <a href="#location.href='<%=contextPath%>/report.re?currentPage=<%= maxPage%>';">&raquo;</a>
+                <a href="location.href='<%=contextPath%>/contactList.co?currentPage=<%= maxPage%>';">&raquo;</a>
             	<% } %>
             </div>
         </div>
     </div>
-    
-    
-    <!-- 푸터 추가-->
+        <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>
+    
 </body>
 </html>

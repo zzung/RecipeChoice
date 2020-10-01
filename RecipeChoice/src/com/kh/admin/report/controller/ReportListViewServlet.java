@@ -18,7 +18,7 @@ import com.kh.admin.report.model.vo.Report;
 /**
  * Servlet implementation class ReportListViewServlet
  */
-@WebServlet("/report.re")
+@WebServlet("/reportList.mr")
 public class ReportListViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

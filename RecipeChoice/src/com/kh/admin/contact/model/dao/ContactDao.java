@@ -88,8 +88,8 @@ public class ContactDao {
 			while(rs.next()) {//매개변수이용
 				list.add(new Contact(rs.getInt("con_no"),
 									 rs.getString("con_type"),
-								     rs.getString("con_title"),
-								     rs.getString("mem_id"),
+									 rs.getString("con_title"),
+									 rs.getString("mem_id"),
 								     rs.getDate("con_date")));
 			}
 			
@@ -103,7 +103,7 @@ public class ContactDao {
 		return list;
 	}
 	/**
-	 * 
+	 * 작성
 	 * @param conn
 	 * @param c
 	 * @return
@@ -120,8 +120,8 @@ public class ContactDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, c.getConTitle());
-			pstmt.setString(2, c.getConContent());
-			pstmt.setString(3, c.getConType());
+			pstmt.setString(2, c.getConType());
+			pstmt.setString(3, c.getConContent());
 			pstmt.setInt(4, Integer.parseInt(c.getUserNo()));//"1" -> 1
 			//완성형태 만듬
 			
@@ -134,5 +134,38 @@ public class ContactDao {
 		}
 		return result; // 서비스에 리턴
 		
+	}
+	public Contact selectContact(Connection conn, int bno) {
+		//select문 => 한 행 조회
+		Contact c = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectContact");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				c = new Contact(rs.getInt("CON_NO"),
+								rs.getString("CON_TITLE"),
+								rs.getString("MEM_ID"),
+								rs.getString("CON_TYPE"),
+								rs.getString("CON_CONTENT"),
+								rs.getDate("CON_DATE"));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return c;
 	}
 }

@@ -141,7 +141,7 @@
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/report.re'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;신고 관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/reportList.mr'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;신고 관리</div>
                
             </div>
             <div id="content_2">
@@ -169,11 +169,10 @@
         	<%for(Report r: list) {%>
                     <tr>
                         <td><%= r.getRepNo()%></td>
-                        <td><a href="<%=contextPath%>/신고된게시글">신고된게시글이동</a></td>
-                        <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=m.getUserNo()%>"><%= r.getRepWriterNo()%></a></td>
-                        <td><%= r.getRepWriterNo()%></td>
-                        <td><%= r.getRepTargetNo() %></td>
-                        <td><%= r.getRepReason()%></td>
+                        <td><a href="<%=contextPath%>/신고된게시글">신고된게시글이</a></td>
+                        <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=loginUser.getUserNo()%>"><%= r.getRepWriterNo()%></a></td>
+                        <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=loginUser.getUserNo()%>"><%= r.getRepTargetNo() %></a></td>
+                       <td><%= r.getRepReason()%></td>
                         <td><%= r.getRepDate()%></td>
                     </tr>
 	                  <% } %> 
@@ -185,19 +184,19 @@
         <div id="footer">
          <div class="pagination">
          		<% if(currentPage != 1) {%>
-                <a href="location.href='<%=contextPath%>/report.re?currentPage=1';">&laquo;</a> 
+                <a href="location.href='<%=contextPath%>/reportList.mr?currentPage=1';">&laquo;</a> 
                <% } %>
                
                <%for(int p=startPage; p<=endPage; p++) { %> 
                <% if(p != currentPage){ %>
-                <a href="location.href='<%=contextPath%>/report.re?currentPage=<%=p%>';"><%=p %></a> 
+                <a href="location.href='<%=contextPath%>/reportList.mr?currentPage=<%=p%>';"><%=p %></a> 
                	<%}else{ %>
                	<a disabled><%= p %></a>
                	<%} %>
                <% } %>
                
                 <%if(currentPage != maxPage){ %>
-                <a href="#location.href='<%=contextPath%>/report.re?currentPage=<%= maxPage%>';">&raquo;</a>
+                <a href="#location.href='<%=contextPath%>/reportList.mr?currentPage=<%= maxPage%>';">&raquo;</a>
             	<% } %>
             </div>
         </div>

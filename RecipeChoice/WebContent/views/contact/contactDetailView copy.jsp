@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.admin.contact.model.vo.*" %>    
-<%
-	Contact c = (Contact)request.getAttribute("c");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,8 +65,8 @@
     .detailArea {border-collapse: collapse;}
 	.detailArea{
     box-sizing: border-box;
-    width: 100%;
-    height: 40px;
+    width: 90%;
+    height: 20px;
     }
     .detailArea td:first-child{
     font-weight: bolder;
@@ -124,35 +120,35 @@
 	
 				<br><br>
                 <h1>1:1 문의
-                    &nbsp;<img src="resources/image/admin/inquiry.jpg" >
+                    &nbsp;<img src="resources/image/admin/inquiry.jpg">
 				 </h1>
-                <h3>&nbsp;1:1 상세보기</h3>
+                <h3>&nbsp;1:1 문의하기
+                </h3>
                 <hr>
 
-                <table class="detailArea" >
+                <form action="" method=""> 
+                 <table class="detailArea">
                     <tr>
-                        <th >제목 | </th>
-                        <td colspan="4" ><%= c.getConTitle() %></td>
+                        <th ><h2>제목</h2></th>
+                        <td colspan="4" ><input type="text" name="title" style="width:80%;" placeholder="내용을 입력하세요"required style="height:22px;"></td>
                     </tr>
                     <tr>
-                        <th>작성자 |</th>
-                        <td><%= c.getUserNo() %></td>
-                        <th>작성일 |</th>
-                        <td><%= c.getConDate() %></td>
-                    </tr>
-                    <tr>
-                        <th><h3>분야 |&nbsp;</h3></th>
+                        <th><h2>문의 분류</h2></th>
                         <td >
-                            <%= c.getConType() %>
+                            <select name="category"style="height:25px; width:110px;"  >
+                                <option value="10" float="">레시피 문의</option>
+                                <option value="20">신고 문의</option>
+                                <option value="30">기타 문의</option>
+                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td><h3>내용&nbsp;</h3></td>
+                        <td><h2>내용</h2></td>
                         <td>
-                           <textarea name="content" cols="70" rows="13" style="resize:none; margin-top:10px;"><%= c.getConContent() %></textarea>
+                           <textarea cols="70" rows="13" style="resize:none; margin-top:10px; margin-bottom:10px;" required></textarea>
                         </td>
                     </tr>
-            </table> 
+              </table>  
               <br> 
               <hr>    
             <br>

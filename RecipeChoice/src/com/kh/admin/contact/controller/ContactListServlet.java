@@ -17,7 +17,7 @@ import com.kh.admin.contact.model.vo.PageInfo;
 /**
  * Servlet implementation class InquiryListServlet
  */
-@WebServlet("/list.co")
+@WebServlet("/contactList.co")
 public class ContactListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

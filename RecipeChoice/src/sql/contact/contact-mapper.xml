@@ -31,21 +31,34 @@ WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="insertContact">
 		INSERT /*com.kh.admin.contact.model.dao.ContactDao#insertContact()*/
-	  INTO CONTACT
-	  (
-	    CON_NO 
-	  , CON_TITLE
-	  , CON_TYPE
-	  , CON_CONTENT
-	  , USER_NO
-	  )
-	  VALUES
-	  (
-	    SEQ_CNO.NEXTVAL
-	  , ?
-	  , ?
-	  , ?
-	  , ?
-	  )
+			  INTO CONTACT
+			  (
+			    CON_NO 
+			  , CON_TYPE
+			  , CON_TITLE
+			  , CON_CONTENT
+			  , USER_NO
+			  )
+			  VALUES
+			  (
+			    SEQ_CONNO.NEXTVAL
+			  , ?
+			  , ?
+			  , ?
+			  , ?
+			  )
+	</entry>
+	<entry key="selectContact">
+		SELECT
+		       CON_NO
+		     , CON_TITLE
+		     , M.MEM_ID
+		     , CON_TYPE
+		     , CON_DATE
+		     , CON_CONTENT
+		  FROM CONTACT C
+		  JOIN MEMBER M ON (M.USER_NO = C.USER_NO)
+		 WHERE CON_NO = ?
+		   AND C.STATUS = 'Y'
 	</entry>
 </properties>

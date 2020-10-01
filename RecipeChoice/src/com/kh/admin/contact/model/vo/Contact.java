@@ -45,6 +45,17 @@ public class Contact {
 		this.conTitle = conTitle;
 		this.conDate = conDate;
 	}
+	
+
+	public Contact(int conNo, String userNo, String conType, String conTitle, String conContent, Date conDate) {
+		super();
+		this.conNo = conNo;
+		this.userNo = userNo;
+		this.conType = conType;
+		this.conTitle = conTitle;
+		this.conContent = conContent;
+		this.conDate = conDate;
+	}
 
 	public int getConNo() {
 		return conNo;
