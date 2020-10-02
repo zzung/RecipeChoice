@@ -63,6 +63,15 @@ public class ContactService {
 		
 		return result;
 	}
+	public ArrayList<Contact> selectContactListView(){
+		Connection conn = getConnection();
+		
+		ArrayList<Contact> listView = new ContactDao().selectContactListView(conn);
+		
+		close(conn);
+		
+		return listView;
+	}
 	/**
 	 * 상세정보 조회용 서비스
 	 * @param bno 상세조회요청한 게시글 번호

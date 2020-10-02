@@ -1,6 +1,6 @@
 package com.kh.admin.contact.model.dao;
 
-import static com.kh.user.common.JDBCTemplate.*;
+import static com.kh.user.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,8 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.admin.contact.model.vo.PageInfo;
 import com.kh.admin.contact.model.vo.Contact;
+import com.kh.admin.contact.model.vo.PageInfo;
 
 public class ContactDao {
 
@@ -87,10 +87,11 @@ public class ContactDao {
 			
 			while(rs.next()) {//매개변수이용
 				list.add(new Contact(rs.getInt("con_no"),
-									 rs.getString("con_type"),
 									 rs.getString("con_title"),
 									 rs.getString("mem_id"),
-								     rs.getDate("con_date")));
+								     rs.getDate("con_date"),
+								     rs.getInt("con_reply"),
+								     rs.getString("answer")));
 			}
 			
 		} catch (SQLException e) {
@@ -119,8 +120,8 @@ public class ContactDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, c.getConTitle());
-			pstmt.setString(2, c.getConType());
+			pstmt.setString(1, c.getConType());
+			pstmt.setString(2, c.getConTitle());
 			pstmt.setString(3, c.getConContent());
 			pstmt.setInt(4, Integer.parseInt(c.getUserNo()));//"1" -> 1
 			//완성형태 만듬
@@ -135,7 +136,49 @@ public class ContactDao {
 		return result; // 서비스에 리턴
 		
 	}
-	public Contact selectContact(Connection conn, int bno) {
+	/**
+	 * 관리자 조회용
+	 * @param conn
+	 * @return
+	 */
+	
+	public ArrayList<Contact> selectContactListView(Connection conn){
+		//select문 =>여러행 조회
+		
+		ArrayList<Contact> listView = new ArrayList<>();
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectContactListView");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				listView.add(new Contact(rs.getInt("con_no"),
+										 rs.getString("con_title"),
+										 rs.getString("mem_id"),
+									     rs.getDate("con_date"),
+									     rs.getInt("con_reply"),
+									     rs.getString("answer")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return listView;
+	
+	
+	}
+	
+
+		public Contact selectContact(Connection conn, int bno) {
 		//select문 => 한 행 조회
 		Contact c = null;
 		
@@ -152,12 +195,12 @@ public class ContactDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				c = new Contact(rs.getInt("CON_NO"),
-								rs.getString("CON_TITLE"),
-								rs.getString("MEM_ID"),
-								rs.getString("CON_TYPE"),
-								rs.getString("CON_CONTENT"),
-								rs.getDate("CON_DATE"));
+				c = new Contact(rs.getInt("con_no"),
+								rs.getString("mem_id"),
+								rs.getString("con_type"),
+								rs.getString("con_title"),
+								rs.getString("con_content"),
+								rs.getDate("con_date"));
 						
 			}
 		} catch (SQLException e) {
@@ -168,4 +211,5 @@ public class ContactDao {
 		}
 		return c;
 	}
+	
 }

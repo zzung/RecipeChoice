@@ -126,7 +126,7 @@ $(document).ready(function(){
 			</div>
 			<br><hr>
 			<div align="center">
-				<button type="submit" class="btn" onclick="answerConfirm();"> 문의하기</button>
+				<button type="submit" class="btn" onclick="answerConfirm();"> 추가하기</button>
 			</div>
 			<script>
 			function answerConfirm(){

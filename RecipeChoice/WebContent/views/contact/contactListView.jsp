@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.admin.contact.model.vo.*" %>    
+<%@ page import="java.util.ArrayList, com.kh.admin.contact.model.vo.*" %>    
 <%
-	Contact c = (Contact)request.getAttribute("c");
+	ArrayList<Contact> listView = (ArrayList<Contact>)request.getAttribute("listView");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -116,11 +117,11 @@
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항관리</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/seasonList.ms'">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;신고 관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/faqList.mf'">&nbsp;&nbsp;&nbsp;FAQ</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.mc'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/reportList.mr'">&nbsp;&nbsp;&nbsp;신고 관리</div>
                
             </div>
             <div id="content_2">
@@ -141,43 +142,35 @@
                     <th width="200">Status</th>
                 </thead>
                 <tbody>
+                <!-- 리스트가 비어있을 경우 -->
+                <% if(listView.isEmpty()) {%>
+                <tr>
+                	<td colspan="5">존재하는 1:1문의가 없습니다.</td>
+                </tr>
+                <% }else { %>
+                <!--  리스트가 비어있지 않을 경우 -->
+                <% for(Contact c : listView){ %>
+                
                     <tr>
                         <td>1004</td>
                         <td>🔒</td>
-                        <td><%= c.getConType() %></td>
                         <td><%= c.getConTitle() %></td>
                         <td><%= c.getUserNo() %></td>
                         <td><%= c.getConDate() %></td>
                         <td><%= c.getAnswer() %></td>
                     </tr>
-                    <tr>
-                        <td>1003</td>
-                        <td>🔒</td>
-                        <td>기타 문의</td>
-                        <td>뇽녕뇽녕닝</td>
-                        <td>홍길동</td>
-                        <td>2020-08-26</td>
-                        <td>답변완료</td>
-                    </tr>
+                      <%} %>
+                    <% }  %>
+                 
                     <tr>
                         <td>1002</td>
                         <td>🔒</td>
                         <td>re:기타 문의</td>
-                        <td>란란나나난난</td>
                         <td>관리자</td>
                         <td>2020-08-24</td>
                         <td><a onclick="modifyConfirm();">수정</a>&nbsp;&nbsp;<a onclick="deleteConfirm();">삭제</a></td>
                     </tr>
-                    
-                    <tr>
-                        <td>1001</td>
-                        <td>🔒</td>
-                        <td>신고 문의</td>
-                        <td>뇽냥닐낭냥녕</td>
-                        <td>유저1</td>
-                        <td>2020-08-24</td>
-                        <td>답변완료</td>
-                    </tr>
+                
                     
                  </tbody>
     

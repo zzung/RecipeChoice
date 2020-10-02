@@ -159,7 +159,7 @@
             <!-- 로그인한 회원 중 관리자 -->
             <% if(loginUser != null && loginUser.getMemId().equals("admin")){ %>
             <div align="right">
-                <button type="submit" class="btn" onclick="EnrollConfirm();"> 답변하기</button>
+                <button type="submit" class="btn" onclick="answerConfirm();"> 답변하기</button>
                 &nbsp;&nbsp;&nbsp;
                 <button type="button" onclick="history.back();">취소</button>
             </div>
@@ -167,12 +167,8 @@
         </div>  
         </form>
         <script>
-        function EnrollConfirm(){
-            if(confirm("등록하시겠습니까?")){
-                location.href='./inquiryEnroll.no';
-            }else{
-                return false;
-             } 
+        function answerConfirm(){
+           location.href="<%= contextPath%>/answer.mc";
             }
      </script>
         </div>

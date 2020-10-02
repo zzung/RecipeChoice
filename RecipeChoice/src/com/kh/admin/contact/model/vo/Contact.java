@@ -11,7 +11,7 @@ public class Contact {
 	private String conContent;
 	private Date conProcessDate;
 	private Date conDate;
-	private String conReply;
+	private int conReply;
 	private String answer;
 	private String status;
 	
@@ -21,7 +21,7 @@ public class Contact {
 	}
 
 	public Contact(int conNo, String userNo, String conType, String conTitle, String conContent, Date conProcessDate,
-			Date conDate, String conReply, String answer, String status) {
+			Date conDate, int conReply, String answer, String status) {
 		super();
 		this.conNo = conNo;
 		this.userNo = userNo;
@@ -35,18 +35,31 @@ public class Contact {
 		this.status = status;
 	}
 	
+	//관리자,사용자 select
 	
+	public Contact(int conNo, String userNo, String conTitle, Date conDate, int conReply, String answer) {
+		super();
+		this.conNo = conNo;
+		this.userNo = userNo;
+		this.conTitle = conTitle;
+		this.conDate = conDate;
+		this.conReply = conReply;
+		this.answer = answer;
+	}
 	
-	public Contact(int conNo, String userNo, String conType, String conTitle, Date conDate) {
+	//사용자insert
+
+	public Contact(int conNo, String userNo, String conType, String conTitle, String conContent) {
 		super();
 		this.conNo = conNo;
 		this.userNo = userNo;
 		this.conType = conType;
 		this.conTitle = conTitle;
-		this.conDate = conDate;
+		this.conContent = conContent;
 	}
 	
 
+	//관리자 상세조회
 	public Contact(int conNo, String userNo, String conType, String conTitle, String conContent, Date conDate) {
 		super();
 		this.conNo = conNo;
@@ -56,10 +69,12 @@ public class Contact {
 		this.conContent = conContent;
 		this.conDate = conDate;
 	}
+	
 
 	public int getConNo() {
 		return conNo;
 	}
+
 
 	public void setConNo(int conNo) {
 		this.conNo = conNo;
@@ -113,11 +128,11 @@ public class Contact {
 		this.conDate = conDate;
 	}
 
-	public String getConReply() {
+	public int getConReply() {
 		return conReply;
 	}
 
-	public void setConReply(String conReply) {
+	public void setConReply(int conReply) {
 		this.conReply = conReply;
 	}
 
