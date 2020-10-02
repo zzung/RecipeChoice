@@ -156,8 +156,7 @@
 							$p.slideUp();
 						}
 					});
-					
-				
+				});
 			</script>
 			
 			<div class="listArea">

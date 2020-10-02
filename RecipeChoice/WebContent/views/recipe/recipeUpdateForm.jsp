@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.kh.user.recipe.model.vo.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%
+	Recipe r = (Recipe)request.getAttribute("r");
+	String[] tagList = (String[])r.getRcpTag().split(",");
+
+	ArrayList<IngredientList> ing = (ArrayList<IngredientList>)request.getAttribute("ingredient");
+	ArrayList<Cook> cook = (ArrayList<Cook>)request.getAttribute("cook"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,17 +28,19 @@
 		<div class="content">
 			<div class="w3-container w3-border-bottom w3-border-grey">
 				<p id="pageTitle">
-					<b><big>레시피 작성하기 </big></b>
+					<b><big>레시피 수정하기 </big></b>
 				</p>
 			</div>
-			<form action="<%=contextPath%>/enrollForm.rp" id="writeRecipe" method="POST" enctype="multipart/form-data">
+			<form action="<%=contextPath%>/update.rp" id="writeRecipe" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>"> 
 				<input type="hidden" name="memName" value="<%=loginUser.getMemName()%>">
+				<input type="hidden" name="rcpNo" value="<%=r.getRcpNo()%>"> 
+			
 				<table class="tb_writeRecipe">
 					<tr>
 						<!-- 왼쪽컬럼 -->
 						<td class="leftContent" align="center">
-						<img src="resources/image/logo/churro.png" id="titleImg" /><br />
+						<img src="<%=contextPath %>/resources/recipe_upfiles/<%=r.getRcpPic() %>" id="titleImg" /><br />
 							<div class="userImg">
 								<img src="resources/image/mypage/cat.jpg" id="userPic"
 									style="width: 90px" /> <br>
@@ -40,14 +51,14 @@
 							<p style="font-size: 20px">
 								<b>레시피 제목 및 설명 </b>
 							</p> 
-							<textarea name="title" cols="40" rows="1" style="resize: none; font-size: 14px" placeholder="제목 입력(20자 내외)"></textarea> 
-							<textarea name="content" cols="40" rows="5" style="resize: none; font-size: 14px" placeholder="설명 입력(50자 내외)"></textarea> 
+							<textarea name="title" cols="40" rows="1" style="resize: none; font-size: 14px" placeholder="제목 입력(20자 내외)"><%=r.getRcpTitle() %></textarea> 
+							<textarea name="content" cols="40" rows="5" style="resize: none; font-size: 14px" placeholder="설명 입력(50자 내외)"><%=r.getRcpContent() %></textarea> 
 							<br />
 						<br />
 
 							<p style="font-size: 20px">
 								<b>조리 시간 설정</b>
-							</p> <input type="number" value="10" name="time" min="10" max="60"
+							</p> <input type="number" value="<%=r.getRcpTime() %>" name="time" min="10" max="60"
 							step="10" style="width: 70px" /> <br />
 						<br /> <!--반복문 돌려야함-->
 							<p style="font-size: 20px">
@@ -56,18 +67,19 @@
 									<i class="fa fa-plus" style="font-size: 14px"></i>
 								</button>
 							</p>
-
-							<div id="ingList">
-								<input type="text" name="dish" placeholder="재료명" style="font-size:14px; width:70px; height:30px;">
-								<input type="text" name="metering" placeholder="계량" style="font-size:14px; width:180px; height:30px;">
-							</div>
 							
+							<%for(IngredientList i : ing){ %>
+							<div id="ingList">
+								<input type="text" name="dish" placeholder="재료명" style="font-size:14px; width:70px; height:30px;" value="<%=i.getIngDish() %>">
+								<input type="text" name="metering" placeholder="계량" style="font-size:14px; width:180px; height:30px;" value="<%=i.getIngMetering()%>">
+							</div>
+							<%} %>
 							<br /><br />
 
 							<p style="font-size: 20px">
 								<b>요리 종류 선택</b><br />
 							</p> 
-							<select name="dishType" id="" style="font-size: 15px">
+							<select name="dishType" id="dishType" style="font-size: 15px">
 								<option value="종류별">종류별</option>
 								<option value="밥종류">밥종류</option>
 								<option value="찌개">찌개</option>
@@ -76,6 +88,15 @@
 								<option value="볶음">볶음</option>
 								<option value="밑반찬">밑반찬</option>
 							</select> 
+							<script>
+								$(function(){
+									$("#dishType>option").each(function(){
+										if($(this).text() == "<%= r.getRcpDishType()%>"){
+											$(this).attr("selected", true);
+										}
+									});
+								});
+							</script>
 						<br />
 						<br /> <!--태그별-->
 							<p style="font-size: 20px">
@@ -84,27 +105,22 @@
 									<i class="fa fa-plus" style="font-size: 14px"></i>
 								</button>
 							</p>
-
+							<%for(int i=0; i<tagList.length; i++) {%>
 							<div id="tagList">
-								<select name="tag" id="" style="font-size: 15px">
-									<option value="">재료선택</option>
-									<option value="소고기">소고기</option>
-									<option value="돼지고기">돼지고기</option>
-									<option value="닭고기">닭고기</option>
-									<option value="오리고기">오리고기</option>
-									<option value="해물류">해물류</option>
-									<option value="건어물류">건어물류</option>
-									<option value="건어물류">콩/견과류</option>
-									<option value="달걀/유제품">달걀/유제품</option>
-									<option value="체소류">체소류</option>
-									<option value="과일류">과일류</option>
-									<option value="버섯류">버섯류</option>
-									<option value="곡류">곡류</option>
-									<option value="밀가루">밀가루</option>
-									<option value="가공식품">가공식품</option>
+								<select name="tag" id="tag" style="font-size: 15px">
+									<option value="<%=tagList[i]%>"><%=tagList[i]%></option>
 								</select> 
 							</div>
-							<div id="returnCopy"></div>
+							<%} %>
+							<script>
+								$(function(){
+									$("#tag>option").each(function(){
+										if($(this).text() == "<%=tagList%>"){
+											$(this).attr("selected",true);
+										}
+									});
+								});
+							</script>
 						</td>
 					</tr>
 
@@ -119,27 +135,31 @@
 							</p> <br />
 						</td>
 					</tr>
-
+					
+					<%for(Cook c : cook) { %>
 					<tr id="cookDetail">
 						<!-- 작성하는거 하나씩 줄이기 (반복문필요)-->
 						<td align="center">
-							<button class="removeRow a" type="button" disabled>
+							<button class="removeRow a" type="button">
 								<i class="fa fa-minus" style="font-size: 14px"></i>
-							</button> &nbsp;&nbsp; <img src="resources/image/logo/churro.png" class="detailImg" id="detailImg1" />
+							</button> &nbsp;&nbsp; <img src="<%=contextPath %>/resources/recipe_upfiles/<%=c.getCookPic() %>" class="detailImg" id="detailImg1" />
 						</td>
-						<td align="center"><span class="dot countIng">1</span>&nbsp;&nbsp;
-							<input type="hidden" name="order" value="1"> 
-							<textarea name="recipeDetail" class="text" cols="40" rows="5" style="resize: none"></textarea></td>
+						<td align="center"><span class="dot countIng"><%=c.getCookOrder() %></span>&nbsp;&nbsp;
+							<input type="hidden" name="cookOrder" value="<%=c.getCookOrder() %>"> 
+							<input type="hidden" name="cookPic" value="<%=c.getCookPic() %>">
+							<textarea name="recipeDetail" class="text" cols="40" rows="5" style="resize: none"><%=c.getCookContent() %></textarea></td>
 					</tr>
+					<%} %>
 					<tr>
 						<td id="tbody" colspan="2"></td>
 					</tr>
 
 				</table>
 				<div class="fileArea">
-					<input type="file" id="recipeWrite_mainPic" name="upfile" onchange="loadImg(this,100);" required /> 
-					<input type="file" id="recipeWrite_detailPic" name="recipeWritePic1" onchange="loadImg(this,1);">
-
+					<input type="file" id="recipeWrite_mainPic" name="reUpfile" onchange="loadImg(this,100);" required /> 
+					<input type="file" id="recipeWrite_detailPic" name="reRecipeWritePic1" onchange="loadImg(this,1);">
+					<input type="hidden" name="originFileNo" value="<%=r.getRcpNo() %>"> // 대표이미지
+					<input type="hidden" name="originFileName" value="<%=r.getRcpPic() %>"> //대표이미지 
 				</div>
 				<!-- 레시피작성 대표이미지 등록 -->
 				<script>
@@ -195,7 +215,7 @@
             $(document).ready(function () {
          
            	rowIdx = 1;
-            count = 1
+            count = 1;
 
               $(".addRow").on("click", function () {
                 $("tbody").append(`<tr>
@@ -210,7 +230,7 @@
                     <input type="hidden" name="order" value="`+ rowIdx +`">
                   <textarea name="recipeDetail" class="text" cols="40" rows="5" style="resize: none"></textarea>
                   <div class="fileArea">
-                  <input type="file" class="recipeWrite_detailPic" id="detailBtn` + count + `" name="recipeWritePic`+ rowIdx + `" onchange="loadImg(this,`+ count +` );">
+                  <input type="file" class="recipeWrite_detailPic" id="detailBtn` + count + `" name="reRecipeWritePic`+ rowIdx + `" onchange="loadImg(this,`+ count +` );">
                   </div></td>
                 </tr>`);
               });
@@ -282,7 +302,7 @@
 				<br>
 				<br>
 				<div align="right">
-					<button type="submit" id="insertRecipe">등록하기</button>
+					<button type="submit" id="insertRecipe">수정하기</button>
 				</div>
 				<br>
 				<br>

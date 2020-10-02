@@ -44,7 +44,7 @@ public class RecipeUpdateFormServlet extends HttpServlet {
 		request.setAttribute("ingredient", ingredient);
 		request.setAttribute("cook", cook);
 		
-		request.getRequestDispatcher("view/recipe/recipeUpdateForm.jsp").forward(request, response);
+		request.getRequestDispatcher("views/recipe/recipeUpdateForm.jsp").forward(request, response);
 		
 		
 	}

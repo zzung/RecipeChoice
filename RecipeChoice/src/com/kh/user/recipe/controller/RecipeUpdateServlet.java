@@ -21,29 +21,26 @@ import com.kh.user.recipe.model.vo.Recipe;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class RecipeEnrollFormServlet
+ * Servlet implementation class RecipeUpdateServlet
  */
-@WebServlet("/enrollForm.rp")
-public class RecipeInsertServlet extends HttpServlet {
+@WebServlet("/update.rp")
+public class RecipeUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public RecipeUpdateServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public RecipeInsertServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		request.setCharacterEncoding("UTF-8");
-
 		if (ServletFileUpload.isMultipartContent(request)) {
 
 			int maxSize = 10 * 1024 * 1024;
@@ -67,17 +64,28 @@ public class RecipeInsertServlet extends HttpServlet {
 
 			int rcpTime = Integer.parseInt(multiRequest.getParameter("time"));
 			String rcpContent = multiRequest.getParameter("content");
-			String rcpPic = multiRequest.getFilesystemName("upfile");
-
+			String rcpPic = multiRequest.getFilesystemName("reUpfile");
+			
 			Recipe r = new Recipe();
-			r.setUserNo(userNo);
-			r.setMemName(memName);
-			r.setRcpTitle(rcpTitle);
-			r.setRcpDishType(rcpDishType);
-			r.setRcpTag(rcpTag);
-			r.setRcpTime(rcpTime);
-			r.setRcpContent(rcpContent);
-			r.setRcpPic(rcpPic);
+			if(multiRequest.getFilesystemName("reUpfile") != null) {
+				
+				r.setUserNo(userNo);
+				r.setMemName(memName);
+				r.setRcpTitle(rcpTitle);
+				r.setRcpDishType(rcpDishType);
+				r.setRcpTag(rcpTag);
+				r.setRcpTime(rcpTime);
+				r.setRcpContent(rcpContent);
+				r.setRcpPic(multiRequest.getFilesystemName("reUpfile"));
+				
+				if(multiRequest.getParameter("originFileNo") != null) {
+					r.setRcpNo(Integer.parseInt(multiRequest.getParameter("originFileNo")));
+					
+					File deleteFile = new File(savePath + multiRequest.getParameter("originFileName"));
+					deleteFile.delete(); 
+				}
+			}
+
 
 			// 2.
 			String[] ingDishs = multiRequest.getParameterValues("dish");
@@ -98,14 +106,28 @@ public class RecipeInsertServlet extends HttpServlet {
 			ArrayList<Cook> cookList = new ArrayList<>();
 			
 			for(int i = 0; i<cookContents.length;i++) {
-				String cookPic = multiRequest.getFilesystemName("recipeWritePic" + (i +1));
+				String cookPic = multiRequest.getFilesystemName("reRecipeWritePic" + (i +1));
 
 				Cook c = new Cook();
-				c.setCookContent(cookContents[i]);
-				c.setCookOrder(i+1);
-				c.setCookPic(cookPic);
 				
-				cookList.add(c);
+				if(multiRequest.getFilesystemName("reRecipeWritePic" + (i +1)) != null) {
+					c.setCookContent(cookContents[i]);
+					c.setCookOrder(i+1);
+					c.setCookPic(cookPic);
+					
+					if(multiRequest.getParameter("cookOrder") != null) {
+						c.setCookOrder(Integer.parseInt(multiRequest.getParameter("cookOrder")));
+						
+						File deleteFile = new File(savePath + multiRequest.getFilesystemName("cookPic"));
+						deleteFile.delete(); 
+					} else {
+						c.setCookOrder(i+1);
+					}
+					
+					cookList.add(c);
+
+				}
+				
 			}
 			
 			int result = new RecipeService().insertRecipe(r, ingList, cookList);
@@ -113,36 +135,26 @@ public class RecipeInsertServlet extends HttpServlet {
 			if (result > 0) {
 
 				HttpSession session = request.getSession();
-				session.setAttribute("alertMsg", "게시글 등록 완료되었습니다.");
+				session.setAttribute("alertMsg", "게시글 수정 완료되었습니다.");
 
-				response.sendRedirect(request.getContextPath() + "/recipeView.rp");
+				response.sendRedirect(request.getContextPath() + "/detail.rp?=rcpNo" + r.getRcpNo());
 
 			} else {
 
 				request.setAttribute("errorMsg", "작성글 등록에 실패하였습니다.");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 
-				if (r != null) {
-					File failedFile = new File(savePath + r.getRcpPic());
-					failedFile.delete();
-				}
-
-				for (int i = 0; i < cookList.size(); i++) {
-					File failedFile = new File(savePath + cookList.get(i).getCookPic());
-					failedFile.delete();
 				}
 
 			} // e.if
 
 		}
-	}
+	
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

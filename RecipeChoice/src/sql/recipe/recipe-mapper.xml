@@ -101,8 +101,7 @@
 			, USER_NO
 			, MEM_NAME
 			, RCP_TITLE
-			,
-			RCP_DISH_TYPE
+			, RCP_DISH_TYPE
 			, RCP_TAG
 			, RCP_TIME
 			, RCP_CONTENT
