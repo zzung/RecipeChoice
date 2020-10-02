@@ -88,8 +88,8 @@
             <div id="content_1">
                 <div id="menu_1">고객센터</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1 문의</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath%>/faqDetail.fa'">&nbsp;&nbsp;&nbsp;FAQ</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/list.co'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;1:1 문의</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;개인정보취급방침</div>
                 <div id="menu_3">
                     <br><b>&nbsp;&nbsp;고객센터</b><br>
@@ -98,42 +98,40 @@
                     <br>&nbsp;&nbsp;(토,일 공휴일은 휴무)<br>
                 </div>
             </div>
+            <br>
              <div id="content_2">
-	
-				<br><br>
-                <h1>1:1 문의
+                <h3>1:1 문의
                     &nbsp;<img src="resources/image/admin/inquiry.jpg" >
-				 </h1>
-                <h3>&nbsp;1:1 문의하기
-                </h3>
+				 </h3>
+                <h6>&nbsp;1:1 문의하기
+                </h6>
                 <hr>
 
                 <form action="<%=contextPath %>/insert.co" method="post"> 
                 <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
                  <table class="EnrollArea">
                     <tr>
-                        <th ><h2>제목&nbsp;</h2></th>
+                        <th ><h5>제목&nbsp;</h5></th>
                         <td colspan="4" ><input type="text" name="title" placeholder="내용을 입력하세요"required style="height:22px;"></td>
                     </tr>
                     <tr>
-                        <th><h2>분야 &nbsp;</h2></th>
+                        <th><h5>분야 &nbsp;</h5></th>
                         <td >
                             <select name="category"style="height:25px; width:110px;"  >
-                                <option value="10" float="">레시피 문의</option>
+                                <option value="10">레시피 문의</option>
                                 <option value="20">신고 문의</option>
                                 <option value="30">기타 문의</option>
                              </select>
                         </td>
                     </tr>
                     <tr>
-                        <td><h2>내용&nbsp;</h2></td>
+                        <td><h5>내용&nbsp;</h5></td>
                         <td>
-                           <textarea name="content" cols="70" rows="13" style="resize:none; margin-top:10px;"></textarea>
+                           <textarea name="content" cols="70" rows="10" style="resize:none; margin-top:10px;" required></textarea>
                         </td>
                     </tr>
             </table> 
-            <br> 
-            <hr>     
+           <hr>     
              <div align="right">
                 <button type="submit">문의등록</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

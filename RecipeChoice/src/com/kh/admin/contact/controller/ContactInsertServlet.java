@@ -36,7 +36,7 @@ public class ContactInsertServlet extends HttpServlet {
 		
 		String userNo = request.getParameter("userNo"); 
 		String conTitle = request.getParameter("title");
-		String conType = request.getParameter("category");	
+		String conType = request.getParameter("contype");	
 		String conContent = request.getParameter("content");
 		
 		Contact c = new Contact();
@@ -51,7 +51,7 @@ public class ContactInsertServlet extends HttpServlet {
 			
 			request.getSession().setAttribute("alertMsg", "문의 등록 완료!");
 			
-			response.sendRedirect(request.getContextPath() + "/list.co");
+			response.sendRedirect(request.getContextPath() + "/ContactList.co?currentPage=1");
 			
 		}else { // 실패 ==> 에러페이지
 			

@@ -117,8 +117,8 @@ div{
             <div id="content_1">
                 <div id="menu_1">고객센터</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/notice.no'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;공지사항</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;1:1 문의</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/faqDetail.fa'">&nbsp;&nbsp;FAQ</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.co'">&nbsp;&nbsp;1:1 문의</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;개인정보취급방침</div>
                 <div id="menu_3">
                     <br>&nbsp;&nbsp;고객센터

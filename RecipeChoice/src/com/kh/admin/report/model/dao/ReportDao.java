@@ -12,17 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.admin.contact.model.vo.Contact;
-
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Properties;
-
-import com.kh.admin.contact.model.vo.Contact;
+import com.kh.admin.report.model.vo.PageInfo;
 import com.kh.admin.report.model.vo.Report;
 
 public class ReportDao {
@@ -40,16 +30,44 @@ public class ReportDao {
 		}
 	
 	}
+	
+	public int selectListCount(Connection conn) {
+		//select문 =>총 게시글 갯수(int)
+		int listCount = 0;
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			if(rs.next()) {
+				listCount = rs.getInt("LISTCOUNT");
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return listCount;
+		
+	}
+	
 	/**
 	 *  신고관리 조회페이지
 	 * @param conn
 	 * @return
 	 */
-	public ArrayList<Report> selectReportList(Connection conn){
+	public ArrayList<Report> selectList(Connection conn, PageInfo pi){
+		//select문 => 여러행 조회
+		ArrayList<Report> list = new ArrayList<>();
 		
-		ArrayList<Contact> list = new ArrayList<>();
-		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		
 		ResultSet rs = null;
 		
@@ -58,22 +76,34 @@ public class ReportDao {
 		
 		try {
 			
-			stmt=conn.createStatement();
+			pstmt = conn.prepareStatement(sql);
 			
-			rs = stmt.executeQuery(sql); 
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rs = pstmt.executeQuery();
+			
+			
 			
 			while(rs.next()) {
-				list.add(new Report(re.getInt()
-									re.getString()
-									re.getString(),
-									re.getString(),
-									));
+				list.add(new Report(rs.getInt("REP_NO"),
+									rs.getString("WRITER"),
+									rs.getString("TARGET"),
+									rs.getString("REP_REASON"),
+									rs.getDate("REP_DATE")));
 									
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
 		}
+		return list;
 		
 	}
 }

@@ -1,7 +1,6 @@
-package com.kh.user.recipe.controller;
+package com.kh.admin.contact.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.user.recipe.model.service.RecipeService;
-import com.kh.user.recipe.model.vo.Cook;
-import com.kh.user.recipe.model.vo.IngredientList;
-import com.kh.user.recipe.model.vo.Recipe;
+import com.kh.admin.contact.model.service.ContactService;
+import com.kh.admin.contact.model.vo.Contact;
 
 /**
- * Servlet implementation class RecipeUpdateFormServlet
+ * Servlet implementation class ContactDetailViewServlet
  */
-@WebServlet("/updateForm.rp")
-public class RecipeUpdateFormServlet extends HttpServlet {
+@WebServlet("/detail.mc")
+public class ContactDetailViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecipeUpdateFormServlet() {
+    public ContactDetailViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,19 +30,14 @@ public class RecipeUpdateFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		int rcpNo = Integer.parseInt(request.getParameter("rcpNo"));
+		Contact c = new ContactService().selectContact(bno);
 		
-		Recipe r = new RecipeService().selectDetailRecipeList(rcpNo);
-		ArrayList<IngredientList> ingredient = new RecipeService().selectDetailIngList(rcpNo);
-		ArrayList<Cook> cook = new RecipeService().selectDetailCookList(rcpNo);
+		request.setAttribute("c", c);
 		
-		request.setAttribute("r", r);
-		request.setAttribute("ingredient", ingredient);
-		request.setAttribute("cook", cook);
-		
-		request.getRequestDispatcher("views/recipe/recipeUpdateForm.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("views/contact/contactDetailView.jsp").forward(request, response);
 		
 	}
 
