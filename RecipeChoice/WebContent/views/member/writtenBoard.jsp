@@ -39,7 +39,7 @@
         
                 <a href="">츄레</a>
                 &lt;
-                <a href="">회원가입</a>
+                <a href="">마이페이지</a>
             </span>   
             <div id="subvar"class="content1">
                 <div class="profile">

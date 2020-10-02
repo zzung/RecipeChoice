@@ -65,6 +65,13 @@
 		   SET STATUS='N' 
 		 WHERE MEM_ID = ? 
 	</entry>
+	<entry key="searchId">
+		SELECT /* com.kh.member.model.dao.MemberDao#loginMember() */
+				   MEM_ID				  
+			  FROM MEMBER
+			 WHERE STATUS ='Y'
+			   AND EMAIL = ?
+	</entry>
 	<entry key="selectMemberList">
 		SELECT
 		       M.USER_NO

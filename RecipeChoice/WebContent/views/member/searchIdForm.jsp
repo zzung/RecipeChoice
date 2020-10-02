@@ -1,21 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 <style>
-<style>
+
     .outer{
     
-        width:600px;
-        height:800px;
-        margin: auto;
-        margin-top: 160px;
+     
         
     }
    .click_link a, a:hover {
@@ -47,17 +43,16 @@
         margin: auto;
     }
     .click_link{
-        margin: 160px 50px 60px 240px;
+        margin: 190px 50px 60px 240px;
     }
     
- 
-</style>
+
 </style>
 </head>
 <body>
 
 <%@include file="../common/menubar.jsp" %>
-
+ 
 	<div class="outer">
 	    <div align="right" class="click_link" style="width: 900px;">
 	
@@ -68,6 +63,8 @@
 	        <a href="">츄레</a>
 	        &lt;
 	        <a href="">로그인</a>
+	        &lt;
+	        <a href="">ID찾기</a>
 	    </div>
 
 
@@ -81,7 +78,7 @@
                 <table align="center">
                     <tr>
                         <td> 이메일</td>
-                        <td><input type="email" id="userEmail" name="userEmail" class="form-control" style="height:30px;width:260px;"maxlength="20" placeholder="가입시 작성한 이메일 입력해주세요"required></td><br>
+                        <td><input type="email" id="userEmail" name="userEmail" class="form-control" style="height:30px;width:260px;"maxlength="30" placeholder="가입시 작성한 이메일 입력해주세요"required></td><br>
                         <td></td>
                     </tr>
                   
@@ -95,10 +92,30 @@
         </div>
         <script>
       	  $("#search_btn").click(function(){
+      		  
 		    	  $userEmail = $("#userEmail").val();
-		    	  console.log($userEmail);
-		    	  $("#email2").text($userEmail);
-		    	  $("#id2").text("일단아이디");
+		    	 
+		    	  $.ajax({
+		    		  url:"<%=contextPath%>/searchId.me",
+			  			type:"get",
+			  			data:{userEmail:$userEmail},
+			  			success:function(searchId){
+						
+			  				if(searchId == ""){
+			  					 $("#email2").text($userEmail);
+			  					$("#id2").text("해당이메일로 가입하신 이력이 없습니다!").css("color","red");
+			  				
+			  				}else{
+			  				  $("#email2").text($userEmail);
+					    	  $("#id2").text(searchId);
+			  					
+			  				}
+			  			}, error:function(){
+			  				console.log("ajax 통신 실패 !");
+			  			}
+		    	  });
+		    	  
+		    	
 		      });
         </script>
          <!-- Modal -->
@@ -128,7 +145,6 @@
 		        location.href="<%=contextPath%>/loginForm.me";
 		      });
 		      
-		  
 		  </script>
 
 	</div>

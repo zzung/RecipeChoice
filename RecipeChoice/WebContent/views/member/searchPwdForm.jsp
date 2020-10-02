@@ -11,15 +11,9 @@
 <style>
 
     .outer{
-    
-        width:600px;
-        height:800px;
-        /* border:solid 1px; */
-        margin: auto;
-        margin-top: 230px;
-        
+	
     }
-    a, a:hover {
+    .click_link a, a:hover {
     color: black;
     text-decoration: none;
     vertical-align: middle;
@@ -29,24 +23,24 @@
     }
     .form-control{
         font-size: 13px;
-        /* width: 250px; */
+         width: 250px; 
     }
     #search_btn{
         margin-top: 10px;
         width: 345px;
     }
-    #id_search td{
+    #pwd_search td{
        padding: 0px 0px 10px 5px;
     }
-    #id_search{
-        margin-top: 130px;
+    #pwd_search{
+        margin-top: 300px;
         border: solid 1px green;
         padding: 20px;
         width:550px;
         margin: auto;
     }
     .click_link{
-        margin: 50px 50px 60px 240px;
+        margin: 190px 50px 60px 240px;
     }
     #checkNumBtn{
         font-size: 13px;
@@ -69,14 +63,16 @@
             <a href="">츄레</a>
             &lt;
             <a href="">로그인</a>
+            &lt;
+	        <a href="">PWD찾기</a>
         </div>
 
 
         <!-- 1. 전체 내용을 감싸는 div -->
-        <div id="id_search">
+        <div id="pwd_search">
             <h3 align="center"><b>pwd 찾기</b></h3>
             <!-- 2_1. 입력을 받는 input요소들이 위치할 영역 -->
-            <form action="" id="id_search_form">
+            <form action="" id="pwd_search_form">
     
                 <!-- 3_1. ID/PWD input요소가 들어갈 div -->
                 <table align="center">

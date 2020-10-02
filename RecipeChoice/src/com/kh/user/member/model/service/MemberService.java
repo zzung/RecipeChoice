@@ -143,5 +143,13 @@ public class MemberService {
 		
 		return result;
 	}
+	public String searchId(String email) {
+		
+		Connection conn = getConnection();
+		String searchId = new MemberDao().searchId(conn, email);
+		
+		close(conn);
+		return searchId;
+	}
 	
 }
