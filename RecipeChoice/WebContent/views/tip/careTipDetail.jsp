@@ -1,5 +1,9 @@
+<%@page import="com.kh.admin.tip.model.vo.Tip"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Tip t = (Tip)request.getAttribute("t");
+%>
 <!DOCTYPE html>
 <html>
 <head>

@@ -128,4 +128,15 @@ public class TipDao {
 		return result;
 	}
 
+
+	public int updateCareTip(Connection conn, Tip t) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateCareTip");
+		
+		
+		return 0;
+	}
+
 }

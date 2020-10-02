@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%
 	ArrayList<Tip> careTipList = (ArrayList<Tip>)request.getAttribute("careTipList");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -150,10 +151,10 @@
 	                    	<% for (Tip t : careTipList) { %>
 	                        <tr>
 	                            <td width="50px">
-	                            &nbsp;&nbsp;<input type="checkbox" id="selectContent" name="selectContent" style="width: 15px; height: 15px;">
+	                            &nbsp;&nbsp;<input type="checkbox" id="selectTip" name="selectContent" style="width: 15px; height: 15px;">
 	                            </td>
-	                            <td width="100px"><%= t.getTipNo() %></td>
-	                            <td width="500px"><%= t.getTipTitle()%></td>
+	                            <td width="100px" id="tipNo"><%= t.getTipNo() %></td>
+	                            <td width="500px" onclick="detailView();"><%= t.getTipTitle()%></td>
 	                            <td width="100px"><%= t.getCreateDate() %></td>
 	                            <td width="100px"><%= t.getTipCount() %></td>
 	                        </tr>
@@ -165,7 +166,7 @@
                 <br><br><br><br><br>
                 <div align="right" >
                 	<a href="" class="btn btn-dark">삭제</a>
-                	<a href="" class="btn btn-primary">수정</a>
+                	<button onclick="careTipUpdate();" class="btn btn-primary">수정</button>
                 	<a href="<%=contextPath%>/careTipEnrollForm.mn" class="btn btn-success">작성</a>
                 </div>
 
@@ -186,8 +187,22 @@
 	        </div>
         </div>
         
-        
-       <script>
+        <script>
+        	function careTipUpdate(){
+        		if($("input:checkbox[id='selectTip']").is(":checked") == true) {
+    				var tno = $(this).parent().children().eq(1).text();
+    				console.log(tno);
+    				location.href = <%=contextPath%>+"/updateFormCareTip.mn?tno="+tno;
+    			}else{
+    				alert("수정할 게시글을 선택해주세요 !");
+    			}
+        	};
+			
+		</script>
+		
+       	<script>
+       
+       		<%--체크박스까지 적용되지 않게 수정필요
         	$(function(){
         		$(".tb1>tbody>tr").click(function(){
         			var tno = $(this).children().eq(1).text();
@@ -195,6 +210,14 @@
         			location.href= "<%=contextPath%>/careTipDetail.mn?tno="+tno;
         		});
         	});
+        	--%>
+        	
+        	<%-- function detailView(){
+        		/* var tno = $(this).parent().children().eq(1).text(); */
+        		var tno = $("#tipNo").val();
+        		console.log(tno);
+        		location.href= "<%=contextPath%>/careTipDetail.mn?tno="+tno;
+        	} --%>
         </script>
         
         

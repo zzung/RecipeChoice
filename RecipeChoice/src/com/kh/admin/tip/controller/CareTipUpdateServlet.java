@@ -10,17 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.admin.tip.model.service.TipService;
 import com.kh.admin.tip.model.vo.Tip;
 
-@WebServlet("/insertCareTip.mn")
-public class CareTipInsertServlet extends HttpServlet {
+@WebServlet("/updateCareTip.mn")
+public class CareTipUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public CareTipInsertServlet() {
+    public CareTipUpdateServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		// careTipEnrollForm.jsp에서 받은 파라미터 넣어서 tip객체 생성
+	
+		request.setCharacterEncoding("utf-8");
+	
+		int tipNo = Integer.parseInt(request.getParameter("tipNo"));
 		String tipCategory = request.getParameter("손질법");
 		String tipTitle = request.getParameter("tipTitle");
 		String tipInfo = request.getParameter("tipInfo");
@@ -29,6 +31,7 @@ public class CareTipInsertServlet extends HttpServlet {
 		String tipContent = request.getParameter("summernote");
 		
 		Tip t = new Tip();
+		t.setTipNo(tipNo);
 		t.setTipCategory(tipCategory);
 		t.setTipTitle(tipTitle);
 		t.setTipInfo(tipInfo);
@@ -36,15 +39,18 @@ public class CareTipInsertServlet extends HttpServlet {
 		t.setTipPicture(tipPic);
 		t.setTipContent(tipContent);
 		
-		int result = new TipService().insertCareTip(t);
+		System.out.println(t);
+		
+		int result = new TipService().updateCareTip(t);
 		
 		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "손질법 게시판에 글등록 성공!");
+			request.getSession().setAttribute("alertMsg", "손질법 글 수정 성공 !");
+			response.sendRedirect(request.getContextPath()+"/careTipDetail.mn?tno="+tipNo);
 		}else {
-			request.getSession().setAttribute("alertMsg","손질법 게시판에 글등록 실패");
+			request.setAttribute("alertMsg", "손질법 글 수정 실패");
+			request.getRequestDispatcher("views/tip/careTipList.jsp").forward(request, response);
 		}
 		
-		response.sendRedirect(request.getContextPath()+"/careTipList.mn");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

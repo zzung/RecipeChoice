@@ -69,4 +69,14 @@
 		       , ?
 		       )
 	</entry>
+	<entry key="updateCareTip">
+		UPDATE 
+		       INGREDIENT_TIP
+		   SET TIP_TITLE =?
+		     , TIP_INFO =?
+		     , TIP_ING = ?
+		     , TIP_CONTENT = ?
+		     , TIP_PIC = ?
+		 WHERE TIP_NO = ?
+	</entry>
 </properties>

@@ -40,4 +40,18 @@ public class TipService {
 		return result;
 	}
 
+	public int updateCareTip(Tip t) {
+
+		Connection conn = getConnection();
+		int result = new TipDao().updateCareTip(conn, t);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
 }
