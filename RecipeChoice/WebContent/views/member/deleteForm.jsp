@@ -104,25 +104,37 @@
 	        <p align="center">회원 탈퇴시 자동으로 작성글이 삭제 되지 않으니<br> 게시글이 남는 것을 원하지 않으신다면 삭제 후 탈퇴 해주세요! </p>
 	        <p align="center" id="important">탈퇴를 진행하시려면 비밀번호를 입력해주세요  </p>
 	        <!-- 2_1. 입력을 받는 input요소들이 위치할 영역 -->
-		            <form action="" id="deleteMemForm">
-		    
+		         
+		    	<form action="delete.me" method="post">
 		                <!-- 3_1. ID/PWD input요소가 들어갈 div -->
-		                <table align="center">
+		                <table align="center"  id="deleteMemForm">
 		                    <tr>
 		                        <td> 비밀번호 : </td>
 		                        <td><input type="password" name="userPwd" maxlength="15" class="form-control" style="height:30px;" placeholder="password"required></td>
 		                        <td></td>
 		                    </tr>
 		                    <tr>
-		                        <td colspan="3"><input type="submit"class="btn btn-success" id="deleteMemBtn" value="탈퇴" >
+		                        <td colspan="3"><input type="submit" onclick="return validatePwd();"class="btn btn-success" id="deleteMemBtn" value="탈퇴" >
 		                        </td>
 		                    </tr>
 		                </table>
-		            </form>
+		         </form>
 	
 	      </div>    
 	
     </div>
 </div>
+<script>
+
+function validatePwd(){
+	if($("input[name=userPwd]").val() == <%=userPwd%>){
+	}else{
+		alert("비밀번호가 일치하지 않습니다.");
+		$("input[name=userPwd]").focus();
+		return false;
+	}
+}
+
+</script>
 </body>
 </html>

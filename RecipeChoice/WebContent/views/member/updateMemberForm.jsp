@@ -107,7 +107,8 @@
 	        <p align="center" id="important">회원 정보를 수정하시려면 아래에 비밀번호를 입력해주세요 !  </p><br>
 	        <!-- 2_1. 입력을 받는 input요소들이 위치할 영역 -->
 		          
-    
+      
+		    <form action="updateForm2.me" method="post">
                 <!-- 3_1. ID/PWD input요소가 들어갈 div -->
                 <table align="center">
                
@@ -126,19 +127,20 @@
                         </td>
                     </tr>
                 </table>
-        
+        	</form>
 
 	      </div>    
 	
     </div>
 </div>
+
 <script>
 	function validatePwd(){
 		if($("input[name=userPwd]").val() == <%=userPwd%>){
 			
-			location.href = "<%=contextPath%>/updateForm2.me";
 		}else{
 			alert("비밀번호가 일치하지 않습니다.");
+			$("input[name=userPwd]").focus();
 			return false;
 		}
 	}
