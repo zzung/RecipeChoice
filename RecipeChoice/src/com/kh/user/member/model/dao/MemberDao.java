@@ -50,6 +50,7 @@ public class MemberDao {
 							   rs.getString("mem_pwd"),
 							   rs.getString("mem_name"),
 							   rs.getString("email"),
+							   rs.getString("mem_pic"),
 							   rs.getDate("enroll_Date"),
 							   rs.getString("status")
 						
@@ -63,7 +64,6 @@ public class MemberDao {
 			close(rs);
 			close(pstmt);
 		}
-	
 		return m;
 	}
 	public int insertMember(Connection conn, Member m) {
@@ -248,5 +248,26 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return m;
+	}
+	
+	public int deleteMember(Connection conn, String memId) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

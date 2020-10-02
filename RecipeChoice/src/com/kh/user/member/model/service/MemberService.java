@@ -122,5 +122,26 @@ public class MemberService {
 		return updateMem;  // 갱신된 회원객체 / null
 		
 	}
+	/**
+	 * 회원 탈퇴용 서비스
+	 * @param memId(사용자 아이디)
+	 * @return
+	 */
+	public int deleteMember (String memId) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().deleteMember(conn, memId);
+		
+		if(result > 0) {
+			commit(conn);
+			
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 }

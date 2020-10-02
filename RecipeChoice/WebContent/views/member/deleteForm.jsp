@@ -107,7 +107,9 @@
 		         
 		    	<form action="delete.me" method="post">
 		                <!-- 3_1. ID/PWD input요소가 들어갈 div -->
+		               
 		                <table align="center"  id="deleteMemForm">
+		                 <input type="hidden" name="userId" class="form-control" value="<%=userId%>">
 		                    <tr>
 		                        <td> 비밀번호 : </td>
 		                        <td><input type="password" name="userPwd" maxlength="15" class="form-control" style="height:30px;" placeholder="password"required></td>

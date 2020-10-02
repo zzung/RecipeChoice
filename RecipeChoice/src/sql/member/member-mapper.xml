@@ -10,6 +10,7 @@
 				  , MEM_PWD
 				  , MEM_NAME
 				  , EMAIL
+				  , MEM_PIC
 				  , ENROLL_DATE
 				  , STATUS
 			  FROM MEMBER
@@ -57,6 +58,12 @@
 		  FROM MEMBER
 		 WHERE EMAIL = ?
 	
+	</entry>
+	<entry key="deleteMember">
+		UPDATE 
+		       MEMBER 
+		   SET STATUS='N' 
+		 WHERE MEM_ID = ? 
 	</entry>
 	<entry key="selectMemberList">
 		SELECT

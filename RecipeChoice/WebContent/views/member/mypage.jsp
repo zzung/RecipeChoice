@@ -21,8 +21,8 @@
 	String userId = loginUser.getMemId();
 	String userName = loginUser.getMemName();
 	String userPwd = loginUser.getMemPwd();
-	String email = loginUser.getEmail();
 	String image = loginUser.getMemPic();
+	String email = loginUser.getEmail();
 	Date enrollDate = loginUser.getEnrollDate();
 %> 
    
