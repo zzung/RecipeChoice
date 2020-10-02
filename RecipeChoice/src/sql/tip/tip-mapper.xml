@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectCareTipList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNO, B.*
+		          FROM (
+		                SELECT
+		                       TIP_NO
+		                     , TIP_TITLE
+		                     , TIP_INFO
+		                     , TIP_ING
+		                     , TIP_CONTENT
+		                     , TIP_COUNT
+		                     , DECODE(TIP_TYPE, 1, '손질법', '상식') TIP_CATEGORY
+		                     , TIP_PIC
+		                     , TO_CHAR(CREATE_DATE, 'yyyy-MM-dd') CREATE_DATE
+		                     , STATUS
+		                  FROM TIP_VIEW T
+		                 ORDER
+		                    BY CREATE_DATE DESC
+		               ) B
+		       )
+		 WHERE RNO BETWEEN 1 AND 10
+	</entry>
+
+	<entry key="selectCareTip">
+		SELECT
+		       TIP_NO
+		     , TIP_TITLE
+		     , TIP_INFO
+		     , TIP_ING
+		     , TIP_CONTENT
+		     , TIP_COUNT
+		     , DECODE(TIP_TYPE, 1, '손질법', '상식') TIP_CATEGORY
+		     , TIP_PIC
+		     , CREATE_DATE
+		     , STATUS
+		  FROM TIP_VIEW
+		 WHERE TIP_NO =?
+	</entry>
+	
+	<entry key="insertCareTip">
+		 INSERT 
+		   INTO INGREDIENT_TIP
+		      (
+		          TIP_NO
+		        , TIP_TITLE
+		        , TIP_INFO
+		        , TIP_ING
+		        , TIP_CONTENT
+		        , TIP_COUNT
+		        , TIP_TYPE
+		        , TIP_PIC
+		        , CREATE_DATE
+		        , STATUS
+		      )
+		 VALUES(
+		         SEQ_TIPNO.NEXTVAL
+		       , ?
+		       , ?
+		       , ?
+		       , ?
+		       , ?
+		       , ?
+		       , ?
+		       , SYSDATE
+		       , ?
+		       )
+	</entry>
+</properties>

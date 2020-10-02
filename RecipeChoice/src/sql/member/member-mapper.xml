@@ -65,13 +65,6 @@
 		   SET STATUS='N' 
 		 WHERE MEM_ID = ? 
 	</entry>
-	<entry key="searchId">
-		SELECT /* com.kh.member.model.dao.MemberDao#loginMember() */
-				   MEM_ID				  
-			  FROM MEMBER
-			 WHERE STATUS ='Y'
-			   AND EMAIL = ?
-	</entry>
 	<entry key="selectMemberList">
 		SELECT
 		       M.USER_NO
@@ -158,5 +151,15 @@
 		  FROM BOARD B
 		  JOIN MEMBER M ON (B.USER_NO = M.USER_NO)
 		 WHERE B.USER_NO = ?
+	</entry>
+	<entry key="enableStatus">
+		UPDATE MEMBER 
+		   SET STATUS = 'Y'
+		 WHERE USER_NO = ?
+	</entry>
+	<entry key="disableStatus">
+		UPDATE MEMBER 
+		   SET STATUS = 'N'
+		 WHERE USER_NO = ?
 	</entry>
 </properties>

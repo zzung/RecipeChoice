@@ -52,8 +52,38 @@ public class ManagementService {
 			
 			return boardList;
 		}
+
+		// 관리자페이지 > 회원상세조회 > 회원 활성화
+		public int enableStatus(int userNo) {
+
+			Connection conn = getConnection();
+			int result = new ManagementDao().enableStatus(conn,userNo);
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollBack(conn);
+			}
+			close(conn);
+			
+			return result;
+		}
 		
-		
+		// 관리자페이지 > 회원상세조회 > 회원 비활성화
+		public int disableStatus(int userNo) {
+			
+			Connection conn = getConnection();
+			int result = new ManagementDao().disabledStatus(conn,userNo);
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollBack(conn);
+			}
+			close(conn);
+			
+			return result;
+		}
 		
 		
 }

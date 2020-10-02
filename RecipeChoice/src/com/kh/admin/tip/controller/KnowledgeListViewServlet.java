@@ -1,4 +1,4 @@
-package com.kh.admin.management.controller;
+package com.kh.admin.tip.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,18 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/enabled.mn")
-public class EnabledMemberServlet extends HttpServlet {
+@WebServlet("/knowledgeList.mn")
+public class KnowledgeListViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public EnabledMemberServlet() {
+    public KnowledgeListViewServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int userNo = Integer.parseInt(request.getParameter("uno"));
-		
+
 	
 	}
 

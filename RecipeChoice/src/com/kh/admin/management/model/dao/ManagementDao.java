@@ -163,4 +163,46 @@ public class ManagementDao {
 		
 		return boardList;
 	}
+
+
+	public int enableStatus(Connection conn, int userNo) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("enableStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int disabledStatus(Connection conn, int userNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("disableStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
