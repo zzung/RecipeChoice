@@ -70,7 +70,8 @@ public class Contact {
 		this.conDate = conDate;
 	}
 	
-
+	
+	
 	public int getConNo() {
 		return conNo;
 	}

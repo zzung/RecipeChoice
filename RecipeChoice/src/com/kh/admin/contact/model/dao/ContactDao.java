@@ -1,6 +1,6 @@
 package com.kh.admin.contact.model.dao;
 
-import static com.kh.user.common.JDBCTemplate.close;
+import static com.kh.user.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -137,6 +137,45 @@ public class ContactDao {
 		
 	}
 	/**
+	 * 사용자 상세조회용 !! 
+	 * @param conn 
+	 * @param conNo
+	 * @return
+	 */
+	public Contact selectContactUser(Connection conn, int conNo) {
+		//select문 => 한 행
+		Contact c = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectContactUser");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				c = new Contact(rs.getInt("con_no"),
+								rs.getString("con_title"),
+								rs.getString("con_type"),
+								rs.getDate("con_date"),
+								rs.getString("mem_id"),
+								rs.getString("con_content"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return c;
+		
+		
+	}
+	/**
 	 * 관리자 조회용
 	 * @param conn
 	 * @return
@@ -177,7 +216,12 @@ public class ContactDao {
 	
 	}
 	
-
+		/**
+		 * 관리자 상세조회용
+		 * @param conn
+		 * @param bno
+		 * @return
+		 */
 		public Contact selectContact(Connection conn, int bno) {
 		//select문 => 한 행 조회
 		Contact c = null;

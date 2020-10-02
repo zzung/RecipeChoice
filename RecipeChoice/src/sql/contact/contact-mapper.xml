@@ -48,6 +48,20 @@ WHERE RNUM BETWEEN ? AND ?
 			  , ?
 			  )
 	</entry>
+	<entry key="selectContactUser">
+	SELECT     
+	        CON_NO
+	      , CON_TITLE
+	      , CON_TYPE
+	      , CON_DATE
+	      , M.MEM_ID
+	      , CON_CONTENT
+	   FROM CONTACT C
+	   JOIN MEMBER M ON(M.USER_NO = C.USER_NO)
+	  WHERE CON_NO = ?
+	    AND C.STATUS = 'Y'
+
+	</entry>
 	
 	<entry key="selectContactListView">
 		SELECT
@@ -69,8 +83,9 @@ WHERE RNUM BETWEEN ? AND ?
 		     , CON_TITLE
 		     , M.MEM_ID
 		     , CON_TYPE
-		     , CON_DATE
+		     , CON_TITLE
 		     , CON_CONTENT
+		     , CON_DATE
 		  FROM CONTACT C
 		  JOIN MEMBER M ON (M.USER_NO = C.USER_NO)
 		 WHERE CON_NO = ?

@@ -133,7 +133,7 @@
             <br> 
             <hr>     
              <div align="right">
-                <button>목록가기</button>
+                <button onclick="<%=contextPath%>/contactList.co">목록가기</button>
                 <!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우-->
                 <button>수정하기</button>
                 <button>삭제하기</button>

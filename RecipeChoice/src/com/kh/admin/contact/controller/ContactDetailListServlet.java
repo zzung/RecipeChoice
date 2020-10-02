@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.contact.model.service.ContactService;
+import com.kh.admin.contact.model.vo.Contact;
 
 /**
  * Servlet implementation class ContactDetailListServlet
@@ -30,9 +31,9 @@ public class ContactDetailListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int conNO = Integer.parseInt(request.getParameter("nno"));
+		int conNo = Integer.parseInt(request.getParameter("bno"));
 		
-		int result = new ContactService().increaseCountList(conNo);
+		Contact c = new ContactService().selectContactUser(conNo);
 	}
 
 	/**

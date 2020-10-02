@@ -125,9 +125,6 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<br><hr>
-			<div align="center">
-				<button type="submit" class="btn" onclick="answerConfirm();"> 추가하기</button>
-			</div>
 			<script>
 			function answerConfirm(){
 				 location.href='./faqEnroll.fa';

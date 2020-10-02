@@ -170,9 +170,12 @@
 				</div>
             </div>
 				<br><hr><br>
+				<!-- 로그인한 회원만 볼 수 있음 -->
+				 <% if(loginUser != null ){ %>
 				<div align="center">
-					<button type="submit" class="btn" onclick="answerConfirm();"> 답변하기</button>
+					<button type="submit" class="btn" onclick="<%= contextPath%>/enrollform.mf"> 추가하기</button>
 				</div>
+				<% } %>
 			</div>
 				  <script>
                 function deleteConfirm(){

@@ -6,8 +6,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.admin.contact.model.dao.ContactDao;
-import com.kh.admin.contact.model.vo.PageInfo;
 import com.kh.admin.contact.model.vo.Contact;
+import com.kh.admin.contact.model.vo.PageInfo;
 
 public class ContactService {
 
@@ -43,7 +43,7 @@ public class ContactService {
 		return list;
 	}
 	/**
-	 *  2. 1:1문의 작성용 서비스
+	 *  2. 1:1문의 작성용 서비스 
 	 * @param c  작성자 번호, 제목, 분야, 내용이 담겨있는 객체
 	 * @return	처리된 행 수 
 	 */
@@ -63,6 +63,23 @@ public class ContactService {
 		
 		return result;
 	}
+	/**
+	 * 사용자 1:1 상세 조회용 서비스
+	 * @param conNo 클릭한 공지사항 번호
+	 * @return 조회된 데이터가 담겨있는 contact 객체
+	 */
+	public Contact selectContactUser(int conNo) {
+		
+		Connection conn = getConnection();
+		
+		Contact c = new ContactDao().selectContactUser(conn, conNo);
+		
+		close(conn);
+		
+		return c;
+	}
+	
+	//관리자 select
 	public ArrayList<Contact> selectContactListView(){
 		Connection conn = getConnection();
 		

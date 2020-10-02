@@ -185,12 +185,6 @@
                  </tbody>
                 </table>
                 <script>
-                	$(function(){
-                		$(".inq>tbody>tr").click(function(){
-                		});
-                	});
-                </script>
-                <script>
                     function deleteConfirm(){
                        if(confirm("삭제하시겠습니까?")){
                            location.href="";
@@ -213,7 +207,7 @@
                     
                 </script>
                 <br>
-           		<!-- 로그인한 회원만 글작성이 보여짐,,관리자x -->
+           		<!-- 로그인한 회원만 글작성이 보여짐,, -->
                 <% if(loginUser != null ){ %>
                 <div id="content_3" align="right" style="width:710px;">
                 <button onclick="location.href='<%=contextPath%>/enrollForm.co';">글작성</button>
