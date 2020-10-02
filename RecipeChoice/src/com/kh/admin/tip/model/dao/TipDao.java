@@ -135,8 +135,46 @@ public class TipDao {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateCareTip");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, t.getTipTitle());
+			pstmt.setString(2, t.getTipInfo());
+			pstmt.setString(3, t.getTipIngredientTag());
+			pstmt.setString(4, t.getTipContent());
+			pstmt.setString(5, t.getTipPicture());
+			pstmt.setInt(6, t.getTipNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
-		return 0;
+		return result;
+	}
+
+
+	public int deleteCareTip(Connection conn, int tipNo) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCareTip");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, tipNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

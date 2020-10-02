@@ -79,4 +79,11 @@
 		     , TIP_PIC = ?
 		 WHERE TIP_NO = ?
 	</entry>
+	
+	<entry key="deleteCareTip">
+		UPDATE
+		       INGREDIENT_TIP
+		   SET STATUS='N'
+		 WHERE TIP_NO=?
+	</entry>
 </properties>

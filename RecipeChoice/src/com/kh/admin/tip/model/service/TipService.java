@@ -54,4 +54,19 @@ public class TipService {
 		return result;
 	}
 
+	public int deleteCareTip(int tipNo) {
+
+		Connection conn = getConnection();
+		int result = new TipDao().deleteCareTip(conn,tipNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
 }
