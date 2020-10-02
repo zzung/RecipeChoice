@@ -12,52 +12,52 @@
 <title>Insert title here</title>
 <style>
         div{
-            box-sizing: border-box;
-        }
-        .wrap{
-            width:1000px;
-            height:800px;
-            margin: auto;
-        }
-        #header{height:20%;} 
-        #content{height:70%; margin-top: 30px;}
-        #footer{height:10%; margin-bottom: 30px;}
-        .nav{background:rgb(39, 174, 96);}
-            .menu{
-                display:table-cell;
-                height:30px;
-                width:150px;
-            }
-        #navigator{height:5%}
-        #content>div{
-            height:100%;
-            float:left;
-        }
-        #content_1{ width:18%; margin-right: 40px;}
-        #content_2{ width:75%; }
-        #menu_1{
-            height: 30%;
-            background: rgb(39, 174, 96);
-            color: white;
-            font-size: 18px;
-            text-align: center;
-            line-height: 180px;
-        }
-        #menu_2{
-            height: 6%;
-            margin-top: 8px;
-            line-height: 30px;
-            border: 1px solid lightslategrey;
-            border-radius: 5px;
-        }
-        #menu_3{
-            height: 25%; 
-            margin-top: 10px;
-            border: 1px solid lightslategrey;
-            border-radius: 5px;
-        }
-        #menu_2{cursor: pointer;}
-        #menu_2:hover{color: rgb(39, 174, 96);}
+	    box-sizing: border-box;
+		}
+		.wrap{
+		    width:1000px;
+		    height:1000px;
+		    margin: auto;
+		}
+		#header{height:20%;} 
+		#content{/* height:70%; */ margin-top: 30px;}
+		#footer{height:10%; margin-bottom: 30px;}
+	    .nav{background:rgb(39, 174, 96);}
+	        .menu{
+	            display:table-cell;
+	            height:30px;
+	            width:150px;
+	        }
+		#navigator{height:5%}
+		#content>div{
+		    height:100%;
+		    float:left;
+		}
+		#content_1{ width:18%; margin-right: 40px;}
+		#content_2{ width:75%; }
+		#menu_1{
+		    height: 30%;
+		    background: rgb(39, 174, 96);
+		    color: white;
+		    font-size: 18px;
+		    text-align: center;
+		    line-height: 180px;
+		}
+		#menu_2{
+		    height: 6%;
+		    margin-top: 8px;
+		    line-height: 30px;
+		    border: 1px solid lightslategrey;
+		    border-radius: 5px;
+		}
+		#menu_3{
+		    height: 25%; 
+		    margin-top: 10px;
+		    border: 1px solid lightslategrey;
+		    border-radius: 5px;
+		}
+		#menu_2{cursor: pointer;}
+		#menu_2:hover{color: rgb(39, 174, 96);}
         .tb1{border-collapse: collapse; margin: 10px; width: 700px; }
         tr{
             border: 1px solid lightgray;
