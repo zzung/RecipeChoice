@@ -152,7 +152,7 @@
                 <% for(Contact c : listView){ %>
                 
                     <tr>
-                        <td>1004</td>
+                        <td><%= c.getConNo() %></td>
                         <td>🔒</td>
                         <td><%= c.getConTitle() %></td>
                         <td><%= c.getUserNo() %></td>
@@ -168,7 +168,7 @@
                         <td>re:기타 문의</td>
                         <td>관리자</td>
                         <td>2020-08-24</td>
-                        <td><a onclick="modifyConfirm();">수정</a>&nbsp;&nbsp;<a onclick="deleteConfirm();">삭제</a></td>
+                        <td><a id="contactUpdate" onclick="modifyConfirm();">수정</a>&nbsp;&nbsp;<a id="contactDelete" onclick="deleteConfirm();">삭제</a></td>
                     </tr>
                 
                     
@@ -184,32 +184,49 @@
                 	});
                 
                 </script>
-                <script>
-                    function modifyConfirm(){
-                         location.href='./inquirymodify.no';
- 
-                         } 
-              
-                </script>
-                <script>
-                    function deleteConfirm(){
-                        if(confirm("삭제하시겠습니까?")){
-                            location.href='./inquirydelete.no';
-                        }else{
-                            return false;
-                         } 
-                        }
-                    
-                </script>
+               
 
-                <!--상세페이지용-->
-                <script>
-                    $(function(){
-                        $(".inq_s>tbody>tr").click(function(){
-                       });
-                    });
-                    
-                </script>
+               <script>
+		    	$(function(){
+		    		
+		    		$("#contactUpdate").click(function contactUpdate(){
+		    			var answer = confirm("수정하시겠습니까 ?");
+		                if(answer){
+		                	var cno = $(this).parents().parents().children().eq(0).text();
+		                    console.log(cno);
+		                    // 수정페이지로 이동
+		                    location.href="update.mc?cno="+cno;
+		                }else{
+		                    return;
+		                }
+		                event.stopPropagation();
+		    		});
+		    		
+		    		$("#contactDelete").click(function contactDelete(){
+		    			var answer = confirm("삭제하시겠습니까 ?");
+		                if(answer){
+		                	var cno = $(this).parents().parents().children().eq(0).text();
+		                    console.log(cno);
+		                    // 삭제 진행
+		                    
+		                    
+		                }else{
+			                return;
+		                }
+		                event.stopPropagation();
+		    		});
+		    		
+		    		
+		    		$(".inq_s>tbody>tr").click(function(){
+		    			var cno = $(this).children().eq(0).text();
+						location.href="<%=contextPath%>/detail.mn?cno="+ cno;    	
+						console.log(cno);
+		    		});
+		    		
+		    	});
+		            
+		
+		    </script>
                 
 
             </div>

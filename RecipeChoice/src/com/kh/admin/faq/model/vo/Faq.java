@@ -19,6 +19,24 @@ public class Faq {
 		this.faqContent = faqContent;
 		this.status = status;
 	}
+	
+
+
+	public Faq(int faqNo, String faqTitle, String faqContent) {
+		super();
+		this.faqNo = faqNo;
+		this.faqTitle = faqTitle;
+		this.faqContent = faqContent;
+	}
+	
+	
+
+
+	public Faq(String faqTitle, String faqContent) {
+		super();
+		this.faqTitle = faqTitle;
+		this.faqContent = faqContent;
+	}
 
 
 	public int getFaqNo() {

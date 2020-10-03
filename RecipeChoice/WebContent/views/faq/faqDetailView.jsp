@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.admin.faq.model.vo.*" %>    
+<%
+	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
+
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,12 +65,16 @@
         cursor:pointer;
         font-weight:bold;
     }
+    .b,.n{
+    	font-weight:bold;
+    }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
+	 $('p.b').hide();
     $('p.a').click(function(){
-        $('p.b').toggle('slow');
+        $('p.b').toggle();
     });
 });
  </script>
@@ -86,8 +95,8 @@ $(document).ready(function(){
             <div id="content_1">
                 <div id="menu_1">고객센터</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1 문의</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/faqDetail.fa'"style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;FAQ</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/contactList.co'">&nbsp;&nbsp;&nbsp;1:1 문의</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;개인정보취급방침</div>
                 <div id="menu_3">
                     <br><b>&nbsp;&nbsp;고객센터</b><br>
@@ -99,37 +108,34 @@ $(document).ready(function(){
             <div id="content_2">
 	
 				<br>
-                <h2>자주 묻는 질문
+                <h4>자주 묻는 질문
                     &nbsp;<img src="resources/image/admin/faq.jpg">
-                </h2>
-                <h3>FAQ</h3>
+                </h4>
+                <h5>FAQ</h5>
                 <hr>
 				<br>
 				<div>
+				 <!-- 리스트가 비어있을 경우 -->
+                <% if(list.isEmpty()) {%>
+                	<div id="t1">
+                	<p class="n">&nbsp;&nbsp;존재하는 faq가 없습니다.</p>
+                	<hr style="width:93%;">
+                	</div>
+                <% }else { %>
+                  <!--  리스트가 비어있지 않을 경우 -->
+                <% for(Faq f : list){ %>
 				<div id="t1">
-					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
+					<p class="a">&nbsp;<%= f.getFaqTitle() %>&nbsp; &nbsp;⌄</p>
                     <hr style="width:93%;">
-                    <p class="b">&nbsp; 아이디와 비밀번호 찾기는 로그인 창 옆에</p>
+                    <p class="b">&nbsp; <%= f.getFaqContent() %></p>
 				</div>
+					<% } %>
+				<% } %>
 				<br>
-				<div id="t1">
-					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
-                    <hr style="width:93%;">
-                    <p class="b"></p>
-				</div>
-				<br>
-				<div id="t1">
-					<p class="a">&nbsp;ID찾기와 비밀번호 찾기는 어디서 하나요?&nbsp; &nbsp;⌄</p>
-                    <hr style="width:93%;">
-                    <p class="b"></p>
-				</div>
+				
 			</div>
 			<br><hr>
-			<script>
-			function answerConfirm(){
-				 location.href='./faqEnroll.fa';
-				}
-		   </script>
+			
 			</div>	
     	<br><br><br>
     <!-- 푸터 추가-->

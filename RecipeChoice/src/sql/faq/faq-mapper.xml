@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+	<entry key="selectFaqListView">
+SELECT 
+       FAQ_NO
+     , FAQ_TITLE
+     , FAQ_CONTENT
+  FROM FAQ
+ WHERE FAQ_NO  = ?
+  AND STATUS = 'Y'
+	</entry>
 	
+	<entry key="selectFaqList">
+SELECT 
+       FAQ_NO
+     , FAQ_TITLE
+     , FAQ_CONTENT
+  FROM FAQ
+ WHERE FAQ_NO  = ?	
+  AND STATUS = 'Y'
+	</entry>
+	<entry key="insertFaq">
+INSERT /*com.kh.admin.faq.model.dao.FaqDao#insertFaq()*/
+	  INTO FAQ
+	  (
+	      FAQ_NO
+	    , FAQ_TITLE
+	    , FAQ_CONTENT
+	  )
+	  VALUES
+	  (
+	       SEQ_FAQNO.NEXTVAL
+	     , ?
+	     , ?
+	  )
+	
+	</entry>
 </properties>
