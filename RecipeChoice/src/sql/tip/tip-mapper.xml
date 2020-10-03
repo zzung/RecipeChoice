@@ -18,6 +18,7 @@
 		                     , TO_CHAR(CREATE_DATE, 'yyyy-MM-dd') CREATE_DATE
 		                     , STATUS
 		                  FROM TIP_VIEW T
+		                 WHERE TIP_TYPE=1
 		                 ORDER
 		                    BY CREATE_DATE DESC
 		               ) B
@@ -85,5 +86,41 @@
 		       INGREDIENT_TIP
 		   SET STATUS='N'
 		 WHERE TIP_NO=?
+	</entry>
+	<entry key="enableStatus">
+		UPDATE
+		       INGREDIENT_TIP
+		   SET STATUS='Y'
+		 WHERE TIP_NO=?
+	</entry>
+	<entry key="increaseCount">
+		UPDATE
+		       INGREDIENT_TIP
+		   SET TIP_COUNT = TIP_COUNT+1
+		 WHERE TIP_NO = ?
+	</entry>
+	<entry key="selectKnowledgeList">
+		SELECT *
+			  FROM (
+			        SELECT ROWNUM RNO, B.*
+			          FROM (
+			                SELECT
+			                       TIP_NO
+			                     , TIP_TITLE
+			                     , TIP_INFO
+			                     , TIP_ING
+			                     , TIP_CONTENT
+			                     , TIP_COUNT
+			                     , DECODE(TIP_TYPE, 1, '손질법', '상식') TIP_CATEGORY
+			                     , TIP_PIC
+			                     , TO_CHAR(CREATE_DATE, 'yyyy-MM-dd') CREATE_DATE
+			                     , STATUS
+			                  FROM TIP_VIEW T
+			                 WHERE TIP_TYPE=2
+			                 ORDER
+			                    BY CREATE_DATE DESC
+			               ) B
+			       )
+			 WHERE RNO BETWEEN 1 AND 10
 	</entry>
 </properties>

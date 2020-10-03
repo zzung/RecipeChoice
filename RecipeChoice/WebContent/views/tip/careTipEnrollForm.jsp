@@ -245,7 +245,7 @@
     </div>
 				
 				
-				
+	<%@ include file="../common/footerTemp.jsp" %>
 		
 	
 </body>

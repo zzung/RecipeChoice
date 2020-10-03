@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import com.kh.admin.tip.model.vo.Tip;
 import com.kh.user.member.model.dao.MemberDao;
+
 import static com.kh.user.common.JDBCTemplate.*;
 
 public class TipDao {
@@ -177,4 +178,83 @@ public class TipDao {
 		return result;
 	}
 
+
+	public int enableStatus(Connection conn, int tno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("enableStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, tno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int increaseTipCount(Connection conn, int tno) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, tno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public ArrayList<Tip> selectKnowledgeList(Connection conn) {
+		
+		ArrayList<Tip> knowledgeList = new ArrayList<>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectKnowledgeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Tip t = new Tip(rs.getInt("TIP_NO"),
+								rs.getString("TIP_TITLE"),
+								rs.getString("TIP_INFO"),
+								rs.getString("TIP_ING"),
+								rs.getString("TIP_CONTENT"),
+								rs.getInt("TIP_COUNT"),
+								rs.getString("TIP_CATEGORY"),
+								rs.getString("TIP_PIC"),
+								rs.getDate("CREATE_DATE"),
+								rs.getString("STATUS"));
+				knowledgeList.add(t);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return knowledgeList;
+	}
+
+	
 }

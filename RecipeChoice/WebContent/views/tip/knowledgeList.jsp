@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Tip> careTipList = (ArrayList<Tip>)request.getAttribute("careTipList");
+	ArrayList<Tip> knowledgeList = (ArrayList<Tip>)request.getAttribute("knowledgeList");
 
 %>
 <!DOCTYPE html>
@@ -127,7 +127,7 @@
             </div>
             <div id="content_2">
                 
-                <p style="font-weight: bolder; font-size: 18px;">재료 손질법 게시판 관리</p>
+                <p style="font-weight: bolder; font-size: 18px;">재료에 대한 상식 게시판 관리</p>
                 <hr> 
 
                 <table class="tb1">
@@ -144,12 +144,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    	<% if(careTipList.isEmpty()){ %>
+                    	<% if(knowledgeList.isEmpty()){ %>
                     	<tr>
                     		<td colspan="6" width="850px">게시글이 없습니다.</td>
                     	</tr>
                     	<%} else{ %>
-	                    	<% for (Tip t : careTipList) { %>
+	                    	<% for (Tip t : knowledgeList) { %>
 	                        <tr>
 	                            <td width="50px">
 	                            &nbsp;&nbsp;<input type="checkbox" id="selectTip" name="selectContent" style="width: 15px; height: 15px;">
@@ -170,7 +170,7 @@
                 	<hr>
                 	<button onclick="careTipDelete();" class="btn btn-dark">삭제</button>
                 	<button onclick="careTipUpdate();" class="btn btn-primary">수정</button>
-                	<a href="<%=contextPath%>/careTipEnrollForm.mn" class="btn btn-success">작성</a>
+                	<a href="<%=contextPath%>/knowledgeEnrollForm.mn" class="btn btn-success">작성</a>
                 </div>
 
             	</div>

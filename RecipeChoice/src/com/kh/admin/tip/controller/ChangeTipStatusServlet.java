@@ -7,41 +7,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.admin.management.model.service.ManagementService;
 import com.kh.admin.tip.model.service.TipService;
-import com.kh.admin.tip.model.vo.Tip;
+import com.kh.user.member.model.vo.Member;
 
-@WebServlet("/careTipDetail.mn")
-public class CareTipDetailViewServlet extends HttpServlet {
+@WebServlet("/changeTipStatus.mn")
+public class ChangeTipStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public CareTipDetailViewServlet() {
+    public ChangeTipStatusServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
 		int tno = Integer.parseInt(request.getParameter("tno"));
+
+		int result = new TipService().enableStatus(tno);
 		
-		int result = new TipService().increaseTipCount(tno);
-
 		if(result > 0) {
-			
-			Tip t = new TipService().selectCareTip(tno);
-			System.out.println(t);
-			
-//			// 첨부파일 조회 (없으면 null)
-//			Attachment at = new BoardService().selectFile(bno);			
-
-			request.setAttribute("t", t);
-			request.getRequestDispatcher("views/tip/careTipDetail.jsp").forward(request, response);
-			
-			
+			request.getSession().setAttribute("alertMsg", "상태 변경 완료 !");
+			response.sendRedirect(request.getContextPath()+"/careTipList.mn?tno="+tno);
 		}else {
-			request.setAttribute("alertMsg", "해당 게시물이 유효하지 않습니다.");
+			request.setAttribute("alertMsg", "상태 변경에 실패했습니다 !");
 			request.getRequestDispatcher("views/tip/careTipList.jsp").forward(request, response);
 		}
-		
-	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

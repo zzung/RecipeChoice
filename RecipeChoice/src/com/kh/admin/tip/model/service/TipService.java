@@ -9,6 +9,8 @@ import com.kh.admin.tip.model.vo.Tip;
 
 public class TipService {
 
+	/*------------------- 재료손질법 게시판 관련 -----------------------------*/
+	
 	public ArrayList<Tip> selectCareTipList() {
 		
 		Connection conn = getConnection();
@@ -67,6 +69,47 @@ public class TipService {
 		close(conn);
 		
 		return result;
+	}
+
+	public int enableStatus(int tno) {
+		
+		Connection conn = getConnection();
+		int result = new TipDao().enableStatus(conn, tno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int increaseTipCount(int tno) {
+
+		Connection conn = getConnection();
+		int result = new TipDao().increaseTipCount(conn,tno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	
+	/*------------------- 재료에 대한 상식 게시판 관련 -----------------------------*/
+	
+	public ArrayList<Tip> selectKnowledgeList() {
+
+		Connection conn = getConnection();
+		ArrayList<Tip> knowledgeList = new TipDao().selectKnowledgeList(conn);
+		
+		return knowledgeList;
 	}
 
 }
