@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 <style>
 
     .outer{
@@ -45,7 +44,8 @@
     #checkNumBtn{
         font-size: 13px;
     }
- 
+ 	.modal-body input{
+ 	width:250px;}
  </style>
 </head>
 <body>
@@ -67,78 +67,117 @@
 	        <a href="">PWD찾기</a>
         </div>
 
-
+		<!-- 인증번호 랜덤 생성 -->
+		<%! public int getRandom(){ 
+			int random = 0;
+			random = (int)Math.floor((Math.random()*(99999-10000+1)))+10000;
+			return random;
+		} %>
         <!-- 1. 전체 내용을 감싸는 div -->
         <div id="pwd_search">
             <h3 align="center"><b>pwd 찾기</b></h3>
             <!-- 2_1. 입력을 받는 input요소들이 위치할 영역 -->
-            <form action="" id="pwd_search_form">
+            <form action="updatePwd.me" id="pwd_search_form" method="post">
     
                 <!-- 3_1. ID/PWD input요소가 들어갈 div -->
                 <table align="center">
                     <tr>
                         <td> 아이디</td>
-                        <td colspan="2"><input type="text" name="userEmail" class="form-control" style="height:30px;"maxlength="20" placeholder="가입시 작성한 이메일 입력해주세요"required></td><br>
+                        <td colspan="2"><input type="text" name="userId" id="userId" class="form-control" style="height:30px;"maxlength="20" placeholder="아이디를 입력해주세요"required></td><br>
                         
                     </tr>
                     <tr>
                         <td> 이메일</td>
-                        <td><input type="email" name="userEmail" class="form-control" style="height:30px;"maxlength="20" placeholder="이메일을 입력해주세요"required></td><br>
-                        <td><button id="checkNumBtn"class="btn btn-success"style="width:100px">인증번호받기</button></td>
+                        <td><input type="email" name="userEmail" class="form-control" style="height:30px;"maxlength="30" placeholder="이메일을 입력해주세요"required></td><br>
+                        <td><button type="submit"id="checkNumBtn"class="btn btn-success"style="width:100px">인증번호받기</button></td>
                     </tr>
                     <tr>
                         <td> 인증번호</td>
                         <td><input type="number" name="checkNum" class="form-control" style="height:30px;"maxlength="20" placeholder="인증번호 입력해주세요." disabled></td><br>
-                        <td></td>
+                        <td><input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>"></td>
                     </tr>
                   
                     <tr>
-                        <td colspan="3"><input type="submit"class="btn btn-success" id="search_btn" value="찾기">
+                        <td colspan="3"><input type=""class="btn btn-success"  data-toggle="modal" data-target="#exampleModal"id="search_btn" value="찾기">
                         </td>
                     </tr>
                 </table>
-            </form>
-       
-    
+            	
+			      <!-- Modal -->
+			    
+					  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					    <div class="modal-dialog">
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <h5 class="modal-title" id="exampleModalLabel">PWD 변경하기</h5>
+					          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					            <span aria-hidden="true">&times;</span>
+					          </button>
+					        </div>
+					     
+					        <div class="modal-body">
+					    		    <table >
+					    		    	<tr>
+					                        <td> 비밀번호 :</td>
+					                        <td><input type="password" id="userPwd"name="userPwd" maxlength="15" placeholder="변경하실 비밀번호를 입력하세요"required></td>
+					                    </tr>
+					                     <tr>
+					                    	<td colspan="3"><input type="hidden" name="userId" value=""></td>
+					                    </tr>
+					                    <tr>
+					                        <td> 비밀번호확인 :</td>
+					                        <td colspan="2"><input type="password" id="checkPwd"name="checkPwd" maxlength="15" placeholder="비밀번호를 한번 더 입력해주세요"required></td>
+					                        
+					                    </tr>
+					    		    
+					    		    </table>
+					        </div>
+					        <div class="modal-footer">
+					          <button type="submit" id="loginBtn"class="btn btn-success" data-dismiss="modal">변경하기</button><br>
+					        </div>
+					      </div>
+					    </div>
+					  </div>
+            	</form>
+            	
         </div>
-          <script>
-      	  $("#search_btn").click(function(){
-		    	  $userEmail = $("#userEmail").val();
-		    	  console.log($userEmail);
-		    	  $("#email2").text($userEmail);
-		    	  $("#id2").text("일단아이디");
-		      });
-        </script>
+    
         
-         <!-- Modal -->
-		  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
-		      <div class="modal-content">
-		        <div class="modal-header">
-		          <h5 class="modal-title" id="exampleModalLabel">PWD 찾기</h5>
-		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		            <span aria-hidden="true">&times;</span>
-		          </button>
-		        </div>
-		        <div class="modal-body">
-		    		      입력하신 이메일 :<p id="email2"></p>
-		         <br> 가입 한 아이디 : <p id="id2">아이디</p>
-		        </div>
-		        <div class="modal-footer">
-		          <button type="button" id="loginBtn"class="btn btn-success" data-dismiss="modal">로그인 하기 </button><br>
-		          <button type="button" class="btn btn-secondary">비밀번호 찾기</button>
-		        </div>
-		      </div>
-		    </div>
-		  </div>
-		  
+         
 		  <script>
+		
 		      $("#loginBtn").click(function(){
-		        location.href="<%=contextPath%>/loginForm.me";
-		      });
-		      
+		    	  
+		    	  
+		    	  $userPwd = $("#userPwd").val();
+		    	  $checkPwd = $("#checkPwd").val();
+					  
+			  var pwd1 = /^[a-z\d!@#$%^&*]{5,15}$/i;  //특수문자(!@#$%^&*)
+			  if(!pwd1.test($userPwd)){
+		             alert("유효한 비밀번호를 입력하세요.");
+
+		             $userPwd.focus(); 
+		             
+		             return false; 
+		             
+		         }else{
+
+			    	  if($userPwd == $checkPwd){  
+			  
+			    	  }
+			    	  else{
+			    		  alert("동일한 비밀번호를 입력해주세요");
+			    		  $("#userPwd").focus();
+			    		  return false;
+			    	  } 
+		         }
 		  
+		      });
+		  		
+		    
+		      
 		  </script>
+		  
         
     </div>
 

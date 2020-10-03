@@ -296,4 +296,27 @@ public class MemberDao {
 		return searchId;
 		
 	}
+	public int updatePwd(Connection conn, String memId, String memPwd ) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memPwd);
+			pstmt.setString(2, memId);
+			
+			result = pstmt.executeUpdate();
+					
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
 }

@@ -65,7 +65,7 @@
                 &lt;
                 <a href="">마이페이지</a>
                 &lt;
-	       	    <a href="">개인정보수정</a>
+	       	    <a href="">정보수정</a>
             </span>   
             <div id="subvar"class="content1">
                 <div class="profile">

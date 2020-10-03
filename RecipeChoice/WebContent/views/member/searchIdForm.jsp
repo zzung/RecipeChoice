@@ -130,7 +130,7 @@
 		        </div>
 		        <div class="modal-body">
 		    		      입력하신 이메일 :<p id="email2"></p>
-		         <br> 가입 한 아이디 : <p id="id2">아이디</p>
+		         <br> 가입 하신 아이디 : <p id="id2">아이디</p>
 		        </div>
 		        <div class="modal-footer">
 		          <button type="button" id="loginBtn"class="btn btn-success" data-dismiss="modal">로그인 하기 </button><br>

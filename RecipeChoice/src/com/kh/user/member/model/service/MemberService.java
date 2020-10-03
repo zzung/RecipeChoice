@@ -143,6 +143,11 @@ public class MemberService {
 		
 		return result;
 	}
+	/**
+	 * ID 찾기 서비스
+	 * @param email
+	 * @return
+	 */
 	public String searchId(String email) {
 		
 		Connection conn = getConnection();
@@ -151,5 +156,24 @@ public class MemberService {
 		close(conn);
 		return searchId;
 	}
-	
+	/**
+	 * 비밀번호 변경 서비스
+	 * @param memId
+	 * @param memPwd
+	 * @return
+	 */
+	public int updatePwd(String memId, String memPwd) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updatePwd(conn,memId,memPwd);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		return result;
+	}
 }
