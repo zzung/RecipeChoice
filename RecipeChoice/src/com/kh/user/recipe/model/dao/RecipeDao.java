@@ -317,6 +317,158 @@ public class RecipeDao {
 			System.out.println(tag.toString());
 		}
 		return tags; 
-	}
+	}//e.tagSearch
 	
+	public int updateRecipe(Connection conn, Recipe r) {
+		int result1 = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateRecipe");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, r.getRcpTitle());
+			pstmt.setString(2, r.getRcpDishType());
+			pstmt.setString(3, r.getRcpTag());
+			pstmt.setInt(4, r.getRcpTime());
+			pstmt.setString(5, r.getRcpContent());
+			pstmt.setString(6, r.getRcpPic());
+			pstmt.setInt(7, r.getRcpNo());
+			
+			result1 = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result1; 
+		
+	} //e.updateRecipe
+	
+	
+	public int insertNewIngredientList(Connection conn, ArrayList<IngredientList> ingList) {
+		int result3 = 0; 
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNewIngredientList");
+		
+		try {
+			
+			for(IngredientList i : ingList) {
+
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, i.getRcpNo());
+				pstmt.setString(2, i.getIngDish());
+				pstmt.setString(3, i.getIngMetering());
+				
+				result3 = pstmt.executeUpdate();
+				
+				if(result3 == 0) {
+					return 0; 
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result3; 
+		
+	}//e.insertNewIngredientList
+	
+	public int insertNewCookDetail(Connection conn, ArrayList<Cook> cookList) {
+		int result5 = 0;
+		
+		PreparedStatement pstmt = null; 
+		String sql = prop.getProperty("insertNewCookDetail");
+		
+		try {
+			
+			for(Cook c : cookList) {
+				
+				System.out.println(c.toString());
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, c.getRcpNo());
+				pstmt.setString(2, c.getCookContent());
+				pstmt.setInt(3, c.getCookOrder());
+				pstmt.setString(4, c.getCookPic());
+				
+				result5 = pstmt.executeUpdate();
+				
+				if(result5 == 0) {
+					return 0; 
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result5; 
+	}//e.insertNewCookDetail 
+	
+	public int deleteIngredientList(Connection conn, int rcpNo) {
+		int result2 = 0; 
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteIngredientList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rcpNo);
+			
+			result2 = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result2; 
+	}//e.deleteIngredientList
+	public int deleteCook(Connection conn, int rcpNo) {
+		int result4 = 0; 
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCook");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rcpNo);
+			
+			result4 = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result4; 
+	}
+	public int deleteRecipe(Connection conn, int rcpNo) {
+		int result = 0; 
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteRecipe"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rcpNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt); 
+		}
+		return result; 
+	}//e.deleteRecipe
 }

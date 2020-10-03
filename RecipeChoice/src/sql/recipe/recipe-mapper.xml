@@ -5,7 +5,7 @@
 		  INSERT
 			INTO RECIPE
 			(
-			RCP_NO
+			  RCP_NO
 			, USER_NO
 			, MEM_NAME
 			, RCP_TITLE
@@ -39,12 +39,11 @@
 				ING_NO
 				, RCP_NO
 				, ING_DISH
-				,
-				ING_METERING
+				, ING_METERING
 				)
 				VALUES
 				(
-				SEQ_INGNO.NEXTVAL
+				  SEQ_INGNO.NEXTVAL
 				, SEQ_RCPNO.CURRVAL
 				, ?
 				, ?
@@ -55,21 +54,19 @@
 		   INSERT
 			 INTO COOK
 				(
-				COOK_NO
+				  COOK_NO
 				, RCP_NO
 				, COOK_CONTENT
-				,
-				COOK_ORDER
+				, COOK_ORDER
 				, COOK_PIC
 				)
 				VALUES
 				(
-				SEQ_CNO.NEXTVAL
+				  SEQ_CNO.NEXTVAL
 				, SEQ_RCPNO.CURRVAL
 				, ?
 				, ?
-				,
-				?
+				, ?
 				)
 	</entry>
 
@@ -97,21 +94,20 @@
 
 	<entry key="selectDetailRecipeList">
 		SELECT
-			R.RCP_NO
-			, USER_NO
-			, MEM_NAME
-			, RCP_TITLE
-			, RCP_DISH_TYPE
-			, RCP_TAG
-			, RCP_TIME
-			, RCP_CONTENT
-			, RCP_PIC
-			, COUNT
-			,
-			SCRAP_COUNT
-			FROM RECIPE R
-			WHERE R.RCP_NO = ?
-			AND R.STATUS = 'Y'
+			   RCP_NO
+			 , USER_NO
+			 , MEM_NAME
+			 , RCP_TITLE
+			 , RCP_DISH_TYPE
+			 , RCP_TAG
+			 , RCP_TIME
+			 , RCP_CONTENT
+			 , RCP_PIC
+			 , COUNT
+			 , SCRAP_COUNT
+		  FROM RECIPE
+		 WHERE RCP_NO = ?
+			AND STATUS = 'Y'
 	</entry>
 
 	<entry key="selectDetailIngList">
@@ -152,5 +148,73 @@
 		    OR RCP_TAG LIKE '%?%'
 		    OR RCP_TAG LIKE '%?%'
 		    OR RCP_TAG LIKE '%?%'
+	</entry>
+	
+	<entry key="updateRecipe">
+		UPDATE
+		       RECIPE
+		   SET RCP_TITLE = ?
+		     , RCP_DISH_TYPE = ?
+		     , RCP_TAG = ?
+		     , RCP_TIME = ?
+		     , RCP_CONTENT = ?
+		     , RCP_PIC = ?
+		 WHERE RCP_NO = ?
+	</entry>
+	
+	<entry key="insertNewCookDetail">
+			   INSERT
+			 	 INTO COOK
+				(
+				  COOK_NO
+				, RCP_NO
+				, COOK_CONTENT
+				, COOK_ORDER
+				, COOK_PIC
+				)
+				VALUES
+				(
+				  SEQ_CNO.NEXTVAL
+				, ?
+				, ?
+				, ?
+				, ?
+				)
+	</entry>
+	
+	<entry key="insertNewIngredientList">
+		INSERT
+			 INTO INGREDIENT_LIST
+				(
+				  ING_NO
+				, RCP_NO
+				, ING_DISH
+				, ING_METERING
+				)
+				VALUES
+				(
+				  SEQ_INGNO.NEXTVAL
+				, ?
+				, ?
+				, ?
+				)
+	</entry>
+	
+	<entry key="deleteIngredientList">
+		DELETE 
+		  FROM INGREDIENT_LIST
+		 WHERE RCP_NO = ?
+	</entry>
+	
+	<entry key="deleteCook">
+		DELETE 
+		  FROM COOK
+		 WHERE RCP_NO = ?
+	</entry>
+	
+	<entry key="deleteRecipe">
+		DELETE 
+		  FROM RECIPE
+		 WHERE RCP_NO = ?
 	</entry>
 </properties>

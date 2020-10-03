@@ -35,6 +35,7 @@
 			<table class="tb_Content">
 				<tr>
 					<td class="leftContent" align="center">
+					<input type="hidden" name="rcpNo" value="<%=r.getRcpNo()%>">
 					<img src="<%=contextPath %>/resources/recipe_upfiles/<%=r.getRcpPic() %>" id="titleImg" />
 					<br />
 						<div class="userImg">

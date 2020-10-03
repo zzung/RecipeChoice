@@ -48,6 +48,12 @@ public class IngredientList {
 	public void setIngMetering(String ingMetering) {
 		this.ingMetering = ingMetering;
 	}
+
+	@Override
+	public String toString() {
+		return "IngredientList [ingNo=" + ingNo + ", rcpNo=" + rcpNo + ", ingDish=" + ingDish + ", ingMetering="
+				+ ingMetering + "]";
+	}
 	
 	
 	

@@ -51,11 +51,9 @@ public class RecipeUpdateServlet extends HttpServlet {
 					new MyFileRenamePolicy());
 
 			// 1.
-			int userNo = Integer.parseInt(multiRequest.getParameter("userNo"));
-			String memName = multiRequest.getParameter("memName");
+			int rcpNo = Integer.parseInt(multiRequest.getParameter("rcpNo"));
 			String rcpTitle = multiRequest.getParameter("title");
 			String rcpDishType = multiRequest.getParameter("dishType");
-
 			String[] rcpTags = multiRequest.getParameterValues("tag");
 			String rcpTag = "";
 			if (rcpTags != null) {
@@ -66,26 +64,38 @@ public class RecipeUpdateServlet extends HttpServlet {
 			String rcpContent = multiRequest.getParameter("content");
 			String rcpPic = multiRequest.getFilesystemName("reUpfile");
 			
-			Recipe r = new Recipe();
+			Recipe r = null; 
+			
 			if(multiRequest.getFilesystemName("reUpfile") != null) {
 				
-				r.setUserNo(userNo);
-				r.setMemName(memName);
+				r = new Recipe(); 
+				r.setRcpNo(rcpNo);
 				r.setRcpTitle(rcpTitle);
 				r.setRcpDishType(rcpDishType);
 				r.setRcpTag(rcpTag);
 				r.setRcpTime(rcpTime);
 				r.setRcpContent(rcpContent);
-				r.setRcpPic(multiRequest.getFilesystemName("reUpfile"));
+				r.setRcpPic(rcpPic);
 				
-				if(multiRequest.getParameter("originFileNo") != null) {
-					r.setRcpNo(Integer.parseInt(multiRequest.getParameter("originFileNo")));
+				if(multiRequest.getParameter("originNo") != null) {
 					
-					File deleteFile = new File(savePath + multiRequest.getParameter("originFileName"));
+					r.setRcpNo(Integer.parseInt(multiRequest.getParameter("originNo")));
+					
+					File deleteFile = new File(savePath + multiRequest.getParameter("originName"));
 					deleteFile.delete(); 
 				}
+				
+			} else {
+				r = new Recipe(); 
+				r.setRcpNo(rcpNo);
+				r.setRcpTitle(rcpTitle);
+				r.setRcpDishType(rcpDishType);
+				r.setRcpTag(rcpTag);
+				r.setRcpTime(rcpTime);
+				r.setRcpContent(rcpContent);
+				r.setRcpPic(multiRequest.getParameter("originName"));
 			}
-
+					
 
 			// 2.
 			String[] ingDishs = multiRequest.getParameterValues("dish");
@@ -97,7 +107,8 @@ public class RecipeUpdateServlet extends HttpServlet {
 				IngredientList ingredient = new IngredientList();
 				ingredient.setIngDish(ingDishs[i]);
 				ingredient.setIngMetering(ingMeterings[i]);
-
+				ingredient.setRcpNo(rcpNo);
+				
 				ingList.add(ingredient);
 			}
 
@@ -106,39 +117,34 @@ public class RecipeUpdateServlet extends HttpServlet {
 			ArrayList<Cook> cookList = new ArrayList<>();
 			
 			for(int i = 0; i<cookContents.length;i++) {
-				String cookPic = multiRequest.getFilesystemName("reRecipeWritePic" + (i +1));
-
-				Cook c = new Cook();
+				String[] cookPics = multiRequest.getParameterValues("cookPic");
+				String cookPic = multiRequest.getFilesystemName("RecipeWritePic" + (i +1));
 				
-				if(multiRequest.getFilesystemName("reRecipeWritePic" + (i +1)) != null) {
+
+				if(cookPic == null) {
+					cookPic = cookPics[i]; 
+				}
+				
+				Cook c = new Cook();
 					c.setCookContent(cookContents[i]);
 					c.setCookOrder(i+1);
 					c.setCookPic(cookPic);
-					
-					if(multiRequest.getParameter("cookOrder") != null) {
-						c.setCookOrder(Integer.parseInt(multiRequest.getParameter("cookOrder")));
-						
-						File deleteFile = new File(savePath + multiRequest.getFilesystemName("cookPic"));
-						deleteFile.delete(); 
-					} else {
-						c.setCookOrder(i+1);
-					}
-					
+					c.setRcpNo(rcpNo); 
+
 					cookList.add(c);
 
 				}
-				
-			}
+
 			
-			int result = new RecipeService().insertRecipe(r, ingList, cookList);
+			int result = new RecipeService().updateRecipe(r, ingList, cookList);
 
 			if (result > 0) {
 
 				HttpSession session = request.getSession();
 				session.setAttribute("alertMsg", "게시글 수정 완료되었습니다.");
 
-				response.sendRedirect(request.getContextPath() + "/detail.rp?=rcpNo" + r.getRcpNo());
-
+				response.sendRedirect(request.getContextPath() + "/detail.rp?rcpNo=" + r.getRcpNo());
+	
 			} else {
 
 				request.setAttribute("errorMsg", "작성글 등록에 실패하였습니다.");

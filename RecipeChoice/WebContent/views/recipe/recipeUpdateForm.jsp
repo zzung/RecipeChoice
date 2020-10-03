@@ -32,8 +32,8 @@
 				</p>
 			</div>
 			<form action="<%=contextPath%>/update.rp" id="writeRecipe" method="POST" enctype="multipart/form-data">
-				<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>"> 
-				<input type="hidden" name="memName" value="<%=loginUser.getMemName()%>">
+				<input type="hidden" name="userNo" value="<%=r.getUserNo()%>"> 
+				<input type="hidden" name="memName" value="<%=r.getMemName()%>">
 				<input type="hidden" name="rcpNo" value="<%=r.getRcpNo()%>"> 
 			
 				<table class="tb_writeRecipe">
@@ -129,7 +129,7 @@
 							<div class="w3-container w3-border-bottom w3-border-grey"></div>
 							<p id="pageTitle">
 								<b><big>조리 사진 첨부 </big></b>
-								<button class="addRow" type="button">
+								<button class="addRow a" type="button" disabled>
 									<i class="fa fa-plus" style="font-size: 14px"></i>
 								</button>
 							</p> <br />
@@ -137,18 +137,23 @@
 					</tr>
 					
 					<%for(Cook c : cook) { %>
-					<tr id="cookDetail">
-						<!-- 작성하는거 하나씩 줄이기 (반복문필요)-->
-						<td align="center">
-							<button class="removeRow a" type="button">
-								<i class="fa fa-minus" style="font-size: 14px"></i>
-							</button> &nbsp;&nbsp; <img src="<%=contextPath %>/resources/recipe_upfiles/<%=c.getCookPic() %>" class="detailImg" id="detailImg1" />
-						</td>
-						<td align="center"><span class="dot countIng"><%=c.getCookOrder() %></span>&nbsp;&nbsp;
-							<input type="hidden" name="cookOrder" value="<%=c.getCookOrder() %>"> 
-							<input type="hidden" name="cookPic" value="<%=c.getCookPic() %>">
-							<textarea name="recipeDetail" class="text" cols="40" rows="5" style="resize: none"><%=c.getCookContent() %></textarea></td>
-					</tr>
+					<tr>
+                  	<td align="center">
+                    	<button class="removeRow a" type="button" disabled>
+                      		<i class="fa fa-minus" style="font-size: 14px"></i>
+                  		</button>&nbsp;&nbsp;
+                     <img src="<%=contextPath %>/resources/recipe_upfiles/<%=c.getCookPic() %>" class="detailImg" id="detailImg<%=c.getCookOrder() %>" onclick="clickBtn(<%=c.getCookOrder() %>);" />
+                  	</td>
+                  	<td align="center" class="row-index">
+                   	 	<span class="dot countIng"><%=c.getCookOrder() %></span>&nbsp;&nbsp;
+                    	<input type="hidden" name="cookOrder" value="<%=c.getCookOrder() %>"> 
+                    	<input type="hidden" name="cookPic" id="cookPic<%= c.getCookOrder() %>" value="<%=c.getCookPic() %>">
+                  	<textarea name="recipeDetail" class="text" cols="40" rows="5" style="resize: none"><%=c.getCookContent() %></textarea>
+                  	<div class="fileArea">
+                  	<input type="file" class="recipeWrite_detailPic" id="detailBtn<%=c.getCookOrder() %>" name="RecipeWritePic<%=c.getCookOrder() %>" onchange="loadImg(this, <%=c.getCookOrder()%> );">
+                  	</div>
+                  	</td>
+               		</tr>
 					<%} %>
 					<tr>
 						<td id="tbody" colspan="2"></td>
@@ -156,10 +161,12 @@
 
 				</table>
 				<div class="fileArea">
-					<input type="file" id="recipeWrite_mainPic" name="reUpfile" onchange="loadImg(this,100);" required /> 
-					<input type="file" id="recipeWrite_detailPic" name="reRecipeWritePic1" onchange="loadImg(this,1);">
-					<input type="hidden" name="originFileNo" value="<%=r.getRcpNo() %>"> // 대표이미지
-					<input type="hidden" name="originFileName" value="<%=r.getRcpPic() %>"> //대표이미지 
+					<input type="file" id="recipeWrite_mainPic" name="reUpfile" onchange="loadImg(this,100);"/> 
+					<input type="file" id="recipeWrite_detailPic" name="RecipeWritePic1" onchange="loadImg(this,1);">
+					<%if(r != null){ %>
+						<input type="hidden" name="originNo" value="<%=r.getRcpNo() %>">
+						<input type="hidden" name="originName" value="<%=r.getRcpPic() %>">
+					<%} %>
 				</div>
 				<!-- 레시피작성 대표이미지 등록 -->
 				<script>
@@ -188,6 +195,7 @@
                   	break; 
                   default:
                 	$("#detailImg"+num).attr("src", e.target.result);
+                  	$("#cookPic"+num).val(e.target.result);
                 	break;  
                   }
                 };
@@ -230,7 +238,7 @@
                     <input type="hidden" name="order" value="`+ rowIdx +`">
                   <textarea name="recipeDetail" class="text" cols="40" rows="5" style="resize: none"></textarea>
                   <div class="fileArea">
-                  <input type="file" class="recipeWrite_detailPic" id="detailBtn` + count + `" name="reRecipeWritePic`+ rowIdx + `" onchange="loadImg(this,`+ count +` );">
+                  <input type="file" class="recipeWrite_detailPic" id="detailBtn` + count + `" name="RecipeWritePic`+ rowIdx + `" onchange="loadImg(this,`+ count +` );">
                   </div></td>
                 </tr>`);
               });
@@ -303,6 +311,7 @@
 				<br>
 				<div align="right">
 					<button type="submit" id="insertRecipe">수정하기</button>
+					<button id="insertRecipe" type="button" onclick="location.href='<%=contextPath%>/delete.rp?rcpNo=<%=r.getRcpNo()%>';">삭제하기</button>
 				</div>
 				<br>
 				<br>

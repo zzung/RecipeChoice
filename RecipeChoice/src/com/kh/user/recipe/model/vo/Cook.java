@@ -58,6 +58,12 @@ public class Cook {
 	public void setCookPic(String cookPic) {
 		this.cookPic = cookPic;
 	}
+
+	@Override
+	public String toString() {
+		return "Cook [cookNo=" + cookNo + ", rcpNo=" + rcpNo + ", cookContent=" + cookContent + ", cookOrder="
+				+ cookOrder + ", cookPic=" + cookPic + "]";
+	}
 	
 	
 }

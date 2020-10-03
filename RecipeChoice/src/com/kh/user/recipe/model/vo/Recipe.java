@@ -181,6 +181,14 @@ public class Recipe {
 		this.rcpType = rcpType;
 	}
 
+	@Override
+	public String toString() {
+		return "Recipe [rcpNo=" + rcpNo + ", userNo=" + userNo + ", memName=" + memName + ", rcpTitle=" + rcpTitle
+				+ ", rcpDishType=" + rcpDishType + ", rcpTag=" + rcpTag + ", rcpTime=" + rcpTime + ", rcpContent="
+				+ rcpContent + ", rcpPic=" + rcpPic + ", createDate=" + createDate + ", count=" + count
+				+ ", scrapCount=" + scrapCount + ", status=" + status + ", rcpType=" + rcpType + "]";
+	}
+
 	
 }
 	
