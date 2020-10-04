@@ -186,14 +186,13 @@
 				<%for(Recipe r : list){ %>
 				<div class="thumbnail" align="center" style="width:200px;">
 					<input type="hidden" name="rcpNo" value="<%=r.getRcpNo()%>">
-					<input type="hidden" name="dishType" value="<%=r.getRcpDishType() %>">
 						<img src="<%=contextPath %>/resources/recipe_upfiles/<%=r.getRcpPic() %>" width="200px" height="150px" />
 					<br />
 					<div class="w3-container w3-border-bottom w3-border-teamColor">
 						"<%=r.getRcpContent() %>" <br /> <br>
 						<small><p style="font-style:italic"><%=r.getRcpTitle() %></p></small>
 					</div>
-					<p align="left"><%=r.getMemName() %> / <%=r.getRcpDishType() %></p>
+					<p align="left"><%=r.getMemName() %></p>
 				</div>
 				<%} %>
 				<script>

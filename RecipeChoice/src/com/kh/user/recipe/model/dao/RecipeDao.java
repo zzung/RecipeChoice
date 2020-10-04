@@ -505,11 +505,10 @@ public class RecipeDao {
 		
 	}//e.selectRecipeList
 	
-	public ArrayList<Count> relationRecipe(Connection conn, String dishType){
-		ArrayList<Count> relation = new ArrayList<>();
+	public ArrayList<Recipe> relationRecipe(Connection conn, String dishType){
+		ArrayList<Recipe> relation = new ArrayList<>();
 		
-		PreparedStatement pstmt = null;
-		//Statement stmt = null; 
+		PreparedStatement pstmt = null; 
 		ResultSet rs = null; 
 		
 		String sql = prop.getProperty("relationRecipe");
@@ -517,13 +516,12 @@ public class RecipeDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dishType);
-			//stmt = conn.createStatement();
-			//rs = stmt.executeQuery(sql);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				Count ct = new Count();
-				ct.setRelationPic(rs.getString("RCP_PIC"));
+				Recipe ct = new Recipe();
+				ct.setRcpNo(rs.getInt("RCP_NO"));
+				ct.setRcpPic(rs.getString("RCP_PIC"));
 				
 				relation.add(ct); 
 			}

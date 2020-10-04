@@ -8,7 +8,7 @@
 	
 	ArrayList<IngredientList> ing = (ArrayList<IngredientList>)request.getAttribute("ingredient");
 	ArrayList<Cook> cook = (ArrayList<Cook>)request.getAttribute("cook"); 
-	ArrayList<Count> relation =(ArrayList<Count>)request.getAttribute("relation"); 
+	ArrayList<Recipe> relation =(ArrayList<Recipe>)request.getAttribute("relation"); 
 %>
 <!DOCTYPE html>
 <html>
@@ -147,8 +147,10 @@
 				<tr>
 					<td colspan="2">
 						<div class="bottom_tipRelation">
-						<%for(Count ct : relation) { %>
-			                <li><a href="#"><img src="<%=contextPath %>/resources/recipe_upfiles/<%=ct.getRelationPic() %>" width="180px" height="150px" /></a></li>
+						<%for(Recipe ct : relation) { %>
+			                <li><a href="<%=contextPath%>/detail.rp?rcpNo=<%=ct.getRcpNo()%>">
+			                <img src="<%=contextPath %>/resources/recipe_upfiles/<%=ct.getRcpPic() %>" width="180px" height="150px" />
+			                </a></li>
               			<%} %>
               			</div> 
 					</td>

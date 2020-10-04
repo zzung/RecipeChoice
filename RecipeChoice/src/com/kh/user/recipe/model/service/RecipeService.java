@@ -207,10 +207,10 @@ public class RecipeService {
 		return list; 
 	}//e.selectList
 	
-	public ArrayList<Count> relationRecipe(String dishType){
+	public ArrayList<Recipe> relationRecipe(String dishType){
 		Connection conn = getConnection();
 
-		ArrayList<Count> relation = new RecipeDao().relationRecipe(conn, dishType);
+		ArrayList<Recipe> relation = new RecipeDao().relationRecipe(conn, dishType);
 		
 		close(conn);
 		

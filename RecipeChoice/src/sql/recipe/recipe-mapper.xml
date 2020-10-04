@@ -236,9 +236,10 @@
 		<![CDATA[SELECT *
 		          FROM (
 		                SELECT
-		                      RCP_PIC
+		                	  RCP_NO	
+		                    , RCP_PIC
 		                 FROM RECIPE
-		                WHERE RCP_DISH_TYPE='?'
+		                WHERE RCP_DISH_TYPE=?
 		                  AND STATUS='Y'
 		                ORDER BY DBMS_RANDOM.RANDOM
 		                )

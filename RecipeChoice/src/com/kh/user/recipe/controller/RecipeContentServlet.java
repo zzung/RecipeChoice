@@ -39,19 +39,19 @@ public class RecipeContentServlet extends HttpServlet {
 		
 		//레시피작성 메인 부분
 		int rcpNo = Integer.parseInt(request.getParameter("rcpNo"));
-		String dishType = request.getParameter("dishType");
-		
-		System.out.println("rcpNo:" + rcpNo);
-		System.out.println("dishType:" + dishType);
-		
+		//String dishType = request.getParameter("dishType");
+	
 		Recipe r = new RecipeService().selectDetailRecipeList(rcpNo);
+		String dishType = r.getRcpDishType();
+		ArrayList<Recipe> relation = new RecipeService().relationRecipe(dishType);
+	
 		//재료리스트
 		ArrayList<IngredientList> ingredient = new RecipeService().selectDetailIngList(rcpNo); 
 		
 		//조리
 		ArrayList<Cook> cook = new RecipeService().selectDetailCookList(rcpNo); 
 		
-		ArrayList<Count> relation = new RecipeService().relationRecipe(dishType);
+	
 		
 		
 		request.setAttribute("r", r );
