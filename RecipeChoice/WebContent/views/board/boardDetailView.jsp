@@ -416,7 +416,7 @@
 				data: {
 					userNo:loginUserNo,
 					bno:<%= b.getBoardNo() %>,
-					memName:'test_3',
+					memName:'<%= loginUser.getMemName() %>',
 					replyContent:$("#replyEnrollForm").val(),
 					boardType:1
 				},
