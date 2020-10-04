@@ -170,19 +170,17 @@ public class RecipeService {
 		return result1 * result2 * result3 * result4 * result5;
 	}// e.insertRecipe
 	
-	public int deleteContent(int rcpNo) {
+	public int deleteRecipe(int rcpNo) {
 		Connection conn = getConnection(); 
 		
-		int result1 = new RecipeDao().deleteRecipe(conn, rcpNo);
-		int result2 = new RecipeDao().deleteIngredientList(conn, rcpNo);
-		int result3 = new RecipeDao().deleteCook(conn, rcpNo); 
-		
-		if(result1>0 && result2>0 && result3>0) {
+		int result = new RecipeDao().deleteRecipe(conn, rcpNo);
+
+		if(result>0) {
 			commit(conn);
 		} else {
 			rollBack(conn); 
 		}
 		close(conn);
-		return result1*result2*result3; 
+		return result;
 	}
 }

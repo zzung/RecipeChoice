@@ -213,8 +213,9 @@
 	</entry>
 	
 	<entry key="deleteRecipe">
-		DELETE 
-		  FROM RECIPE
+		UPDATE
+		       RECIPE
+		   SET STATUS = 'N'
 		 WHERE RCP_NO = ?
 	</entry>
 </properties>

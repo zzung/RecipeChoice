@@ -100,10 +100,8 @@
 							<b>관련 꿀팁</b>
 						</p>
 						<div class="tipRelation">
-							<li><a href="#">&laquo;</a></li>
 							<li><a href="#"><img src=" " width="125px" height="90px" /></a></li>
                			 	<li><a href="#"><img src=" " width="125px" height="90px" /></a></li>
-							<li><a href="#">&raquo;</a></li>
 						</div>
 					</td>
 				</tr>
@@ -148,12 +146,10 @@
 				<tr>
 					<td colspan="2">
 						<div class="bottom_tipRelation">
-			                <li><a href="#">&laquo;</a></li>
 			                <li><a href="#"><img src=" " width="180px" height="150px" /></a></li>
 			                <li><a href="#"><img src=" " width="180px" height="150px" /></a></li>
 			                <li><a href="#"><img src=" " width="180px" height="150px" /></a></li>
 			                <li><a href="#"><img src=" " width="180px" height="150px" /></a></li>
-			                <li><a href="#">&raquo;</a></li>
               			</div> 
 					</td>
 				</tr>

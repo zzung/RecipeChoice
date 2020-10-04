@@ -38,7 +38,7 @@ public class RecipeDeleteServlet extends HttpServlet {
 		
 		int rcpNo = Integer.parseInt(request.getParameter("rcpNo"));
 		
-		int result = new RecipeService().deleteContent(rcpNo); 
+		int result = new RecipeService().deleteRecipe(rcpNo); 
 		
 		if(result > 0) {
 			
