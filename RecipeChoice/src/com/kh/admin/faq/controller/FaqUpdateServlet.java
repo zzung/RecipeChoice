@@ -2,7 +2,6 @@ package com.kh.admin.faq.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +12,16 @@ import com.kh.admin.faq.model.service.FaqService;
 import com.kh.admin.faq.model.vo.Faq;
 
 /**
- * Servlet implementation class FaqUpdateFormServlet
+ * Servlet implementation class FaqUpdateServlet
  */
-@WebServlet("/updateForm.mf")
-public class FaqUpdateFormServlet extends HttpServlet {
+@WebServlet("/update.mf")
+public class FaqUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqUpdateFormServlet() {
+    public FaqUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +30,32 @@ public class FaqUpdateFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("utf-8");
+		
+		int  fno = Integer.parseInt(request.getParameter("fno"));
+		String faqTitle = request.getParameter("title");
+		String faqContent = request.getParameter("content");
+		
+		Faq f = new Faq();
+		f.setFaqNo(fno);
+		f.setFaqTitle(faqTitle);
+		f.setFaqContent(faqContent);
+		
+		int result = new FaqService().updateFaq(f);
+		
+		if(result > 0) { //성공 => 재요청 
+			
+			request.getSession().setAttribute("alertMsg", "게시글 수정 성공했습니다.");
+			response.sendRedirect(request.getContextPath() + "/faqlist.mf");
+			
+		}else { //실패
+			
+			request.setAttribute("errorMsg", "게시글 수정 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+		
 	
-		int fno = Integer.parseInt(request.getParameter("fno"));
-		
-		Faq f = new FaqService().selectFaq(fno); //게시글 제목, 게시글 내용 , 번호
-		
-		request.setAttribute("f",f);
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/faq/faqUpdateForm.jsp");
-		view.forward(request,response);
-		
 	}
 
 	/**

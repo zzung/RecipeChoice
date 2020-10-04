@@ -21,7 +21,7 @@ public class ReportDao {
 	
 	public ReportDao() {
 		
-		String fileName = ReportDao.class.getResource("/sql/Report/Report-mapper").getPath();
+		String fileName = ReportDao.class.getResource("/sql/report/report-mapper.xml").getPath();
 
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -32,7 +32,7 @@ public class ReportDao {
 	}
 	
 	public int selectListCount(Connection conn) {
-		//select문 =>총 게시글 갯수(int)
+		//select문 =>총 게시글 갯수
 		int listCount = 0;
 		
 		Statement stmt = null;

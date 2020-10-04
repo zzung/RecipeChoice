@@ -1,12 +1,16 @@
 package com.kh.admin.faq.model.service;
 
-import static com.kh.user.common.JDBCTemplate.*;
+import static com.kh.user.common.JDBCTemplate.close;
+import static com.kh.user.common.JDBCTemplate.commit;
+import static com.kh.user.common.JDBCTemplate.getConnection;
+import static com.kh.user.common.JDBCTemplate.rollBack;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.admin.faq.model.dao.FaqDao;
 import com.kh.admin.faq.model.vo.Faq;
+
 
 
 public class FaqService {
@@ -67,12 +71,51 @@ public class FaqService {
 		
 		Connection conn = getConnection();
 		
-		Faq f = new FaqDao().selectFaqDetailView(conn, fno);
+		Faq f = new FaqDao().selectFaq(conn, fno);
 		
 		close(conn);
 		
 		return f;
 	}
-	
+	/**
+	 * faq수정용 서비스
+	 * @param f 수정된 내용들이 담겨있는 Faq 객체
+	 * @return	
+	 */
+	public int updateFaq(Faq f) {
+		
+		Connection conn = getConnection();
+		
+		int result = new FaqDao().updateFaq(conn, f);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+	/**
+	 * 삭제
+	 * @param faqNo
+	 * @return
+	 */
+	public int deleteFaq(int faqNo) {
+
+		Connection conn = getConnection();
+		int result = new FaqDao().deleteFaq(conn, faqNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
 	
 }

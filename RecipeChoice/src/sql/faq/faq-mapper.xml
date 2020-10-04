@@ -36,4 +36,30 @@ INSERT /*com.kh.admin.faq.model.dao.FaqDao#insertFaq()*/
 	  )
 	
 	</entry>
+	<entry key="selectFaq">
+		SELECT
+				FAQ_NO
+			  , FAQ_TITLE
+			  , FAQ_CONTENT
+		   FROM	FAQ
+		  WHERE FAQ_NO = ?    	
+	
+	</entry>
+	
+	
+	<entry key="updateFaq">
+	 UPDATE
+	         FAQ
+	    SET FAQ_TITLE = ?
+	      , FAQ_CONTENT = ?
+	  WHERE FAQ_NO = ?
+	    AND STATUS = 'Y'
+	</entry>
+	<entry key="deleteFaq">
+		UPDATE
+		       NOTICE
+		   SET STATUS ='N'
+		 WHERE NOT_NO = ?
+	</entry>
+	
 </properties>

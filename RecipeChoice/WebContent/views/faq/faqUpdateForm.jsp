@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.admin.faq.model.vo.*" %>    
+<%
+	Faq f = (Faq)request.getAttribute("f"); //제목이랑 내용 번호
+	
+ %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,19 +92,18 @@
         <div id="navigator"></div>
         <div id="content">
             <div id="content_1">
-                <div id="menu_1">고객센터</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1 문의</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;개인정보취급방침</div>
-                <div id="menu_3">
-                    <br><b>&nbsp;&nbsp;고객센터</b><br>
-                    <b>&nbsp;&nbsp;1234-5678</b>
-                    <br>&nbsp;&nbsp;평일 10:00 ~ 18:00
-                    <br>&nbsp;&nbsp;(토,일 공휴일은 휴무)<br>
+                <div id="menu_1">관리자</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항관리</div>
+                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
+                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/seasonList.ms'">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
+                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/faqList.mf'"style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;FAQ</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/contactList.mc'">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/reportList.mc'">&nbsp;&nbsp;&nbsp;신고 관리</div>
                 </div>
-            </div>
-            <div id="content_2">
+            
+            	<div id="content_2">
 	
 				<br>
                 <h4>자주 묻는 질문
@@ -107,16 +111,17 @@
                 </h4>
                 <h5>FAQ</h5>
                 <hr>
-                <form id="updateForm" action="<%=contextPath %>/insert.mf" method="post"> 
+                <form id="updateForm" action="<%=contextPath %>/update.mf" method="post"> 
+                <input type="hidden" name="fno" value="<%= f.getFaqNo() %>">
         		 <table class="faq">
                        <tr>
                            <th ><h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제목 &nbsp;&nbsp;&nbsp;</h5></th>
-                           <td colspan="4" ><input type="text" name="title" style="width:78%;" placeholder="내용을 입력하세요" value="기존의 제목이 보여져야됨" required style="height:22px;"></td>
+                           <td colspan="4" ><input type="text" name="title" style="width:78%;" placeholder="내용을 입력하세요" value="<%=f.getFaqTitle() %>" required style="height:22px;"></td>
                        </tr>
                        <tr>
                            <td><h5>내용</h5></td>
                            <td>
-                              <textarea name="content" cols="60" rows="6" style="resize:none; margin-top:10px; margin-bottom:10px;"required>기존의 내용이 보여져야됨</textarea>
+                              <textarea name="content" cols="60" rows="6" style="resize:none; margin-top:10px; margin-bottom:10px;"required><%=f.getFaqContent() %></textarea>
                            </td>
                        </tr>
                  </table>   
@@ -128,6 +133,7 @@
            </div>  
        </form>
           </div>
+          
     <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>
 </body>

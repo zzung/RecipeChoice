@@ -73,7 +73,7 @@ public class ReportListViewServlet extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/report/reportListView.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/report/reportList.jsp");
 		view.forward(request, response);	
 		
 		

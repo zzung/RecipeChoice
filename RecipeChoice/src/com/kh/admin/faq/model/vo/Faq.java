@@ -32,11 +32,6 @@ public class Faq {
 	
 
 
-	public Faq(String faqTitle, String faqContent) {
-		super();
-		this.faqTitle = faqTitle;
-		this.faqContent = faqContent;
-	}
 
 
 	public int getFaqNo() {

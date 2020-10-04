@@ -8,5 +8,15 @@
 </head>
 <body>
 
+
+<script>
+	$(function(){
+		$("#updateForm option").each(funtion(){
+			if($(this).text() == "<%=c.getConType()%>"){
+				$(this).attr("selected",true);
+			}
+		});
+	});
+</script>
 </body>
 </html>

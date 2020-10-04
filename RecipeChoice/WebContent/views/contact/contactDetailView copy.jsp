@@ -136,7 +136,7 @@
                         <th><h2>문의 분류</h2></th>
                         <td >
                             <select name="category"style="height:25px; width:110px;"  >
-                                <option value="10" float="">레시피 문의</option>
+                                <option value="10" >레시피 문의</option>
                                 <option value="20">신고 문의</option>
                                 <option value="30">기타 문의</option>
                              </select>

@@ -146,7 +146,7 @@
                 <% for(Faq f : listView){ %>
 				<div class="t1">
                     <p id="a1">&nbsp;<%= f.getFaqTitle() %>&nbsp; &nbsp;⌄</p>
-                     <img id="imgDelete" onclick="deleteConfirm();"src="resources/image/navbar/pencil.jpg">
+                     <img id="imgDelete" onclick="location.href='<%=contextPath%>/delete.mf?fno=<%=f.getFaqNo()%>';" src="resources/image/navbar/pencil.jpg">
                      <img id="img" onclick="location.href='<%=contextPath%>/updateForm.mf?fno=<%= f.getFaqNo() %>';" src="resources/image/navbar/pencil.jpg">                                 
                     <hr style="width:93%;">
                     <p id="b1">&nbsp; <%= f.getFaqContent() %></p>
@@ -163,22 +163,6 @@
 				</div>
 				<% } %>
 			</div>
-			
-				  <script>
-				  $("#imgDelete").click(function noticeDelete(){
-		    			var answer = confirm("삭제하시겠습니까 ?");
-		                if(answer){
-		                	var fno = $(this).parents().parents().children().eq(0).text();
-		                    console.log(fno);
-		                    // 삭제 진행
-		                    
-		                    
-		                }else{
-			                return;
-		                }
-		                event.stopPropagation();
-		    		});
-           		</script>
            
             <div id="content_3"></div>
             
