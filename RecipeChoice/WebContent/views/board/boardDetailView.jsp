@@ -134,8 +134,11 @@
 	<% 
 		int loginUserNo = 0;
 	
+		String loginMemName = "";
+	
 		if(loginUser != null) {
 			loginUserNo = loginUser.getUserNo();
+			loginMemName = loginUser.getMemName();
 		}
 	%>
 	
@@ -416,9 +419,9 @@
 				data: {
 					userNo:loginUserNo,
 					bno:<%= b.getBoardNo() %>,
-					memName:'<%= loginUser.getMemName() %>',
+					memName:'<%= loginMemName %>',
 					replyContent:$("#replyEnrollForm").val(),
-					boardType:2
+					boardType:1
 				},
 				type: 'post',
 				success: function (result) {

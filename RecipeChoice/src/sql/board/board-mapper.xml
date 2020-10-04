@@ -2,11 +2,6 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-	<comment>
-		후에 정렬기능 orderby에 알맞은 정렬 기준을 제시하기 위해 2파트로 나누고
-		사이에 문자열을 더해줄것
-		prop.getProperty() + 정렬기준 + prop.getProperty()	
-	</comment>
 	<entry key="selectBoardListByPagePart1">
 		SELECT *
 		  FROM (
