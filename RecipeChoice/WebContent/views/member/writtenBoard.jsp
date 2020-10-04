@@ -1,15 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.Date" %>
+<%@page import="com.kh.user.board.model.vo.PageInfo"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.kh.user.board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
+
+<%
+
+	ArrayList<Board> boardList = new ArrayList<Board>();
+	if(request.getAttribute("boardList") instanceof ArrayList) {
+		ArrayList<?> tmpList = (ArrayList<?>)request.getAttribute("boardList");
+		for(Object obj : tmpList) {
+			if(obj instanceof Board) {
+				boardList.add((Board)obj);
+			}
+		}
+	}
+	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	
+	session.removeAttribute("alertMsg");
+	
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <link rel="stylesheet" href="resources/css/subvar.css">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
 <style>
 .paging{
 	margin-left:300px;
@@ -104,103 +124,23 @@
                     </thead>
                   </table>
                 <div class="content2_1_1">
-                    <div class="card" style="width: 10.8rem;">
-                        <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 45px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width:10.8rem;">
-                        <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 45px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width:10.8rem;">
-                        <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 45px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 10.8rem;">
-                        <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 45px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
+                    <% for(Board b : boardList) { %>
+              			<% if(userName.equals(b.getMemName())) {%>
+		                  <div class="card" style="width:10.8rem;">
+		                      <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
+		                      <div class="body" style="height: 45px; ">
+		                          <p><b><%=b.getBoardTitle() %></b></p>
+		                          <p><%=b.getCreateDate() %></p>
+		                      </div>
+		                  </div>
+	                  	<%} %>
+	                 <%} %> 
                 </div>   
             </div>
          
-            <div class="content2_2">
-               
-                <div class="content2_2_1">
-                    <div class="card" style="width:10.8rem;">
-                        <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 50px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 10.8rem;">
-                        <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 50px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width:10.8rem ;">
-                        <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 50px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 10.8rem;">
-                        <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 50px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
-                </div>   
-                
-            </div>
+         
             <div class="content2_3">
-                
-                <div class="content2_3_1">
-                    <div class="card" style="width: 10.8rem; margin-top:10px;">
-                        <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 45px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width:10.8rem;">
-                        <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 45px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width:10.8rem;">
-                        <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 45px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 10.8rem;">
-                        <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
-                        <div class="body" style="height: 45px; ">
-                            <p><b>글제목</b></p>
-                            <p>작성일 : 2020-01-01</p>
-                        </div>
-                    </div>
-                </div>   
+                 
              
              	<div class="content2_3_1">
              		<nav aria-label="Page navigation example" class="paging">

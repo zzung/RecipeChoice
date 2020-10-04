@@ -5,7 +5,7 @@
         box-sizing: border-box;
     }
     .wrap{
-            margin-top: 195px!important;
+            margin-top: 180px!important;
             width:1000px;
             height:800px;
             margin:auto;
@@ -53,6 +53,9 @@
     .wrap .content1,.content2{
         float:left;
     }
+    .content1{
+    	margin-top:25px;
+    }
     .content2_1 div{
         float:left;
         margin:0px 15px 12px;
@@ -95,5 +98,8 @@
     
         margin-left: 460px;
      }
-     
+     .wrap .card:hover{
+        cursor: pointer;
+        box-shadow:0 1px 10px rgba(0,0,0,0.4);
+    }
  

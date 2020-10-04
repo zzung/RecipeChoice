@@ -156,19 +156,18 @@
                   </thead>
                 </table>
               <div class="content2_2_1">
-             
+
               <% for(Board b : boardList) { %>
-              	<% if(userName.equals(b.getMemName())) {%>
-	                  <div class="card" style="width:10.8rem;">
-	                      <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
-	                      <div class="body" style="height: 45px; ">
-	                          <p><b><%=b.getBoardTitle() %></b></p>
-	                          <p><%=b.getCreateDate() %></p>
-	                      </div>
-	                  </div>
-                  	<%} %>
+	              	<% if(userName.equals(b.getMemName())) {%>
+		                  <div class="card" style="width:10.8rem;">
+		                      <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
+		                      <div class="body" style="height: 45px; ">
+		                          <p><b><%=b.getBoardTitle() %></b></p>
+		                          <p><%=b.getCreateDate() %></p>
+		                      </div>
+		                  </div>
+	                  	<%} %>
                  <%} %> 
-	              
               </div>
           
               <div class="content2_2_2">
