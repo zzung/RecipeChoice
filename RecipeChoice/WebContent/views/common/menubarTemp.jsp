@@ -1,7 +1,11 @@
+<%@page import="com.kh.user.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	String contextPath = request.getContextPath();
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	
+	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
 <html>
@@ -12,6 +16,16 @@
 <link rel="stylesheet" href="resources/css/footer.css">
 <link rel="stylesheet" href="resources/css/w3.css">
 <title>menubar</title>
+<script>
+	$(function(){
+		var msg = "<%=alertMsg%>"; 
+
+		if(msg != "null"){
+			alert(msg);
+			<% session.removeAttribute("alertMsg"); %>
+		}
+	});
+</script>
 </head>
 <body>
 
@@ -29,7 +43,7 @@
 						<a class="dropdown-item" href="#">재료상식</a>
 					</div>
 				</li>
-				<li class="nav-item margin-top"><a class="nav-link" href="<%=contextPath%>/recipeView.rp">레시피</a></li>
+				<li class="nav-item margin-top"><a class="nav-link" href="<%=contextPath%>/pageList.rp?currentPage=1">레시피</a></li>
 				<li class="nav-item margin-top"><a class="nav-link" href="<%=contextPath%>/board.bo">커뮤니티</a></li>
 				<!-- Brand -->
 				<li class="nav-item">
@@ -44,10 +58,14 @@
 						<img src="resources/image/navbar/user.png" alt="logo" style="width: 30px;">
 					</a>
 					<div class="dropdown-menu">
+						<%if(loginUser == null) {%>
 						<a class="dropdown-item" href="<%=contextPath%>/enrollForm.me">회원가입</a>
-						<a class="dropdown-item" href="<%=contextPath%>/login.me">로그인</a>
+						<a class="dropdown-item" href="<%=contextPath%>/loginForm.me">로그인</a>
+						<%}else{ %>
 						<!-- 로그인 회원 -->
 						<a class="dropdown-item" href="<%=contextPath%>/mypage.me">마이페이지</a>
+						<a class="dropdown-item" href="<%=contextPath%>/logout.me">로그아웃</a>
+						<%} %>
 					</div>
 				</li>
 				<li class="nav-item margin-top">
@@ -60,8 +78,8 @@
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="<%= contextPath %>/serviceCenter.no">이용 방법</a> 
 						<a class="dropdown-item" href="<%= contextPath%>/notice.no">공지사항</a> 
-						<a class="dropdown-item" href="#">FAQ</a> 
-						<a class="dropdown-item" href="#">1:1 문의</a> 
+						<a class="dropdown-item" href="<%= contextPath%>/faqDetail.fa">FAQ</a> 
+						<a class="dropdown-item" href="<%= contextPath%>/contactList.co?currentPage=1">1:1 문의</a> 
 						<a class="dropdown-item" href="#">개인정보취급방침</a>
 					</div>
 				</li>

@@ -272,13 +272,14 @@
             <!-- hover시 여백용 tr -->
             <tr id="tableBlink"><td></td><td></td><td></td></tr>
         </table>
-        
-        <!-- 로그인했을때만 -->
+
+		<% if(loginUser != null && loginUser.getUserNo() != 1) { %>        
         <div align="right" style="width: 900px;">
             <button class="btn btn-secondry btnWrite" onclick="location.href='<%= request.getContextPath() %>/boardWriteForm.bo'">
             	글쓰기
             </button>
         </div>
+		<% } %>        
         
         <br>
 

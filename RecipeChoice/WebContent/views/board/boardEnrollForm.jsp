@@ -110,8 +110,7 @@
 
         <form action="<%= servletPath %>" id="insertForm" method="post">
 			
-			<% // TODO 2는 테스트용 로그인과 세션 구현시 실제 로그인한 유저의 번호 %>	
-			<input type="hidden" name="userNo" value="2">
+			<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
 			
             <table style="margin: 0px auto;">
             
