@@ -112,4 +112,12 @@ public class TipService {
 		return knowledgeList;
 	}
 
+	public Tip selectKnowledge(int tno) {
+
+		Connection conn = getConnection();
+		Tip t = new TipDao().selectKnowledge(conn, tno);
+		
+		return t;
+	}
+
 }

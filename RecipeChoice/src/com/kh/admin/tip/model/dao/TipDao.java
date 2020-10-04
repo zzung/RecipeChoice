@@ -113,10 +113,7 @@ public class TipDao {
 			pstmt.setString(3, t.getTipIngredientTag());
 			pstmt.setString(4, t.getTipContent());
 			pstmt.setInt(5, t.getTipCount());
-			pstmt.setString(6, t.getTipCategory());
-			pstmt.setString(7, t.getTipPicture());
-			pstmt.setDate(8, t.getCreateDate());
-			pstmt.setString(9, t.getStatus());
+			pstmt.setString(6, t.getTipPicture());
 			 
 			result = pstmt.executeUpdate();
 			
@@ -254,6 +251,41 @@ public class TipDao {
 		}
 		
 		return knowledgeList;
+	}
+
+
+	public Tip selectKnowledge(Connection conn, int tno) {
+
+		Tip t = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectKnowledge");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, tno);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				t = new Tip(rs.getInt("TIP_NO"),
+						rs.getString("TIP_TITLE"),
+						rs.getString("TIP_INFO"),
+						rs.getString("TIP_ING"),
+						rs.getString("TIP_CONTENT"),
+						rs.getInt("TIP_COUNT"),
+						rs.getString("TIP_CATEGORY"),
+						rs.getString("TIP_PIC"),
+						rs.getDate("CREATE_DATE"),
+						rs.getString("STATUS"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return t;
 	}
 
 	

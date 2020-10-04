@@ -78,7 +78,7 @@
     line-height: 3px;
     text-align: center;
     }
-    .tb1 td, .tb1 th{
+    .tb1 td, .tb1 th, .tb1 a{
 		line-height: 30px;
         padding-left: 0px;
         text-align: center;
@@ -86,6 +86,7 @@
     .tb1 a{color: black; font-size:13px;}
 	tbody>tr {cursor: pointer;}
 	tbody>tr:hover{ background: #f3f3f3;}
+	
     .pagination {
 	    text-align: center;
         margin-left: 40%;
@@ -156,10 +157,10 @@
 		                       <td><%= n.getNoticeNo()%></td>
 		                       <td><%= n.getNoticeTitle() %></td>
 		                       <td><%= n.getNoticeDate() %></td>
-		                       <td>
-			                       <a id="noticeUpdate" onclick="return noticeUpdate();">수정</a>&nbsp;&nbsp;
-			                       <a id="noticeDelete" onclick="return noticeDelete();">삭제</a>
-		                       </td>
+		                   	   <td>
+									<a onclick="noticeUpdate(this); event.stopImmediatePropagation();">수정</a>&nbsp;&nbsp;
+									<a onclick="noticeDelete(this); event.stopImmediatePropagation();">삭제</a>
+	                       	   </td>
 		                 	 </tr>
 	                        <% } %>
 	                    </tbody>
@@ -191,7 +192,39 @@
     <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>
     
-    <script>
+    	<script>
+    	
+			const noticeUpdate = function(e){
+			   var answer = confirm("수정하시겠습니까 ?");
+			   if(answer){
+			    console.log(e.parentNode)
+			   var nno = e.parentNode.parentNode.childNodes[1].textContent;
+			   location.href="<%=contextPath%>/updateForm.mn?nno="+nno;
+			    }else{
+			      return;
+			    }
+			    	};
+			    		
+			const noticeDelete =  function(e){
+			    var answer = confirm("삭제하시겠습니까 ?");
+			    if(answer){
+			       var nno = e.parentNode.parentNode.childNodes[1].textContent;
+			           // 삭제 진행
+			       location.href="<%=contextPath%>/delete.mn?nno="+nno;
+			     }else{
+				return;
+			     }
+			    };
+			    
+			$(".tb1>tbody>tr").click(function(){
+		    	var nno = $(this).children().eq(0).text();
+			 	location.href="<%=contextPath%>/detail.mn?nno="+ nno;    	
+		     });
+			
+		</script>
+    
+    
+    <%-- <script>
     	$(function(){
     		
     		$("#noticeUpdate").click(function noticeUpdate(){
@@ -231,7 +264,7 @@
     	});
             
 
-    </script>
+    </script> --%>
     
     
     

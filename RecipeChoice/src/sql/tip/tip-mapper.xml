@@ -39,7 +39,8 @@
 		     , CREATE_DATE
 		     , STATUS
 		  FROM TIP_VIEW
-		 WHERE TIP_NO =?
+		 WHERE TIP_TYPE = 1
+		   AND TIP_NO =?
 	</entry>
 	
 	<entry key="insertCareTip">
@@ -64,10 +65,10 @@
 		       , ?
 		       , ?
 		       , ?
-		       , ?
+		       , 1
 		       , ?
 		       , SYSDATE
-		       , ?
+		       , DEFAULT
 		       )
 	</entry>
 	<entry key="updateCareTip">
@@ -122,5 +123,21 @@
 			               ) B
 			       )
 			 WHERE RNO BETWEEN 1 AND 10
+	</entry>
+	<entry key="selectKnowledge">
+		SELECT
+		       TIP_NO
+		     , TIP_TITLE
+		     , TIP_INFO
+		     , TIP_ING
+		     , TIP_CONTENT
+		     , TIP_COUNT
+		     , DECODE(TIP_TYPE, 1, '손질법', '상식') TIP_CATEGORY
+		     , TIP_PIC
+		     , CREATE_DATE
+		     , STATUS
+		  FROM TIP_VIEW
+		 WHERE TIP_TYPE = 2
+		   AND TIP_NO =?
 	</entry>
 </properties>
