@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.user.recipe.model.service.RecipeService;
 import com.kh.user.recipe.model.vo.Cook;
+import com.kh.user.recipe.model.vo.Count;
 import com.kh.user.recipe.model.vo.IngredientList;
 import com.kh.user.recipe.model.vo.Recipe;
 
@@ -38,17 +39,25 @@ public class RecipeContentServlet extends HttpServlet {
 		
 		//레시피작성 메인 부분
 		int rcpNo = Integer.parseInt(request.getParameter("rcpNo"));
-		Recipe r = new RecipeService().selectDetailRecipeList(rcpNo);
+		String dishType = request.getParameter("dishType");
 		
+		System.out.println("rcpNo:" + rcpNo);
+		System.out.println("dishType:" + dishType);
+		
+		Recipe r = new RecipeService().selectDetailRecipeList(rcpNo);
 		//재료리스트
 		ArrayList<IngredientList> ingredient = new RecipeService().selectDetailIngList(rcpNo); 
 		
 		//조리
 		ArrayList<Cook> cook = new RecipeService().selectDetailCookList(rcpNo); 
 		
+		ArrayList<Count> relation = new RecipeService().relationRecipe(dishType);
+		
+		
 		request.setAttribute("r", r );
 		request.setAttribute("ingredient", ingredient);
 		request.setAttribute("cook", cook);
+		request.setAttribute("relation", relation);
 		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response); 
 		
 	}

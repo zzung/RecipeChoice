@@ -8,6 +8,7 @@
 	
 	ArrayList<IngredientList> ing = (ArrayList<IngredientList>)request.getAttribute("ingredient");
 	ArrayList<Cook> cook = (ArrayList<Cook>)request.getAttribute("cook"); 
+	ArrayList<Count> relation =(ArrayList<Count>)request.getAttribute("relation"); 
 %>
 <!DOCTYPE html>
 <html>
@@ -146,10 +147,9 @@
 				<tr>
 					<td colspan="2">
 						<div class="bottom_tipRelation">
-			                <li><a href="#"><img src=" " width="180px" height="150px" /></a></li>
-			                <li><a href="#"><img src=" " width="180px" height="150px" /></a></li>
-			                <li><a href="#"><img src=" " width="180px" height="150px" /></a></li>
-			                <li><a href="#"><img src=" " width="180px" height="150px" /></a></li>
+						<%for(Count ct : relation) { %>
+			                <li><a href="#"><img src="<%=contextPath %>/resources/recipe_upfiles/<%=ct.getRelationPic() %>" width="180px" height="150px" /></a></li>
+              			<%} %>
               			</div> 
 					</td>
 				</tr>
@@ -168,15 +168,15 @@
 
 				<textarea class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
 
-				<input type="button" class="btn btn-success replyBtn" value="등록">
+				<input type="button" class="btn btn-success replyBtn" value="등록" onclick="replyWrite()">
 
 				<br>
 				<br>
 
 				<!-- 숫자에 실제로 가져온 댓글의 숫자값으로 대체 -->
-				<h4 class="replytitle" align="left">댓글 15</h4>
+				<h4 id="replyCount" class="replytitle" align="left">댓글 15</h4>
 
-				<table class="replylistArea" style="margin: 0px auto; width: 800px;">
+				<table id="replyListArea" class="replylistArea" style="margin: 0px auto; width: 800px;">
 					<tr>
 						<td colspan="2">
 							<div data-image-content="false"
@@ -210,65 +210,42 @@
 								ㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇ ㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㄹㄴㅇㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹ</div>
 						</td>
 					</tr>
-					<!-- 여기서 부터는 테이블 스타일 테스트용 더미 지울예정 -->
-					<tr>
-						<td colspan="2">
-							<div data-image-content="false"
-								style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
-						</td>
-					</tr>
-					<tr>
-						<td width="10%" align="center"><img
-							src="<%=request.getContextPath()%>/resources/image/board/defaultprofile.png"
-							class="profileImg" width="50px" height="50px"></td>
-						<td width="90%" style="padding-right: 30px;">
-							<div align="left" style="color: gray;">
-								<b style="color: rgb(9, 175, 79); margin-right: 20px;"
-									id="writerNickName">왕십리대마왕</b>
-								<!-- 뿌릴때 서브스트링으로 4자 이후는 ***로 표시 -->
-								<input type="hidden" id="writerId" value="Wang***">
-								20200827 08:31
-								<!-- 작성자일경우에만 표시 -->
-								| <a style="color: gray">수정</a> | <a style="color: gray">삭제</a>
-								<!-- 항상표시 -->
-								| <a style="color: gray">신고</a>
-							</div>
-							<div>예수는 맺어, 산야에 무엇이 미인을 것은 약동하다. 거선의 넣는 하였으며, 그림자는 같이,
-								봄바람이다. 소금이라 이상 이것이야말로 얼마나 소담스러운 미인을 사람은 이것이다. 장식하는 듣기만 심장의 때까지
-								없으면,</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<div data-image-content="false"
-								style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
-						</td>
-					</tr>
-					<tr>
-						<td width="10%" align="center"><img
-							src="<%=request.getContextPath()%>/resources/image/board/defaultprofile.png"
-							class="profileImg" width="50px" height="50px"></td>
-						<td width="90%" style="padding-right: 30px;">
-							<div align="left" style="color: gray;">
-								<b style="color: rgb(9, 175, 79); margin-right: 20px;">닉네임</b>
-								20200827 08:31
-								<!-- 작성자일경우에만 표시 -->
-								| <a style="color: gray">수정</a> | <a style="color: gray">삭제</a>
-								<!-- 항상표시 -->
-								| <a style="color: gray">신고</a>
-							</div>
-							<div>예수는 맺어, 산야에 무엇이 미인을 것은 약동하다. 거선의 넣는 하였으며, 그림자는 같이,
-								봄바람이다. 소금이라 이상 이것이야말로 얼마나 소담스러운 미인을 사람은 이것이다. 장식하는 듣기만 심장의 때까지
-								없으면,</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<div data-image-content="false"
-								style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
-						</td>
-					</tr>
 				</table>
+				<script>
+				$(function(){
+					function replyWrite() {
+						
+			        	<% // TODO data부분은 로그인 구현후 로그인한 사용자의 값을 세션에서 가져옴 %>
+			        	$.ajax({
+							url: 'replyWrite.re',
+							data: {
+								userNo:<%=r.getUserNo()%>,
+								bno:<%= r.getRcpNo() %>,
+								memName:'test_3',
+								replyContent:$("#replyEnrollForm").val(),
+								boardType:1
+							},
+							type: 'post',
+							success: function (result) {
+								
+								if(result <= 0) {
+									alert("댓글 작성에 실패했습니다.");
+								}
+								
+								$("#replyEnrollForm").val("");
+								
+								selectReply();
+								
+							},
+							error: function () {
+								console.log("통신 실패");	
+							}
+						});
+			        	
+					}
+				});
+				</script>
+				
 				 <br><br>
 				 <%if(loginUser != null && loginUser.getUserNo()== r.getUserNo()) { %>
 		          <div align="right">
