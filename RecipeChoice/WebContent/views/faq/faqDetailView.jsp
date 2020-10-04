@@ -65,7 +65,7 @@
         cursor:pointer;
         font-weight:bold;
     }
-    .b,.n{
+    .n{
     	font-weight:bold;
     }
 </style>
@@ -109,7 +109,7 @@ $(document).ready(function(){
 	
 				<br>
                 <h4>자주 묻는 질문
-                    &nbsp;<img src="resources/image/admin/faq.jpg">
+                    &nbsp;<img src="<%= request.getContextPath() %>/resources/image/admin/faq.JPG">
                 </h4>
                 <h5>FAQ</h5>
                 <hr>
@@ -134,9 +134,10 @@ $(document).ready(function(){
 				<br>
 				
 			</div>
-			<br><hr>
-			
-			</div>	
+			<br>
+			</div>
+			</div>
+		</div>	
     	<br><br><br>
     <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>

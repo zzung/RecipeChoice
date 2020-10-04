@@ -12,7 +12,7 @@ import com.kh.admin.contact.model.vo.PageInfo;
 public class ContactService {
 
 	/**
-	 * 1_1. 총 일반게시글 갯수 조회용 서비스
+	 *  총 1:1문의 갯수 조회용 서비스
 	 * @return 총 갯수
 	 */
 	public int selectListCount() {
@@ -29,8 +29,9 @@ public class ContactService {
 	
 	
 	/**
-	 * 1.사용자 1:1문의 전체조회용 서비스
-	 * @return 조회된 전체 1:1문의 리스트
+	 * 현재 요청한 페이지에 보여져야할 리스트 조회용 서비스
+	 * @param pi		현재요청한 페이지, 게시글 최대갯수가 담겨있는 pageInfo객체
+	 * @return			조회된 결과가 담겨있는 list
 	 */
 	public ArrayList<Contact> selectContactList(PageInfo pi){
 		

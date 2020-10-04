@@ -127,19 +127,20 @@
             <div id="content_2">
 	
 				<br><br>
-                <h1>1:1 문의 조회
-                    &nbsp;<img src="resources/image/admin/inquiry.jpg" align="center">
-				</h1>
+                <h3>1:1 문의 조회
+                     &nbsp;<img src="<%= request.getContextPath() %>/resources/image/admin/inquiry.JPG">
+				</h3>
              
                 <table class="inq_s">
                 <thead>
+                   <tr>
                     <th width="80">NO.</th>
-                    <th>   </th>
-                    <th width="300">Content</th>
+                    <th width="300">Type</th>
                     <th width="400">Title</th>
-                    <th width=200">NickName</th>
+                    <th width="200">NickName</th>
                     <th width="200">Date</th>
                     <th width="200">Status</th>
+                   </tr>
                 </thead>
                 <tbody>
                 <!-- 리스트가 비어있을 경우 -->
@@ -234,6 +235,7 @@
         
         <div id="footer"></div>
     </div>
+   </div>
     
     
      <!-- footer 추가-->

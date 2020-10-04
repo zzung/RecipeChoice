@@ -110,7 +110,7 @@
         border-radius: 5px;
     }
     
-	tbody>tr {cursor: pointer;}
+	tr>td>a {cursor: pointer;}
 	tbody>tr:hover{background: rgb(243, 243, 243)}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -153,12 +153,14 @@
               
                 <table class="rep">
                 <thead>
+                 <tr>
                     <th >NO.</th>
                     <th width="400">신고 게시물</th>
-                    <th width=300">작성자</th>
+                    <th width="300">작성자</th>
                     <th width="200">신고자</th>
                     <th width="300">신고사유</th>
                     <th width="200">신고일</th>
+                  </tr>
                 </thead>
                 <tbody>
                 <%if(list.isEmpty()){ %>
@@ -200,6 +202,7 @@
             	<% } %>
             </div>
         </div>
+    </div>
     </div>
     <!-- footer 추가-->
     <%@include file="../common/footer.jsp" %>

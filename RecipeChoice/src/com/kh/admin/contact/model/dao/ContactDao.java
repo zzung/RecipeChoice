@@ -86,12 +86,11 @@ public class ContactDao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {//매개변수이용
-				list.add(new Contact(rs.getInt("con_no"),
-									 rs.getString("con_title"),
-									 rs.getString("mem_id"),
-								     rs.getDate("con_date"),
-								     rs.getInt("con_reply"),
-								     rs.getString("answer")));
+				list.add(new Contact(rs.getInt("CON_NO"),
+									 rs.getString("CON_TYPE"),
+									 rs.getString("CON_TITLE"),
+								     rs.getString("USER_NO"),
+								     rs.getDate("CON_DATE")));
 			}
 			
 		} catch (SQLException e) {

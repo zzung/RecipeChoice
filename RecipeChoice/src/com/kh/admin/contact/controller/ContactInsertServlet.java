@@ -34,13 +34,11 @@ public class ContactInsertServlet extends HttpServlet {
 	
 		request.setCharacterEncoding("utf-8");
 		
-		String userNo = request.getParameter("userNo"); 
 		String conTitle = request.getParameter("title");
-		String conType = request.getParameter("contype");	
+		String conType = request.getParameter("category");	
 		String conContent = request.getParameter("content");
 		
 		Contact c = new Contact();
-		c.setUserNo(userNo);
 		c.setConType(conType);
 		c.setConTitle(conTitle);
 		c.setConContent(conContent);
@@ -49,7 +47,7 @@ public class ContactInsertServlet extends HttpServlet {
 		
 		if(result > 0) {//성공 ==> 1:1문의 리스트 페이지
 			
-			request.getSession().setAttribute("alertMsg", "문의 등록 완료!");
+			request.getSession().setAttribute("alertMsg", "성공적으로 문의가 등록되었습니다.");
 			
 			response.sendRedirect(request.getContextPath() + "/ContactList.co?currentPage=1");
 			

@@ -20,12 +20,7 @@
 	    margin: auto;
 	}
 	#header{height:20%} 
-    .nav{background:rgb(39, 174, 96);}
-        .menu{
-            display:table-cell;
-            height:30px;
-            width:150px;
-        }
+    
 	#navigator{height:5%}
 	#content{height:70%}
 	#footer{height:10%}
@@ -84,7 +79,7 @@
         box-sizing:border-box; 
         
     }
-    .b{
+    .b,#a1{
     	font-weight:bold;
     }
 </style>
@@ -97,7 +92,7 @@
         });
     });
      </script>
-\
+
 <body>
 	 <!--메뉴바 추가-->
     <%@include file="../common/menubar.jsp" %>
@@ -107,9 +102,6 @@
             <div id="header_1"></div>
             <div id="header_2"></div>
             <div id="header_3"></div>
-        </div>
-        <div class="nav">
-            <div class="menu"></div>
         </div>
     
         <div id="navigator"></div>
@@ -129,11 +121,10 @@
             <div id="content_2">
 	            <br>
                 <h4>자주 묻는 질문
-                    &nbsp;<img src="resources/image/admin/faq.jpg">
+                    &nbsp;<img src="<%= request.getContextPath() %>/resources/image/admin/faq.JPG">
                 </h4>
                 <h5>FAQ</h5>
                 <hr>
-				<br>
 				<div class="tt1">
 				 <!-- 리스트가 비어있을 경우 -->
                 <% if(listView.isEmpty()) {%>
@@ -145,12 +136,26 @@
                  <!--  리스트가 비어있지 않을 경우 -->
                 <% for(Faq f : listView){ %>
 				<div class="t1">
+					<br>
                     <p id="a1">&nbsp;<%= f.getFaqTitle() %>&nbsp; &nbsp;⌄</p>
-                     <img id="imgDelete" onclick="location.href='<%=contextPath%>/delete.mf?fno=<%=f.getFaqNo()%>';" src="resources/image/navbar/pencil.jpg">
-                     <img id="img" onclick="location.href='<%=contextPath%>/updateForm.mf?fno=<%= f.getFaqNo() %>';" src="resources/image/navbar/pencil.jpg">                                 
+                     <img id="img" onclick="deleteConfirm();" src="resources/image/admin/recyclebin.JPG">
+                     <img id="img" onclick="location.href='<%=contextPath%>/updateForm.mf?fno=<%= f.getFaqNo() %>';" src="<%= request.getContextPath() %>/resources/image/admin/update.JPG">                                 
+                   	<br>
                     <hr style="width:93%;">
                     <p id="b1">&nbsp; <%= f.getFaqContent() %></p>
 				</div>
+				<script>
+	          function deleteConfirm(){
+	        	  var del = confirm("삭제하시겠습니까 ?")
+	        	  if(del == true)
+	        	  {
+	        		 location.href="<%=contextPath%>/delete.mf?fno=<%=f.getFaqNo()%>";
+	          }else{
+	        	  alert("취소되었습니다.")
+	          }
+	        	  }
+	        	  
+           </script>
 				<% } %>
 			 <% } %>	
 				<br>
@@ -163,13 +168,14 @@
 				</div>
 				<% } %>
 			</div>
-           
+          
             <div id="content_3"></div>
             
         
         <div id="footer"></div>
     </div>
     <br><br><br>
+    </div>
     
      <!-- footer 추가-->
      <%@include file="../common/footer.jsp" %>

@@ -47,7 +47,7 @@ public class FaqUpdateServlet extends HttpServlet {
 		if(result > 0) { //성공 => 재요청 
 			
 			request.getSession().setAttribute("alertMsg", "게시글 수정 성공했습니다.");
-			response.sendRedirect(request.getContextPath() + "/faqlist.mf");
+			response.sendRedirect(request.getContextPath() + "/faqList.mf");
 			
 		}else { //실패
 			

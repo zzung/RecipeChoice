@@ -107,7 +107,7 @@
         border-radius: 5px;
     }
     .pagination a:hover:not(.active){
-        background-color: #ddd;
+        background-color: gray;
         border-radius: 5px;
     }
     tbody>tr{cursor: pointer;}
@@ -146,62 +146,65 @@
 	
 				<br><br>
                 <h3>1:1 문의 조회
-                    &nbsp;<img src="resources/image/admin/inquiry.jpg" style="width: 40px; height: 40px;">
+                    &nbsp;<img src="<%= request.getContextPath() %>/resources/image/admin/inquiry.JPG">
 				</h3>
             
                 <hr>
                 <table class="inq">
                 <thead>
+                  <tr>
                     <th width="80">NO.</th>
-                    <th>   </th>
-                    <th width="300">Content</th>
-                    <th width="400"> Title</th>
-                    <th width=200">Name</th>
+                    <th width="300">Type</th>
+                    <th width="400">Title</th>
+                    <th width="200">Name</th>
                     <th width="200">Date</th>
                     <th width="200">Status</th>
+                  </tr>
                 </thead>
                 <tbody>
                    <!--자기꺼만 삭제할 수 있도록 보여지기 삭제아이콘-->
                    <!-- 리스트가 비어있을 경우 -->
                    <% if(list.isEmpty()){ %>
                    <tr>
-                   		<td colspan="7">존재하는 1:1문의가 없습니다.</td>
+                   		<td colspan="6">존재하는 1:1문의가 없습니다.</td>
                    </tr>
                    <% }else { %>
                    <!-- 리스트가 비어있지 않을 경우 -->
                    <% for(Contact c: list) { %>
-                   <!-- 관리자랑 사용자랑 따로 ,,자기꺼 자기가 비밀번호쳐서 열기 아니면 누르면 이용권한이 없습니다. 문구 -->
                     <tr>
                         <td><%=c.getConNo() %></td>
-                        <td>🔒</td>
                         <td><%=c.getConType() %></td>
                         <td><%=c.getConTitle() %></td>
                         <td><%=c.getUserNo() %></td>
                         <td><%=c.getConDate() %></td>
-                        <td><img id="img"onclick="deleteConfirm();"src="resources/image/admin/recyclebin.jpg" align="center">
+                        <td>  <% if(loginUser != null && loginUser.getMemId().equals(c.getUserNo())) { %>
+                         <img id="img"onclick="deleteConfirm();" src="resources/image/admin/recyclebin.jpg" >
+                		<%} %>
                     </tr>
-                    <% } %>   
+                    <script>
+			          function deleteConfirm(){
+			        	  var del = confirm("삭제하시겠습니까 ?")
+			        	  if(del == true)
+			        	  {
+			        		 location.href="<%=contextPath%>/delete.mc?cno=<%=c.getConNo()%>";
+			          }else{
+			        	  alert("취소되었습니다.")
+			          }
+			        	  }
+			        	  
+           			</script>
+                   <% } %>
                  <% } %>
                  </tbody>
+                 
                 </table>
-                <script>
-                    function deleteConfirm(){
-                       if(confirm("삭제하시겠습니까?")){
-                           location.href="";
-                       }else{
-                           return false;
-                        } 
-                       }
-             
-               </script>
-              
                  <!--1:1문의 답변조회 페이지용-->
                  <script>
                     $(function(){
                         $(".inq>tbody>tr").click(function(){
                         	var nno = $(this).children().eq(0).text();//text로 inner값 가져올 수 있다. 첫번째 그 뮨의번호 //클릭이벤트 발생한 요소<tr> $(this)
                        
-                        	location.href = "<%=contextPath%>/detail.co?nno=" + nno;
+                        	location.href = "<%=contextPath%>/detail.co?cno=" + cno;
                         });
                     });
                     
@@ -222,20 +225,24 @@
                 <a href="location.href='<%=contextPath%>/contactList.co?currentPage=1';">&laquo;</a> 
                <% } %>
                
-               <%for(int p=startPage; p<=endPage; p++) { %> 
-               <% if(p != currentPage){ %>
-                <a href="location.href='<%=contextPath%>contactList.co?currentPage=<%=p%>';"><%=p %></a> 
+             <%for(int p=startPage; p<=endPage; p++) { %> 
+                <% if(p != currentPage){ %>
+                <a href="location.href='<%=contextPath%>contactList.co?currentPage=<%= p%>';"><%= p%></a> 
                	<%}else{ %>
                	<a disabled><%= p %></a>
                	<%} %>
-               <% } %>
+              <% } %>
                
                 <%if(currentPage != maxPage){ %>
                 <a href="location.href='<%=contextPath%>/contactList.co?currentPage=<%= maxPage%>';">&raquo;</a>
             	<% } %>
             </div>
+         
         </div>
     </div>
+    </div>
+    </div>
+  
         <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>
     

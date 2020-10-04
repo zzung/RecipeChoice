@@ -7,19 +7,9 @@ SELECT
      , FAQ_TITLE
      , FAQ_CONTENT
   FROM FAQ
- WHERE FAQ_NO  = ?
-  AND STATUS = 'Y'
+ WHERE STATUS = 'Y'
 	</entry>
 	
-	<entry key="selectFaqList">
-SELECT 
-       FAQ_NO
-     , FAQ_TITLE
-     , FAQ_CONTENT
-  FROM FAQ
- WHERE FAQ_NO  = ?	
-  AND STATUS = 'Y'
-	</entry>
 	<entry key="insertFaq">
 INSERT /*com.kh.admin.faq.model.dao.FaqDao#insertFaq()*/
 	  INTO FAQ
@@ -57,9 +47,9 @@ INSERT /*com.kh.admin.faq.model.dao.FaqDao#insertFaq()*/
 	</entry>
 	<entry key="deleteFaq">
 		UPDATE
-		       NOTICE
+		       FAQ
 		   SET STATUS ='N'
-		 WHERE NOT_NO = ?
+		 WHERE FAQ_NO = ?
 	</entry>
 	
 </properties>

@@ -45,7 +45,7 @@ public class FaqInsertServlet extends HttpServlet {
 		
 		if(result > 0) { // 성공
 			
-			request.getSession().setAttribute("alertMsg", "성공적으로 faq 등록되었습니다."); 
+			request.getSession().setAttribute("alertMsg", "성공적으로 faq가 등록되었습니다."); 
 			
 			response.sendRedirect(request.getContextPath() + "/faqList.mf");
 			

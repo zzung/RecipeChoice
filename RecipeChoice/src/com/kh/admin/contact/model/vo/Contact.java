@@ -35,16 +35,15 @@ public class Contact {
 		this.status = status;
 	}
 	
-	//관리자,사용자 select
+	//사용자 select
 	
-	public Contact(int conNo, String userNo, String conTitle, Date conDate, int conReply, String answer) {
+	public Contact(int conNo, String userNo, String conType, String conTitle, Date conDate) {
 		super();
 		this.conNo = conNo;
 		this.userNo = userNo;
+		this.conType = conType;
 		this.conTitle = conTitle;
 		this.conDate = conDate;
-		this.conReply = conReply;
-		this.answer = answer;
 	}
 	
 	//사용자insert
@@ -58,6 +57,16 @@ public class Contact {
 		this.conContent = conContent;
 	}
 	
+	//관리자 SELECT
+	public Contact(int conNo, String userNo, String conTitle, Date conDate, int conReply, String answer) {
+		super();
+		this.conNo = conNo;
+		this.userNo = userNo;
+		this.conTitle = conTitle;
+		this.conDate = conDate;
+		this.conReply = conReply;
+		this.answer = answer;
+	}
 
 	//관리자 상세조회
 	public Contact(int conNo, String userNo, String conType, String conTitle, String conContent, Date conDate) {

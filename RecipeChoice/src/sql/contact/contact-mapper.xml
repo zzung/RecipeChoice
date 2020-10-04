@@ -3,7 +3,7 @@
 <properties>
 	<entry key="selectListCount">
 			SELECT COUNT(*) LISTCOUNT
-			  FROM REPORT
+			  FROM CONTACT
 			 WHERE STATUS = 'Y'
 	
 	</entry>
@@ -16,10 +16,10 @@
 	          FROM (
 	                SELECT 
 	                       CON_NO
+                         , CON_TYPE  
 	                     , CON_TITLE
-	                     , M.MEM_ID
+	                     , M.MEM_ID 
 	                     , CON_DATE
-	                     , ANSWER
 	                  FROM CONTACT C
 	                  JOIN MEMBER M ON (M.USER_NO = C.USER_NO)
 	                 WHERE C.STATUS='Y'
@@ -90,8 +90,5 @@ WHERE RNUM BETWEEN ? AND ?
 		  JOIN MEMBER M ON (M.USER_NO = C.USER_NO)
 		 WHERE CON_NO = ?
 		   AND C.STATUS = 'Y'
-	</entry>
-	<entry ke">
-	
 	</entry>
 </properties>

@@ -107,7 +107,7 @@
                 </h6>
                 <hr>
 
-                <form action="<%=contextPath %>/insert.co" method="post"> 
+                <form id="insertForm" action="<%=contextPath %>/insert.co" method="post"> 
                 <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
                  <table class="EnrollArea">
                     <tr>
@@ -137,13 +137,14 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" onclick="history.back();">뒤로가기</button>
             </div>
+            </form>
         </div>  
-    </form>
+   	 
          </div>
             <div id="content_3"></div>
         </div>
         <div id="footer"></div>
-    </div>
+    
     
     <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>
