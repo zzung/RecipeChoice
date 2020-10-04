@@ -1,9 +1,9 @@
 package com.kh.user.recipe.model.service;
 
+import static com.kh.user.common.JDBCTemplate.close;
 import static com.kh.user.common.JDBCTemplate.commit;
 import static com.kh.user.common.JDBCTemplate.getConnection;
 import static com.kh.user.common.JDBCTemplate.rollBack;
-import static com.kh.user.common.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.kh.user.recipe.model.dao.RecipeDao;
 import com.kh.user.recipe.model.vo.Cook;
 import com.kh.user.recipe.model.vo.IngredientList;
+import com.kh.user.recipe.model.vo.PageInfo;
 import com.kh.user.recipe.model.vo.Recipe;
 
 public class RecipeService {
@@ -44,7 +45,7 @@ public class RecipeService {
 	 * 
 	 * @return
 	 */
-	public ArrayList<Recipe> selectRecipeList() {
+	/*public ArrayList<Recipe> selectRecipeList() {
 		Connection conn = getConnection();
 
 		ArrayList<Recipe> list = new RecipeDao().selectRecipeList(conn);
@@ -53,7 +54,7 @@ public class RecipeService {
 
 		return list;
 
-	}
+	}*/
 
 	/**
 	 * 레시피 화면 총 게시글 보여주기 위한 조회
@@ -118,7 +119,11 @@ public class RecipeService {
 		return cook;
 
 	}// e.
-
+	/**
+	 * 레시피 디테일뷰 화면에서 태그 목록 보여주는 것 
+	 * @param rcpTags
+	 * @return
+	 */
 	public ArrayList<Recipe> tagSearch(String[] rcpTags) {
 		Connection conn = getConnection();
 
@@ -128,7 +133,13 @@ public class RecipeService {
 
 		return tags;
 	}
-
+	/**
+	 * 레시피 작서 수정 하는 것 
+	 * @param r
+	 * @param ingList
+	 * @param cookList
+	 * @return
+	 */
 	public int updateRecipe(Recipe r, ArrayList<IngredientList> ingList, ArrayList<Cook> cookList) {
 		Connection conn = getConnection();
 
@@ -169,7 +180,11 @@ public class RecipeService {
 		close(conn);
 		return result1 * result2 * result3 * result4 * result5;
 	}// e.insertRecipe
-	
+	/**
+	 * 레시피 작성 한거 삭제 할때 status = 'N'
+	 * @param rcpNo
+	 * @return
+	 */
 	public int deleteRecipe(int rcpNo) {
 		Connection conn = getConnection(); 
 		
@@ -182,5 +197,28 @@ public class RecipeService {
 		}
 		close(conn);
 		return result;
-	}
+	}//e.deleteRecipe
+	/**
+	 * 레시피 게시글 갯수 조회용 
+	 * @return 총갯수 
+	 */
+	public int selectListCount() {
+		Connection conn = getConnection();
+		
+		int listCount = new RecipeDao().selectListCount(conn);
+		
+		close(conn);
+		
+		return listCount; 
+	}//e.selectListCount
+	
+	public ArrayList<Recipe> selectRecipeList(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Recipe> list = new RecipeDao().selectRecipeList(conn, pi); 
+		
+		close(conn);
+		
+		return list; 
+	}//e.selectList
 }

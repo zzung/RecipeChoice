@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.user.recipe.model.vo.Cook;
 import com.kh.user.recipe.model.vo.IngredientList;
+import com.kh.user.recipe.model.vo.PageInfo;
 import com.kh.user.recipe.model.vo.Recipe;
 
 public class RecipeDao {
@@ -121,7 +122,7 @@ public class RecipeDao {
 		return result3;
 	}// e.insertCookDetail
 	
-	public ArrayList<Recipe> selectRecipeList(Connection conn) {	
+	/*public ArrayList<Recipe> selectRecipeList(Connection conn) {	
 		ArrayList<Recipe> list = new ArrayList<>(); 
 		
 		Statement stmt = null; 
@@ -149,7 +150,7 @@ public class RecipeDao {
 			close(stmt);
 		}
 		return list; 
-	}//e.ArrayList<Recipe>
+	}//e.ArrayList<Recipe>*/
 	
 	public int totalCount(Connection conn) {
 		int totalCount = 0; 
@@ -471,4 +472,66 @@ public class RecipeDao {
 		}
 		return result; 
 	}//e.deleteRecipe
+	
+	public int selectListCount(Connection conn) {
+		int listCount = 0 ; 
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectListCount"); 
+		
+		try {
+			stmt = conn.createStatement();
+			rs= stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				listCount = rs.getInt("LISTCOUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		return listCount; 
+				
+	}//e.selectListCount
+	
+	public ArrayList<Recipe> selectRecipeList(Connection conn, PageInfo pi){
+		ArrayList<Recipe> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectRecipeList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1; 
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new Recipe(rs.getInt("RCP_NO"),
+						            rs.getString("MEM_NAME"),
+						            rs.getString("RCP_TITLE"),
+						            rs.getString("RCP_CONTENT"),
+						            rs.getString("RCP_PIC")
+						            ));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list; 
+		
+	}
 }

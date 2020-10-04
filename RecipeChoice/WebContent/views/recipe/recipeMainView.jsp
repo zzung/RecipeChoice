@@ -5,15 +5,19 @@
 <%
 	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
 	Count ct = (Count)request.getAttribute("ct");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage(); 
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="resources/css/bootstrap.css">
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/w3.css">
 <link rel="stylesheet" href="resources/css/recipeMainView.css">
 <link rel="stylesheet" href="resources/css/footer.css">
 <title>Insert title here</title>
@@ -197,16 +201,24 @@
 							location.href="<%=contextPath%>/detail.rp?rcpNo="+$(this).children().eq(0).val();
 						});
 					});
+					
 				</script>
-				<div class="pagination" align="center">
-					<a href="#">&laquo;</a> 
-					<a href="#">1</a> 
-					<a href="#">2</a> 
-					<a href="#">3</a> 
-					<a href="#">4</a> 
-					<a href="#">5</a> 
-					<a href="#">6</a>
-					<a href="#">&raquo;</a>
+				<div class="pagination">
+				<%if(currentPage != 1){ %>
+					<a href="<%=contextPath %>/pageList.rp?currentPage=<%=currentPage-1%>">&laquo;</a> 
+				<%} %>
+				
+				<%for(int p=startPage; p<=endPage; p++) {%>
+					<%if(p != currentPage){ %>
+						<a href="<%=contextPath%>/pageList.rp?currentPage=<%=p%>"><%=p %></a> 
+					<%}else { %>
+						<a class="pagination"><%=p %></a>
+					<%} %>
+				<%} %>
+				
+				<%if(currentPage != maxPage) {%>
+					<a href="<%=contextPath%>/pageList.rp?currentPage=<%=currentPage+1%>">&raquo;</a>
+				<%} %>
 				</div>
 			</div>
 

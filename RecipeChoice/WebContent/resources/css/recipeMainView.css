@@ -6,12 +6,12 @@
 
 .content {
 	width: 900px;
-	height: 800px;
+	height: auto;
 	margin: auto;
 }
 
 .selectRecipe {
-	height:32.2%;
+	height: 32.2%;
 	padding: 5px;
 }
 
@@ -38,7 +38,7 @@ img {
 .thumbnail {
 	display: inline-block;
 	margin: 8px;
-	margin-top:10px;
+	margin-top: 10px;
 }
 
 .arrangeList {
@@ -82,51 +82,11 @@ img {
 	border-radius: 5px;
 }
 
-.pagination
-
- 
-
-a
-
-
-:hover
-
-
-:not
-
- 
-
-(
-.active
-
- 
-
-)
-{
-background-color
-
-
-:
-
- 
-
-#ddd
-
-
-;
-border-radius
-
-
-:
-
- 
-
-5
-px
-
-
-;
+.pagination a:hover:not(.active){
+background-color:#ddd;
+border-radius:5px;
 }
+
 #searchbt {
 	border: none;
 	background: rgb(39, 174, 96);
@@ -216,7 +176,7 @@ input[type="checkbox"]:hover ~ #recipe {
 .view_type {
 	width: 860px;
 	margin: auto;
-	margin-top:10px;
+	margin-top: 10px;
 }
 
 .view_type li:hover {
@@ -226,4 +186,14 @@ input[type="checkbox"]:hover ~ #recipe {
 .view_type li>a {
 	text-decoration: none;
 	color: rgb(39, 174, 96);
+}
+
+.btnDisabled {
+	color: #fff;
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.btnDisabled:hover {
+	cursor: auto;
 }

@@ -115,7 +115,7 @@ public class RecipeInsertServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("alertMsg", "게시글 등록 완료되었습니다.");
 
-				response.sendRedirect(request.getContextPath() + "/recipeView.rp");
+				response.sendRedirect(request.getContextPath() + "/pageList.rp?currentPage=1");
 
 			} else {
 

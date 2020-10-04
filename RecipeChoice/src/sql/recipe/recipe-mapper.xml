@@ -71,19 +71,25 @@
 	</entry>
 
 	<entry key="selectRecipeList">
-		<![CDATA[SELECT *
-				  FROM (
-				  		SELECT
+		SELECT *
+		  FROM (
+		  		SELECT
+		  		       ROWNUM RNUM
+		  		     , A.*
+		  		 FROM (
+		  		        SELECT 
 				               RCP_NO
 				             , MEM_NAME
 				             , RCP_TITLE
 				             , RCP_CONTENT
 				             , RCP_PIC
-				         FROM RECIPE
+				         FROM RECIPE 
 				        WHERE STATUS='Y'
-				        ORDER BY DBMS_RANDOM.RANDOM
-				        )
-		  		WHERE ROWNUM < 5]]>
+				        ORDER 
+				           BY RCP_NO DESC
+				        ) A
+				  )  
+		  		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
 	<entry key="totalCount">
@@ -217,5 +223,11 @@
 		       RECIPE
 		   SET STATUS = 'N'
 		 WHERE RCP_NO = ?
+	</entry>
+	
+	<entry key="selectListCount">
+		SELECT COUNT(*) LISTCOUNT
+		  FROM RECIPE
+		 WHERE STATUS = 'Y'
 	</entry>
 </properties>

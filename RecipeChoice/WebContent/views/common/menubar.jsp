@@ -44,7 +44,7 @@
 						<a class="dropdown-item" href="#">재료상식</a>
 					</div>
 				</li>
-				<li class="nav-item margin-top"><a class="nav-link" href="<%=contextPath%>/recipeView.rp">레시피</a></li>
+				<li class="nav-item margin-top"><a class="nav-link" href="<%=contextPath%>/pageList.rp?currentPage=1">레시피</a></li>
 				<li class="nav-item margin-top"><a class="nav-link" href="<%=contextPath%>/board.bo">커뮤니티</a></li>
 				<!-- Brand -->
 				<li class="nav-item">
