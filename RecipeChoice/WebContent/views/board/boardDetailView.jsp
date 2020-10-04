@@ -418,7 +418,7 @@
 					bno:<%= b.getBoardNo() %>,
 					memName:'test_3',
 					replyContent:$("#replyEnrollForm").val(),
-					boardType:1
+					boardType:2
 				},
 				type: 'post',
 				success: function (result) {

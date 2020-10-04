@@ -83,6 +83,7 @@
 				             , RCP_TITLE
 				             , RCP_CONTENT
 				             , RCP_PIC
+				             , RCP_DISH_TYPE
 				         FROM RECIPE 
 				        WHERE STATUS='Y'
 				        ORDER 
@@ -229,5 +230,18 @@
 		SELECT COUNT(*) LISTCOUNT
 		  FROM RECIPE
 		 WHERE STATUS = 'Y'
+	</entry>
+	
+	<entry key="relationRecipe">
+		<![CDATA[SELECT *
+		          FROM (
+		                SELECT
+		                      RCP_PIC
+		                 FROM RECIPE
+		                WHERE RCP_DISH_TYPE='?'
+		                  AND STATUS='Y'
+		                ORDER BY DBMS_RANDOM.RANDOM
+		                )
+		        WHERE ROWNUM < 5]]>
 	</entry>
 </properties>

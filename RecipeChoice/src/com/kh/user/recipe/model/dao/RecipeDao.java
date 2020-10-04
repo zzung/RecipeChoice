@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.user.recipe.model.vo.Cook;
+import com.kh.user.recipe.model.vo.Count;
 import com.kh.user.recipe.model.vo.IngredientList;
 import com.kh.user.recipe.model.vo.PageInfo;
 import com.kh.user.recipe.model.vo.Recipe;
@@ -121,36 +122,6 @@ public class RecipeDao {
 		}
 		return result3;
 	}// e.insertCookDetail
-	
-	/*public ArrayList<Recipe> selectRecipeList(Connection conn) {	
-		ArrayList<Recipe> list = new ArrayList<>(); 
-		
-		Statement stmt = null; 
-		ResultSet rs = null;
-		
-		String sql = prop.getProperty("selectRecipeList");
-		
-		try {
-				stmt = conn.createStatement();
-				rs = stmt.executeQuery(sql);
-			
-				while(rs.next()) {
-				list.add(new Recipe(rs.getInt("RCP_NO"),
-									rs.getString("MEM_NAME"),
-									rs.getString("RCP_TITLE"),
-									rs.getString("RCP_CONTENT"),
-									rs.getString("RCP_PIC")));
-		
-				
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(stmt);
-		}
-		return list; 
-	}//e.ArrayList<Recipe>*/
 	
 	public int totalCount(Connection conn) {
 		int totalCount = 0; 
@@ -391,8 +362,6 @@ public class RecipeDao {
 			
 			for(Cook c : cookList) {
 				
-				System.out.println(c.toString());
-				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, c.getRcpNo());
 				pstmt.setString(2, c.getCookContent());
@@ -521,7 +490,8 @@ public class RecipeDao {
 						            rs.getString("MEM_NAME"),
 						            rs.getString("RCP_TITLE"),
 						            rs.getString("RCP_CONTENT"),
-						            rs.getString("RCP_PIC")
+						            rs.getString("RCP_PIC"),
+						            rs.getString("RCP_DISH_TYPE")
 						            ));
 				
 			}
@@ -533,5 +503,38 @@ public class RecipeDao {
 		}
 		return list; 
 		
+	}//e.selectRecipeList
+	
+	public ArrayList<Count> relationRecipe(Connection conn, String dishType){
+		ArrayList<Count> relation = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		//Statement stmt = null; 
+		ResultSet rs = null; 
+		
+		String sql = prop.getProperty("relationRecipe");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dishType);
+			//stmt = conn.createStatement();
+			//rs = stmt.executeQuery(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Count ct = new Count();
+				ct.setRelationPic(rs.getString("RCP_PIC"));
+				
+				relation.add(ct); 
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt); 
+		}
+		return relation; 
 	}
 }

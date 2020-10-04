@@ -44,6 +44,16 @@ public class Recipe {
 	}
 
 
+	public Recipe(int rcpNo, String memName, String rcpTitle, String rcpContent, String rcpPic, String rcpDishType) {
+		super();
+		this.rcpNo = rcpNo;
+		this.memName = memName;
+		this.rcpTitle = rcpTitle;
+		this.rcpContent = rcpContent;
+		this.rcpPic = rcpPic;
+		this.rcpDishType = rcpDishType; 
+	}
+
 	public Recipe(int rcpNo, String memName, String rcpTitle, String rcpContent, String rcpPic) {
 		super();
 		this.rcpNo = rcpNo;
@@ -52,7 +62,7 @@ public class Recipe {
 		this.rcpContent = rcpContent;
 		this.rcpPic = rcpPic;
 	}
-
+	
 	public Recipe(int rcpNo, int userNo, String memName, String rcpTitle, String rcpDishType, String rcpTag,
 			int rcpTime, String rcpContent, String rcpPic, int count, int scrapCount) {
 		super();

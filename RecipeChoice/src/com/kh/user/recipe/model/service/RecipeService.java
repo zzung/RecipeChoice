@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.kh.user.recipe.model.dao.RecipeDao;
 import com.kh.user.recipe.model.vo.Cook;
+import com.kh.user.recipe.model.vo.Count;
 import com.kh.user.recipe.model.vo.IngredientList;
 import com.kh.user.recipe.model.vo.PageInfo;
 import com.kh.user.recipe.model.vo.Recipe;
@@ -39,22 +40,6 @@ public class RecipeService {
 		close(conn);
 		return result1 * result2 * result3;
 	}// e.insertRecipe
-
-	/**
-	 * 레시피 화면 밑에 랜덤으로 추천 4가지 뜨게끔
-	 * 
-	 * @return
-	 */
-	/*public ArrayList<Recipe> selectRecipeList() {
-		Connection conn = getConnection();
-
-		ArrayList<Recipe> list = new RecipeDao().selectRecipeList(conn);
-
-		close(conn);
-
-		return list;
-
-	}*/
 
 	/**
 	 * 레시피 화면 총 게시글 보여주기 위한 조회
@@ -221,4 +206,14 @@ public class RecipeService {
 		
 		return list; 
 	}//e.selectList
+	
+	public ArrayList<Count> relationRecipe(String dishType){
+		Connection conn = getConnection();
+
+		ArrayList<Count> relation = new RecipeDao().relationRecipe(conn, dishType);
+		
+		close(conn);
+		
+		return relation; 
+	}
 }

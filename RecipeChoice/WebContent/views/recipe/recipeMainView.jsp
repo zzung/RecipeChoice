@@ -175,7 +175,7 @@
 			<!-- 썸네일 정렬 -->
 			<div class="view_type">
 				<ul>
-					<li><a onclick="" href="">최신순</a></li>
+					<li><a href="<%=contextPath %>/pageList.rp?currentPage=1">최신순</a></li>
 					<li><a onclick="" href="">인기순</a></li>
 					<li><a onclick="" href="">조회순</a></li>
 				</ul>
@@ -186,13 +186,14 @@
 				<%for(Recipe r : list){ %>
 				<div class="thumbnail" align="center" style="width:200px;">
 					<input type="hidden" name="rcpNo" value="<%=r.getRcpNo()%>">
+					<input type="hidden" name="dishType" value="<%=r.getRcpDishType() %>">
 						<img src="<%=contextPath %>/resources/recipe_upfiles/<%=r.getRcpPic() %>" width="200px" height="150px" />
 					<br />
 					<div class="w3-container w3-border-bottom w3-border-teamColor">
 						"<%=r.getRcpContent() %>" <br /> <br>
 						<small><p style="font-style:italic"><%=r.getRcpTitle() %></p></small>
 					</div>
-					<p align="left"><%=r.getMemName() %></p>
+					<p align="left"><%=r.getMemName() %> / <%=r.getRcpDishType() %></p>
 				</div>
 				<%} %>
 				<script>
