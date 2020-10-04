@@ -1,6 +1,9 @@
 package com.kh.admin.contact.model.service;
 
-import static com.kh.user.common.JDBCTemplate.*;
+import static com.kh.user.common.JDBCTemplate.close;
+import static com.kh.user.common.JDBCTemplate.commit;
+import static com.kh.user.common.JDBCTemplate.getConnection;
+import static com.kh.user.common.JDBCTemplate.rollBack;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -8,6 +11,7 @@ import java.util.ArrayList;
 import com.kh.admin.contact.model.dao.ContactDao;
 import com.kh.admin.contact.model.vo.Contact;
 import com.kh.admin.contact.model.vo.PageInfo;
+
 
 public class ContactService {
 
@@ -66,18 +70,59 @@ public class ContactService {
 	}
 	/**
 	 * 사용자 1:1 상세 조회용 서비스
-	 * @param conNo 클릭한 공지사항 번호
+	 * @param cno 클릭한 공지사항 번호
 	 * @return 조회된 데이터가 담겨있는 contact 객체
 	 */
-	public Contact selectContactUser(int conNo) {
+	public Contact selectContactUser(int cno) {
 		
 		Connection conn = getConnection();
 		
-		Contact c = new ContactDao().selectContactUser(conn, conNo);
+		Contact c = new ContactDao().selectContactUser(conn, cno);
 		
 		close(conn);
 		
 		return c;
+	}
+	
+	/**
+	 * 사용자 수정용
+	 * @param cno
+	 * @return
+	 */
+	public int updateContactList(Contact c) {
+	
+	Connection conn = getConnection();
+	
+	int result = new ContactDao().updateContactList(conn, c);
+	
+	if(result > 0) {
+		commit(conn);
+	}else {
+		rollBack(conn);
+	}
+	
+	close(conn);
+	
+	return result;
+	}
+	/**
+	 * 문의글 삭제
+	 * @param faqNo
+	 * @return
+	 */
+	public int deleteContactList(int conNo) {
+
+		Connection conn = getConnection();
+		int result = new ContactDao().deleteContactList(conn, conNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
 	}
 	
 	//관리자 select

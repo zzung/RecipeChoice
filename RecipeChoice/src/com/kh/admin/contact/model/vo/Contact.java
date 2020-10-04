@@ -57,6 +57,8 @@ public class Contact {
 		this.conContent = conContent;
 	}
 	
+	
+	
 	//관리자 SELECT
 	public Contact(int conNo, String userNo, String conTitle, Date conDate, int conReply, String answer) {
 		super();
@@ -68,7 +70,7 @@ public class Contact {
 		this.answer = answer;
 	}
 
-	//관리자 상세조회
+	//사용자,관리자 상세조회
 	public Contact(int conNo, String userNo, String conType, String conTitle, String conContent, Date conDate) {
 		super();
 		this.conNo = conNo;

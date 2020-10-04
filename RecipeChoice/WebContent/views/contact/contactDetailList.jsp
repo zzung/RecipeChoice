@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.admin.contact.model.vo.*" %>    
+<% 
+	Contact c = (Contact)request.getAttribute("c");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,7 +105,7 @@
 	
 				<br><br>
                 <h1>1:1 문의
-                    &nbsp;<img src="resources/image/admin/inquiry.jpg" >
+                    &nbsp;<img src="<%= request.getContextPath() %>/resources/image/admin/inquiry.JPG">
 				 </h1>
                 <h3>&nbsp;1:1 상세보기</h3>
                 <hr>
@@ -109,36 +113,51 @@
                 <table class="EnrollArea" >
                     <tr>
                         <th >제목 | </th>
-                        <td colspan="4" >해당 1:1문의 제목 들어감</td>
+                        <td colspan="4" ><%=c.getConTitle() %></td>
                     </tr>
                     <tr>
                         <th>작성자 |</th>
-                        <td>sidsid</td>
+                        <td><%=c.getUserNo() %></td>
                         <th>작성일 |</th>
-                        <td>2020-08-01</td>
+                        <td><%=c.getConDate() %></td>
                     </tr>
                     <tr>
                         <th><h3>분야 |&nbsp;</h3></th>
                         <td >
-                            분야 들어감
+                           	<%=c.getConType() %>
                         </td>
                     </tr>
                     <tr>
                         <td><h3>내용&nbsp;</h3></td>
                         <td>
-                           <textarea name="content" cols="70" rows="13" style="resize:none; margin-top:10px;">이거로하자</textarea>
+                           <textarea name="content" cols="70" rows="13" style="resize:none; margin-top:10px;"><%=c.getConContent() %></textarea>
                         </td>
                     </tr>
             </table> 
             <br> 
             <hr>     
+            <% if(loginUser != null && loginUser.getMemId().equals(c.getUserNo())){ %>
              <div align="right">
-                <button onclick="<%=contextPath%>/contactList.co">목록가기</button>
+                <button onclick="location.href='<%=contextPath%>/contactList.co';">목록가기</button>
                 <!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우-->
-                <button>수정하기</button>
-                <button>삭제하기</button>
+                <button onclick="location.href='<%=contextPath%>/updateForm.co?cno=<%=c.getConNo()%>';">수정하기</button>
+                <button onclick="deleteConfirm();">삭제하기</button>
             </div>
+            <script>
+	          function deleteConfirm(){
+	        	  var del = confirm("삭제하시겠습니까 ?")
+	        	  if(del == true)
+	        	  {
+	        		 location.href="<%=contextPath%>/delete.co?cno=<%=c.getConNo()%>";
+	          }else{
+	        	  alert("취소되었습니다.")
+	          }
+	        	  }
+	        	  
+           </script>
+            <% } %>
         </div>  
+        	
 
          </div>
             <div id="content_3"></div>

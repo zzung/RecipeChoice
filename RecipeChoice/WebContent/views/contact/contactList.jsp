@@ -178,7 +178,7 @@
                         <td><%=c.getUserNo() %></td>
                         <td><%=c.getConDate() %></td>
                         <td>  <% if(loginUser != null && loginUser.getMemId().equals(c.getUserNo())) { %>
-                         <img id="img"onclick="deleteConfirm();" src="resources/image/admin/recyclebin.jpg" >
+                         <img id="img"onclick="deleteConfirm();" src="resources/image/admin/recyclebin.JPG" >
                 		<%} %>
                     </tr>
                     <script>
@@ -186,7 +186,7 @@
 			        	  var del = confirm("삭제하시겠습니까 ?")
 			        	  if(del == true)
 			        	  {
-			        		 location.href="<%=contextPath%>/delete.mc?cno=<%=c.getConNo()%>";
+			        		 location.href="<%=contextPath%>/delete.co?cno=<%=c.getConNo()%>";
 			          }else{
 			        	  alert("취소되었습니다.")
 			          }
@@ -198,13 +198,10 @@
                  </tbody>
                  
                 </table>
-                 <!--1:1문의 답변조회 페이지용-->
                  <script>
                     $(function(){
                         $(".inq>tbody>tr").click(function(){
-                        	var nno = $(this).children().eq(0).text();//text로 inner값 가져올 수 있다. 첫번째 그 뮨의번호 //클릭이벤트 발생한 요소<tr> $(this)
-                       
-                        	location.href = "<%=contextPath%>/detail.co?cno=" + cno;
+                        	location.href = "<%=contextPath%>/detail.co?cno=" + $(this).children().eq(0).text();
                         });
                     });
                     

@@ -130,10 +130,11 @@
                <div align="center">
                    <button type="submit">수정하기</button>
                </div>
+               </form>
            </div>  
-       </form>
+       
           </div>
-          
+          </div>
     <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>
 </body>

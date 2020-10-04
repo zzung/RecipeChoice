@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.contact.model.service.ContactService;
-import com.kh.admin.contact.model.vo.Contact;
 
 /**
- * Servlet implementation class ContactDetailListServlet
+ * Servlet implementation class ContactDeleteListServlet
  */
-@WebServlet("/detail.co")
-public class ContactDetailListServlet extends HttpServlet {
+@WebServlet("/delete.co")
+public class ContactDeleteListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContactDetailListServlet() {
+    public ContactDeleteListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +29,20 @@ public class ContactDetailListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		int conNo = Integer.parseInt(request.getParameter("cno"));
+				
+		int result = new ContactService().deleteContactList(conNo);
 		
-		int cno = Integer.parseInt(request.getParameter("cno"));
-		
-		Contact c = new ContactService().selectContactUser(cno);
-		
-		request.setAttribute("c", c);
-		
-		request.getRequestDispatcher("views/contact/contactDetailList.jsp").forward(request, response);
-		
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "문의 삭제 성공하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/contactList.co");
+			
+		}else {
+			request.getSession().setAttribute("alertMsg", "문의 삭제 실패하였습니다.");
+			request.getRequestDispatcher(request.getContextPath() + "/contactList.co").forward(request, response);
+		}
+	
 	}
 
 	/**

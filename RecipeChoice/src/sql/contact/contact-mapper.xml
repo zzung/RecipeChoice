@@ -34,10 +34,11 @@ WHERE RNUM BETWEEN ? AND ?
 			  INTO CONTACT
 			  (
 			    CON_NO 
-			  , CON_TYPE
 			  , CON_TITLE
+			  , CON_TYPE
 			  , CON_CONTENT
 			  , USER_NO
+			  , CON_DATE
 			  )
 			  VALUES
 			  (
@@ -46,10 +47,11 @@ WHERE RNUM BETWEEN ? AND ?
 			  , ?
 			  , ?
 			  , ?
+			  , SYSDATE
 			  )
 	</entry>
 	<entry key="selectContactUser">
-	SELECT     
+	 SELECT     
 	        CON_NO
 	      , CON_TITLE
 	      , CON_TYPE
@@ -62,14 +64,28 @@ WHERE RNUM BETWEEN ? AND ?
 	    AND C.STATUS = 'Y'
 
 	</entry>
+	<entry key="updateContactList">
+			UPDATE
+		         CONTACT
+		    SET CON_TITLE = ?
+		      , CON_TYPE = ?  
+		      , CON_CONTENT = ?
+		  WHERE CON_NO = ?
+	</entry>
+	<entry key="deleteContactList">
+		UPDATE
+		       CONTACT
+		   SET STATUS ='N'
+		 WHERE CON_NO = ?
+	</entry>
 	
 	<entry key="selectContactListView">
 		SELECT
 		       CON_NO
+		     , CON_TYPE
 		     , CON_TITLE
 		     , M.MEM_ID
 		     , CON_DATE
-		     , ANSWER
 		  FROM CONTACT C
 		  JOIN MEMBER M ON (M.USER_NO = C.USER_NO)
 		 WHERE C.STATUS='Y'

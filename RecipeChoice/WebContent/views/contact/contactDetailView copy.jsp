@@ -162,15 +162,6 @@
             <% } %>
         </div>  
         </form>
-        <script>
-        function EnrollConfirm(){
-            if(confirm("등록하시겠습니까?")){
-                location.href='./inquiryEnroll.no';
-            }else{
-                return false;
-             } 
-            }
-     </script>
         </div>
             <div id="content_3"></div>
         </div>

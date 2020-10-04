@@ -119,8 +119,8 @@ public class ContactDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, c.getConType());
-			pstmt.setString(2, c.getConTitle());
+			pstmt.setString(1, c.getConTitle());
+			pstmt.setString(2, c.getConType());
 			pstmt.setString(3, c.getConContent());
 			pstmt.setInt(4, Integer.parseInt(c.getUserNo()));//"1" -> 1
 			//완성형태 만듬
@@ -141,7 +141,7 @@ public class ContactDao {
 	 * @param conNo
 	 * @return
 	 */
-	public Contact selectContactUser(Connection conn, int conNo) {
+	public Contact selectContactUser(Connection conn, int cno) {
 		//select문 => 한 행
 		Contact c = null;
 		
@@ -153,6 +153,8 @@ public class ContactDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			pstmt.setInt(1, cno);
+			
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -163,7 +165,6 @@ public class ContactDao {
 								rs.getString("mem_id"),
 								rs.getString("con_content"));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -174,6 +175,60 @@ public class ContactDao {
 		
 		
 	}
+	
+	public int updateContactList(Connection conn, Contact c) {
+		//update문 => 처리된 행수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateContactList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, c.getConTitle());
+			pstmt.setString(2, c.getConType());
+			pstmt.setString(3, c.getConContent());
+			pstmt.setInt(4, c.getConNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	
+		
+	}
+	/**
+	 * 삭제
+	 * @param conn
+	 * @param faqNo
+	 * @return
+	 */
+	public int deleteContactList(Connection conn, int conNo) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteContactList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, conNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	/**
 	 * 관리자 조회용
 	 * @param conn
