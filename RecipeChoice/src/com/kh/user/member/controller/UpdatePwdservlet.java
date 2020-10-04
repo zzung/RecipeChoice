@@ -34,19 +34,16 @@ public class UpdatePwdservlet extends HttpServlet {
 		
 		String memId = request.getParameter("userId");
 		String memPwd = request.getParameter("userPwd");
-		System.out.println(memId);
-		System.out.println(memPwd);
 		
 		int result = new MemberService().updatePwd(memId,memPwd);
 		
 		HttpSession session = request.getSession();
 		
 		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 비밀번호 변경했습니다.");
+			response.getWriter().print("success");
 		}else {
-			session.setAttribute("alertMsg", "비밀번호 변경에 실패했습니다.");
+			response.getWriter().print("");
 		}
-		response.sendRedirect(request.getContextPath());
 		
 	}
 

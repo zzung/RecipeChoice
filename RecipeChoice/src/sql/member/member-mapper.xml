@@ -78,6 +78,15 @@
 		   SET MEM_PWD= ?
 		 WHERE MEM_ID = ?
 	</entry>
+	<entry key="selectboardList"> <!--테스트용. 레시피랑 합쳐서 다시 변경해야함  -->
+		SELECT
+		        BOARD_TITLE
+		       ,CREATE_DATE
+		  FROM  BOARD B
+		  JOIN MEMBER USING(USER_NO)
+		 WHERE  USER_NO = ?
+		   AND  B.STATUS = ?
+	</entry>
 	<entry key="selectMemberList">
 		SELECT
 		       M.USER_NO

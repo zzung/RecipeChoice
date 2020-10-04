@@ -77,7 +77,7 @@
         <div id="pwd_search">
             <h3 align="center"><b>pwd 찾기</b></h3>
             <!-- 2_1. 입력을 받는 input요소들이 위치할 영역 -->
-            <form action="updatePwd.me" id="pwd_search_form" method="post">
+            <form action="send.me" id="pwd_search_form" method="post">
     
                 <!-- 3_1. ID/PWD input요소가 들어갈 div -->
                 <table align="center">
@@ -89,7 +89,7 @@
                     <tr>
                         <td> 이메일</td>
                         <td><input type="email" name="userEmail" class="form-control" style="height:30px;"maxlength="30" placeholder="이메일을 입력해주세요"required></td><br>
-                        <td><button type="submit"id="checkNumBtn"class="btn btn-success"style="width:100px">인증번호받기</button></td>
+                        <td><button type=""id="checkNumBtn"class="btn btn-success"style="width:100px">인증번호받기</button></td>
                     </tr>
                     <tr>
                         <td> 인증번호</td>
@@ -102,7 +102,7 @@
                         </td>
                     </tr>
                 </table>
-            	
+            </form>
 			      <!-- Modal -->
 			    
 					  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -122,7 +122,7 @@
 					                        <td><input type="password" id="userPwd"name="userPwd" maxlength="15" placeholder="변경하실 비밀번호를 입력하세요"required></td>
 					                    </tr>
 					                     <tr>
-					                    	<td colspan="3"><input type="hidden" name="userId" value=""></td>
+					                    	<td colspan="3"><input type="hidden"></td>
 					                    </tr>
 					                    <tr>
 					                        <td> 비밀번호확인 :</td>
@@ -138,22 +138,21 @@
 					      </div>
 					    </div>
 					  </div>
-            	</form>
             	
         </div>
     
         
          
 		  <script>
-		
+			 $userId = $("#userId").val();
+			 $userPwd = $("#userPwd").val();
+    	 	 $checkPwd = $("#checkPwd").val();
+    	 	 
 		      $("#loginBtn").click(function(){
-		    	  
-		    	  
 		    	  $userPwd = $("#userPwd").val();
-		    	  $checkPwd = $("#checkPwd").val();
-					  
-			  var pwd1 = /^[a-z\d!@#$%^&*]{5,15}$/i;  //특수문자(!@#$%^&*)
-			  if(!pwd1.test($userPwd)){
+		    	  $checkPwd = $("#checkPwd").val();	  
+				 var pwd1 = /^[a-z\d!@#$%^&*]{5,15}$/i;  //특수문자(!@#$%^&*)
+			  	if(!pwd1.test($userPwd)){
 		             alert("유효한 비밀번호를 입력하세요.");
 
 		             $userPwd.focus(); 
@@ -163,7 +162,7 @@
 		         }else{
 
 			    	  if($userPwd == $checkPwd){  
-			  
+			    		  updatePwd();
 			    	  }
 			    	  else{
 			    		  alert("동일한 비밀번호를 입력해주세요");
@@ -174,7 +173,22 @@
 		  
 		      });
 		  		
-		    
+		    function updatePwd(){
+		    	 $userId = $("#userId").val();
+		    	$.ajax({
+		    		url:"<%=contextPath%>/updatePwd.me",
+		  			type:"post",
+		  			data:{userId:$userId,userPwd:$userPwd},
+		  			success:function(result){
+		  				if(result == "success"){
+		  					alert("비밀번호변경이 완료되었습니다.");
+		  					location.href="<%=contextPath%>/loginForm.me"
+		  				}
+		  			},error:function(){
+		  				console.log("ajax 통신실패!")
+		  			}
+		    	});
+		    }
 		      
 		  </script>
 		  

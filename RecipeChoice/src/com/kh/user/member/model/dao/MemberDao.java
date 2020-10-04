@@ -316,7 +316,7 @@ public class MemberDao {
 		}finally {
 			close(pstmt);
 		}
-		System.out.println(result);
+		
 		return result;
 	}
 }
