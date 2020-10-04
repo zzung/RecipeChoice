@@ -1,6 +1,8 @@
 package com.kh.admin.tip.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,18 +20,19 @@ public class CareTipDeleteServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int tipNo = Integer.parseInt(request.getParameter("tno"));
-		
-		int result = new TipService().deleteCareTip(tipNo);
-		
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "글 삭제 성공 !");
-			response.sendRedirect(request.getContextPath() + "/careTipList.mn");
-		}else {
-			request.setAttribute("alertMsg", "글 삭제 실패");
-			request.getRequestDispatcher(request.getContextPath()+"/careTipList.mn").forward(request, response);
+		String tnos = request.getParameter("tno");
+		TipService t = new TipService();
+		for(String tno : tnos.split(",")) {
+			int tipNo = Integer.parseInt(tno);
+			int result = t.deleteCareTip(tipNo);
+			if(!(result > 0)) {
+				request.setAttribute("alertMsg", "글 삭제 실패");
+				request.getRequestDispatcher(request.getContextPath()+"/careTipList.mn").forward(request, response);
+				break;
+			}
 		}
+		request.setAttribute("alertMsg", "글 삭제 성공 !");
+		response.sendRedirect(request.getContextPath() + "/careTipList.mn");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

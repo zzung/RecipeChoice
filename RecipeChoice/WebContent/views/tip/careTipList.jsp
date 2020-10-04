@@ -183,9 +183,8 @@
 	
 		<script>
 			const careTipUpdate = function(){
-            let check_length = document.getElementsByName("selectContent").length;
-            console.log(check_length);
-            let check_cnt = 0;
+            var check_length = document.getElementsByName("selectContent").length;
+            var check_cnt = 0;
             var tno = 0;
             for(var i=0; i<check_length; i++){
                if(document.getElementsByName("selectContent")[i].checked==true){
@@ -201,6 +200,32 @@
                location.href= "<%=request.getContextPath()%>"+"/updateFormCareTip.mn?tno="+tno;
             }
          };
+         
+         	const careTipDelete = function(){
+         		var check_length = document.getElementsByName("selectContent").length;
+                var check_cnt = 0;
+                var tno = "";
+                for(var i=0; i<check_length; i++){
+                   if(document.getElementsByName("selectContent")[i].checked==true){
+                      check_cnt++;
+                      if(check_cnt==1){
+                    	  tno = document.getElementsByName("selectContent")[i].parentNode.nextSibling.nextSibling.textContent;
+                      }else{
+                     	  tno += ","+document.getElementsByName("selectContent")[i].parentNode.nextSibling.nextSibling.textContent;
+                      }
+                   }
+                }
+                console.log(tno);
+                if(check_cnt == 0){
+                   alert("삭제할 게시글을 선택해 주세요 !");
+                }else{
+                   location.href= "<%=request.getContextPath()%>"+"/deleteCareTip.mn?tno="+tno;
+                }
+         		
+         	};
+         
+         
+         
        
        		/* 체크박스까지 적용되지 않게 수정필요 */
         	$(function(){
