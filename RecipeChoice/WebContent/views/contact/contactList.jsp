@@ -177,41 +177,38 @@
                     <tr>
                         <td><%=c.getConNo() %></td>
                         <td><%=c.getConType() %></td>
-                        <td><a onclick="noticeUpdate();"><%=c.getConTitle() %></a></td>
+                        <td><%=c.getConTitle() %></td>
                         <td><%=c.getUserNo() %></td>
                         <td><%=c.getConDate() %></td>
                         <td>  <% if(loginUser != null && loginUser.getMemId().equals(c.getUserNo())) { %>
-                         <img id="img"onclick="deleteConfirm();" src="resources/image/admin/recyclebin.JPG" >
+                         <img id="img"onclick="contactDelete(this); event.stopImmediatePropagation();" src="resources/image/admin/recyclebin.JPG" >
                 		<%} %>
                     </tr>
                     <script>
-			          function deleteConfirm(){
-			        	  var del = confirm("삭제하시겠습니까 ?")
-			        	  if(del == true)
-			        	  {
-			        		 location.href="<%=contextPath%>/delete.co?cno=<%=c.getConNo()%>";
-			          }else{
-			        	  alert("취소되었습니다.")
-			          }
-			        	  };
-			        	  
-           			</script>
-           			<script>
-           		 function noticeUpdate(){
-		        	   if(del == true)
-		        	  {
-		        		 location.href="<%=contextPath%>/detail.co?cno=" + cno;
-		          }else{
-		        	  return;
-		          }
-		        	  };
-           			</script>
+	                const contactDelete =  function(e){
+				    var answer = confirm("삭제하시겠습니까 ?");
+				    if(answer){
+				       var cno = e.parentNode.parentNode.childNodes[1].textContent;
+				           // 삭제 진행
+				       location.href="<%=contextPath%>/delete.co?cno="+cno;
+				     }else{
+					return;
+				     }
+				    };
+				    
+				    $(function(){
+					$(".inq>tbody>tr").click(function(){
+				    	var cno = $(this).children().eq(0).text();
+					 	location.href="<%=contextPath%>/detail.co?cno=" + $(this).children().eq(0).text();   	
+				     });
+				    });
+					</script>
                    <% } %>
                  <% } %>
                  </tbody>
                  
                 </table>
-               
+                 
                 <br>
            		<!-- 로그인한 회원만 글작성이 보여짐,, -->
                 <% if(loginUser != null ){ %>
