@@ -71,7 +71,6 @@ public class ContactListServlet extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
-		
 		RequestDispatcher view = request.getRequestDispatcher("views/contact/contactList.jsp");
 		view.forward(request, response);
 	}

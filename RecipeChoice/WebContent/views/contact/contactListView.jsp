@@ -146,7 +146,7 @@
                 <!-- 리스트가 비어있을 경우 -->
                 <% if(listView.isEmpty()) {%>
                 <tr>
-                	<td colspan="5">존재하는 1:1문의가 없습니다.</td>
+                	<td colspan="6">존재하는 1:1문의가 없습니다.</td>
                 </tr>
                 <% }else { %>
                 <!--  리스트가 비어있지 않을 경우 -->
@@ -154,7 +154,7 @@
                 
                     <tr>
                         <td><%= c.getConNo() %></td>
-                        <td>🔒</td>
+                        <td><%= c.getConType() %></td>
                         <td><%= c.getConTitle() %></td>
                         <td><%= c.getUserNo() %></td>
                         <td><%= c.getConDate() %></td>
@@ -169,7 +169,7 @@
                         <td>re:기타 문의</td>
                         <td>관리자</td>
                         <td>2020-08-24</td>
-                        <td><a id="contactUpdate" onclick="modifyConfirm();">수정</a>&nbsp;&nbsp;<a id="contactDelete" onclick="deleteConfirm();">삭제</a></td>
+                        <td><a id="contactUpdate" onclick="updateConfirm();">수정</a>&nbsp;&nbsp;<a id="contactDelete" onclick="deleteConfirm();">삭제</a></td>
                     </tr>
                 
                     

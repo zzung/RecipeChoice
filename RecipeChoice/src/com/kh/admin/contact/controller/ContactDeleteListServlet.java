@@ -36,11 +36,11 @@ public class ContactDeleteListServlet extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "문의 삭제 성공하였습니다.");
-			response.sendRedirect(request.getContextPath() + "/contactList.co");
+			response.sendRedirect(request.getContextPath() + "/contactList.co?currentPage=1");
 			
 		}else {
 			request.getSession().setAttribute("alertMsg", "문의 삭제 실패하였습니다.");
-			request.getRequestDispatcher(request.getContextPath() + "/contactList.co").forward(request, response);
+			request.getRequestDispatcher(request.getContextPath() + "/contactList.co?currentPage=1").forward(request, response);
 		}
 	
 	}

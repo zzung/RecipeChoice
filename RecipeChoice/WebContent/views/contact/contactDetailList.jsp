@@ -104,10 +104,10 @@
              <div id="content_2">
 	
 				<br><br>
-                <h1>1:1 문의
+                <h3>1:1 문의
                     &nbsp;<img src="<%= request.getContextPath() %>/resources/image/admin/inquiry.JPG">
-				 </h1>
-                <h3>&nbsp;1:1 상세보기</h3>
+				 </h3>
+                <h6>&nbsp;1:1 상세보기</h6>
                 <hr>
 
                 <table class="EnrollArea" >
@@ -122,15 +122,15 @@
                         <td><%=c.getConDate() %></td>
                     </tr>
                     <tr>
-                        <th><h3>분야 |&nbsp;</h3></th>
+                        <th><h6><b>분야 |&nbsp;</b></h6></th>
                         <td >
                            	<%=c.getConType() %>
                         </td>
                     </tr>
                     <tr>
-                        <td><h3>내용&nbsp;</h3></td>
+                        <td><h6><b>내용&nbsp;</b></h6></td>
                         <td>
-                           <textarea name="content" cols="70" rows="13" style="resize:none; margin-top:10px;"><%=c.getConContent() %></textarea>
+                           <textarea name="content" cols="70" rows="8" style="resize:none; margin-top:10px;" readonly><%=c.getConContent() %></textarea>
                         </td>
                     </tr>
             </table> 

@@ -51,7 +51,7 @@ public class ContactInsertServlet extends HttpServlet {
 			
 			request.getSession().setAttribute("alertMsg", "성공적으로 문의가 등록되었습니다.");
 			
-			response.sendRedirect(request.getContextPath() + "/ContactList.co?currentPage=1");
+			response.sendRedirect(request.getContextPath() + "/contactList.co?currentPage=1");
 			
 		}else { // 실패 ==> 에러페이지
 			

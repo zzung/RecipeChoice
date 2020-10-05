@@ -86,6 +86,7 @@ WHERE RNUM BETWEEN ? AND ?
 		     , CON_TITLE
 		     , M.MEM_ID
 		     , CON_DATE
+		     , ANSWER
 		  FROM CONTACT C
 		  JOIN MEMBER M ON (M.USER_NO = C.USER_NO)
 		 WHERE C.STATUS='Y'

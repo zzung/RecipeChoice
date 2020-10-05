@@ -101,7 +101,7 @@
             <br>
              <div id="content_2">
                 <h3>1:1 문의
-                    &nbsp;<img src="resources/image/admin/inquiry.jpg" >
+                    &nbsp;<img src="<%= request.getContextPath() %>/resources/image/admin/inquiry.JPG">
 				 </h3>
                 <h6>&nbsp;1:1 문의하기
                 </h6>
@@ -112,22 +112,22 @@
                  <table class="EnrollArea">
                     <tr>
                         <th ><h5>제목&nbsp;</h5></th>
-                        <td colspan="4" ><input type="text" name="title" placeholder="내용을 입력하세요"required style="height:22px;"></td>
+                        <td colspan="4" ><input type="text" name="title" placeholder="내용을 입력하세요"required style="height:22px; width:500px;"></td>
                     </tr>
                     <tr>
                         <th><h5>분야 &nbsp;</h5></th>
                         <td >
                             <select name="category"style="height:25px; width:110px;"  >
-                                <option value="10">레시피 문의</option>
-                                <option value="20">신고 문의</option>
-                                <option value="30">기타 문의</option>
+                                <option value="레시피 문의">레시피 문의</option>
+                                <option value="신고 문의">신고 문의</option>
+                                <option value="기타 문의">기타 문의</option>
                              </select>
                         </td>
                     </tr>
                     <tr>
                         <td><h5>내용&nbsp;</h5></td>
                         <td>
-                           <textarea name="content" cols="70" rows="10" style="resize:none; margin-top:10px;" required></textarea>
+                           <textarea name="content" cols="70" rows="8" style="resize:none; margin-top:10px;" required></textarea>
                         </td>
                     </tr>
             </table> 

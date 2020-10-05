@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.admin.contact.model.vo.*" %>    
+<%@ page import="java.util.ArrayList, com.kh.admin.contact.model.vo.*" %>  
+
 <%  
 	ArrayList<Contact> list =(ArrayList<Contact>)request.getAttribute("list");//조회된 1:1문의 리스트가 담김
     PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -12,6 +13,8 @@
  	int maxPage = pi.getMaxPage();
 
 %>
+
+					
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,7 +113,7 @@
         background-color: gray;
         border-radius: 5px;
     }
-    tbody>tr{cursor: pointer;}
+ 
     tbody>tr:hover{background: rgb(243, 243, 243)}
 
 </style>
@@ -148,7 +151,7 @@
                 <h3>1:1 문의 조회
                     &nbsp;<img src="<%= request.getContextPath() %>/resources/image/admin/inquiry.JPG">
 				</h3>
-            
+            	
                 <hr>
                 <table class="inq">
                 <thead>
@@ -174,7 +177,7 @@
                     <tr>
                         <td><%=c.getConNo() %></td>
                         <td><%=c.getConType() %></td>
-                        <td><%=c.getConTitle() %></td>
+                        <td><a onclick="noticeUpdate();"><%=c.getConTitle() %></a></td>
                         <td><%=c.getUserNo() %></td>
                         <td><%=c.getConDate() %></td>
                         <td>  <% if(loginUser != null && loginUser.getMemId().equals(c.getUserNo())) { %>
@@ -190,22 +193,25 @@
 			          }else{
 			        	  alert("취소되었습니다.")
 			          }
-			        	  }
+			        	  };
 			        	  
+           			</script>
+           			<script>
+           		 function noticeUpdate(){
+		        	   if(del == true)
+		        	  {
+		        		 location.href="<%=contextPath%>/detail.co?cno=" + cno;
+		          }else{
+		        	  return;
+		          }
+		        	  };
            			</script>
                    <% } %>
                  <% } %>
                  </tbody>
                  
                 </table>
-                 <script>
-                    $(function(){
-                        $(".inq>tbody>tr").click(function(){
-                        	location.href = "<%=contextPath%>/detail.co?cno=" + $(this).children().eq(0).text();
-                        });
-                    });
-                    
-                </script>
+               
                 <br>
            		<!-- 로그인한 회원만 글작성이 보여짐,, -->
                 <% if(loginUser != null ){ %>
@@ -230,7 +236,7 @@
                	<%} %>
               <% } %>
                
-                <%if(currentPage != maxPage){ %>
+                <%if(maxPage != 0 && currentPage != maxPage){ %>
                 <a href="location.href='<%=contextPath%>/contactList.co?currentPage=<%= maxPage%>';">&raquo;</a>
             	<% } %>
             </div>

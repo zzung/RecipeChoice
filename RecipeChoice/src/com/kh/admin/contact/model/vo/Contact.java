@@ -37,12 +37,12 @@ public class Contact {
 	
 	//사용자 select
 	
-	public Contact(int conNo, String userNo, String conType, String conTitle, Date conDate) {
+	public Contact(int conNo, String conType, String conTitle, String userNo, Date conDate) {
 		super();
 		this.conNo = conNo;
-		this.userNo = userNo;
 		this.conType = conType;
 		this.conTitle = conTitle;
+		this.userNo = userNo;
 		this.conDate = conDate;
 	}
 	
@@ -71,18 +71,18 @@ public class Contact {
 	}
 
 	//사용자,관리자 상세조회
-	public Contact(int conNo, String userNo, String conType, String conTitle, String conContent, Date conDate) {
+	
+	public Contact(int conNo, String conTitle, String conType, Date conDate, String userNo, String conContent) {
 		super();
 		this.conNo = conNo;
-		this.userNo = userNo;
-		this.conType = conType;
 		this.conTitle = conTitle;
-		this.conContent = conContent;
+		this.conType = conType;
 		this.conDate = conDate;
+		this.userNo = userNo;
+		this.conContent = conContent;
+	
 	}
-	
-	
-	
+
 	public int getConNo() {
 		return conNo;
 	}

@@ -89,7 +89,7 @@ public class ContactDao {
 				list.add(new Contact(rs.getInt("CON_NO"),
 									 rs.getString("CON_TYPE"),
 									 rs.getString("CON_TITLE"),
-								     rs.getString("USER_NO"),
+								     rs.getString("MEM_ID"),
 								     rs.getDate("CON_DATE")));
 			}
 			
@@ -294,6 +294,7 @@ public class ContactDao {
 			
 			if(rs.next()) {
 				c = new Contact(rs.getInt("con_no"),
+								rs.getString("con_title"),
 								rs.getString("mem_id"),
 								rs.getString("con_type"),
 								rs.getString("con_title"),
