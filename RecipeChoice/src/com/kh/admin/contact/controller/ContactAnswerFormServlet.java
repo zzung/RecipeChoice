@@ -1,30 +1,23 @@
 package com.kh.admin.contact.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.admin.contact.model.service.ContactService;
-import com.kh.admin.contact.model.vo.Contact;
-
-
-
 /**
- * Servlet implementation class ContactUpdateFormServlet
+ * Servlet implementation class ContactAnswerFormServlet
  */
-@WebServlet("/updateForm.co")
-public class ContactUpdateFormServlet extends HttpServlet {
+@WebServlet("/answerForm.mc")
+public class ContactAnswerFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContactUpdateFormServlet() {
+    public ContactAnswerFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +27,10 @@ public class ContactUpdateFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-
-		int cno = Integer.parseInt(request.getParameter("cno"));
 		
-		Contact c = new ContactService().selectContactUser(cno); //게시글 제목, 게시글 내용 , 번호, 카테고리, 작성자아이디 => 내가 필요한거 담겨있음
-		
-		request.setAttribute("c",c);
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/contact/contactUpdateForm.jsp");
-		view.forward(request,response);
+		request.getRequestDispatcher("views/contact/contactAnswerForm.jsp").forward(request, response);
 		
 	}
-	
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

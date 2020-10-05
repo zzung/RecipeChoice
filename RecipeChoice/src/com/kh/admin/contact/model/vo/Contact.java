@@ -60,13 +60,13 @@ public class Contact {
 	
 	
 	//관리자 SELECT
-	public Contact(int conNo, String userNo, String conTitle, Date conDate, int conReply, String answer) {
+	public Contact(int conNo, String conType, String conTitle, String userNo, Date conDate, String answer) {
 		super();
 		this.conNo = conNo;
-		this.userNo = userNo;
+		this.conType = conType;
 		this.conTitle = conTitle;
+		this.userNo = userNo;
 		this.conDate = conDate;
-		this.conReply = conReply;
 		this.answer = answer;
 	}
 
@@ -81,6 +81,14 @@ public class Contact {
 		this.userNo = userNo;
 		this.conContent = conContent;
 	
+	}
+	
+	public Contact(int conNo, String userNo, String conTitle, String conContent) {
+		super();
+		this.conNo = conNo;
+		this.userNo = userNo;
+		this.conTitle = conTitle;
+		this.conContent = conContent;
 	}
 
 	public int getConNo() {

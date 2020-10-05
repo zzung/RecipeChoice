@@ -112,21 +112,21 @@
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항관리</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/seasonList.ms'">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;신고 관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/faqList.mf'">&nbsp;&nbsp;&nbsp;FAQ</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.mc'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/reportList.mr'">&nbsp;&nbsp;&nbsp;신고 관리</div>
                
             </div>
             
             <div id="content_2">
 	
-				<br><br>
-                <h1>1:1 문의
-                    &nbsp;<img src="resources/image/admin/inquiry.jpg" >
-				 </h1>
-                <h3>&nbsp;1:1 상세보기</h3>
+				<br>
+                <h3>1:1 문의
+                    &nbsp;<img src="<%= request.getContextPath() %>/resources/image/admin/inquiry.JPG">
+				 </h3>
+                <h6>&nbsp;1:1 상세보기</h6>
                 <hr>
 
                 <table class="detailArea" >
@@ -141,36 +141,30 @@
                         <td><%= c.getConDate() %></td>
                     </tr>
                     <tr>
-                        <th><h3>분야 |&nbsp;</h3></th>
+                        <th><h6><b>분야 |&nbsp;</b></h6></th>
                         <td >
                             <%= c.getConType() %>
                         </td>
                     </tr>
                     <tr>
-                        <td><h3>내용&nbsp;</h3></td>
+                        <td><h6>내용&nbsp;</h6></td>
                         <td>
-                           <textarea name="content" cols="70" rows="13" style="resize:none; margin-top:10px;"><%= c.getConContent() %></textarea>
+                           <textarea name="content" cols="70" rows="8" style="resize:none; margin-top:10px;" readonly><%= c.getConContent() %></textarea>
                         </td>
                     </tr>
-            </table> 
-              <br> 
+            </table>  
               <hr>    
-            <br>
             <!-- 로그인한 회원 중 관리자 -->
             <% if(loginUser != null && loginUser.getMemId().equals("admin")){ %>
             <div align="right">
-                <button type="submit" class="btn" onclick="answerConfirm();"> 답변하기</button>
+                <button onclick="location.href='<%=contextPath%>/answerForm.mc';"> 답변하기</button>
                 &nbsp;&nbsp;&nbsp;
                 <button type="button" onclick="history.back();">취소</button>
             </div>
             <% } %>
         </div>  
         </form>
-        <script>
-        function answerConfirm(){
-           location.href="<%= contextPath%>/answer.mc";
-            }
-     </script>
+       
         </div>
             <div id="content_3"></div>
         </div>

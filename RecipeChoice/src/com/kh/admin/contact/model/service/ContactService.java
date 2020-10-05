@@ -140,14 +140,35 @@ public class ContactService {
 	 * @param bno 상세조회요청한 게시글 번호
 	 * @return 해당 게시글 정보가 담겨있는 Contact 객체
 	 */
-	public Contact selectContact(int bno) {
+	public Contact selectContact(int cno) {
 		
 		Connection conn = getConnection();
 		
-		Contact c = new ContactDao().selectContact(conn,  bno);
+		Contact c = new ContactDao().selectContact(conn,  cno);
 		
 		close(conn);
 		
 		return c;
+	}
+	/**
+	 * 답글 작성용
+	 * @param c
+	 * @return
+	 */
+	public int insertContactView(Contact c) {
+		//처리된 행수를 리턴 
+		Connection conn = getConnection();
+		
+		int result = new ContactDao().insertContactView(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 }

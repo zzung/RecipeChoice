@@ -252,10 +252,10 @@ public class ContactDao {
 			
 			while(rs.next()) {
 				listView.add(new Contact(rs.getInt("con_no"),
+										 rs.getString("con_type"),
 										 rs.getString("con_title"),
 										 rs.getString("mem_id"),
 									     rs.getDate("con_date"),
-									     rs.getInt("con_reply"),
 									     rs.getString("answer")));
 			}
 			
@@ -276,7 +276,7 @@ public class ContactDao {
 		 * @param bno
 		 * @return
 		 */
-		public Contact selectContact(Connection conn, int bno) {
+		public Contact selectContact(Connection conn, int cno) {
 		//select문 => 한 행 조회
 		Contact c = null;
 		
@@ -288,18 +288,17 @@ public class ContactDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, bno);
+			pstmt.setInt(1, cno);
 			
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				c = new Contact(rs.getInt("con_no"),
 								rs.getString("con_title"),
-								rs.getString("mem_id"),
 								rs.getString("con_type"),
-								rs.getString("con_title"),
-								rs.getString("con_content"),
-								rs.getDate("con_date"));
+								rs.getDate("con_date"),
+								rs.getString("mem_id"),
+								rs.getString("con_content"));
 						
 			}
 		} catch (SQLException e) {
@@ -310,5 +309,37 @@ public class ContactDao {
 		}
 		return c;
 	}
+		/**
+		 * 작성
+		 * @param conn
+		 * @param c
+		 * @return
+		 */
+		public int insertContactView(Connection conn, Contact c) {
+			//insert문 => 처리된 행 수
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("insertContactView");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, c.getConTitle());
+				pstmt.setString(2, c.getConContent());
+				pstmt.setInt(3, Integer.parseInt(c.getUserNo()));//"1" -> 1
+				//완성형태 만듬
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result; // 서비스에 리턴
+			
+		}
 	
 }
