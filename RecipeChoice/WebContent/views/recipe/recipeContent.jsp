@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.user.recipe.model.vo.*" %>
 <%@ page import="java.util.ArrayList" %>
+<%@page import="com.kh.user.reply.model.*"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%
 	Recipe r = (Recipe)request.getAttribute("r");
 	String[] tagList = (String[])r.getRcpTag().split(",");
@@ -9,6 +11,8 @@
 	ArrayList<IngredientList> ing = (ArrayList<IngredientList>)request.getAttribute("ingredient");
 	ArrayList<Cook> cook = (ArrayList<Cook>)request.getAttribute("cook"); 
 	ArrayList<Recipe> relation =(ArrayList<Recipe>)request.getAttribute("relation"); 
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -168,9 +172,9 @@
 			<!--댓글-->
 			<div class="replyArea" align="center">
 
-				<textarea class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
+				<textarea id="replyEnroll" class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
 
-				<input type="button" class="btn btn-success replyBtn" value="등록" onclick="replyWrite()">
+				<input type="button" class="btn btn-success replyBtn" value="등록" onclick="writeReply()">
 
 				<br>
 				<br>
@@ -185,68 +189,36 @@
 								style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
 						</td>
 					</tr>
-					<tr>
-						<td width="10%" align="center"><img
-							src="<%=request.getContextPath()%>/resources/image/board/defaultprofile.png"
-							class="profileImg" width="50px" height="50px"></td>
-						<td width="90%" style="padding-right: 30px;">
-							<div align="left" style="color: gray;">
-								<b style="color: rgb(9, 175, 79); margin-right: 20px;"
-									id="writerNickName">왕십리대마왕</b>
-								<!-- 뿌릴때 서브스트링으로 4자 이후는 ***로 표시 -->
-								<input type="hidden" id="writerId" value="Wang***">
-								20200827 08:31
-								<!-- 작성자일경우에만 표시 -->
-								| <a onclick="callChangeForm(this)"
-									style="color: gray; cursor: pointer;">수정</a> | <a
-									href="#replyDeleteModal" data-toggle="modal"
-									data-target="#replyDeleteModal" data-no="3"
-									onclick="modalGetEl(this)" style="color: gray">삭제</a>
-								<!-- 항상표시 -->
-								| <a href="#reportModal" data-toggle="modal"
-									data-target="#reportModal" data-no="3"
-									onclick="reportContent(this)" style="color: gray">신고</a>
-							</div>
-							<div id="replyConent">ㅇㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ
-								ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ
-								ㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇ ㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㄹㄴㅇㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹ</div>
-						</td>
-					</tr>
+					<!-- 댓글출력 -->
 				</table>
 				<script>
-				$(function(){
-					function replyWrite() {
+					$(function(){
+						selectReplyList();
 						
-			        	<% // TODO data부분은 로그인 구현후 로그인한 사용자의 값을 세션에서 가져옴 %>
-			        	$.ajax({
-							url: 'replyWrite.re',
-							data: {
-								userNo:<%=r.getUserNo()%>,
-								bno:<%= r.getRcpNo() %>,
-								memName:'test_3',
-								replyContent:$("#replyEnrollForm").val(),
-								boardType:1
-							},
-							type: 'post',
-							success: function (result) {
-								
-								if(result <= 0) {
-									alert("댓글 작성에 실패했습니다.");
-								}
-								
-								$("#replyEnrollForm").val("");
-								
-								selectReply();
-								
-							},
-							error: function () {
-								console.log("통신 실패");	
-							}
-						});
-			        	
-					}
-				});
+						setInterval(selectReplyList, 1000);
+					});
+						function writeReply(){
+							$.ajax({
+								url:"<%=contextPath%>/replyInsert.rp",
+								type:"post",
+								data:{
+									content:$("#replyEnroll").val(),
+									bno:<%=r.getRcpNo()%>
+									boardType:2
+								},
+								success: function(result){
+									if(result>0){
+										
+										selectReplyList()
+									}else {
+										
+									}
+								},
+							});
+						}
 				</script>
+				
+		
 				
 				 <br><br>
 				 <%if(loginUser != null && loginUser.getUserNo()== r.getUserNo()) { %>
@@ -258,7 +230,9 @@
 			</div>
 		</div>
 	</div>
-	</div>
+	
+     
+
 
 
 	<%@include file="../common/footer.jsp"%>

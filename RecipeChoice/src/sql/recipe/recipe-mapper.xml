@@ -141,20 +141,21 @@
 	<entry key="tagSearch">
 		SELECT *
 		  FROM RECIPE
-		 WHERE RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
+		 WHERE RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 
 	</entry>
 	
 	<entry key="updateRecipe">
@@ -270,4 +271,12 @@
 		]]>
 	</entry>
 	
+	<entry key="myPage">
+		SELECT
+		       RCP_TITLE
+		     , CREATE_DATE 
+		 FROM RECIPE
+		 WHERE USER_NO = ?
+		   AND STATUS = 'Y'
+	</entry>
 </properties>
