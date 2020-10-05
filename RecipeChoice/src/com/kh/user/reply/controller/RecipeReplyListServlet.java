@@ -1,11 +1,18 @@
 package com.kh.user.reply.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.kh.user.recipe.model.service.RecipeService;
+import com.kh.user.reply.model.vo.Reply;
 
 /**
  * Servlet implementation class RecipeReplyListServlet
@@ -26,8 +33,16 @@ public class RecipeReplyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		
+		ArrayList<Reply> list = new RecipeService().selectReplyList(bno); 
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create();
+		gson.toJson(list,response.getWriter());
+		
+		
 	}
 
 	/**

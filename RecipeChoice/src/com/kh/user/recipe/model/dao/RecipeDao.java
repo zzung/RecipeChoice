@@ -666,5 +666,36 @@ public class RecipeDao {
 			close(pstmt); 
 		}
 		return result; 
+	}//e.insertReply
+	
+	public ArrayList<Reply> selectReplyList(Connection conn, int bno){
+		ArrayList<Reply> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectReplyList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new Reply(rs.getInt("BRE_NO"),
+						           rs.getString("MEM_NAME"),
+						           rs.getString("BRE_CONTENT"),
+						           rs.getString("BRE_DATE")
+								   ));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list; 
 	}
 }

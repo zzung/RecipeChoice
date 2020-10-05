@@ -306,4 +306,17 @@
 		  )
 	</entry>
 	
+	<entry key="selectReplyList">
+		SELECT
+		       BRE_NO
+		     , MEM_NAME
+		     , BRE_CONTENT
+		     , BRE_DATE
+		  FROM REPLY
+		 WHERE BOARD_NO = ?
+		   AND STATUS = 'Y'
+		 ORDER 
+		    BY BRE_NO DESC
+	</entry>
+	
 </properties>

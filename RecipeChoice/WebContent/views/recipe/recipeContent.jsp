@@ -221,7 +221,7 @@
 						function selectReplyList(){
 							$.ajax({
 								url:"<%=contextPath%>/replyList.re",
-								type="get",
+								type:"get",
 								data:{
 									bno:<%=r.getRcpNo()%>
 								},
@@ -240,9 +240,9 @@
 					                     + "<div align='left' style='color: gray;'>"
 					                     + "<b style='color: rgb(9, 175, 79); margin-right: 20px;' id='writerNickName'>" + list[i].memName + "</b>"
 										 + "<input type='hidden' id='writerId' value=''>"+ list[i].createDate 
-					                     + "| <a onclick='callChangeForm(this)' style='color: gray; cursor: pointer;'>" + 수정 + "</a>"
-					                     + "| <a href='#replyDeleteModal' data-toggle='modal' data-target='#replyDeleteModal' data-no='3' onclick='modalGetEl(this)' style='color: gray'>" + 삭제 + "</a>"
-					                     + "| <a href=''#reportModal' data-toggle='modal' data-target='#reportModal' data-no='3' onclick='reportContent(this)' style='color: gray'>" + 신고 + "</a>"
+					                     + "| <a onclick='callChangeForm(this)' style='color: gray; cursor: pointer;'>" + '수정' + "</a>"
+					                     + "| <a href='#replyDeleteModal' data-toggle='modal' data-target='#replyDeleteModal' data-no='3' onclick='modalGetEl(this)' style='color: gray'>" + '삭제' + "</a>"
+					                     + "| <a href=''#reportModal' data-toggle='modal' data-target='#reportModal' data-no='3' onclick='reportContent(this)' style='color: gray'>" + '신고' + "</a>"
 					                     + "</div>"
 					                     + "<div id='replyConent'>"
 					                     + list[i].replyContent  
