@@ -282,4 +282,28 @@
 		   AND STATUS = 'Y'
 	</entry>
 	
+	<entry key="insertReply">
+		INSERT 
+		  INTO REPLY
+		  (
+		       BRE_NO
+		     , USER_NO
+		     , MEM_NAME
+		     , BOARD_NO
+		     , BRE_CONTENT
+		     , BOARD_TYPE
+		     , BRE_DATE
+		  )
+		  VALUES
+		  (
+		       SEQ_BRENO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , 2
+		     , SYSDATE
+		  )
+	</entry>
+	
 </properties>

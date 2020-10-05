@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.kh.user.reply.model.vo.Reply"%>
 <%@ page import="com.kh.user.recipe.model.vo.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@page import="com.kh.user.reply.model.*"%>
@@ -171,11 +172,12 @@
 			</table>
 			<!--댓글-->
 			<div class="replyArea" align="center">
-
+ 				<%if(loginUser == null) { %>
+				<textarea class="form-control" rows="3" readonly>로그인 후 사용 해주세요</textarea>
+				<%}else { %>
 				<textarea id="replyEnroll" class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
-
-				<input type="button" class="btn btn-success replyBtn" value="등록" onclick="writeReply()">
-
+			    <button class="btn btn-success replyBtn" onclick="writeReply();">등록</button> 
+				<%} %>
 				<br>
 				<br>
 
@@ -183,13 +185,7 @@
 				<h4 id="replyCount" class="replytitle" align="left">댓글 15</h4>
 
 				<table id="replyListArea" class="replylistArea" style="margin: 0px auto; width: 800px;">
-					<tr>
-						<td colspan="2">
-							<div data-image-content="false"
-								style="background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;"></div>
-						</td>
-					</tr>
-					<!-- 댓글출력 -->
+					
 				</table>
 				<script>
 					$(function(){
@@ -197,16 +193,17 @@
 						
 						setInterval(selectReplyList, 1000);
 					});
+					
 						function writeReply(){
 							$.ajax({
-								url:"<%=contextPath%>/replyInsert.rp",
+								url:"<%=contextPath%>/replyInsert.re",
 								type:"post",
 								data:{
 									content:$("#replyEnroll").val(),
-									bno:<%=r.getRcpNo()%>
-									boardType:2
+									bno:<%=r.getRcpNo()%>,
+									memName:"<%=r.getMemName()%>"
 								},
-								success: function(result){
+								success:function(result){
 									if(result>0){
 										console.log("댓글성공");
 										selectReplyList();
@@ -217,6 +214,47 @@
 								},
 								error:function(){
 									console.log("댓글 작성용 ajax 실패");
+								}
+							});
+						}
+						
+						function selectReplyList(){
+							$.ajax({
+								url:"<%=contextPath%>/replyList.re",
+								type="get",
+								data:{
+									bno:<%=r.getRcpNo()%>
+								},
+								success:function(list){
+									var result = "";
+									
+									for(var i in list){
+										result += "<tr>" 
+						                 + "<td colspan='2'>"
+					                     + "<div data-image-content='false' style='background-image: url(https://ovenapp.io/static/images/shape/line-horizontal.svg); width: 100%; height: 20px;'></div>"
+					                     + "</td>"
+					                     + "</tr>"
+					              		 + "<tr>"
+					                     + "<td width='10%' align='center'>"+"<img src='<%= request.getContextPath() %>/resources/image/board/defaultprofile.png' class='profileImg' width='50px' height='50px'></td>"
+					                 	 + "<td width='90%' style='padding-right: 30px;'>"
+					                     + "<div align='left' style='color: gray;'>"
+					                     + "<b style='color: rgb(9, 175, 79); margin-right: 20px;' id='writerNickName'>" + list[i].memName + "</b>"
+										 + "<input type='hidden' id='writerId' value=''>"+ list[i].createDate 
+					                     + "| <a onclick='callChangeForm(this)' style='color: gray; cursor: pointer;'>" + 수정 + "</a>"
+					                     + "| <a href='#replyDeleteModal' data-toggle='modal' data-target='#replyDeleteModal' data-no='3' onclick='modalGetEl(this)' style='color: gray'>" + 삭제 + "</a>"
+					                     + "| <a href=''#reportModal' data-toggle='modal' data-target='#reportModal' data-no='3' onclick='reportContent(this)' style='color: gray'>" + 신고 + "</a>"
+					                     + "</div>"
+					                     + "<div id='replyConent'>"
+					                     + list[i].replyContent  
+					                     + "</div>"
+					                 	 + "</td>"
+					              		 + "</tr>"
+									}
+									$(".replyArea>#replyListArea").html(result);
+									
+								},
+								error:function(){
+									console.log("댓글리스트 조회 실패")
 								}
 							});
 						}

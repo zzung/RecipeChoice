@@ -17,6 +17,7 @@ import com.kh.user.recipe.model.vo.Count;
 import com.kh.user.recipe.model.vo.IngredientList;
 import com.kh.user.recipe.model.vo.PageInfo;
 import com.kh.user.recipe.model.vo.Recipe;
+import com.kh.user.reply.model.vo.Reply;
 
 public class RecipeDao {
 
@@ -640,5 +641,30 @@ public class RecipeDao {
 		
 		return bestRecipes;
 		
+	}//e.
+	
+	public int insertReply(Connection conn, Reply re) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertReply"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, re.getUserNo());
+			pstmt.setString(2, re.getMemName());
+			pstmt.setInt(3, re.getBno());
+			pstmt.setString(4, re.getReplyContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt); 
+		}
+		return result; 
 	}
 }

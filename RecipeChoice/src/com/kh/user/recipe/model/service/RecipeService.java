@@ -14,6 +14,7 @@ import com.kh.user.recipe.model.vo.Count;
 import com.kh.user.recipe.model.vo.IngredientList;
 import com.kh.user.recipe.model.vo.PageInfo;
 import com.kh.user.recipe.model.vo.Recipe;
+import com.kh.user.reply.model.vo.Reply;
 
 public class RecipeService {
 	/**
@@ -249,5 +250,20 @@ public class RecipeService {
 		
 		return bestRecipes;
 		
+	}
+	
+	public int insertReply(Reply re) {
+		Connection conn = getConnection();
+		
+		int result = new RecipeDao().insertReply(conn, re);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollBack(conn); 
+		}
+		close(conn);
+		
+		return result; 
 	}
 }
