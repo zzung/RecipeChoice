@@ -275,6 +275,7 @@
 		SELECT
 		       RCP_TITLE
 		     , CREATE_DATE 
+		     , RCP_PIC
 		 FROM RECIPE
 		 WHERE USER_NO = ?
 		   AND STATUS = 'Y'

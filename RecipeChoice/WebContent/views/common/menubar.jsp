@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.user.member.model.vo.Member" %>
+<%@ page import="com.kh.user.recipe.model.vo.Recipe" %>
 <%
 	String contextPath = request.getContextPath();
 	String alertMsg = (String)session.getAttribute("alertMsg");

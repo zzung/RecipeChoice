@@ -208,14 +208,19 @@
 								},
 								success: function(result){
 									if(result>0){
-										
-										selectReplyList()
+										console.log("댓글성공");
+										selectReplyList();
+										$("#replyEnroll").val("");
 									}else {
-										
+										console.log("실패하였습니다.")
 									}
 								},
+								error:function(){
+									console.log("댓글 작성용 ajax 실패");
+								}
 							});
 						}
+						
 				</script>
 				
 		

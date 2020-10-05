@@ -19,7 +19,7 @@
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	
 	session.removeAttribute("alertMsg");
-	
+
 	
 %>
 <!DOCTYPE html>

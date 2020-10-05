@@ -555,6 +555,7 @@ public class RecipeDao {
 				Recipe my = new Recipe();
 				my.setRcpTitle(rs.getString("RCP_TITLE"));
 				my.setCreateDate(rs.getDate("CREATE_DATE"));
+				my.setRcpPic(rs.getString("RCP_PIC"));
 				
 				myPage.add(my); 
 			}
