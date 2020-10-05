@@ -247,12 +247,38 @@
 		        WHERE ROWNUM < 5]]>
 	</entry>
 	
+	<entry key="todayRecipeList">
+		<![CDATA[
+		SELECT * 
+		  FROM (
+		        SELECT * 
+		        FROM RECIPE 
+		        ORDER
+		           BY DBMS_RANDOM.RANDOM()
+		       ) 
+		 WHERE ROWNUM <= 2
+		]]>
+	</entry>
+	
+	<entry key="bestRecipeList">
+		<![CDATA[
+		SELECT * 
+		  FROM
+		     (SELECT * 
+		        FROM RECIPE 
+		       ORDER BY SCRAP_COUNT DESC) 
+		 WHERE ROWNUM <= 4
+		]]>
+	</entry>
+	
 	<entry key="myPage">
 		SELECT
 		       RCP_TITLE
 		     , CREATE_DATE 
+		     , RCP_PIC
 		 FROM RECIPE
 		 WHERE USER_NO = ?
 		   AND STATUS = 'Y'
 	</entry>
+	
 </properties>

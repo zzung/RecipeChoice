@@ -555,6 +555,7 @@ public class RecipeDao {
 				Recipe my = new Recipe();
 				my.setRcpTitle(rs.getString("RCP_TITLE"));
 				my.setCreateDate(rs.getDate("CREATE_DATE"));
+				my.setRcpPic(rs.getString("RCP_PIC"));
 				
 				myPage.add(my); 
 			}
@@ -565,5 +566,79 @@ public class RecipeDao {
 			close(pstmt);
 		}
 		return myPage; 
+	}
+
+	public ArrayList<Recipe> todayRecipeList(Connection conn) {
+		
+		ArrayList<Recipe> todaytodayRecommendedRecipe = new ArrayList<Recipe>();
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("todayRecipeList");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				todaytodayRecommendedRecipe.add(new Recipe(rs.getInt("RCP_NO"),
+														   rs.getInt("USER_NO"),
+														   rs.getString("MEM_NAME"),
+														   rs.getString("RCP_TITLE"),
+														   rs.getString("RCP_DISH_TYPE"),
+														   rs.getString("RCP_TAG"),
+														   rs.getInt("RCP_TIME"),
+														   rs.getString("RCP_CONTENT"),
+														   rs.getString("RCP_PIC"),
+														   rs.getInt("COUNT"),
+														   rs.getInt("SCRAP_COUNT")
+														  ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return todaytodayRecommendedRecipe;
+		
+	}
+
+	public ArrayList<Recipe> bestRecipeList(Connection conn) {
+
+		ArrayList<Recipe> bestRecipes = new ArrayList<Recipe>();
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("bestRecipeList");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				bestRecipes.add(new Recipe(rs.getInt("RCP_NO"),
+										   rs.getInt("USER_NO"),
+										   rs.getString("MEM_NAME"),
+										   rs.getString("RCP_TITLE"),
+										   rs.getString("RCP_DISH_TYPE"),
+										   rs.getString("RCP_TAG"),
+										   rs.getInt("RCP_TIME"),
+										   rs.getString("RCP_CONTENT"),
+										   rs.getString("RCP_PIC"),
+										   rs.getInt("COUNT"),
+										   rs.getInt("SCRAP_COUNT")
+										  ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return bestRecipes;
+		
 	}
 }

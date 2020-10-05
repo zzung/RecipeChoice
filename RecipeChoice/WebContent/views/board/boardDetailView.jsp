@@ -273,7 +273,7 @@
 				
 					var replyList = JSON.parse(json[0]);
 					
-					if(replyList.length > 10) {
+					if(replyList.length > 10 || maxReply == 0) {
 						$("#replylistArea>tbody").html(
 							'<tr>' +
 			                    '<td colspan="2">' +
@@ -401,6 +401,7 @@
 						alert("댓글 삭제에 실패했습니다.");
 					}
 					
+					maxReply -= 10;
 					selectReply();
 					
 				},
@@ -432,6 +433,7 @@
 					
 					$("#replyEnrollForm").val("");
 					
+					maxReply -= 10;
 					selectReply();
 					
 				},
