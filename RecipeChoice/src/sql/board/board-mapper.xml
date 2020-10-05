@@ -31,7 +31,6 @@
 		 WHERE RNO BETWEEN ? AND ?
 	</entry>
 	
-
 	<entry key="getMaxPage">
 		SELECT COUNT(*) MAX
   		  FROM BOARD_VIEW B

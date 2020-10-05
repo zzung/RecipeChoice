@@ -10,10 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.user.board.model.service.BoardService;
 import com.kh.user.board.model.vo.Board;
 import com.kh.user.board.model.vo.PageInfo;
+import com.kh.user.member.model.vo.Member;
+import com.kh.user.recipe.model.service.RecipeService;
+import com.kh.user.recipe.model.vo.Recipe;
 
 /**
  * Servlet implementation class MypageMain
@@ -54,7 +58,12 @@ public class MypageMain extends HttpServlet {
 
 		ArrayList<Board> boardList = new BoardService().selectBoardList(pi);
 		
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+				
+		ArrayList<Recipe> list = new RecipeService().myPage(userNo);
+		
 		request.setAttribute("boardList", boardList);
+		request.setAttribute("list", list);
 		request.setAttribute("pageInfo", pi);
 	
 		

@@ -88,6 +88,10 @@
                            <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me'";>작성 게시글 보기 </th>
                            
                        </tr>
+                        <tr>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/'";>작성 레시피 보기 </th>
+                           
+                       </tr>
                        <tr>
                            <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/writtenBoard.me'";>스크랩한 게시글 보기 </th>
                            

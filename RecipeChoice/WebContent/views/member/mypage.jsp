@@ -5,7 +5,10 @@
 <%@page import="com.kh.user.board.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Date" %>
+<%@page import="com.kh.user.recipe.*" %>
+<%@page import="com.kh.user.recipe.model.vo.Recipe" %>
 <%
+	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
 
 	ArrayList<Board> boardList = new ArrayList<Board>();
 	if(request.getAttribute("boardList") instanceof ArrayList) {
@@ -19,7 +22,6 @@
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	
 	session.removeAttribute("alertMsg");
-	
 	
 %>
 <!DOCTYPE html>
@@ -88,6 +90,10 @@
                        </tr>
                        <tr>
                            <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me'";>작성 게시글 보기 </th>
+                           
+                       </tr>
+                        <tr>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/'";>작성 레시피 보기 </th>
                            
                        </tr>
                        <tr>
@@ -178,6 +184,31 @@
               <table class="table table-striped">
                   <thead>
                     <tr>
+                      <th scope="col" colspan="2"> 작성 레시피 보기</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                </table>
+              <div class="content2_3_1">
+              <%for(Recipe li: list){ %>
+                  <div class="card" style="width:10.8rem;">
+                      <img src="<%=contextPath%>/resources/recipe_upfiles/<%=li.getRcpPic()%>" class="card-img-top" alt="...">
+                      <div class="body" style="height: 45px; ">
+                          <p><b><%=li.getRcpTitle() %></b></p>
+                          <p>작성일 : <%=li.getCreateDate() %></p>
+                      </div>
+                  </div>
+                  <%} %>
+              </div>   
+           
+              <div class="content2_3_2">
+                  <a href="" id="moreBtn" class="btn btn-light">more</a>
+              </div>
+          </div>
+		 <div class="content2_3">
+              <table class="table table-striped">
+                  <thead>
+                    <tr>
                       <th scope="col" colspan="2"> 스크랩한 게시글 보기</th>
                       <th scope="col"></th>
                     </tr>
@@ -218,7 +249,7 @@
                   <a href="" id="moreBtn" class="btn btn-light">more</a>
               </div>
           </div>
-
+		
 
        </div>
 
