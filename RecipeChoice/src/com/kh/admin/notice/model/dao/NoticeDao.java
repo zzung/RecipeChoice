@@ -29,16 +29,19 @@ public class NoticeDao {
 	}
 	
 	
-	public ArrayList<Notice> selectNoticeList(Connection conn) {
+	public ArrayList<Notice> selectNoticeList(Connection conn, int page) {
 
 		ArrayList<Notice> noticeList = new ArrayList<>();
 		ResultSet rs = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectNoticeList");
-		
+		int start = (int)(page-1)*10+1;
+		int end = start+9;
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				Notice n = new Notice(rs.getInt("not_no"), rs.getString("not_title"),
@@ -51,7 +54,7 @@ public class NoticeDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(stmt);
+			close(pstmt);
 			close(rs);
 		}
 		
@@ -158,15 +161,20 @@ public class NoticeDao {
 	}
 
 
-	public ArrayList<Notice> selectNoticeListManagement(Connection conn) {
+	public ArrayList<Notice> selectNoticeListManagement(Connection conn, int page) {
 		ArrayList<Notice> noticeList = new ArrayList<>();
 		ResultSet rs = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		int start = (int)(page-1)*10+1;
+		int end = start+9;
 		String sql = prop.getProperty("selectNoticeListManagement");
 		
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				Notice n = new Notice(rs.getInt("not_no"), rs.getString("not_title"),
@@ -179,11 +187,34 @@ public class NoticeDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(stmt);
+			close(pstmt);
 			close(rs);
 		}
 		
 		return noticeList;
+	}
+
+
+	public int noticeListCount(Connection conn) {
+
+		int result = 0;
+		Statement stmt = null;
+		String sql = prop.getProperty("noticeListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery(sql);
+			rs.next();
+			result = rs.getInt(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		
+		return result;
 	}
 	
 	
