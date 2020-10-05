@@ -197,3 +197,25 @@ INSERT
   );
 
 ROLLBACK;
+
+-- 레시피 랜덤으로 2개 조회
+SELECT * 
+  FROM
+     (SELECT * 
+        FROM RECIPE 
+       ORDER BY DBMS_RANDOM.RANDOM()) 
+ WHERE ROWNUM <= 2;
+ 
+-- 테스트용 스크랩수 수정
+UPDATE
+       RECIPE
+   SET SCRAP_COUNT = 10
+ WHERE RCP_NO = 42;
+ 
+-- 스크랩수로 상위 4개 조회
+SELECT * 
+  FROM
+     (SELECT * 
+        FROM RECIPE 
+       ORDER BY SCRAP_COUNT DESC) 
+ WHERE ROWNUM <= 4;
