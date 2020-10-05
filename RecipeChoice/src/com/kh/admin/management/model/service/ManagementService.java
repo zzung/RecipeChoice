@@ -13,10 +13,10 @@ public class ManagementService {
 	
 	
 		// 관리자 페이지 > 전체 회원 조회
-		public ArrayList<Member> selectMemberList() {
+		public ArrayList<Member> selectMemberList(int page) {
 
 			Connection conn = getConnection();
-			ArrayList<Member> memberList = new ManagementDao().selectMemberList(conn);
+			ArrayList<Member> memberList = new ManagementDao().selectMemberList(conn, page);
 			close(conn);
 			
 			return memberList;
@@ -24,10 +24,10 @@ public class ManagementService {
 		
 	
 		// 관리자 페이지 > 블랙리스트 조회
-		public ArrayList<Member> selectBlackList() {
+		public ArrayList<Member> selectBlackList(int page) {
 
 			Connection conn = getConnection();
-			ArrayList<Member> blackList = new ManagementDao().selectBlackList(conn);
+			ArrayList<Member> blackList = new ManagementDao().selectBlackList(conn, page);
 			close(conn);
 			
 			return blackList;

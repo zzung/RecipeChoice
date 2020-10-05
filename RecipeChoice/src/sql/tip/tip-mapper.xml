@@ -4,7 +4,7 @@
 	<entry key="selectCareTipList">
 		SELECT *
 		  FROM (
-		        SELECT ROWNUM RNO, B.*
+		        SELECT ROWNUM RNUM, B.*
 		          FROM (
 		                SELECT
 		                       TIP_NO
@@ -20,10 +20,10 @@
 		                  FROM TIP_VIEW T
 		                 WHERE TIP_TYPE=1
 		                 ORDER
-		                    BY CREATE_DATE DESC
+		                    BY TIP_NO DESC
 		               ) B
 		       )
-		 WHERE RNO BETWEEN 1 AND 10
+		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
 	<entry key="selectCareTip">
@@ -102,27 +102,27 @@
 	</entry>
 	<entry key="selectKnowledgeList">
 		SELECT *
-			  FROM (
-			        SELECT ROWNUM RNO, B.*
-			          FROM (
-			                SELECT
-			                       TIP_NO
-			                     , TIP_TITLE
-			                     , TIP_INFO
-			                     , TIP_ING
-			                     , TIP_CONTENT
-			                     , TIP_COUNT
-			                     , DECODE(TIP_TYPE, 1, '손질법', '상식') TIP_CATEGORY
-			                     , TIP_PIC
-			                     , TO_CHAR(CREATE_DATE, 'yyyy-MM-dd') CREATE_DATE
-			                     , STATUS
-			                  FROM TIP_VIEW T
-			                 WHERE TIP_TYPE=2
-			                 ORDER
-			                    BY TIP_NO
-			               ) B
-			       )
-			 WHERE RNO BETWEEN 1 AND 10
+		  FROM (
+		        SELECT ROWNUM RNUM, B.*
+		          FROM (
+		                SELECT
+		                       TIP_NO
+		                     , TIP_TITLE
+		                     , TIP_INFO
+		                     , TIP_ING
+		                     , TIP_CONTENT
+		                     , TIP_COUNT
+		                     , DECODE(TIP_TYPE, 1, '손질법', '상식') TIP_CATEGORY
+		                     , TIP_PIC
+		                     , TO_CHAR(CREATE_DATE, 'yyyy-MM-dd') CREATE_DATE
+		                     , STATUS
+		                  FROM TIP_VIEW T
+		                 WHERE TIP_TYPE=2
+		                 ORDER
+		                    BY TIP_NO DESC
+		               ) B
+		       )
+		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="selectKnowledge">
 		SELECT

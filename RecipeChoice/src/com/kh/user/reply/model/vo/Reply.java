@@ -40,6 +40,14 @@ public class Reply {
 		this.createDate = createDate;
 	}
 
+	public Reply(int boardReplyNo, String memName, String replyContent, String createDate) {
+		super();
+		this.boardReplyNo = boardReplyNo;
+		this.memName = memName;
+		this.replyContent = replyContent;
+		this.createDate = createDate;
+	}
+
 	public int getBoardReplyNo() {
 		return boardReplyNo;
 	}

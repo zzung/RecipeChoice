@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.admin.common.PagingManager;
+import com.kh.admin.notice.model.service.NoticeService;
 import com.kh.admin.tip.model.service.TipService;
 import com.kh.admin.tip.model.vo.Tip;
 
@@ -22,9 +24,16 @@ public class CareTipListViewServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<Tip> careTipList = new TipService().selectCareTipList();
-		System.out.println(careTipList);
+		int totalCount = new NoticeService().noticeListCount();
+		String pageStr = request.getParameter("page");
+		if(pageStr==null) {
+			pageStr = "1";
+		}
+		int page = Integer.parseInt(pageStr);
 		
+		ArrayList<Tip> careTipList = new TipService().selectCareTipList(page);
+		
+		request.setAttribute("pagingManager", new PagingManager(totalCount, page));
 		request.setAttribute("careTipList", careTipList);
 		request.getRequestDispatcher("views/tip/careTipList.jsp").forward(request, response);
 	

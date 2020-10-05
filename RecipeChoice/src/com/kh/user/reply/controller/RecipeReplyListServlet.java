@@ -1,26 +1,30 @@
 package com.kh.user.reply.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.user.member.model.vo.*;
-import com.kh.user.reply.model.vo.*;
-import com.kh.user.recipe.model.service.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.kh.user.recipe.model.service.RecipeService;
+import com.kh.user.reply.model.vo.Reply;
+
 /**
- * Servlet implementation class RecipeReplyInsertServlet
+ * Servlet implementation class RecipeReplyListServlet
  */
-@WebServlet("/replyInsert.re")
-public class RecipeReplyInsertServlet extends HttpServlet {
+@WebServlet("/replyList.re")
+public class RecipeReplyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecipeReplyInsertServlet() {
+    public RecipeReplyListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +33,15 @@ public class RecipeReplyInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String replyContent = request.getParameter("content"); 
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		String memName = request.getParameter("memName"); 
 		
-		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		ArrayList<Reply> list = new RecipeService().selectReplyList(bno); 
 		
-		Reply re = new Reply(); 
-		re.setReplyContent(replyContent);
-		re.setBno(bno);
-		re.setUserNo(userNo);
-		re.setMemName(memName);
+		response.setContentType("application/json; charset=utf-8");
 		
-		int result = new RecipeService().insertReply(re);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create();
+		gson.toJson(list,response.getWriter());
 		
-		response.getWriter().print(result);
 		
 	}
 

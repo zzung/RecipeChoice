@@ -1,3 +1,4 @@
+<%@page import="com.kh.admin.common.PagingManager"%>
 <%@page import="com.kh.admin.tip.model.vo.Tip"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -20,15 +21,14 @@
 		    height:1000px;
 		    margin: auto;
 		}
-		#header{height:20%;} 
-		#content{/* height:70%; */ margin-top: 30px;}
+		#header{height:130px;} 
+		#content{margin-top: 30px;}
 		#footer{height:10%; margin-bottom: 30px;}
-	    .nav{background:rgb(39, 174, 96);}
-	        .menu{
-	            display:table-cell;
-	            height:30px;
-	            width:150px;
-	        }
+        .menu{
+            display:table-cell;
+            height:30px;
+            width:150px;
+        }
 		#navigator{height:5%}
 		#content>div{
 		    height:100%;
@@ -165,19 +165,34 @@
                     </tbody>
                 </table>
 				
-				<br><br><br><br>
+				
+				<br><br>
                 <div align="right" style="margin-bottom: 30px">
-                	<hr>
                 	<button onclick="careTipDelete();" class="btn btn-dark">삭제</button>
                 	<button onclick="careTipUpdate();" class="btn btn-primary">수정</button>
                 	<a href="<%=contextPath%>/careTipEnrollForm.mn" class="btn btn-success">작성</a>
+                	<hr>
                 </div>
+
+				<div class="pagination" align="center">
+	                <% PagingManager pm = (PagingManager)request.getAttribute("pagingManager"); %>
+	                <%if(pm.getNowBlock()>=2) { %>
+	               	<a href="<%=contextPath%>/careTipList.mn?page=<%=pm.getStartPage()-1%>">&laquo;</a>
+	                <% } %>
+	            	<%for(int i=0; i<pm.getEndPage(); i++){ %>
+	            	<a href="<%=contextPath%>/careTipList.mn?page=<%=i+1%>"><%=i+1%></a>
+	            	<% } %>
+	            	<%if(pm.getNowBlock()<pm.getTotalBlock()){ %>
+	            	<a href="<%=contextPath%>/careTipList.mn?page=<%=pm.getEndPage()+1%>">&raquo;</a>
+	            	<% } %>
+            	</div>
+				
 
             	</div>
             	<div id="content_3"></div>
         	</div>
-	        <div id="footer">
-	        </div>
+	        <div id="footer"></div>
+	        
         </div>
         
 	
@@ -224,11 +239,8 @@
          		
          	};
          
-         
-         
-       
-       		/* 체크박스까지 적용되지 않게 수정필요 */
-        	$(function(){
+
+         	$(function(){
         		$(".tb1>tbody>tr").click(function(){
         			var tno = $(this).children().eq(1).text();
         			console.log(tno);
