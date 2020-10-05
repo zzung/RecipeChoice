@@ -98,6 +98,9 @@
 			<div class="content_1">
                 <h3>오늘의 추천 레시피</h3>
                 <div align="center">
+                	<% if(todayRecommendedRecipe.size() < 2) { %>
+                	<div><h2>조회된 데이터가 없습니다</h2></div>
+                	<% } else { %>
                 	<a href="<%= contextPath %>/detail.rp?rcpNo=<%= todayRecommendedRecipe.get(0).getRcpNo() %>">
 	                    <img src="resources/recipe_upfiles/<%= todayRecommendedRecipe.get(0).getRcpPic() %>" width="400" height="300">
                 	</a>
@@ -105,12 +108,16 @@
                    	<a href="<%= contextPath %>/detail.rp?rcpNo=<%= todayRecommendedRecipe.get(1).getRcpNo() %>">
                     	<img src="resources/recipe_upfiles/<%= todayRecommendedRecipe.get(1).getRcpPic() %>" width="400" height="300">
                     </a>
+                	<% } %>
                 </div>
 			</div>
 			<div class="content_2">
                 <h3>지금 많이 검색하는 메뉴</h3>
                 <div>
                     <br><br><br><br>
+                    <% if(bestRecipes.size() < 4) { %>
+                	<div><h2>조회된 데이터가 없습니다</h2></div>
+                	<% } else { %>
                     <div class="recommendedRecipe" style="margin-left: 130px;" onclick="location.href='<%= contextPath %>/detail.rp?rcpNo=<%= bestRecipes.get(0).getRcpNo() %>'">
     	                <img src="resources/recipe_upfiles/<%= bestRecipes.get(0).getRcpPic() %>" width="150" height="150">
                         <div class="recommendedRecipeTitleBar"><p align="center" class="recommendedRecipeTitle"><%= bestRecipes.get(0).getRcpTitle() %></p></div>
@@ -127,6 +134,7 @@
                         <img src="resources/recipe_upfiles/<%= bestRecipes.get(3).getRcpPic() %>" width="150" height="150">
                         <div class="recommendedRecipeTitleBar"><p align="center" class="recommendedRecipeTitle"><%= bestRecipes.get(3).getRcpTitle() %></p></div>
                     </div>
+                    <% } %>
                 </div>
 			</div>
 			<div class="content_3">
