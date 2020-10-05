@@ -157,24 +157,22 @@
               <table class="table table-striped" id="dd">
                   <thead>
                     <tr>
-                      <th scope="col" colspan="2"> 작성글</th>
+                      <th scope="col" colspan="2"> 작성 레시피 보기</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
                 </table>
               <div class="content2_2_1">
-
-              <% for(Board b : boardList) { %>
-	              	<% if(userName.equals(b.getMemName())) {%>
-		                  <div class="card" style="width:10.8rem;">
-		                      <img src="resources/image/mypage/cat2.jpg" class="card-img-top" alt="...">
-		                      <div class="body" style="height: 45px; ">
-		                          <p><b><%=b.getBoardTitle() %></b></p>
-		                          <p><%=b.getCreateDate() %></p>
-		                      </div>
-		                  </div>
-	                  	<%} %>
-                 <%} %> 
+				  <%for(Recipe li: list){ %>
+                  <div class="card recipeCard" style="width:10.8rem;">
+                  <input type="hidden" name="rcpNo" value="<%=li.getRcpNo()%>">
+                      <img src="resources/recipe_upfiles/<%=li.getRcpPic()%>" style="width:160px;height:130px;"class="card-img-top" alt="...">
+                      <div class="body" style="height: 45px; ">
+                          <p><b><%=li.getRcpTitle() %></b></p>
+                          <p>작성일 : <%=li.getCreateDate() %></p>
+                      </div>
+                  </div>
+                  <%} %>
               </div>
           
               <div class="content2_2_2">
@@ -185,21 +183,23 @@
               <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th scope="col" colspan="2"> 작성 레시피 보기</th>
+                      <th scope="col" colspan="2"> 작성 게시글 보기</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
                 </table>
               <div class="content2_3_1">
-              <%for(Recipe li: list){ %>
-                  <div class="card" style="width:10.8rem;">
-                      <img src="<%=contextPath%>/resources/recipe_upfiles/<%=li.getRcpPic()%>" class="card-img-top" alt="...">
-                      <div class="body" style="height: 45px; ">
-                          <p><b><%=li.getRcpTitle() %></b></p>
-                          <p>작성일 : <%=li.getCreateDate() %></p>
-                      </div>
-                  </div>
-                  <%} %>
+          		 <% for(Board b : boardList) { %>
+              		<% if(userName.equals(b.getMemName())) {%>
+	                  <div class="card" style="width:10.8rem;">
+	                      <img src="resources/image/mypage/bada.jpg.jpg" style="width:160px;height:130px;"class="card-img-top" alt="...">
+	                      <div class="body" style="height: 45px; ">
+	                          <p><b><%=b.getBoardTitle() %></b></p>
+	                          <p><%=b.getCreateDate() %></p>
+	                      </div>
+	                  </div>
+                  	<%} %>
+                 <%} %> 
               </div>   
            
               <div class="content2_3_2">
@@ -251,11 +251,16 @@
               </div>
           </div>
 		
-
        </div>
 
 
     </div>
+    <script>
+    	$(".recipeCard").click(function(){
+    		location.href="<%=contextPath%>/detail.rp?rcpNo="+$(this).children().eq(0).val();
+    	});
+    
+    </script>
 </body>
 </body>
 </html>

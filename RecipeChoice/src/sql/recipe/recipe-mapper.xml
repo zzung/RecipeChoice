@@ -276,6 +276,7 @@
 		       RCP_TITLE
 		     , CREATE_DATE 
 		     , RCP_PIC
+		     , RCP_NO
 		 FROM RECIPE
 		 WHERE USER_NO = ?
 		   AND STATUS = 'Y'
