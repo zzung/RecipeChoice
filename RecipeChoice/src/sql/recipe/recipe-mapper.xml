@@ -246,4 +246,13 @@
 		                )
 		        WHERE ROWNUM < 5]]>
 	</entry>
+	
+	<entry key="myPage">
+		SELECT
+		       RCP_TITLE
+		     , CREATE_DATE 
+		 FROM RECIPE
+		 WHERE USER_NO = ?
+		   AND STATUS = 'Y'
+	</entry>
 </properties>
