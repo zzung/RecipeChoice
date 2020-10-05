@@ -254,7 +254,7 @@ public class RecipeDao {
 	
 	public ArrayList<Recipe> tagSearch(Connection conn, String[] rcpTags){
 		ArrayList<Recipe> tags = new ArrayList<>();
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -264,10 +264,12 @@ public class RecipeDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			for(int i=0; i<rcpTags.length; i++) {
-				pstmt.setString(i, rcpTags[i]);
+				System.out.println(i+1 + "번째 인덱스 -> " + rcpTags[i]);
+				pstmt.setString(i+1, "%"+rcpTags[i]+"%");
 			}
-			for(int j=rcpTags.length; j<=14; j++) {
-				pstmt.setString(j, null);
+			for(int j=rcpTags.length; j<14; j++) {
+				System.out.println(j+1 + "번째 인덱스 -> NULL" );
+				pstmt.setString(j+1, "%NULL%");
 			}
 			rs = pstmt.executeQuery();
 			
@@ -534,5 +536,34 @@ public class RecipeDao {
 			close(pstmt); 
 		}
 		return relation; 
+	}//e.
+	
+	public ArrayList<Recipe> myPage(Connection conn, int userNo){
+		ArrayList<Recipe> myPage = new ArrayList<>(); 
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		
+		String sql = prop.getProperty("myPage");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,userNo); 
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Recipe my = new Recipe();
+				my.setRcpTitle(rs.getString("RCP_TITLE"));
+				my.setCreateDate(rs.getDate("CREATE_DATE"));
+				
+				myPage.add(my); 
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return myPage; 
 	}
 }

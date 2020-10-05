@@ -141,20 +141,21 @@
 	<entry key="tagSearch">
 		SELECT *
 		  FROM RECIPE
-		 WHERE RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
-		    OR RCP_TAG LIKE '%?%'
+		 WHERE RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 	OR RCP_TAG LIKE ?
+		 
 	</entry>
 	
 	<entry key="updateRecipe">

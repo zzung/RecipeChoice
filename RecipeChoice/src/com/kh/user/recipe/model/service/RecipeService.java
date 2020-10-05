@@ -215,5 +215,15 @@ public class RecipeService {
 		close(conn);
 		
 		return relation; 
+	}//e.relationRecipe
+	
+	public ArrayList<Recipe> myPage(int userNo){
+		Connection conn = getConnection();
+		
+		ArrayList<Recipe> myPage = new RecipeDao().myPage(conn, userNo);
+		
+		close(conn);
+		
+		return myPage; 
 	}
 }

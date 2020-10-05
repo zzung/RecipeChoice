@@ -34,8 +34,13 @@ public class RecipeMainSearchBarServlet extends HttpServlet {
 
 		//String[] rcpDishTypes = request.getParameterValues("dishType");
 		String[] rcpTags = request.getParameterValues("tag");
+		for(String t : rcpTags) {
+			System.out.println("servlet tcpTags => " + t);
+		}
+		
 		
 		ArrayList<Recipe> tags = new RecipeService().tagSearch(rcpTags);
+		
 		
 		
 		//int rcpTime = Integer.parseInt(request.getParameter("time"));

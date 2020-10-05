@@ -43,8 +43,11 @@ public class RecipeContentServlet extends HttpServlet {
 	
 		Recipe r = new RecipeService().selectDetailRecipeList(rcpNo);
 		String dishType = r.getRcpDishType();
+		int userNo = r.getUserNo(); 
+
 		ArrayList<Recipe> relation = new RecipeService().relationRecipe(dishType);
-	
+		ArrayList<Recipe> myPage = new RecipeService().myPage(userNo);
+
 		//재료리스트
 		ArrayList<IngredientList> ingredient = new RecipeService().selectDetailIngList(rcpNo); 
 		
@@ -58,6 +61,7 @@ public class RecipeContentServlet extends HttpServlet {
 		request.setAttribute("ingredient", ingredient);
 		request.setAttribute("cook", cook);
 		request.setAttribute("relation", relation);
+		request.setAttribute("myPage", myPage);
 		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response); 
 		
 	}
