@@ -14,30 +14,28 @@ import com.kh.admin.tip.model.service.TipService;
 import com.kh.admin.tip.model.vo.Tip;
 import com.kh.user.common.MyFileRenamePolicy;
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.MultipartRequest;
 
-@WebServlet("/updateCareTip.mn")
-public class CareTipUpdateServlet extends HttpServlet {
+@WebServlet("/insertKnowledge.mn")
+public class KnowledgeInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public CareTipUpdateServlet() {
+    public KnowledgeInsertServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		request.setCharacterEncoding("utf-8");
-	
-		if(ServletFileUpload.isMultipartContent(request)) {
-			
+
+		request.setCharacterEncoding("UTF-8");
+		
+		if (ServletFileUpload.isMultipartContent(request)) {
+
 			int maxSize = 10 * 1024 * 1024;
-			
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/careTip_upfiles/");
-			
+
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/knowledge_upfiles/");
+
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+			String tipPic = multiRequest.getFilesystemName("tipPic");
 			
-			
-			int tipNo = Integer.parseInt(multiRequest.getParameter("tipNo"));
 			String tipTitle = multiRequest.getParameter("tipTitle");
 			String tipInfo = multiRequest.getParameter("tipInfo");
 			String tipContent = multiRequest.getParameter("summernote");
@@ -63,35 +61,32 @@ public class CareTipUpdateServlet extends HttpServlet {
 			}
 			
 			Tip t = new Tip();
-			t.setTipNo(tipNo);
 			t.setTipTitle(tipTitle);
 			t.setTipInfo(tipInfo);
 			t.setTipIngredientTag(tipTagName);
+			t.setTipPicture(tipPic);
 			t.setTipContent(tipContent);
 			
-			// 새로 이미지 업로드 할경우
-			if(multiRequest.getOriginalFileName("reuploadTipPic") != null) {
-				t.setTipPicture(multiRequest.getFilesystemName("reuploadTipPic"));
-				
-				// 기존의 파일 삭제
-//				File deleteFile = new File(savePath + multiRequest.getParameter("reuploadTipPic"));
-//				deleteFile.delete(); // 서버에 업로드 되어있던 기존 파일 삭제
-			}else {
-				t.setTipPicture(multiRequest.getFilesystemName("originTipPic"));
-			}
-			
 			System.out.println(t);
-			
-			int result = new TipService().updateCareTip(t);
+			int result = new TipService().insertKnowledge(t);
 			
 			if(result > 0) {
-				request.getSession().setAttribute("alertMsg", "손질법 글 수정 성공 !");
-				response.sendRedirect(request.getContextPath()+"/careTipDetail.mn?tno="+tipNo);
+				request.getSession().setAttribute("alertMsg", "상식 게시판에 글등록 성공!");
+				response.sendRedirect(request.getContextPath()+"/knowledgeList.mn");
 			}else {
-				request.setAttribute("alertMsg", "손질법 글 수정 실패");
-				request.getRequestDispatcher("views/tip/careTipList.jsp").forward(request, response);
+				request.setAttribute("alertMsg","상식 게시판에 글등록 실패");
+				request.getRequestDispatcher("views/tip/knowledgeList.jsp").forward(request, response);
+				
+				if (t != null) {
+					File failedFile = new File(savePath + t.getTipPicture());
+					failedFile.delete();
+				}
+	
 			}
+			
 		}
+	
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -28,9 +28,6 @@ public class CareTipDetailViewServlet extends HttpServlet {
 			
 			Tip t = new TipService().selectCareTip(tno);
 			System.out.println(t);
-			
-//			// 첨부파일 조회 (없으면 null)
-//			Attachment at = new BoardService().selectFile(bno);			
 
 			request.setAttribute("t", t);
 			request.getRequestDispatcher("views/tip/careTipDetail.jsp").forward(request, response);

@@ -74,6 +74,15 @@ public class NoticeService {
 		return result;
 	}
 
+	public ArrayList<Notice> selectNoticeListManagement() {
+		
+		Connection conn = getConnection();
+		ArrayList<Notice> noticeList = new NoticeDao().selectNoticeListManagement(conn);
+		close(conn);
+		
+		return noticeList;
+	}
+
 	
 	
 	

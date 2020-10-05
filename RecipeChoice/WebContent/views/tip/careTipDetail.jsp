@@ -83,7 +83,7 @@
                 
                 <div id="detailTop">
                     <hr>
-                    <p style="font-size: 15px; font-weight: bolder;"><%=t.getTipTitle() %></p>
+                    <p style="font-size: 18px; font-weight: bolder;"><%=t.getTipTitle() %></p>
                     <hr>  
                     <p>관리자 &nbsp;&nbsp;|&nbsp;&nbsp;<%=t.getCreateDate() %></p>
                     <hr>
@@ -93,7 +93,7 @@
                 <br><br><br>
                 <div class="detailArea" align="center">
                     <div align="center" style="font-size: 25px; font-weight: bolder;"><%=t.getTipTitle() %></div>
-                    
+                    <input type="hidden" id="tipPic" name="tipPic" value="<%=t.getTipPicture() %>">
                     <hr width="500px">
                     <div align="center" style="width: 400px;">
 			        	<%=t.getTipInfo() %>

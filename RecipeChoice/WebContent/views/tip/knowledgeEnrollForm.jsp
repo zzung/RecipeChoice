@@ -94,10 +94,10 @@
             </div>
             <div id="content_2">
                 
-                <p style="font-weight: bolder; font-size: 18px;">재료 손질법 작성하기</p>
+                <p style="font-weight: bolder; font-size: 18px;">재료에 대한 상식 글 작성하기</p>
                 <hr> 
                 
-				<form action="insertCareTip.mn" method="post" enctype="multipart/form-data">
+				<form action="insertKnowledge.mn" method="post" enctype="multipart/form-data">
 					<input type="hidden" id="tipType" name="tipType" value="1">
 					
 					<table class="tb2">

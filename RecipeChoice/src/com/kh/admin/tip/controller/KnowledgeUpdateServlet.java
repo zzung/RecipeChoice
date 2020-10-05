@@ -1,6 +1,5 @@
 package com.kh.admin.tip.controller;
 
-import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,25 +13,24 @@ import com.kh.admin.tip.model.service.TipService;
 import com.kh.admin.tip.model.vo.Tip;
 import com.kh.user.common.MyFileRenamePolicy;
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.MultipartRequest;
 
-@WebServlet("/updateCareTip.mn")
-public class CareTipUpdateServlet extends HttpServlet {
+@WebServlet("/updateKnowledge.mn")
+public class KnowledgeUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public CareTipUpdateServlet() {
+    public KnowledgeUpdateServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
 		request.setCharacterEncoding("utf-8");
-	
+		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			int maxSize = 10 * 1024 * 1024;
 			
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/careTip_upfiles/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/knowledge_upfiles/");
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
@@ -82,7 +80,7 @@ public class CareTipUpdateServlet extends HttpServlet {
 			
 			System.out.println(t);
 			
-			int result = new TipService().updateCareTip(t);
+			int result = new TipService().updateKnowledge(t);
 			
 			if(result > 0) {
 				request.getSession().setAttribute("alertMsg", "손질법 글 수정 성공 !");

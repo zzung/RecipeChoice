@@ -127,14 +127,14 @@
             </div>
             <div id="content_2">
                 
-                <p style="font-weight: bolder; font-size: 18px;">재료에 대한 상식 게시판 관리</p>
+                <p style="font-weight: bolder; font-size: 18px;">재료 손질법 게시판 관리</p>
                 <hr> 
 
                 <table class="tb1">
                     <thead>
                         <tr>
                             <td width="50px">
-                                &nbsp;&nbsp;<input type="checkbox" id="selectContent" name="selectContent" style="width: 15px; height: 15px;">
+                                &nbsp;&nbsp;
                             </td>
                             <td width="100px">글번호</td>
                             <td width="350px">&nbsp;&nbsp;제목</td>
@@ -152,10 +152,10 @@
 	                    	<% for (Tip t : knowledgeList) { %>
 	                        <tr>
 	                            <td width="50px">
-	                            &nbsp;&nbsp;<input type="checkbox" id="selectTip" name="selectContent" style="width: 15px; height: 15px;">
+	                            &nbsp;&nbsp;<input type="checkbox" id="selectTip" name="selectContent" onclick="event.stopPropagation();" style="width: 15px; height: 15px;">
 	                            </td>
 	                            <td width="100px" id="tipNo"><%= t.getTipNo() %></td>
-	                            <td width="350px" onclick="detailView();"><%= t.getTipTitle()%></td>
+	                            <td width="350px"><%= t.getTipTitle()%></td>
 	                            <td width="150px"><%= t.getCreateDate() %></td>
 	                            <td width="100px"><%= t.getTipCount() %></td>
 	                            <td width="100px"><%= t.getStatus() %></td>
@@ -168,8 +168,8 @@
 				<br><br><br><br>
                 <div align="right" style="margin-bottom: 30px">
                 	<hr>
-                	<button onclick="careTipDelete();" class="btn btn-dark">삭제</button>
-                	<button onclick="careTipUpdate();" class="btn btn-primary">수정</button>
+                	<button onclick="knowledgeDelete();" class="btn btn-dark">삭제</button>
+                	<button onclick="knowledgeUpdate();" class="btn btn-primary">수정</button>
                 	<a href="<%=contextPath%>/knowledgeEnrollForm.mn" class="btn btn-success">작성</a>
                 </div>
 
@@ -182,44 +182,61 @@
         
 	
 		<script>
-			const careTipUpdate = function(){
-			        		let check_length = document.getElementsByName("selectContent").length;
-			        		let check_cnt = 0;
-			        		let tno = 0;
-			        		for(var i=0; i<check_length; i++){
-			        				if(document.getElementsByName("selectContent")[i].checked == true){
-			        					cnt++;
-			        					tno = document.getElementsByName("selectContent")[i].parentNode.nextSibling.textContent;
-			        				}
-			        		}
-			        		if(cnt == 0){
-			        			alert("수정할 게시글을 선택해주세요 !");
-			        		}else if(cnt >= 2){
-			        			alert("한 번에 하나의 게시글만 수정 가능합니다.");
-			        		}else{
-			        			location.href = <%=contextPath%>+"/updateFormCareTip.mn?tno="+tno;
-			        		}
-			        	};
-		</script>
-		
-       	<script>
+			const knowledgeUpdate = function(){
+            var check_length = document.getElementsByName("selectContent").length;
+            var check_cnt = 0;
+            var tno = 0;
+            for(var i=0; i<check_length; i++){
+               if(document.getElementsByName("selectContent")[i].checked==true){
+                  check_cnt++;
+                  tno = document.getElementsByName("selectContent")[i].parentNode.nextSibling.nextSibling.textContent;
+               }
+            }
+            if(check_cnt == 0){
+               alert("수정할 게시글을 선택해 주세요 !");
+            }else if(check_cnt >= 2){
+               alert("한 번에 하나의 게시글만 수정 가능합니다.");
+            }else{
+               location.href= "<%=request.getContextPath()%>"+"/updateFormKnowledge.mn?tno="+tno;
+            }
+         };
+         
+         	const careTipDelete = function(){
+         		var check_length = document.getElementsByName("selectContent").length;
+                var check_cnt = 0;
+                var tno = "";
+                for(var i=0; i<check_length; i++){
+                   if(document.getElementsByName("selectContent")[i].checked==true){
+                      check_cnt++;
+                      if(check_cnt==1){
+                    	  tno = document.getElementsByName("selectContent")[i].parentNode.nextSibling.nextSibling.textContent;
+                      }else{
+                     	  tno += ","+document.getElementsByName("selectContent")[i].parentNode.nextSibling.nextSibling.textContent;
+                      }
+                   }
+                }
+                console.log(tno);
+                if(check_cnt == 0){
+                   alert("삭제할 게시글을 선택해 주세요 !");
+                }else{
+                   location.href= "<%=request.getContextPath()%>"+"/deleteKnowledge.mn?tno="+tno;
+                }
+         		
+         	};
+         
+         
+         
        
        		/* 체크박스까지 적용되지 않게 수정필요 */
         	$(function(){
         		$(".tb1>tbody>tr").click(function(){
         			var tno = $(this).children().eq(1).text();
         			console.log(tno);
-        			location.href= "<%=contextPath%>/careTipDetail.mn?tno="+tno;
+        			location.href= "<%=contextPath%>/knowledgeDetail.mn?tno="+tno;
         		});
         	});
         	
-        	
-        	<%-- function detailView(){
-        		/* var tno = $(this).parent().children().eq(1).text(); */
-        		var tno = $("#tipNo").val();
-        		console.log(tno);
-        		location.href= "<%=contextPath%>/careTipDetail.mn?tno="+tno;
-        	} --%>
+
         </script>
         
         

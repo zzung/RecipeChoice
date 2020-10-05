@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.admin.tip.model.service.TipService;
 import com.kh.admin.tip.model.vo.Tip;
 
-@WebServlet("/knowledgeDetail.mn")
-public class KnowledgeDetailViewServlet extends HttpServlet {
+@WebServlet("/updateFormKnowledge.mn")
+public class KnowledgeUpdateFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public KnowledgeDetailViewServlet() {
+    public KnowledgeUpdateFormServlet() {
         super();
     }
 
@@ -22,23 +22,10 @@ public class KnowledgeDetailViewServlet extends HttpServlet {
 
 		int tno = Integer.parseInt(request.getParameter("tno"));
 		
-		int result = new TipService().increaseTipCount(tno);
-
-		if(result > 0) {
-			
-			Tip t = new TipService().selectKnowledge(tno);
-			System.out.println(t);
-			
-
-			request.setAttribute("t", t);
-			request.getRequestDispatcher("views/tip/knowledgeDetail.jsp").forward(request, response);
-			
-		}else {
-			request.setAttribute("alertMsg", "해당 게시물이 유효하지 않습니다.");
-			request.getRequestDispatcher("views/tip/knowledgeList.jsp").forward(request, response);
-		}
+		Tip t = new TipService().selectKnowledge(tno);
 		
-	
+		request.setAttribute("t", t);
+		request.getRequestDispatcher("views/tip/knowledgeUpdateForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

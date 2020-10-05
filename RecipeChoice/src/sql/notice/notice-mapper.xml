@@ -67,6 +67,17 @@
 		 WHERE NOT_NO = ?
 	</entry>
 	
+	<entry key="selectNoticeListManagement">
+	SELECT
+		       NOT_NO
+		     , NOT_TITLE
+		     , NOT_CONTENT
+		     , NOT_IMPORTANT
+		     , NOT_DATE
+		     , STATUS
+		  FROM NOTICE
+		 ORDER BY NOT_NO
+	</entry>
 	
 	
 </properties>

@@ -1,5 +1,9 @@
+<%@page import="com.kh.admin.tip.model.vo.Tip"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Tip t = (Tip)request.getAttribute("t");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,34 +91,35 @@
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/memberList.mn'">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/blackList.mn'">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/tip.mn'">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/tip.mn'" style="color: rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;FAQ</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;신고 관리</div>
             </div>
             <div id="content_2">
                 
-                <p style="font-weight: bolder; font-size: 18px;">재료 손질법 작성하기</p>
+                <p style="font-weight: bolder; font-size: 18px;">재료 손질법 수정하기</p>
                 <hr> 
                 
-				<form action="insertCareTip.mn" method="post" enctype="multipart/form-data">
+				<form action="<%=contextPath %>/updateKnowledge.mn" method="post" enctype="multipart/form-data">
 					<input type="hidden" id="tipType" name="tipType" value="1">
+					<input type="hidden" id="tipNo"	name="tipNo" value="<%=t.getTipNo() %>">
 					
 					<table class="tb2">
                     	<tbody>
 	                        <tr>
 	                            <th width="100px" >제목</th>
-	                            <td><input type="text" id="tipTitle" name="tipTitle" style=" width: 300px; height:30px; float: left; padding-top: 5px; margin-top: 10px; margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;</td>
+	                            <td><input type="text" id="tipTitle" name="tipTitle" value="<%=t.getTipTitle()%>" style=" width: 300px; height:30px; float: left; padding-top: 5px; margin-top: 10px; margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;</td>
 	                        </tr>
 	                        <tr>
 	                            <th>간단 설명</th>
-	                            <td><input type="text" id="tipInfo" name="tipInfo" style=" width: 500px; height:30px; float: left; padding-top: 5px; margin-top: 10px; margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;</td>
+	                            <td><input type="text" id="tipInfo" name="tipInfo" value="<%=t.getTipInfo() %>" style=" width: 500px; height:30px; float: left; padding-top: 5px; margin-top: 10px; margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;</td>
 	                        </tr>
 	                        <tr>
 	                            <th>연관 태그</th>
 	                            <td>
 	                                <select id="tipTag1" name="tipTag1" style="margin-top: 10px; margin-bottom: 10px;">
-	                                 	<option value="null">선택없음</option>
+	                                    <option value="null">선택없음</option>
 	                                    <option value="beef">소고기</option>
 	                                    <option value="pork">돼지고기</option>
 	                                    <option value="chicken">닭고기</option>
@@ -131,7 +136,7 @@
 	                                    <option value="proceseedProduct">가공식품</option>
 	                                </select>
 	                                <select id="tipTag2" name="tipTag2" style="margin-top: 10px; margin-bottom: 10px;">
-	                                	<option value="null">선택없음</option>
+	                                    <option value="null">선택없음</option>
 	                                    <option value="beef">소고기</option>
 	                                    <option value="pork">돼지고기</option>
 	                                    <option value="chicken">닭고기</option>
@@ -148,7 +153,7 @@
 	                                    <option value="proceseedProduct">가공식품</option>
 	                                </select>
 	                                <select id="tipTag3" name="tipTag3" style="margin-top: 10px; margin-bottom: 10px;">
-	                                	<option value="null">선택없음</option>
+	                                    <option value="null">선택없음</option>
 	                                    <option value="beef">소고기</option>
 	                                    <option value="pork">돼지고기</option>
 	                                    <option value="chicken">닭고기</option>
@@ -168,19 +173,38 @@
 	                        </tr>
 	                        <tr>
 	                            <th>썸네일</th>
-	                            <td><input type="file" id="tipPic" name="tipPic" style="margin-top: 10px; margin-bottom: 10px;"></td>
+	                            <td>
+	                            	<input type="file" id="tipPic" name="reuploadTipPic" style="margin-top: 10px; margin-bottom: 10px;">
+	                            	<input type="hidden" id="tipPic" name="originTipPic" value="<%=t.getTipPicture() %>">
+	                            	(기존파일 : <%=t.getTipPicture() %>)
+	                            </td>
 	                        </tr>
 	                        
 	                        <tr>
 	                            <th>글쓰기</th>
 	                            <td>
-	                                <textarea id="summernote" name="summernote" style="margin-top: 10px; margin-bottom: 10px;"></textarea>
+	                                <textarea id="summernote" name="summernote" style="margin-top: 10px; margin-bottom: 10px;"><%=t.getTipContent() %></textarea>
 	                            </td>
 	                        </tr>
                    	 	</tbody>
                 	</table>
 					
 					<script>
+					$(function(){
+						var tipTag = "<%=t.getTipIngredientTag()%>";
+						var split = tipTag.split(',');
+						var num = 1;
+						for (var i in split){
+							var selectedTag = $('#tipTag'+num+' option');
+							for(var j=0; j<selectedTag.length; j++){
+								if(selectedTag[j].value==split[i]){
+									selectedTag[j].selected=true;
+									num++;
+									break;
+								}
+							}
+						};
+					});
 						$('#summernote').summernote({
 							  width: 700,
 							  height: 300,                 
@@ -231,12 +255,13 @@
 			                });
 			            }
 						
+						
 					</script>
 					
 					<hr>
 	                <div align="right">
 	                    <button type="submit" class="btn btn-primary">등록</button>
-	                    <button onclick="history.back();" class="btn btn-dark">취소</button>
+	                    <button type="reset" onclick="history.back();" class="btn btn-dark">취소</button>
 	                </div>
 
 				</form>

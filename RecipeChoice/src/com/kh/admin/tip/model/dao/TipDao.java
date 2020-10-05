@@ -288,5 +288,81 @@ public class TipDao {
 		return t;
 	}
 
+
+	public int updateKnowledge(Connection conn, Tip t) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateKnowledge");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, t.getTipTitle());
+			pstmt.setString(2, t.getTipInfo());
+			pstmt.setString(3, t.getTipIngredientTag());
+			pstmt.setString(4, t.getTipContent());
+			pstmt.setString(5, t.getTipPicture());
+			pstmt.setInt(6, t.getTipNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int insertKnowledge(Connection conn, Tip t) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertKnowledge");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, t.getTipTitle());
+			pstmt.setString(2, t.getTipInfo());
+			pstmt.setString(3, t.getTipIngredientTag());
+			pstmt.setString(4, t.getTipContent());
+			pstmt.setInt(5, t.getTipCount());
+			pstmt.setString(6, t.getTipPicture());
+			 
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int deleteKnowledge(Connection conn, int tipNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteKnowledge");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, tipNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 }

@@ -156,6 +156,35 @@ public class NoticeDao {
 		
 		return result;
 	}
+
+
+	public ArrayList<Notice> selectNoticeListManagement(Connection conn) {
+		ArrayList<Notice> noticeList = new ArrayList<>();
+		ResultSet rs = null;
+		Statement stmt = null;
+		String sql = prop.getProperty("selectNoticeListManagement");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				Notice n = new Notice(rs.getInt("not_no"), rs.getString("not_title"),
+									  rs.getString("not_content"), rs.getString("not_important"),
+									  rs.getDate("not_date"), rs.getString("status"));
+				
+				noticeList.add(n);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rs);
+		}
+		
+		return noticeList;
+	}
 	
 	
 	

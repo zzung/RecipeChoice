@@ -101,7 +101,7 @@
                 <p style="font-weight: bolder; font-size: 18px;">재료 손질법 수정하기</p>
                 <hr> 
                 
-				<form action="<%=contextPath %>/updateCareTip.mn" method="post">
+				<form action="<%=contextPath %>/updateCareTip.mn" method="post" enctype="multipart/form-data">
 					<input type="hidden" id="tipType" name="tipType" value="1">
 					<input type="hidden" id="tipNo"	name="tipNo" value="<%=t.getTipNo() %>">
 					
@@ -173,7 +173,11 @@
 	                        </tr>
 	                        <tr>
 	                            <th>썸네일</th>
-	                            <td><input type="file" id="tipPic" name="tipPic" value="<%=t.getTipPicture() %>" style="margin-top: 10px; margin-bottom: 10px;"></td>
+	                            <td>
+	                            	<input type="file" id="tipPic" name="reuploadTipPic" style="margin-top: 10px; margin-bottom: 10px;">
+	                            	<input type="hidden" id="tipPic" name="originTipPic" value="<%=t.getTipPicture() %>">
+	                            	(기존파일 : <%=t.getTipPicture() %>)
+	                            </td>
 	                        </tr>
 	                        
 	                        <tr>
@@ -250,6 +254,7 @@
 			                    }
 			                });
 			            }
+						
 						
 					</script>
 					

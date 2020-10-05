@@ -120,4 +120,49 @@ public class TipService {
 		return t;
 	}
 
+	public int updateKnowledge(Tip t) {
+
+		Connection conn = getConnection();
+		int result = new TipDao().updateKnowledge(conn, t);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int insertKnowledge(Tip t) {
+
+		Connection conn = getConnection();
+		int result = new TipDao().insertKnowledge(conn, t);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteKnowledge(int tipNo) {
+		
+		Connection conn = getConnection();
+		int result = new TipDao().deleteKnowledge(conn,tipNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+
 }

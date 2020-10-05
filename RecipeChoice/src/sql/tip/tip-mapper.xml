@@ -119,7 +119,7 @@
 			                  FROM TIP_VIEW T
 			                 WHERE TIP_TYPE=2
 			                 ORDER
-			                    BY CREATE_DATE DESC
+			                    BY TIP_NO
 			               ) B
 			       )
 			 WHERE RNO BETWEEN 1 AND 10
@@ -139,5 +139,52 @@
 		  FROM TIP_VIEW
 		 WHERE TIP_TYPE = 2
 		   AND TIP_NO =?
+		 
+	</entry>
+	
+	<entry key="updateKnowledge">
+		UPDATE 
+		       INGREDIENT_TIP
+		   SET TIP_TITLE =?
+		     , TIP_INFO =?
+		     , TIP_ING = ?
+		     , TIP_CONTENT = ?
+		     , TIP_PIC = ?
+		 WHERE TIP_NO = ?
+	</entry>
+	<entry key="insertKnowledge">
+	INSERT 
+		   INTO INGREDIENT_TIP
+		      (
+		          TIP_NO
+		        , TIP_TITLE
+		        , TIP_INFO
+		        , TIP_ING
+		        , TIP_CONTENT
+		        , TIP_COUNT
+		        , TIP_TYPE
+		        , TIP_PIC
+		        , CREATE_DATE
+		        , STATUS
+		      )
+		 VALUES(
+		         SEQ_TIPNO.NEXTVAL
+		       , ?
+		       , ?
+		       , ?
+		       , ?
+		       , ?
+		       , 2
+		       , ?
+		       , SYSDATE
+		       , DEFAULT
+		       )
+	</entry>
+	<entry key="deleteKnowledge">
+		UPDATE
+		       INGREDIENT_TIP
+		   SET STATUS='N'
+		 WHERE TIP_NO=?
+		   AND TIP_TYPE=2
 	</entry>
 </properties>

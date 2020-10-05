@@ -143,11 +143,11 @@ div{
                 	<%} else{ %>
 	                	<% for (Notice n : noticeList) { %>
 	                    <tr>
-	                    	<% if(n.getNoticeImportant().equals("Y")){ %>
+	                    	<%-- <% if(n.getNoticeImportant().equals("Y")){ %>
 	                    	<td width="55px"><button id="important">공지</button></td>
-	                    	<% } else{ %>
+	                    	<% } else{ %> --%>
                         	<td width="55px"><%= n.getNoticeNo() %></td>
-                        	<% } %>
+                        	<%--<% } %> --%>
 	                        <td width="500px"><%= n.getNoticeTitle() %></td>
 	                        <td width="145px"><%= n.getNoticeDate() %></td>
 	                    </tr>
