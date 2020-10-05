@@ -1,5 +1,28 @@
+<%@page import="com.kh.user.recipe.model.vo.Recipe"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% 
+	ArrayList<Recipe> todayRecommendedRecipe = new ArrayList<Recipe>();
+	if(request.getAttribute("todayRecommendedRecipe") instanceof ArrayList) {
+		ArrayList<?> tmpList = (ArrayList<?>)request.getAttribute("todayRecommendedRecipe");
+		for(Object obj : tmpList) {
+			if(obj instanceof Recipe) {
+				todayRecommendedRecipe.add((Recipe)obj);
+			}
+		}
+	}
+	
+	ArrayList<Recipe> bestRecipes = new ArrayList<Recipe>();
+	if(request.getAttribute("bestRecipes") instanceof ArrayList) {
+		ArrayList<?> tmpList = (ArrayList<?>)request.getAttribute("bestRecipes");
+		for(Object obj : tmpList) {
+			if(obj instanceof Recipe) {
+				bestRecipes.add((Recipe)obj);
+			}
+		}
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,36 +34,112 @@
 <link rel="stylesheet" href="resources/css/w3.css">
 <title>menubar</title>
 <style>
-	.contents{
-		margin-top:70px;
-		height:1000px;
-	}
-	#content{
-		width:900px;
-		height: 100%; 
-		margin:auto; 
-	}
+    .contents{
+     	margin-top: 160px;
+        height:1300px;
+    }
+
+    #content{
+        width:1100px;
+        height: 100%; 
+        margin:auto; 
+    }
+
+    .contents>#content>div {
+        width: 100%;
+    }
+
+    .content_1 {
+        height: 30%;
+    }
+
+    .content_2 {
+        height: 30%;
+    }
+
+    .recommendedRecipe {
+        float: left;
+        margin-left: 80px;
+    }
+    
+    .recommendedRecipe:hover {
+    	cursor: pointer;
+    }
+
+    .recommendedRecipeTitleBar {
+        height: 38px;
+        width: 150px;
+        position: absolute;
+        top: 789px;
+        background: gray;
+        opacity: 0.6;
+        color: black;
+    }
+    
+    .recommendedRecipeTitle {
+    	margin: 0px 13px;
+    	padding-top: 7px;
+    	overflow: hidden;
+		display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    .content_3 {
+        height: 40%;
+    }
 </style>
 </head>
-<%@include file="menubar.jsp" %>
 
+	<%@include file="menubar.jsp" %>
 
-	<div class="contents">
+    <div class="contents">
 		<div id="content">
 			<div class="content_1">
-
+                <h3>오늘의 추천 레시피</h3>
+                <div align="center">
+                	<a href="<%= contextPath %>/detail.rp?rcpNo=<%= todayRecommendedRecipe.get(0).getRcpNo() %>">
+	                    <img src="resources/recipe_upfiles/<%= todayRecommendedRecipe.get(0).getRcpPic() %>" width="400" height="300">
+                	</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   	<a href="<%= contextPath %>/detail.rp?rcpNo=<%= todayRecommendedRecipe.get(1).getRcpNo() %>">
+                    	<img src="resources/recipe_upfiles/<%= todayRecommendedRecipe.get(1).getRcpPic() %>" width="400" height="300">
+                    </a>
+                </div>
 			</div>
 			<div class="content_2">
-
+                <h3>지금 많이 검색하는 메뉴</h3>
+                <div>
+                    <br><br><br><br>
+                    <div class="recommendedRecipe" style="margin-left: 130px;" onclick="location.href='<%= contextPath %>/detail.rp?rcpNo=<%= bestRecipes.get(0).getRcpNo() %>'">
+    	                <img src="resources/recipe_upfiles/<%= bestRecipes.get(0).getRcpPic() %>" width="150" height="150">
+                        <div class="recommendedRecipeTitleBar"><p align="center" class="recommendedRecipeTitle"><%= bestRecipes.get(0).getRcpTitle() %></p></div>
+                    </div>
+                    <div class="recommendedRecipe" onclick="location.href='<%= contextPath %>/detail.rp?rcpNo=<%= bestRecipes.get(1).getRcpNo() %>'">
+                        <img src="resources/recipe_upfiles/<%= bestRecipes.get(1).getRcpPic() %>" width="150" height="150">
+                        <div class="recommendedRecipeTitleBar"><p align="center" class="recommendedRecipeTitle"><%= bestRecipes.get(1).getRcpTitle() %></p></div>
+                    </div>
+                    <div class="recommendedRecipe" onclick="location.href='<%= contextPath %>/detail.rp?rcpNo=<%= bestRecipes.get(2).getRcpNo() %>'">
+                        <img src="resources/recipe_upfiles/<%= bestRecipes.get(2).getRcpPic() %>" width="150" height="150">
+                        <div class="recommendedRecipeTitleBar"><p align="center" class="recommendedRecipeTitle"><%= bestRecipes.get(2).getRcpTitle() %></p></div>
+                    </div>
+                    <div class="recommendedRecipe" onclick="location.href='<%= contextPath %>/detail.rp?rcpNo=<%= bestRecipes.get(3).getRcpNo() %>'">
+                        <img src="resources/recipe_upfiles/<%= bestRecipes.get(3).getRcpPic() %>" width="150" height="150">
+                        <div class="recommendedRecipeTitleBar"><p align="center" class="recommendedRecipeTitle"><%= bestRecipes.get(3).getRcpTitle() %></p></div>
+                    </div>
+                </div>
 			</div>
 			<div class="content_3">
-
+                <h3>계절메뉴</h3>
+                <div align="center">
+                    <img src="resources/recipe_upfiles/2020092807305412149.JPG" width="500" height="400">
+                </div>
 			</div>
 		</div>
 	</div>
 
-<!-- footer -->
-<div class="bottom">
+	<!-- footer -->
+	<div class="bottom">
         <div id="footer_1">
             <a href="">회사소개</a> <a href="">개인정보취급방침</a> <a href="">고객센터</a>
         </div>
@@ -59,11 +158,8 @@
         </div>
     </div>
 
-
-
-<script src="resources/js/bootstrap.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
+	<script src="resources/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </body>
 </html>

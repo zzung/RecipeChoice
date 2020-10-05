@@ -20,9 +20,11 @@ public class JDBCTemplate {
 		Properties prop = new Properties();
 		
 		try {
+			
 			prop.loadFromXML(new FileInputStream(fileName));
 			
 			Class.forName(prop.getProperty("driver"));
+			
 			
 			conn = DriverManager.getConnection(prop.getProperty("url")
 					                         , prop.getProperty("username")

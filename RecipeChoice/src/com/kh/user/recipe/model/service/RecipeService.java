@@ -216,4 +216,28 @@ public class RecipeService {
 		
 		return relation; 
 	}
+
+	public ArrayList<Recipe> todayRecipeList() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Recipe> todaytodayRecommendedRecipe = new RecipeDao().todayRecipeList(conn);
+		
+		close(conn);
+		
+		return todaytodayRecommendedRecipe;
+		
+	}
+
+	public ArrayList<Recipe> bestRecipeList() {
+
+		Connection conn = getConnection();
+		
+		ArrayList<Recipe> bestRecipes = new RecipeDao().bestRecipeList(conn);
+		
+		close(conn);
+		
+		return bestRecipes;
+		
+	}
 }
