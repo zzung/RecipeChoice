@@ -33,16 +33,21 @@ public class ManagementDao {
 	
 	
 	
-	public ArrayList<Member> selectMemberList(Connection conn) {
+	public ArrayList<Member> selectMemberList(Connection conn, int page) {
 
 		ArrayList<Member> memberList = new ArrayList<>();
 		ResultSet rs = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		int start = (int)(page-1)*10+1;
+		int end = start+9;
 		String sql = prop.getProperty("selectMemberList");
 		
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				Member m = new Member(rs.getInt("USER_NO"), rs.getString("MEM_ID"),
@@ -57,23 +62,29 @@ public class ManagementDao {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return memberList;
 	}
 	
 	
-	public ArrayList<Member> selectBlackList(Connection conn) {
+	public ArrayList<Member> selectBlackList(Connection conn, int page) {
 
 		ArrayList<Member> blackList = new ArrayList<>();
 		ResultSet rs = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		int start = (int)(page-1)*10+1;
+		int end = start+9;
 		String sql = prop.getProperty("selectBlackList");
 		
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				Member m = new Member(rs.getInt("USER_NO"), rs.getString("MEM_ID"),
@@ -89,7 +100,7 @@ public class ManagementDao {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return blackList;

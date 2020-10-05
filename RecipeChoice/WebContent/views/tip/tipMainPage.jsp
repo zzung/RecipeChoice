@@ -64,8 +64,7 @@
         height: 40px;
     }
     .tb1 td{
-        font-size: 12px;
-        font-weight: bolder;
+        font-size: 15px;
         padding: 5px;
     }
     tr:hover{background: rgb(243, 243, 243)}

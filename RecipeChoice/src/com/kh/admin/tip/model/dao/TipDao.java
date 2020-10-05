@@ -30,16 +30,22 @@ public class TipDao {
 	}
 	
 	
-	public ArrayList<Tip> selectCareTipList(Connection conn) {
+	public ArrayList<Tip> selectCareTipList(Connection conn, int page) {
 
 		ArrayList<Tip> careTipList = new ArrayList<>();
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
+		int start = (int)(page-1)*10+1;
+		int end = start+9;
 		String sql = prop.getProperty("selectCareTipList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				Tip t = new Tip(rs.getInt("TIP_NO"),
 								rs.getString("TIP_TITLE"),
@@ -219,16 +225,22 @@ public class TipDao {
 	}
 
 
-	public ArrayList<Tip> selectKnowledgeList(Connection conn) {
+	public ArrayList<Tip> selectKnowledgeList(Connection conn, int page) {
 		
 		ArrayList<Tip> knowledgeList = new ArrayList<>();
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
+		int start = (int)(page-1)*10+1;
+		int end = start+9;
 		String sql = prop.getProperty("selectKnowledgeList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				Tip t = new Tip(rs.getInt("TIP_NO"),
 								rs.getString("TIP_TITLE"),

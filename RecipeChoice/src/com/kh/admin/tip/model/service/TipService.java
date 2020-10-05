@@ -11,10 +11,10 @@ public class TipService {
 
 	/*------------------- 재료손질법 게시판 관련 -----------------------------*/
 	
-	public ArrayList<Tip> selectCareTipList() {
+	public ArrayList<Tip> selectCareTipList(int page) {
 		
 		Connection conn = getConnection();
-		ArrayList<Tip> careTipList = new TipDao().selectCareTipList(conn);
+		ArrayList<Tip> careTipList = new TipDao().selectCareTipList(conn, page);
 		
 		return careTipList;
 	}
@@ -104,10 +104,10 @@ public class TipService {
 	
 	/*------------------- 재료에 대한 상식 게시판 관련 -----------------------------*/
 	
-	public ArrayList<Tip> selectKnowledgeList() {
+	public ArrayList<Tip> selectKnowledgeList(int page) {
 
 		Connection conn = getConnection();
-		ArrayList<Tip> knowledgeList = new TipDao().selectKnowledgeList(conn);
+		ArrayList<Tip> knowledgeList = new TipDao().selectKnowledgeList(conn, page);
 		
 		return knowledgeList;
 	}
