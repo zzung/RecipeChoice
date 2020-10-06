@@ -76,9 +76,9 @@
 	
 	        <a href="">츄레</a>
 	        &lt;
-	        <a href="">회원가입</a>
-             &lt;
-       	    <a href="">개인정보수정</a>
+	        <a href="<%=contextPath%>">회원가입</a>
+            
+       	    
 	    </div>
 	
 	

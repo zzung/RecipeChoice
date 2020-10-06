@@ -587,7 +587,7 @@ public class RecipeDao {
 				my.setRcpTitle(rs.getString("RCP_TITLE"));
 				my.setCreateDate(rs.getDate("CREATE_DATE"));
 				my.setRcpPic(rs.getString("RCP_PIC"));
-		
+				my.setRcpNo(rs.getInt("RCP_NO")); 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

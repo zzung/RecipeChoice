@@ -107,7 +107,7 @@
 	            <path d="M20 40V28h8v12h10V24h6L24 6 4 24h6v16z"></path>
 	        </svg>
 	
-	        <a href="">츄레</a>
+	        <a href="<%=contextPath%>">츄레</a>
 	        &lt;
 	        <a href="">회원가입</a>
 	    </div>
@@ -201,10 +201,10 @@
   			success:function(count){
   				if(count == "fail"){
   				
-  					$("#checkName").text("이미 존재하는 닉네임입니다.").css("color","red").css("font-size","13px");
+  					$("#checkName").text("이미 존재하는 닉네임입니다!").css("color","red").css("font-size","13px");
   					$userId.focus();
   				}else{
-  					$("#checkName").text("사용 가능한 닉네임 입니다.").css("color","lightgreen").css("font-size","13px");
+  					$("#checkName").text("사용 가능한 닉네임 입니다!").css("color","	#719E71").css("font-size","13px");
   					$userId.attr("readonly", true);
   				}
   			}, error:function(){
@@ -227,10 +227,10 @@
   			success:function(result){
   				if(result == "fail"){
   				
-  					$("#checkId").text("이미 존재하는 아이디 입니다.").css("color","red").css("font-size","13px");
+  					$("#checkId").text("이미 존재하는 아이디 입니다!").css("color","red").css("font-size","13px");
   					$userId.focus();
   				}else{
-  					$("#checkId").text("사용가능한 아이디 입니다.").css("color","lightgreen").css("font-size","13px");
+  					$("#checkId").text("사용가능한 아이디 입니다!").css("color","#719E71").css("font-size","13px");
   					$userId.attr("readonly", true);
   				}
   			}, error:function(){
@@ -248,10 +248,10 @@
   			data:{checkEmail:$email.val()},
   			success:function(count){
   				if(count == "fail"){
-  					$("#checkEmail").text("이미 존재하는 이메일 입니다.").css("color","red").css("font-size","13px");
+  					$("#checkEmail").text("이미 존재하는 이메일 입니다!").css("color","red").css("font-size","13px");
   					$userId.focus();
   				}else{
-  					$("#checkEmail").text("사용가능한 이메일 입니다.").css("color","lightgreen").css("font-size","13px");
+  					$("#checkEmail").text("사용가능한 이메일 입니다!").css("color","#719E71").css("font-size","13px");
   					$userId.attr("readonly", true);
   				}
   			}, error:function(){
