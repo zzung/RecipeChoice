@@ -23,7 +23,7 @@
 	
 	session.removeAttribute("alertMsg");
 
-	
+	ArrayList<Recipe> cookieList = (ArrayList<Recipe>)request.getAttribute("cookieList");
 %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,7 @@
 	Date enrollDate = loginUser.getEnrollDate();
 	
 %> 
-   
+
 
 <div class="wrap" >
 
@@ -122,34 +122,17 @@
                   </thead>
                 </table>
               <div class="content2_1_1">
+               <%for(Recipe cl: cookieList){ %>
                   <div class="card" style="width: 10.8rem;">
-                      <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
+                      <img src="resources/recipe_upfiles/<%=cl.getRcpPic()%>"  class="card-img-top" alt="...">
                       <div class="body" style="height: 45px; ">
-                          <p><b>글제목</b></p>
-                          <p>작성일 : 2020-01-01</p>
+                          <p><b><%=cl.getRcpTitle() %></b></p>
+                          <p>작성일 :<%=cl.getCreateDate() %></p>
                       </div>
                   </div>
-                  <div class="card" style="width: 10.8rem;">
-                      <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
-                      <div class="body" style="height: 45px; ">
-                          <p><b>글제목</b></p>
-                          <p>작성일 : 2020-01-01</p>
-                      </div>
-                  </div>
-                  <div class="card" style="width: 10.8rem;">
-                      <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
-                      <div class="body" style="height: 45px; ">
-                          <p><b>글제목</b></p>
-                          <p>작성일 : 2020-01-01</p>
-                      </div>
-                  </div>
-                  <div class="card" style="width: 10.8rem;">
-                      <img src="resources/image/mypage/AD.jpg" class="card-img-top" alt="...">
-                      <div class="body" style="height: 45px; ">
-                          <p><b>글제목</b></p>
-                          <p>작성일 : 2020-01-01</p>
-                      </div>
-                  </div>
+                  <%} %>
+                  
+                
               </div>   
           </div>
        

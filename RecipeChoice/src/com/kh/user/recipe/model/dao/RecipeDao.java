@@ -568,6 +568,34 @@ public class RecipeDao {
 		}
 		return myPage; 
 	}
+	public ArrayList<Recipe> myPage2(Connection conn, int rcp){
+		ArrayList<Recipe> myPage2 = new ArrayList<>(); 
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		
+		String sql = prop.getProperty("myPage2");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,rcp); 
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Recipe my = new Recipe();
+				my.setRcpTitle(rs.getString("RCP_TITLE"));
+				my.setCreateDate(rs.getDate("CREATE_DATE"));
+				my.setRcpPic(rs.getString("RCP_PIC"));
+				myPage2.add(my); 
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return myPage2; 
+	}
 
 	public ArrayList<Recipe> todayRecipeList(Connection conn) {
 		

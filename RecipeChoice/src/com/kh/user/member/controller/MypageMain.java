@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,7 +66,20 @@ public class MypageMain extends HttpServlet {
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("list", list);
 		request.setAttribute("pageInfo", pi);
-	
+		
+		 ArrayList<Recipe> cookieList = new  ArrayList<Recipe>();
+		//[쿠키 정보 꺼내오기]
+		// request객체에서 전체 쿠키들을 가져온다.
+		Cookie[] cookies = request.getCookies();
+		for (int i =0; i < cookies.length; i++) {
+		    if (cookies[i].getName().equals("rcpnum")) {
+		        String rcpNo = cookies[i].getValue();
+		        System.out.println(rcpNo);
+		        cookieList = new RecipeService().myPage2(rcpNo);
+		    }
+		  
+		}
+		request.setAttribute("cookieList", cookieList);
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/member/mypage.jsp");
 		view.forward(request, response);

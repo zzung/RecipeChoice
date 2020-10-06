@@ -281,6 +281,15 @@
 		 WHERE USER_NO = ?
 		   AND STATUS = 'Y'
 	</entry>
+	<entry key="myPage2"> 
+		SELECT
+		       RCP_TITLE
+		     , CREATE_DATE 
+		     , RCP_PIC
+		 FROM RECIPE
+		 WHERE RCP_NO = ?
+		   AND STATUS = 'Y'
+	</entry>
 	
 	<entry key="insertReply">
 		INSERT 

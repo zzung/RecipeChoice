@@ -227,6 +227,21 @@ public class RecipeService {
 		
 		return myPage; 
 	}
+	/**
+	 * 쿠키로 rcpNo 받아와서 레시피 리스트 반환
+	 * @param rcpNo
+	 * @return
+	 */
+	public ArrayList<Recipe> myPage2(String rcpNo){
+		Connection conn = getConnection();
+		int rcp = Integer.parseInt(rcpNo);
+
+		ArrayList<Recipe> myPage2 = new RecipeDao().myPage2(conn, rcp);
+		
+		close(conn);
+		
+		return myPage2; 
+	}
 
 	public ArrayList<Recipe> todayRecipeList() {
 		
