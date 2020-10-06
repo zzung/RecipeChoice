@@ -51,6 +51,8 @@
                 <a href="">츄레</a>
                 &lt;
                 <a href="">회원가입</a>
+                &lt;
+                <a href="">탈퇴</a>
             </span>   
             <div id="subvar"class="content1">
                 <div class="profile">

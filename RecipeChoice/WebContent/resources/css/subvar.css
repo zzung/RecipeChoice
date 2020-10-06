@@ -28,7 +28,7 @@
     .profile{
         width:100%;
         height:26%;
-        border: solid 1.5px rgb(103, 214, 149);
+        border: solid 2.5px rgb(103, 214, 149);
         background-image: url("https://search.pstatic.net/common/?src=https%3A%2F%2Fg-grafolio.pstatic.net%2F20190403_224%2F1554270629293YYCFX_JPEG%2F%25B3%25EB%25B6%25F5%25B0%25FA%25C0%25CF2.jpg%3Ftype%3Dw896_4&type=sc960_832");
     }
     
@@ -54,8 +54,9 @@
         float:left;
     }
     .content1{
-    	margin-top:25px;
+    	margin-top:35px;
     }
+	.content2_1{margin-top:10px;}
     .content2_1 div{
         float:left;
         margin:0px 15px 12px;
@@ -96,7 +97,7 @@
         }
     .clickLink{
     
-        margin-left: 460px;
+        margin-left: 600px;
      }
      .wrap .card-img-top:hover{
         cursor: pointer;

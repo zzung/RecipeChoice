@@ -110,7 +110,7 @@
               
            </div>
         </div>
-   
+   		
       <div class="content2">
 
           <div class="content2_1">
@@ -132,7 +132,6 @@
                   </div>
                   <%} %>
                   
-                
               </div>   
           </div>
        
@@ -174,7 +173,7 @@
               <div class="content2_3_1">
           		 <% for(Board b : boardList) { %>
               		<% if(userName.equals(b.getMemName())) {%>
-	                  <div class="card" style="width:10.8rem;">
+	                  <div class="card" style="width:10.8rem;" onclick="location.href='<%= request.getContextPath() %>/boardView.bo?bno=<%= b.getBoardNo() %>'">
 	                  	<div class="pic">
 	                      	<div class="text">
 	                      	<p><%=b.getCategory() %></p>
@@ -191,7 +190,7 @@
               </div>   
            
               <div class="content2_3_2">
-                  <a href="" id="moreBtn" class="btn btn-light">more</a>
+                  <a href="" id="moreBtn" class="btn btn-light"></a>
               </div>
           </div>
 		 <div class="content2_3">
@@ -248,6 +247,7 @@
 
     		location.href="<%=contextPath%>/detail.rp?rcpNo="+$(this).children().eq(0).val();
     	});
+    
     
     </script>
 </body>
