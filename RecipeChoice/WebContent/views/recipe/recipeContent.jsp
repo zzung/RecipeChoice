@@ -162,6 +162,7 @@
 					</td>
 				</tr>
 
+ 				<%if(loginUser != null) { %>
 				<tr class="bottomContent">
 					<td colspan="2"><br>
 					<br>
@@ -173,18 +174,15 @@
 			</table>
 			<!--댓글-->
 			<div class="replyArea" align="center">
- 				<%if(loginUser == null) { %>
-				<textarea class="form-control" rows="3" readonly>로그인 후 사용 해주세요</textarea>
-				<%}else { %>
-				<textarea id="replyEnroll" class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
-			    <button class="btn btn-success replyBtn" onclick="writeReply();">등록</button> 
+					<textarea id="replyEnroll" class="form-control" rows="3" placeholder="댓글을 입력해주세요"></textarea>
+				    <button class="btn btn-success replyBtn" onclick="writeReply();">등록</button> 
 				<%} %>
 				<br>
 				<br>
 
-				<!-- 숫자에 실제로 가져온 댓글의 숫자값으로 대체 -->
+				<%if(loginUser != null){ %>
 				<h4 id="replyCount" class="replytitle" align="left">총<%=cr.getReplyCount() %>댓글</h4>
-
+				<%} %>
 				<table id="replyListArea" class="replylistArea" style="margin: 0px auto; width: 800px;">
 					
 				</table>

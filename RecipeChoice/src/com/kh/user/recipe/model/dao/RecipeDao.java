@@ -253,7 +253,7 @@ public class RecipeDao {
 		return cook; 
 	}//e.selectDetailCookList
 	
-	public ArrayList<Recipe> tagSearch(Connection conn, String[] rcpTags){
+	public ArrayList<Recipe> tagSearch(Connection conn, String[] rcpTags, int rcpTime){
 		ArrayList<Recipe> tags = new ArrayList<>();
 
 		PreparedStatement pstmt = null;
@@ -272,6 +272,8 @@ public class RecipeDao {
 				System.out.println(j+1 + "번째 인덱스 -> NULL" );
 				pstmt.setString(j+1, "%NULL%");
 			}
+			pstmt.setInt(15, rcpTime);
+			System.out.println("rcpTime" + rcpTime);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

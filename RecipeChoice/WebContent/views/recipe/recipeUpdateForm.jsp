@@ -108,19 +108,24 @@
 							<%for(int i=0; i<tagList.length; i++) {%>
 							<div id="tagList">
 								<select name="tag" id="tag" style="font-size: 15px">
-									<option value="<%=tagList[i]%>"><%=tagList[i]%></option>
+								    <option value="<%=tagList[i]%>"><%=tagList[i]%></option>
+									<option value="소고기">소고기</option>
+									<option value="돼지고기">돼지고기</option>
+									<option value="닭고기">닭고기</option>
+									<option value="오리고기">오리고기</option>
+									<option value="해물류">해물류</option>
+									<option value="건어물류">건어물류</option>
+									<option value="건어물류">콩/견과류</option>
+									<option value="달걀/유제품">달걀/유제품</option>
+									<option value="체소류">체소류</option>
+									<option value="과일류">과일류</option>
+									<option value="버섯류">버섯류</option>
+									<option value="곡류">곡류</option>
+									<option value="밀가루">밀가루</option>
+									<option value="가공식품">가공식품</option>
 								</select> 
 							</div>
 							<%} %>
-							<script>
-								$(function(){
-									$("#tag>option").each(function(){
-										if($(this).text() == "<%=tagList%>"){
-											$(this).attr("selected",true);
-										}
-									});
-								});
-							</script>
 						</td>
 					</tr>
 

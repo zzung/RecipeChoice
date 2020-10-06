@@ -110,10 +110,10 @@ public class RecipeService {
 	 * @param rcpTags
 	 * @return
 	 */
-	public ArrayList<Recipe> tagSearch(String[] rcpTags) {
+	public ArrayList<Recipe> tagSearch(String[] rcpTags, int rcpTime) {
 		Connection conn = getConnection();
 
-		ArrayList<Recipe> tags = new RecipeDao().tagSearch(conn, rcpTags);
+		ArrayList<Recipe> tags = new RecipeDao().tagSearch(conn, rcpTags, rcpTime);
 
 		close(conn);
 

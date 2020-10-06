@@ -1,28 +1,23 @@
-package com.kh.user.recipe.controller;
+package com.kh.user.common.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.user.recipe.model.service.RecipeService;
-import com.kh.user.recipe.model.vo.Recipe;
-
 /**
- * Servlet implementation class RecipeMainSearchBarServlet
+ * Servlet implementation class SearchBarServlet
  */
-@WebServlet("/searchBar.rp")
-public class RecipeMainSearchBarServlet extends HttpServlet {
+@WebServlet("/searchBar.sh")
+public class SearchBarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecipeMainSearchBarServlet() {
+    public SearchBarServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +26,6 @@ public class RecipeMainSearchBarServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//String[] rcpDishTypes = request.getParameterValues("dishType");
-		String[] rcpTags = request.getParameterValues("tag");
-		for(String t : rcpTags) {
-			System.out.println("servlet tcpTags => " + t);
-		}
-		
-		
-		ArrayList<Recipe> tags = new RecipeService().tagSearch(rcpTags);
-		
-		
-		
-		//int rcpTime = Integer.parseInt(request.getParameter("time"));
-		
-		
 		
 	}
 

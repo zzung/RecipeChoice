@@ -3,7 +3,7 @@
 <%@ page import="com.kh.user.recipe.model.vo.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%
-	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
+	ArrayList<Recipe> tags = (ArrayList<Recipe>)request.getAttribute("tags");
 	Count ct = (Count)request.getAttribute("ct");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
@@ -172,18 +172,10 @@
 				</p>
 			</div>
 			
-			<!-- 썸네일 정렬 -->
-			<div class="view_type">
-				<ul>
-					<li><a href="<%=contextPath %>/pageList.rp?currentPage=1">최신순</a></li>
-					<li><a onclick="" href="">인기순</a></li>
-					<li><a onclick="" href="">조회순</a></li>
-				</ul>
-			</div>
 			<br><br>
 			<!--썸네일-->
 				<!-- 반복문 -->
-				<%for(Recipe r : list){ %>
+				<%for(Recipe r : tags){ %>
 				<div class="thumbnail" align="center" style="width:200px;">
 					<input type="hidden" name="rcpNo" value="<%=r.getRcpNo()%>">
 						<img src="<%=contextPath %>/resources/recipe_upfiles/<%=r.getRcpPic() %>" width="200px" height="150px" />
