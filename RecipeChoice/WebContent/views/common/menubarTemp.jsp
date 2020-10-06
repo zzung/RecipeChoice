@@ -39,8 +39,8 @@
 				<li class="nav-item dropdown margin-top">
 					<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> 꿀팁 </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">재료손질</a> 
-						<a class="dropdown-item" href="#">재료상식</a>
+						<a class="dropdown-item" href="<%=contextPath%>/careTipList.tip?page=1">재료손질</a> 
+						<a class="dropdown-item" href="<%=contextPath%>/knowledgeList.tip?page=1">재료상식</a>
 					</div>
 				</li>
 				<li class="nav-item margin-top"><a class="nav-link" href="<%=contextPath%>/pageList.rp?currentPage=1">레시피</a></li>

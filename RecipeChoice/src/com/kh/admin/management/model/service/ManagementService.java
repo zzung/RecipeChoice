@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.kh.admin.management.model.dao.ManagementDao;
 import com.kh.user.board.model.vo.Board;
+import com.kh.user.common.JDBCTemplate;
 import com.kh.user.member.model.dao.MemberDao;
 import com.kh.user.member.model.vo.Member;
 import static com.kh.user.common.JDBCTemplate.*;
@@ -15,6 +16,7 @@ public class ManagementService {
 		// 관리자 페이지 > 전체 회원 조회
 		public ArrayList<Member> selectMemberList(int page) {
 
+			
 			Connection conn = getConnection();
 			ArrayList<Member> memberList = new ManagementDao().selectMemberList(conn, page);
 			close(conn);

@@ -175,44 +175,33 @@
 	                            <th>글쓰기</th>
 	                            <td>
 	                                <textarea id="summernote" name="summernote" style="margin-top: 10px; margin-bottom: 10px;"></textarea>
+	                            	<script>
+	                            	$(document).ready(function(){
+	        						$('#summernote').summernote({
+	        							  width: 700,
+	        							  height: 300,                 
+	        							  minHeight: 300,             // 최소 높이
+	        							  maxHeight: null,             // 최대 높이
+	        							  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+	        							  lang: "ko-KR",					// 한글 설정
+	        							  placeholder: '내용을 입력해주세요.',
+	        							  callbacks: {
+	        				                onImageUpload: function(files, editor, welEditable) {
+	        				                    sendFile(files[0], this);
+	        				                }
+	        			                }
+	        						});
+	        					});
+	                            </script>
 	                            </td>
 	                        </tr>
                    	 	</tbody>
                 	</table>
 					
 					<script>
-						$('#summernote').summernote({
-							  width: 700,
-							  height: 300,                 
-							  minHeight: 300,             // 최소 높이
-							  maxHeight: null,             // 최대 높이
-							  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-							  lang: "ko-KR",					// 한글 설정
-							  placeholder: '내용을 입력해주세요.',
-							  callbacks: {
-				                onImageUpload: function(files, editor) {
-				                    sendFile(files, this);
-				                },
-					        	onPaste: function (e) {
-									var clipboardData = e.originalEvent.clipboardData;
-									if (clipboardData && clipboardData.items && clipboardData.items.length) {
-										var item = clipboardData.items[0];
-										if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-											e.preventDefault();
-										}
-									}
-								}
-			                }
-						});
-						
-						
-						function sendFile(files, editor) {
-			        		
-			        		console.log("작동");
+						function sendFile(file, editor) {
 			        		data = new FormData();
-			        		for (var i = 0, max = files.length; i < max; i++) {
-								data.append("file" + (i + 1), files[i]);						
-							}
+			        		data.append("file", file);
 			                $.ajax({
 			                    url: "tipEditorImageUpload.mn",
 			                    data: data,
@@ -220,17 +209,14 @@
 			                    cache: false,
 			                    contentType: false,
 			                    processData: false,
-			                    success: function(urlList) {
-			                    	for (var i = 0, max = urlList.length; i < max; i++) {
-			                    		$(editor).summernote('editor.insertImage', urlList[i]);
-			    					}
+			                    success: function(data) {
+			                    		$(editor).summernote('editor.insertImage', data.url);
 			                    },
 			                    error: function() {
 			                    	console.log("통신 실패");
 			                    }
 			                });
 			            }
-						
 					</script>
 					
 					<hr>

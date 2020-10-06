@@ -15,19 +15,20 @@
         }
         .wrap{
             width:1000px;
-            height:1500px;	/****자동으로 페이지 높이 조정하는 방법,,,,,,,*****/
+            overflow: hidden;
+            height: auto;	/****자동으로 페이지 높이 조정하는 방법,,,,,,,*****/
             margin: auto;
         }
-        #header{height:10%;} 
+        #header{height:150px;} 
         #content{height:auto;}
         #footer{height:10%;}
         #content>div{
-            height:100%;
+            height:auto;
             float:left;
         }
         #content_1{ width: 5%;  }
         #content_2{ width: 90%; }
-        #content_3{ width: 5%;}
+        #content_3{ width: 5%; }
 
         #detailTop>p{ margin-left: 20px;}
 
@@ -40,7 +41,7 @@
             margin-left: 100px;
             margin-top: 50px;
         }
-
+		.detailTable td{text-align: center;}
 
         .pagination {
 	    display: inline-block;
@@ -71,7 +72,7 @@
 	<!-- 사용자 화면에서도 띄워질것 -->
 	
 	<!-- 메뉴바추가 -->
-	<%@ include file="../common/menubarTemp.jsp" %>	
+	<%@ include file="../common/menubar.jsp" %>	
 		 
 	 <div class="wrap">
         <div id="header"></div>
@@ -90,7 +91,7 @@
                     <p align="right">조회수 : <%=t.getTipCount() %></p>
                 </div>
 
-                <br><br><br>
+                <br>
                 <div class="detailArea" align="center">
                     <div align="center" style="font-size: 25px; font-weight: bolder;"><%=t.getTipTitle() %></div>
                     <input type="hidden" id="tipPic" name="tipPic" value="<%=t.getTipPicture() %>">
@@ -103,38 +104,35 @@
 
                     <table class="detailTable" align="center">
                         <tr>
-                            <td><img src="<%-- <%= contextPath %>/<%= b.getTitleImg() %> --%>" width="250" height="180"></td>
-                            <td width="400" style="word-break: break-all;">
+                            <td width="800" style="word-break: break-all; ">
                                <%=t.getTipContent() %>
-                               <br>썸머노트 이미지, 내용 가져오기
                             </td>
-                        </tr>
-                        <tr>
-                            <td><img src="<%-- <%= contextPath %>/<%= b.getTitleImg() %> --%>" width="250" height="180"></td>
-                            <td>썸머노트 이미지, 내용 가져오기</td>
                         </tr>
                     </table>
                 </div>
                 
                 
-                <br><br>
+                <br>
                 <hr>
 
-                <%-- 관리자 일때만 보이게 --%>
                 <div align="right" style="margin-right: 50px;">
-                	<% if(t.getStatus().equals("N")){ %>
-                    	<a href="<%=contextPath%>/changeTipStatus.mn?tno=<%=t.getTipNo()%>" class="btn btn-danger">활성화</a>
-					<% }else{ %>
-                    	<a href="<%=contextPath%>/deleteCareTip.mn?tno=<%=t.getTipNo()%>" class="btn btn-danger">삭제</a>
-                    <% } %>
+                	<% if(loginUser.getMemId().equals("admin")){ %>
+	                	<% if(t.getStatus().equals("N")){ %>
+	                    	<a href="<%=contextPath%>/changeTipStatus.mn?tno=<%=t.getTipNo()%>" class="btn btn-danger">활성화</a>
+						<% }else{ %>
+	                    	<a href="<%=contextPath%>/deleteCareTip.mn?tno=<%=t.getTipNo()%>" class="btn btn-danger">삭제</a>
+	                    <% } %>
                     <a href="<%=contextPath%>/updateFormCareTip.mn?tno=<%=t.getTipNo()%>" class="btn btn-success">수정</a>
                     <a href="<%=contextPath%>/careTipList.mn" class="btn btn-secondary">목록</a>
+                    <%} %>
+                    <a href="<%=contextPath%>/careTipList.tip?page=1" class="btn btn-secondary">목록</a>
                 </div>
-
+				
             </div>
         </div>
 	 
 	 </div>
+	 <br><br>
 	 <%@ include file="../common/footerTemp.jsp" %>
 </body>
 </html>

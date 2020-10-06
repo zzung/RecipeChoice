@@ -376,5 +376,87 @@ public class TipDao {
 		return result;
 	}
 
+
+	public ArrayList<Tip> selectCareTipListUserView(Connection conn, int page) {
+		
+		ArrayList<Tip> careTipList = new ArrayList<>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		int start = (int)(page-1)*10+1;
+		int end = start+9;
+		String sql = prop.getProperty("selectCareTipListUserView");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Tip t = new Tip(rs.getInt("TIP_NO"),
+								rs.getString("TIP_TITLE"),
+								rs.getString("TIP_INFO"),
+								rs.getString("TIP_ING"),
+								rs.getString("TIP_CONTENT"),
+								rs.getInt("TIP_COUNT"),
+								rs.getString("TIP_CATEGORY"),
+								rs.getString("TIP_PIC"),
+								rs.getDate("CREATE_DATE"),
+								rs.getString("STATUS"));
+				careTipList.add(t);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return careTipList;
+	}
+
+
+	public ArrayList<Tip> selectKnowledgeListUserView(Connection conn, int page) {
+
+		ArrayList<Tip> knowledgeList = new ArrayList<>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		int start = (int)(page-1)*10+1;
+		int end = start+9;
+		String sql = prop.getProperty("selectKnowledgeListUserView");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Tip t = new Tip(rs.getInt("TIP_NO"),
+								rs.getString("TIP_TITLE"),
+								rs.getString("TIP_INFO"),
+								rs.getString("TIP_ING"),
+								rs.getString("TIP_CONTENT"),
+								rs.getInt("TIP_COUNT"),
+								rs.getString("TIP_CATEGORY"),
+								rs.getString("TIP_PIC"),
+								rs.getDate("CREATE_DATE"),
+								rs.getString("STATUS"));
+				knowledgeList.add(t);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return knowledgeList;
+	}
+
 	
 }

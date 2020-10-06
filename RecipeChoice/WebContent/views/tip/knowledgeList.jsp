@@ -128,7 +128,7 @@
             </div>
             <div id="content_2">
                 
-                <p style="font-weight: bolder; font-size: 18px;">재료 손질법 게시판 관리</p>
+                <p style="font-weight: bolder; font-size: 18px;">재료에 대한 상식 게시판 관리</p>
                 <hr> 
 
                 <table class="tb1">

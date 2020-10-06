@@ -31,7 +31,7 @@ public class KnowledgeInsertServlet extends HttpServlet {
 
 			int maxSize = 10 * 1024 * 1024;
 
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/knowledge_upfiles/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/knowledge_upfiles");
 
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			String tipPic = multiRequest.getFilesystemName("tipPic");

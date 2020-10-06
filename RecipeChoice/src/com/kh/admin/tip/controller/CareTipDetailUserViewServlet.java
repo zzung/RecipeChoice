@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.admin.tip.model.service.TipService;
 import com.kh.admin.tip.model.vo.Tip;
 
-@WebServlet("/careTipDetail.mn")
-public class CareTipDetailViewServlet extends HttpServlet {
+@WebServlet("/careTipDetail.tip")
+public class CareTipDetailUserViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public CareTipDetailViewServlet() {
+    public CareTipDetailUserViewServlet() {
         super();
     }
 
@@ -31,10 +31,9 @@ public class CareTipDetailViewServlet extends HttpServlet {
 			request.setAttribute("t", t);
 			request.getRequestDispatcher("views/tip/careTipDetail.jsp").forward(request, response);
 			
-			
 		}else {
 			request.setAttribute("alertMsg", "해당 게시물이 유효하지 않습니다.");
-			request.getRequestDispatcher("views/tip/careTipList.jsp").forward(request, response);
+			request.getRequestDispatcher("views/tip/careTipListUserView.jsp").forward(request, response);
 		}
 		
 	

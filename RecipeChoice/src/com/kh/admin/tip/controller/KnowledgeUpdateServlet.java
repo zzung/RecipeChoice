@@ -30,7 +30,7 @@ public class KnowledgeUpdateServlet extends HttpServlet {
 			
 			int maxSize = 10 * 1024 * 1024;
 			
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/knowledge_upfiles/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/knowledge_upfiles");
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
@@ -68,14 +68,11 @@ public class KnowledgeUpdateServlet extends HttpServlet {
 			t.setTipContent(tipContent);
 			
 			// 새로 이미지 업로드 할경우
-			if(multiRequest.getOriginalFileName("reuploadTipPic") != null) {
+			if(multiRequest.getFilesystemName("reuploadTipPic") != null) {
 				t.setTipPicture(multiRequest.getFilesystemName("reuploadTipPic"));
 				
-				// 기존의 파일 삭제
-//				File deleteFile = new File(savePath + multiRequest.getParameter("reuploadTipPic"));
-//				deleteFile.delete(); // 서버에 업로드 되어있던 기존 파일 삭제
 			}else {
-				t.setTipPicture(multiRequest.getFilesystemName("originTipPic"));
+				t.setTipPicture(multiRequest.getParameter("originTipPic"));
 			}
 			
 			System.out.println(t);
@@ -84,10 +81,10 @@ public class KnowledgeUpdateServlet extends HttpServlet {
 			
 			if(result > 0) {
 				request.getSession().setAttribute("alertMsg", "손질법 글 수정 성공 !");
-				response.sendRedirect(request.getContextPath()+"/careTipDetail.mn?tno="+tipNo);
+				response.sendRedirect(request.getContextPath()+"/knowledgeDetail.tip?tno="+tipNo);
 			}else {
 				request.setAttribute("alertMsg", "손질법 글 수정 실패");
-				request.getRequestDispatcher("views/tip/careTipList.jsp").forward(request, response);
+				request.getRequestDispatcher("views/tip/knowledgeList.jsp").forward(request, response);
 			}
 		}
 	}

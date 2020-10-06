@@ -67,7 +67,6 @@ public class CareTipInsertServlet extends HttpServlet {
 			t.setTipPicture(tipPic);
 			t.setTipContent(tipContent);
 			
-			System.out.println(t);
 			int result = new TipService().insertCareTip(t);
 			
 			if(result > 0) {

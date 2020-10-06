@@ -10,33 +10,31 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.admin.tip.model.service.TipService;
 import com.kh.admin.tip.model.vo.Tip;
 
-@WebServlet("/careTipDetail.mn")
-public class CareTipDetailViewServlet extends HttpServlet {
+@WebServlet("/knowledgeDetail.tip")
+public class KnowledgeDetailUserViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public CareTipDetailViewServlet() {
+    public KnowledgeDetailUserViewServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
 		int tno = Integer.parseInt(request.getParameter("tno"));
 		
 		int result = new TipService().increaseTipCount(tno);
 
 		if(result > 0) {
 			
-			Tip t = new TipService().selectCareTip(tno);
+			Tip t = new TipService().selectKnowledge(tno);
 
 			request.setAttribute("t", t);
-			request.getRequestDispatcher("views/tip/careTipDetail.jsp").forward(request, response);
-			
+			request.getRequestDispatcher("views/tip/knowledgeDetail.jsp").forward(request, response);
 			
 		}else {
 			request.setAttribute("alertMsg", "해당 게시물이 유효하지 않습니다.");
-			request.getRequestDispatcher("views/tip/careTipList.jsp").forward(request, response);
+			request.getRequestDispatcher("views/tip/knowledgeListUserView.jsp").forward(request, response);
 		}
-		
 	
 	}
 

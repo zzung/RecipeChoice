@@ -164,5 +164,21 @@ public class TipService {
 		return result;
 	}
 
+	public ArrayList<Tip> selectCareTipListUserView(int page) {
+
+		Connection conn = getConnection();
+		ArrayList<Tip> careTipList = new TipDao().selectCareTipListUserView(conn, page);
+		
+		return careTipList;
+	}
+
+	public ArrayList<Tip> selectKnowledgeListUserView(int page) {
+
+		Connection conn = getConnection();
+		ArrayList<Tip> knowledgeList = new TipDao().selectKnowledgeListUserView(conn, page);
+		
+		return knowledgeList;
+	}
+
 
 }

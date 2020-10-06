@@ -42,6 +42,7 @@ public class ManagementDao {
 		int end = start+9;
 		String sql = prop.getProperty("selectMemberList");
 		
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, start);
