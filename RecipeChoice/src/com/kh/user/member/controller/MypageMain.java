@@ -75,14 +75,12 @@ public class MypageMain extends HttpServlet {
 		for (int i =0; i < cookies.length; i++) {
 		    if (cookies[i].getName().contains("rcpnum")) {
 		        String rcpNo = cookies[i].getValue();
-		        System.out.println(rcpNo);
 		       Recipe m = new RecipeService().myPage2(rcpNo);
 		       cookieList.add(m);
 		    }
 		  
 		}
 		request.setAttribute("cookieList", cookieList);
-		
 		RequestDispatcher view = request.getRequestDispatcher("views/member/mypage.jsp");
 		view.forward(request, response);
 	}

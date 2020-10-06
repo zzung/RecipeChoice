@@ -228,7 +228,7 @@ public class RecipeService {
 		return myPage; 
 	}
 	/**
-	 * 쿠키로 rcpNo 받아와서 레시피 리스트 반환
+	 * 쿠키로 rcpNo 받아와서 레시피 객체 반환
 	 * @param rcpNo
 	 * @return
 	 */

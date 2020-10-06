@@ -9,7 +9,6 @@
 <%@page import="com.kh.user.recipe.model.vo.Recipe" %>
 <%
 	ArrayList<Recipe> list = (ArrayList<Recipe>)request.getAttribute("list");
-
 	ArrayList<Board> boardList = new ArrayList<Board>();
 	if(request.getAttribute("boardList") instanceof ArrayList) {
 		ArrayList<?> tmpList = (ArrayList<?>)request.getAttribute("boardList");
@@ -123,7 +122,7 @@
                 </table>
               <div class="content2_1_1">
                <%for(Recipe cl: cookieList){ %>
-                  <div class="card" style="width: 10.8rem;">
+                  <div class="card" style="width: 10.8rem;" onclick="location.href='<%= request.getContextPath() %>/detail.rp?rcpNo=<%= cl.getRcpNo() %>'">
                       <img src="resources/recipe_upfiles/<%=cl.getRcpPic()%>"style="width:160px;height:130px;"  class="card-img-top" alt="...">
                       <div class="body" style="height: 45px; ">
                           <p><b><%=cl.getRcpTitle() %></b></p>
