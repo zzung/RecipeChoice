@@ -39,6 +39,7 @@ WHERE RNUM BETWEEN ? AND ?
 			  , CON_CONTENT
 			  , USER_NO
 			  , CON_DATE
+			  , CON_REPLY
 			  )
 			  VALUES
 			  (
@@ -48,6 +49,7 @@ WHERE RNUM BETWEEN ? AND ?
 			  , ?
 			  , ?
 			  , SYSDATE
+			  , SEQ_CONNO.CURRVAL
 			  )
 	</entry>
 	<entry key="selectContactUser">
@@ -126,7 +128,7 @@ WHERE RNUM BETWEEN ? AND ?
 			  , ?
 			  , ?
 			  , ?
-			  , SYSDATE
+			  , ?
 			  )
 	</entry>
 </properties>

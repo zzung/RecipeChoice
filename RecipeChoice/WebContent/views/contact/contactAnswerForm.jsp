@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.admin.contact.model.vo.*" %>    
+<%
+	Contact c = (Contact)request.getAttribute("c");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,6 +117,7 @@
 				</h3>
                 <hr>
                 <form action="<%= contextPath %>/answer.mc" method="post"> 
+                <input type="hidden" name="conNo" value="<%= c.getConNo() %>">
                 <table class="answer">
                        <tr>
                            <th ><h6><b>제목</b></h6></th>

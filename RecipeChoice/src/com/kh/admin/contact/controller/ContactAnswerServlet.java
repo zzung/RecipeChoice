@@ -37,11 +37,13 @@ public class ContactAnswerServlet extends HttpServlet {
 		String userNo = request.getParameter("userNo"); 
 		String conTitle = request.getParameter("title");
 		String conContent = request.getParameter("content");
+		int conNo = Integer.parseInt(request.getParameter("conNo")); 
 		
 		Contact c = new Contact(); //매개변수 대신 기본생성자로
 		c.setUserNo(userNo);
 		c.setConTitle(conTitle);
 		c.setConContent(conContent);
+		c.setConNo(conNo);
 		
 		int result = new ContactService().insertContact(c);//처리된 행 수 받아냄
 		

@@ -48,13 +48,14 @@ public class Contact {
 	
 	//사용자insert
 
-	public Contact(int conNo, String userNo, String conType, String conTitle, String conContent) {
+	public Contact(int conNo, String userNo, String conType, String conTitle, String conContent, int conReply) {
 		super();
 		this.conNo = conNo;
 		this.userNo = userNo;
 		this.conType = conType;
 		this.conTitle = conTitle;
 		this.conContent = conContent;
+		this.conReply = conReply;
 	}
 	
 	

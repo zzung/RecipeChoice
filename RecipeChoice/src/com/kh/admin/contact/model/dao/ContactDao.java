@@ -123,6 +123,7 @@ public class ContactDao {
 			pstmt.setString(2, c.getConType());
 			pstmt.setString(3, c.getConContent());
 			pstmt.setInt(4, Integer.parseInt(c.getUserNo()));//"1" -> 1
+			pstmt.setInt(5, c.getConReply());
 			//완성형태 만듬
 			
 			result = pstmt.executeUpdate();
