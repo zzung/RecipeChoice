@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.user.recipe.model.service.RecipeService;
 import com.kh.user.recipe.model.vo.Cook;
-import com.kh.user.recipe.model.vo.Count;
 import com.kh.user.recipe.model.vo.IngredientList;
 import com.kh.user.recipe.model.vo.Recipe;
+import com.kh.user.reply.model.vo.ReplyCount;
 
 /**
  * Servlet implementation class RecipeContentServlet
@@ -54,14 +54,15 @@ public class RecipeContentServlet extends HttpServlet {
 		//조리
 		ArrayList<Cook> cook = new RecipeService().selectDetailCookList(rcpNo); 
 		
-	
-		
-		
+		int replyCount = new RecipeService().replyCount(rcpNo); 
+		ReplyCount cr = new ReplyCount(replyCount); 
+
 		request.setAttribute("r", r );
 		request.setAttribute("ingredient", ingredient);
 		request.setAttribute("cook", cook);
 		request.setAttribute("relation", relation);
 		request.setAttribute("myPage", myPage);
+		request.setAttribute("cr", cr);
 		request.getRequestDispatcher("views/recipe/recipeContent.jsp").forward(request, response); 
 		
 	}

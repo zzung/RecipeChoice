@@ -71,9 +71,21 @@
 					</div>
 				</li>
 				<li class="nav-item margin-top">
+				<%if(loginUser == null){ %>
+					<a class="navbar-brand nav-link" href="#" onclick="recipeWrite();"> 
+						<img src="resources/image/navbar/pencil.png" alt="logo" style="width: 30px;">
+					</a>
+				<%} else { %>
 					<a class="navbar-brand nav-link" href="<%=contextPath%>/recipeWrite.rp"> 
 						<img src="resources/image/navbar/pencil.png" alt="logo" style="width: 30px;">
 					</a>
+				<%} %>
+				<script>
+					function recipeWrite(){
+						alert("로그인 후 사용 가능합니다.")
+					}
+				</script>
+				
 				</li>
 				<li class="nav-item dropdown margin-top">
 				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> 고객센터 </a>
