@@ -12,15 +12,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-div{
+	div{
 	    box-sizing: border-box;
 	}
 	.wrap{
 	    width:1000px;
-	    height:800px;
+	    height:900px;
 	    margin: auto;
 	}
-	#header{height:20%; margin-top:50px;} 
+	#header{height:150px; margin-top:50px;} 
 	#navigator{height:5%}
 	#content{height:70%}
 	#footer{height:10%; margin-bottom:10px;}
@@ -40,7 +40,7 @@ div{
 	    line-height: 180px;
 	}
 	#menu_2{
-	    height: 8%;
+	    height: 6%;
 	    margin-top: 10px;
 	    line-height: 40px;
 	    border: 1px solid lightslategrey;
