@@ -107,7 +107,6 @@
                 <h3>1:1 문의
                     &nbsp;<img src="<%= request.getContextPath() %>/resources/image/admin/inquiry.JPG">
 				 </h3>
-                <h6>&nbsp;1:1 상세보기</h6>
                 <hr>
 
                 <table class="EnrollArea" >

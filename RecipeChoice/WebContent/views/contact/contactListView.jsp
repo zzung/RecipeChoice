@@ -151,11 +151,7 @@
                 <% }else { %>
                 <!--  리스트가 비어있지 않을 경우 -->
                 <% for(Contact c : listView){ %>
-                	<% if (c.getConType().equals("답변")){ %>
-                    <tr onclick="location.href='';">
-                    <% }else { %>
-                    <tr onclick="location.href='<%=contextPath%>/detail.mc?cno=<%=c.getConNo() %>';">
-                    <%} %>
+                	 <tr>
                         <td><%= c.getConNo() %></td>
                         <% if (c.getConType().equals("답변")){ %>
                         <td>  </td>
@@ -172,6 +168,7 @@
 	                    	<% } else if(c.getAnswer().equals("A") && loginUser != null && loginUser.getMemId().equals("admin")){%>
 	                    	 <td>
                        		 <a onclick="contactUpdate(this); event.stopImmediatePropagation();">수정</a>&nbsp;&nbsp;
+								
                        		 </td>
 	                      <%} %>
                     	</tr>
