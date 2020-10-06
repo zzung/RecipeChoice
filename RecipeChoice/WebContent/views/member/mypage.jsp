@@ -86,14 +86,14 @@
                            <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/updateForm.me'";>개인 정보 수정</th>
                        </tr>
                        <tr>
-                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/contactForm.me'";>내 문의 확인</th>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/contactForm.me?currentPage=1'";>1:1문의 조회</th>
                        </tr>
                        <tr>
                            <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me'";>작성 게시글 보기 </th>
                            
                        </tr>
                         <tr>
-                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/'";>작성 레시피 보기 </th>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/'";>내 레시피 보기 </th>
                            
                        </tr>
                        <tr>
@@ -138,7 +138,7 @@
               <table class="table table-striped" id="dd">
                   <thead>
                     <tr>
-                      <th scope="col" colspan="2"> 작성 레시피 보기</th>
+                      <th scope="col" colspan="2"> 내가 작성한 레시피 보기</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
@@ -156,9 +156,6 @@
                   <%} %>
               </div>
           
-              <div class="content2_2_2">
-                  <a href="" id="moreBtn" class="btn btn-light">more</a>
-              </div>
           </div>
           <div class="content2_3">
               <table class="table table-striped">
@@ -188,9 +185,6 @@
                  <%} %> 
               </div>   
            
-              <div class="content2_3_2">
-                  <a href="" id="moreBtn" class="btn btn-light"></a>
-              </div>
           </div>
 		 <div class="content2_3">
               <table class="table table-striped">

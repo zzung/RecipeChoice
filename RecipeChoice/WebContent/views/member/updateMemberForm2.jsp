@@ -61,9 +61,9 @@
                     <path d="M20 40V28h8v12h10V24h6L24 6 4 24h6v16z"></path>
                 </svg>
         
-                <a href="">츄레</a>
+                <a href="<%=contextPath%>">츄레</a>
                 &lt;
-                <a href="">마이페이지</a>
+                <a href="<%=contextPath%>/mypage.me">마이페이지</a>
                 &lt;
 	       	    <a href="">정보수정</a>
             </span>   
