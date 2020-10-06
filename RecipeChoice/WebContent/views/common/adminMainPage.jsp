@@ -22,12 +22,7 @@
 	#header{height:20%;} 
 	#content{height:70%; margin-top: 30px;}
 	#footer{height:10%; margin-bottom: 30px;}
-    .nav{background:rgb(39, 174, 96);}
-        .menu{
-            display:table-cell;
-            height:30px;
-            width:150px;
-        }
+   
 	#navigator{height:5%}
 	#content>div{
 	    height:100%;
@@ -71,9 +66,7 @@
             <div id="header_2"></div>
             <div id="header_3"></div>
         </div>
-        <div class="nav">
-            <div class="menu"></div>
-        </div>
+       
         <div id="content">
             <div id="content_1">
                 <div id="menu_1">관리자</div>

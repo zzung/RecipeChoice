@@ -138,7 +138,7 @@
             <hr>     
             <% if(loginUser != null && loginUser.getMemId().equals(c.getUserNo())){ %>
              <div align="right">
-                <button onclick="location.href='<%=contextPath%>/contactList.co';">목록가기</button>
+                <button onclick="location.href='<%=contextPath%>/contactList.co?currenPage=1';">목록가기</button>
                 <!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우-->
                 <button onclick="location.href='<%=contextPath%>/updateForm.co?cno=<%=c.getConNo()%>';">수정하기</button>
                 <button onclick="deleteConfirm();">삭제하기</button>

@@ -66,7 +66,12 @@
 						<a class="dropdown-item" href="<%=contextPath%>/loginForm.me">로그인</a>
 						<%}else{ %>
 						<!-- 로그인 회원 -->
+						<!-- 관리자 로그인하고 마이페이지 누르면 관리자페이지로 이동  -->
+						 <% if(loginUser != null && loginUser.getMemId().equals("admin") ){ %>
+						<a class="dropdown-item" href="<%=contextPath%>/admin.mm">마이페이지</a>
+						<%}else {%>
 						<a class="dropdown-item" href="<%=contextPath%>/mypage.me">마이페이지</a>
+						<% } %>
 						<a class="dropdown-item" href="<%=contextPath%>/logout.me">로그아웃</a>
 						<%} %>
 					</div>

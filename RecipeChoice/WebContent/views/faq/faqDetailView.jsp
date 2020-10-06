@@ -18,6 +18,7 @@
 	    width:1000px;
 	    height:800px;
 	    margin: auto;
+	    overflow:hidden;
 	}
 	#header{height:20%;} 
    	#navigator{height:5%}
@@ -54,6 +55,8 @@
 	#menu_2{cursor: pointer;}
 	#menu_2:hover{color: rgb(39, 174, 96);}
 	#t1{
+		display:inline-block;
+		vertical-align:top;
 		width:45%;
 		height:auto;;
 	    margin-top: 8px;

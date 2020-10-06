@@ -32,12 +32,7 @@
 	    margin: auto;
 	}
 	#header{height:20%} 
-    .nav{background:rgb(39, 174, 96);}
-        .menu{
-            display:table-cell;
-            height:30px;
-            width:150px;
-        }
+   
 	#navigator{height:5%}
 	#content{height:70%}
 	#footer{height:10%}
@@ -126,9 +121,7 @@
             <div id="header_2"></div>
             <div id="header_3"></div>
         </div>
-        <div class="nav">
-            <div class="menu"></div>
-        </div>
+        
     
         <div id="navigator"></div>
         <div id="content">

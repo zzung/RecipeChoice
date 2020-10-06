@@ -52,7 +52,7 @@ public class ContactUpdateServlet extends HttpServlet {
 		if(result > 0) { //성공 => 재요청 
 			
 			request.getSession().setAttribute("alertMsg", "문의 수정 성공했습니다.");
-			response.sendRedirect(request.getContextPath() + "/contactList.co?cno=" + cno);
+			response.sendRedirect(request.getContextPath() + "/detail.co?cno=" + cno);
 			
 		}else { //실패
 			
