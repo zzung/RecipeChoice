@@ -6,6 +6,7 @@
 	String contextPath = request.getContextPath();
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	Member loginUser = (Member)session.getAttribute("loginUser");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -101,9 +102,9 @@
 		</nav>
 		<!-- searchbar -->
 		<nav class="navbar navbar-expand-sm bg-teamColor navbar-light justify-content-center">
-			<form class="form-inline" action="<%=contextPath%>/searchBar.sh">
+			<form class="form-inline" action="<%=contextPath %>/searchBar.sh">
 				<input class="form-control mr-sm-2" type="text" placeholder="Search">
-				<button class="btn btn-success my-2 my-sm-0" type="button" >Search</button>
+				<button class="btn btn-success my-2 my-sm-0" type="submit" >Search</button>
 			</form>
 		</nav>
 </div>

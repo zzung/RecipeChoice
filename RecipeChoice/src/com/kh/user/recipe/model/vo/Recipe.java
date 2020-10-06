@@ -63,6 +63,7 @@ public class Recipe {
 		this.rcpPic = rcpPic;
 	}
 	
+
 	public Recipe(int rcpNo, int userNo, String memName, String rcpTitle, String rcpDishType, String rcpTag,
 			int rcpTime, String rcpContent, String rcpPic, int count, int scrapCount) {
 		super();

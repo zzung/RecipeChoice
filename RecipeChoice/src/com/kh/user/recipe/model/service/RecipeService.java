@@ -300,5 +300,15 @@ public class RecipeService {
 		close(conn);
 		
 		return replyCount;
+	}//e.replyCount
+	
+	public ArrayList<Recipe> searchAll(String rcpTag, String rcpDishType){
+		Connection conn = getConnection();
+		
+		ArrayList<Recipe> search = new RecipeDao().searchAll(conn,rcpTag,rcpDishType);
+		
+		close(conn);
+		
+		return search; 
 	}
 }

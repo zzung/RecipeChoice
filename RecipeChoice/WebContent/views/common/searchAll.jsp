@@ -3,8 +3,15 @@
 <%@ page import="com.kh.user.recipe.model.vo.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%
-	ArrayList<Recipe> tags = (ArrayList<Recipe>)request.getAttribute("tags");
+	ArrayList<Recipe> search = (ArrayList<Recipe>)request.getAttribute("search");
 	Count ct = (Count)request.getAttribute("ct");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage(); 
 %>
 <!DOCTYPE html>
 <html>
@@ -168,12 +175,13 @@
 			<br><br>
 			<!--썸네일-->
 				<!-- 반복문 -->
-				<%for(Recipe r : tags){ %>
+				<%for(Recipe r : search){ %>
 				<div class="thumbnail" align="center" style="width:200px;">
 					<input type="hidden" name="rcpNo" value="<%=r.getRcpNo()%>">
 						<img src="<%=contextPath %>/resources/recipe_upfiles/<%=r.getRcpPic() %>" width="200px" height="150px" />
 					<br />
 					<div class="w3-container w3-border-bottom w3-border-teamColor">
+						"<%=r.getRcpContent() %>" <br /> <br>
 						<small><p style="font-style:italic"><%=r.getRcpTitle() %></p></small>
 					</div>
 					<p align="left"><%=r.getMemName() %></p>
@@ -187,7 +195,23 @@
 					});
 					
 				</script>
+				<div class="pagination">
+				<%if(currentPage != 1){ %>
+					<a href="<%=contextPath %>/pageList.rp?currentPage=<%=currentPage-1%>">&laquo;</a> 
+				<%} %>
 				
+				<%for(int p=startPage; p<=endPage; p++) {%>
+					<%if(p != currentPage){ %>
+						<a href="<%=contextPath%>/pageList.rp?currentPage=<%=p%>"><%=p %></a> 
+					<%}else { %>
+						<a class="pagination"><%=p %></a>
+					<%} %>
+				<%} %>
+				
+				<%if(currentPage != maxPage) {%>
+					<a href="<%=contextPath%>/pageList.rp?currentPage=<%=currentPage+1%>">&raquo;</a>
+				<%} %>
+				</div>
 			</div>
 
 

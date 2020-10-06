@@ -756,4 +756,41 @@ public class RecipeDao {
 		}
 		return replyCount; 
 	}//e.replyCount
+	
+	public ArrayList<Recipe> searchAll(Connection conn, String rcpTag, String rcpDishType){
+		ArrayList<Recipe> search = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("searchAll"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "%"+rcpTag+"%");
+			pstmt.setString(2, "%"+rcpDishType+"%");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				search.add(new Recipe(rs.getInt("RCP_NO"),
+						   			  rs.getString("MEM_NAME"),
+						   			  rs.getString("RCP_TITLE"),
+						   			  rs.getString("RCP_CONTENT"),
+						   			  rs.getString("RCP_PIC")
+						   			  ));
+			}
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		for(Recipe sh : search) {
+			System.out.println("sh :" + sh);
+		}
+		return search; 
+	}
 }

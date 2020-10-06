@@ -40,8 +40,8 @@
 							<p style="font-size: 20px">
 								<b>레시피 제목 및 설명 </b>
 							</p> 
-							<textarea name="title" cols="40" rows="1" style="resize: none; font-size: 14px" placeholder="제목 입력(20자 내외)"></textarea> 
-							<textarea name="content" cols="40" rows="5" style="resize: none; font-size: 14px" placeholder="설명 입력(50자 내외)"></textarea> 
+							<textarea name="title" cols="40" rows="1" style="resize: none; font-size: 14px" placeholder="제목 입력(15자 내외)" maxlength="15"></textarea> 
+							<textarea name="content" cols="40" rows="5" style="resize: none; font-size: 14px" placeholder="설명 입력(50자 내외)" maxlength="50"></textarea> 
 							<br />
 						<br />
 

@@ -334,4 +334,16 @@
 		 WHERE BOARD_NO = ?
 	</entry>
 	
+	<entry key="searchAll">
+		SELECT 
+		       RCP_NO
+		     , MEM_NAME
+		     , RCP_TITLE
+		     , RCP_CONTENT
+		     , RCP_PIC
+	      FROM RECIPE
+	     WHERE RCP_TAG LIKE ?
+	        OR RCP_DISH_TYPE LIKE ?
+	</entry>
+	
 </properties>

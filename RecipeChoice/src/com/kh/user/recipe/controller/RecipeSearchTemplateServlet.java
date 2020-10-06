@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.user.recipe.model.service.RecipeService;
+import com.kh.user.recipe.model.vo.Count;
 import com.kh.user.recipe.model.vo.Recipe;
 
 /**
@@ -39,10 +40,12 @@ public class RecipeSearchTemplateServlet extends HttpServlet {
 		
 		ArrayList<Recipe> tags = new RecipeService().tagSearch(rcpTags,rcpTime);
 
+		int totalCount = new RecipeService().totalCount();
+		Count ct = new Count(totalCount);
+		
 		request.setAttribute("tags", tags);
+		request.setAttribute("ct", ct); 
 		request.getRequestDispatcher("views/recipe/recipeThemeSearchView.jsp").forward(request, response);
-		
-		
 		
 	}
 

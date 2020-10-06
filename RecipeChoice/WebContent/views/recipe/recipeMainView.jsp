@@ -189,8 +189,8 @@
 						<img src="<%=contextPath %>/resources/recipe_upfiles/<%=r.getRcpPic() %>" width="200px" height="150px" />
 					<br />
 					<div class="w3-container w3-border-bottom w3-border-teamColor">
-						"<%=r.getRcpContent() %>" <br /> <br>
-						<small><p style="font-style:italic"><%=r.getRcpTitle() %></p></small>
+						<!-- "<%=r.getRcpContent() %>"<br /> <br>-->
+						<small><p style="font-style:italic">"<%=r.getRcpTitle() %>"</p></small>
 					</div>
 					<p align="left"><%=r.getMemName() %></p>
 				</div>
