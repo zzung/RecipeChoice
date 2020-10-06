@@ -121,6 +121,7 @@ WHERE RNUM BETWEEN ? AND ?
 			  , CON_CONTENT
 			  , USER_NO
 			  , CON_REPLY
+			  , ANSWER
 			  )
 			  VALUES
 			  (
@@ -130,6 +131,7 @@ WHERE RNUM BETWEEN ? AND ?
 			  , ?
 			  , 1
 			  , ?
+			  , 'A'
 			  )
 	</entry>
 	<entry  key="updateAnswerView">

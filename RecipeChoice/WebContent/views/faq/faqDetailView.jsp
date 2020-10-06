@@ -73,10 +73,14 @@
 <script>
 $(document).ready(function(){
 	 $('p.b').hide();
-    $('p.a').click(function(){
-        $('p.b').toggle();
+
     });
-});
+
+
+function faqToggle(e){
+	$(e).siblings('.b').toggle();
+	
+}
  </script>
 </head>
 <body>
@@ -125,7 +129,7 @@ $(document).ready(function(){
                   <!--  리스트가 비어있지 않을 경우 -->
                 <% for(Faq f : list){ %>
 				<div id="t1">
-					<p class="a">&nbsp;<%= f.getFaqTitle() %>&nbsp; &nbsp;⌄</p>
+					<p class="a" onclick="faqToggle(this);">&nbsp;<%= f.getFaqTitle() %>&nbsp; &nbsp;⌄</p>
                     <hr style="width:93%;">
                     <p class="b">&nbsp; <%= f.getFaqContent() %></p>
 				</div>

@@ -85,14 +85,13 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	for(i = 1; 1<=5; i++){
+
     $(document).ready(function(){
-    	$('p#b' + i).hide();
+    	$('p#b1').hide();
         $('p#a1').click(function(){
-            $('p#b' + i).toggle();
+            $('p#b1').toggle();
         });
 	});	
-	}
      </script>
 
 <body>
@@ -144,9 +143,6 @@
                      <img id="img" onclick="location.href='<%=contextPath%>/updateForm.mf?fno=<%= f.getFaqNo() %>';" src="<%= request.getContextPath() %>/resources/image/admin/update.JPG">                                 
                    	<br>
 					<hr style="width:93%;">
-					<%=for(i = 1; i<=5; i++){%>
-                    <p id="b + i">&nbsp; <%= f.getFaqContent() %></p>
-					<%=}%>
 				</div>
 				<script>
 	          function deleteConfirm(){
