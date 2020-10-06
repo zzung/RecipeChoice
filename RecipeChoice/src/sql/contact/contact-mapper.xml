@@ -79,7 +79,7 @@ WHERE RNUM BETWEEN ? AND ?
 		UPDATE
 		       CONTACT
 		   SET STATUS ='N'
-		 WHERE CON_NO = ?
+		 WHERE CON_REPLY = CON_NO
 	</entry>
 	
 	<entry key="selectContactListView">
@@ -117,6 +117,7 @@ WHERE RNUM BETWEEN ? AND ?
 			  (
 			    CON_NO 
 			  , CON_TITLE
+			  ,	CON_TYPE
 			  , CON_CONTENT
 			  , USER_NO
 			  , CON_REPLY
@@ -125,10 +126,16 @@ WHERE RNUM BETWEEN ? AND ?
 			  (
 			    SEQ_CONNO.NEXTVAL
 			  , ?
+			  , '답변'
 			  , ?
-			  , ?
-			  , ?
+			  , 1
 			  , ?
 			  )
+	</entry>
+	<entry  key="updateAnswerView">
+	UPDATE
+	        CONTACT
+	    SET ANSWER= 'Y' 
+	  WHERE CON_NO = ?
 	</entry>
 </properties>

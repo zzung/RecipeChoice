@@ -34,18 +34,18 @@ public class ContactAnswerServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		String userNo = request.getParameter("userNo"); 
+		 
 		String conTitle = request.getParameter("title");
 		String conContent = request.getParameter("content");
-		int conNo = Integer.parseInt(request.getParameter("conNo")); 
+		int conReply = Integer.parseInt(request.getParameter("conNo")); 
 		
 		Contact c = new Contact(); //매개변수 대신 기본생성자로
-		c.setUserNo(userNo);
+		
 		c.setConTitle(conTitle);
 		c.setConContent(conContent);
-		c.setConNo(conNo);
+		c.setConReply(conReply);
 		
-		int result = new ContactService().insertContact(c);//처리된 행 수 받아냄
+		int result = new ContactService().insertContactView(c);//처리된 행 수 받아냄
 		
 		if(result > 0) {//성공 ==> 1:1문의 리스트 페이지
 			
@@ -60,6 +60,11 @@ public class ContactAnswerServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request,response);
 		}
+		
+		
+	
+		int result1 = new ContactService().updateAnswerView(conReply);
+		
 	}
 
 	

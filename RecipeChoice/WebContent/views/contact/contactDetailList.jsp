@@ -165,6 +165,7 @@
         <div id="footer"></div>
     </div>
     
+    
     <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>
 </body>

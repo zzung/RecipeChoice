@@ -123,7 +123,6 @@ public class ContactDao {
 			pstmt.setString(2, c.getConType());
 			pstmt.setString(3, c.getConContent());
 			pstmt.setInt(4, Integer.parseInt(c.getUserNo()));//"1" -> 1
-			pstmt.setInt(5, c.getConReply());
 			//완성형태 만듬
 			
 			result = pstmt.executeUpdate();
@@ -329,7 +328,7 @@ public class ContactDao {
 				
 				pstmt.setString(1, c.getConTitle());
 				pstmt.setString(2, c.getConContent());
-				pstmt.setInt(3, Integer.parseInt(c.getUserNo()));//"1" -> 1
+				pstmt.setInt(3, c.getConReply());
 				//완성형태 만듬
 				
 				result = pstmt.executeUpdate();
@@ -342,5 +341,33 @@ public class ContactDao {
 			return result; // 서비스에 리턴
 			
 		}
+
+		public int updateAnswerView(Connection conn, int result1) {
+			
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("updateAnswerView");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, result1);
+				
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result;
+		
+			
+		}
+			
+		}
 	
-}
+
+

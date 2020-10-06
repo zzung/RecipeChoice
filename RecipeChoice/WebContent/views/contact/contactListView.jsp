@@ -152,9 +152,17 @@
                 <!--  리스트가 비어있지 않을 경우 -->
                 <% for(Contact c : listView){ %>
                 
-                    <tr>
+                	<% if (c.getConType().equals("답변")){ %>
+                    <tr onclick="location.href='';">
+                    <% }else { %>
+                    <tr onclick="문의글 상세조회">
+                    <%} %>
                         <td><%= c.getConNo() %></td>
-                        <td><%= c.getConType() %></td>
+                        <% if (c.getConType().equals("답변")){ %>
+                        <td>  </td>
+                        <% }else {%>
+                        <td><%=c.getConType() %></td>
+                        <% } %>
                         <td><%= c.getConTitle() %></td>
                         <td><%= c.getUserNo() %></td>
                         <td><%= c.getConDate() %></td>
@@ -167,10 +175,11 @@
                        		 <a onclick="contactUpdate(this); event.stopImmediatePropagation();">수정</a>&nbsp;&nbsp;
                        		 <a onclick="contactDelete(this); event.stopImmediatePropagation();">삭제</a>
                        		 </td>
-                    	</tr>
 	                      <%} %>
+                    	</tr>
 	                    <% } %>
 		              <% } %>
+		              
 	                 </tbody>
 	  				  </table>
 	               

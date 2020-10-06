@@ -171,4 +171,20 @@ public class ContactService {
 		
 		return result;
 	}
-}
+	public int updateAnswerView(int result1) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ContactDao().updateAnswerView(conn, result1);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		}
+	}

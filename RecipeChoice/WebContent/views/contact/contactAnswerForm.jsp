@@ -126,27 +126,18 @@
                        <tr>
                            <td><h6><b>내용</b></h6></td>
                            <td>
-                              <textarea cols="70" rows="8" style="resize:none; margin-top:10px; margin-bottom:10px;" required></textarea>
+                              <textarea name="content" cols="70" rows="8" style="resize:none; margin-top:10px; margin-bottom:10px;" required></textarea>
                            </td>
                        </tr>
                  </table>  
                  <br>   
                <div align="center">
-                   <button type="submit" onclick="answerConfirm();"> 답변하기</button>
+                   <button type="submit"> 답변하기</button>
                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                    <button type="button" onclick="history.back();">뒤로가기</button>
                </div>
               </form>
            </div>  
-       <script>
-        function answerConfirm(){
-            if(confirm("등록하시겠습니까?")){
-                location.href="<%= contextPath%>/contactList.mc";
-            }else{
-                return false;
-             } 
-            }
-       </script>
            </div>
         <div id="footer"></div>
     </div>

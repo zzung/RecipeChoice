@@ -37,6 +37,8 @@ public class ContactAnswerFormServlet extends HttpServlet {
 		c.setConNo(conNo);
 		
 		
+		request.setAttribute("c", c);
+		
 		request.getRequestDispatcher("views/contact/contactAnswerForm.jsp").forward(request, response);
 		
 	}

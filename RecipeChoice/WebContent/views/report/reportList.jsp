@@ -171,9 +171,9 @@
         	<%for(Report r: list) {%>
                     <tr>
                         <td><%= r.getRepNo()%></td>
-                        <%= if (location.href) { %>
+                       
                         <td><a href="<%=contextPath%>/신고된게시글">신고된게시글이</a></td>
-                        <%= } %>
+                       
                         <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=loginUser.getUserNo()%>"><%= r.getRepWriterNo()%></a></td>
                         <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=loginUser.getUserNo()%>"><%= r.getRepTargetNo() %></a></td>
                        <td><%= r.getRepReason()%></td>
