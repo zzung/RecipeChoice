@@ -90,7 +90,7 @@
         vertical-align: middle
         
     }
-    tbody>tr {cursor: pointer;}
+  
     tbody>tr:hover{background: rgb(243, 243, 243)}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -158,36 +158,55 @@
                         <td><%= c.getConTitle() %></td>
                         <td><%= c.getUserNo() %></td>
                         <td><%= c.getConDate() %></td>
-                        <td><%= c.getAnswer() %></td>
-                    </tr>
-                      <%} %>
-                    <% }  %>
-                 
-                    <tr>
-                        <td>1002</td>
-                        <td>🔒</td>
-                        <td>re:기타 문의</td>
-                        <td>관리자</td>
-                        <td>2020-08-24</td>
-                        <td><a id="contactUpdate" onclick="updateConfirm();">수정</a>&nbsp;&nbsp;<a id="contactDelete" onclick="deleteConfirm();">삭제</a></td>
-                    </tr>
-                
-                    
-                 </tbody>
-    
-                </table>
-                <!-- 상세조회요청url 이동 -->
-                <script>
-                	$(function(){
-                		$(".inq_s>tbody>tr").click(function(){
-                			location.href="<%=contextPath%>/detail.mc?bno=" + $(this).children().eq(0).text();	
-                		});
-                	});
-                
-                </script>
+                        <% if(c.getAnswer().equals("N")){ %>
+	                    	<td>미답변</td>
+	                    	<% } else if(c.getAnswer().equals("Y")){ %>
+	                    	<td>답변</td> 
+	                    	<% } else if(c.getAnswer().equals("A") && loginUser != null && loginUser.getMemId().equals("admin")){%>
+	                    	 <td>
+                       		 <a onclick="contactUpdate(this); event.stopImmediatePropagation();">수정</a>&nbsp;&nbsp;
+                       		 <a onclick="contactDelete(this); event.stopImmediatePropagation();">삭제</a>
+                       		 </td>
+                    	</tr>
+	                      <%} %>
+	                    <% } %>
+		              <% } %>
+	                 </tbody>
+	  				  </table>
+	               
+	                <script>
+	    	
+					const contactUpdate = function(e){
+					   var answer = confirm("수정하시겠습니까 ?");
+					   if(answer){
+					    console.log(e.parentNode)
+					   var cno = e.parentNode.parentNode.childNodes[1].textContent;
+					   location.href="<%=contextPath%>/updateForm.mc?cno="+cno;
+					    }else{
+					      return;
+					    }
+					    	};
+					    		
+					const contactDelete =  function(e){
+					    var answer = confirm("삭제하시겠습니까 ?");
+					    if(answer){
+					       var cno = e.parentNode.parentNode.childNodes[1].textContent;
+					           // 삭제 진행
+					       location.href="<%=contextPath%>/delete.mc?cno="+cno;
+					     }else{
+						return;
+					     }
+					    };
+					    
+					$(".inq_s>tbody>tr").click(function(){
+				    	var cno = $(this).children().eq(0).text();
+					 	location.href="<%=contextPath%>/detail.mc?cno="+ $(this).children().eq(0).text();    	
+				     });
+					
+			</script>
                
 
-               <script>
+              <!-- <script>
 		    	$(function(){
 		    		
 		    		$("#contactUpdate").click(function contactUpdate(){
@@ -220,14 +239,14 @@
 		    		
 		    		$(".inq_s>tbody>tr").click(function(){
 		    			var cno = $(this).children().eq(0).text();
-						location.href="<%=contextPath%>/detail.mn?cno="+ cno;    	
+						location.href="<%=contextPath%>/detail.mc?cno="+ cno;    	
 						console.log(cno);
 		    		});
 		    		
 		    	});
 		            
 		
-		    </script>
+		    </script>-->
                 
 
             </div>

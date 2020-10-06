@@ -319,4 +319,10 @@
 		    BY BRE_NO DESC
 	</entry>
 	
+	<entry key="replyCount">
+		SELECT COUNT(BOARD_NO) CR
+		  FROM REPLY
+		 WHERE BOARD_NO = ?
+	</entry>
+	
 </properties>

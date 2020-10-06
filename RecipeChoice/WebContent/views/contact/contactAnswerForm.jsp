@@ -5,15 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-    <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <style>
 	div{
 	    box-sizing: border-box;
@@ -117,36 +108,35 @@
             <div id="content_2">
 	
 				<br><br>
-                <h1>1:1 문의 조회
-                    &nbsp;<img src="resources/image/admin/inquiry.jpg" align="center">
-				</h1>
+                <h3>1:1 문의 조회
+                   &nbsp;<img src="<%= request.getContextPath() %>/resources/image/admin/inquiry.JPG">
+				</h3>
                 <hr>
-                <form action="" method=""> 
-                    <table class="answer">
+                <form action="<%= contextPath %>/answer.mc" method="post"> 
+                <table class="answer">
                        <tr>
-                           <th ><h2>제목</h2></th>
+                           <th ><h6><b>제목</b></h6></th>
                            <td colspan="4" ><input type="text" name="title" value="re:" style="width:80%;"required style="height:22px;"></td>
                        </tr>
                        <tr>
-                           <td><h2>내용</h2></td>
+                           <td><h6><b>내용</b></h6></td>
                            <td>
-                              <textarea cols="70" rows="13" style="resize:none; margin-top:10px; margin-bottom:10px;" required></textarea>
+                              <textarea cols="70" rows="8" style="resize:none; margin-top:10px; margin-bottom:10px;" required></textarea>
                            </td>
                        </tr>
                  </table>  
-                 <br>    
-               <br>
+                 <br>   
                <div align="center">
-                   <button type="submit" class="btn" onclick="answerConfirm();"> 답변하기</button>
+                   <button type="submit" onclick="answerConfirm();"> 답변하기</button>
                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                    <button type="button" onclick="history.back();">뒤로가기</button>
                </div>
+              </form>
            </div>  
-       </form>
        <script>
         function answerConfirm(){
             if(confirm("등록하시겠습니까?")){
-                location.href='./inquiryEnroll.no';
+                location.href="<%= contextPath%>/contactList.mc";
             }else{
                 return false;
              } 
@@ -159,7 +149,5 @@
     
      <!-- footer 추가-->
      <%@include file="../common/footer.jsp" %>
-</body>
-</html>
 </body>
 </html>

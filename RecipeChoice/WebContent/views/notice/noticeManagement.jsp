@@ -1,3 +1,4 @@
+<%@page import="com.kh.admin.common.PagingManager"%>
 <%@page import="com.kh.admin.notice.model.vo.Notice"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -170,16 +171,18 @@
                 <% } %>
                 <hr>
                 <div align="right"><a href="<%=contextPath %>/enrollForm.mn" class="btn btn-secondary">글 작성</a></div>
-                <div class="pagination" style="margin-left: 25%">
-	                <a href="#">&laquo;</a> 
-	                <a href="#">1</a> 
-	                <a href="#">2</a> 
-	                <a href="#">3</a> 
-	                <a href="#">4</a> 
-	                <a href="#">5</a> 
-	                <a href="#">6</a>
-	                <a href="#">&raquo;</a>
-           		</div>
+                <div class="pagination" align="center">
+	                <%PagingManager pm = (PagingManager)request.getAttribute("pagingManager"); %>
+	                <%if(pm.getNowBlock()>=2) { %>
+	               	<a href="<%=contextPath%>/notice.mn?page=<%=pm.getStartPage()-1%>">&laquo;</a>
+	                <% } %>
+	            	<%for(int i=0; i<pm.getEndPage(); i++){ %>
+	            	<a href="<%=contextPath%>/notice.mn?page=<%=i+1%>"><%=i+1%></a>
+	            	<% } %>
+	            	<%if(pm.getNowBlock()<pm.getTotalBlock()){ %>
+	            	<a href="<%=contextPath%>/notice.mn?page=<%=pm.getEndPage()+1%>">&raquo;</a>
+	            	<% } %>
+            	</div>
             </div>
             <div id="content_3"></div>
         </div>

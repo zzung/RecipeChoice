@@ -1,3 +1,4 @@
+<%@page import="com.kh.admin.common.PagingManager"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.kh.user.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -150,22 +151,26 @@
                         <% } %>
                     </tbody>
                 </table>
+                <br><br><br>
                 <hr>
+                
+                <div class="pagination" align="center">
+	                <%PagingManager pm = (PagingManager)request.getAttribute("pagingManager"); %>
+	                <%if(pm.getNowBlock()>=2) { %>
+	               	<a href="<%=contextPath%>/memberList.mn?page=<%=pm.getStartPage()-1%>">&laquo;</a>
+	                <% } %>
+	            	<%for(int i=0; i<pm.getEndPage(); i++){ %>
+	            	<a href="<%=contextPath%>/memberList.mn?page=<%=i+1%>"><%=i+1%></a>
+	            	<% } %>
+	            	<%if(pm.getNowBlock()<pm.getTotalBlock()){ %>
+	            	<a href="<%=contextPath%>/memberList.mn?page=<%=pm.getEndPage()+1%>">&raquo;</a>
+	            	<% } %>
+            	</div>
+                
             </div>
             <div id="content_3"></div>
         </div>
-        <div id="footer">
-            <div class="pagination">
-                <a href="#">&laquo;</a> 
-                <a href="#">1</a> 
-                <a href="#">2</a> 
-                <a href="#">3</a> 
-                <a href="#">4</a> 
-                <a href="#">5</a> 
-                <a href="#">6</a>
-                <a href="#">&raquo;</a>
-            </div>
-        </div>
+        <div id="footer"></div>
 
     </div>
 </body>

@@ -1,4 +1,5 @@
-<%@page import="com.kh.admin.notice.model.vo.Notice"%>
+<%@page import="com.kh.admin.common.PagingManager"%>
+<%@page import="com.kh.admin.notice.model.vo.Notice" %>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -118,7 +119,7 @@ div{
                 <div id="menu_1">고객센터</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/notice.no'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;공지사항</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/faqDetail.fa'">&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.co'">&nbsp;&nbsp;1:1 문의</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.co?currentPage=1'">&nbsp;&nbsp;1:1 문의</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;개인정보취급방침</div>
                 <div id="menu_3">
                     <br>&nbsp;&nbsp;고객센터
@@ -143,11 +144,11 @@ div{
                 	<%} else{ %>
 	                	<% for (Notice n : noticeList) { %>
 	                    <tr>
-	                    	<%-- <% if(n.getNoticeImportant().equals("Y")){ %>
-	                    	<td width="55px"><button id="important">공지</button></td>
-	                    	<% } else{ %> --%>
-                        	<td width="55px"><%= n.getNoticeNo() %></td>
-                        	<%--<% } %> --%>
+	                    	<% if(n.getNoticeImportant().equals("Y")){ %>
+	                    	<td width="55px"><input type="hidden" name="nno" id="nno" value="<%=n.getNoticeNo()%>"><button id="important">공지</button></td>
+	                    	<% } else{ %> 
+                        	<td width="55px"><input type="hidden" name="nno" id="nno" value="<%=n.getNoticeNo()%>"><%= n.getNoticeNo() %></td>
+                        	<% } %> 
 	                        <td width="500px"><%= n.getNoticeTitle() %></td>
 	                        <td width="145px"><%= n.getNoticeDate() %></td>
 	                    </tr>
@@ -161,14 +162,16 @@ div{
         
         <div id="footer">
   				<div class="pagination" align="center">
-	                <a href="#">&laquo;</a> 
-	                <a href="#">1</a> 
-	                <a href="#">2</a> 
-	                <a href="#">3</a> 
-	                <a href="#">4</a> 
-	                <a href="#">5</a> 
-	                <a href="#">6</a>
-	                <a href="#">&raquo;</a>
+	                <%PagingManager pm = (PagingManager)request.getAttribute("pagingManager"); %>
+	                <%if(pm.getNowBlock()>=2) { %>
+	               	<a href="<%=contextPath%>/notice.no?page=<%=pm.getStartPage()-1%>">&laquo;</a>
+	                <% } %>
+	            	<%for(int i=0; i<pm.getEndPage(); i++){ %>
+	            	<a href="<%=contextPath%>/notice.no?page=<%=i+1%>"><%=i+1%></a>
+	            	<% } %>
+	            	<%if(pm.getNowBlock()<pm.getTotalBlock()){ %>
+	            	<a href="<%=contextPath%>/notice.no?page=<%=pm.getEndPage()+1%>">&raquo;</a>
+	            	<% } %>
             	</div>
         </div>
 
@@ -176,7 +179,7 @@ div{
             $(function(){
                 <%-- 제목 클릭시 상세페이지로 이동--%>
 	            $(".tb1 tr").click(function(){
-	            	var nno = $(this).children().eq(0).text();
+	            	var nno = $(this).children().children().eq(0).val();
 	            	location.href = "<%= contextPath %>/noticeDetail.no?nno="+ nno;
 	            	console.log(nno);
 	            });

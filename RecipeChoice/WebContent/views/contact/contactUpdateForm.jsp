@@ -113,7 +113,7 @@
                 <hr>
 
                 <form id="updateForm" action="<%=contextPath %>/update.co" method="post"> 
-                <input type="hidden" name="cno" value="<%= c.getUserNo() %>">
+                <input type="hidden" name="cno" value="<%= c.getConNo() %>">
                  <table class="EnrollArea">
                     <tr>
                         <th ><h5>제목&nbsp;</h5></th>
@@ -132,7 +132,7 @@
                              <tr>
 		                        <td><h5>내용&nbsp;</h5></td>
 		                        <td>
-		                           <textarea name="content" cols="70" rows="8" style="resize:none; margin-top:10px;" required></textarea>
+		                           <textarea name="content" cols="70" rows="8" style="resize:none; margin-top:10px;" required><%=c.getConContent() %></textarea>
 		                        </td>
 		                    </tr>
 		                    
@@ -142,18 +142,12 @@
 									  if($(this).text() == "<%= c.getConType()%>"){
 										 $(this).attr("selected",true);
 									  }
+									});  
 								});
 							 </script>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><h5>내용&nbsp;</h5></td>
-                        <td>
-                           <textarea name="content" cols="70" rows="10" style="resize:none; margin-top:10px;" required><%=c.getConContent() %></textarea>
-                        </td>
-                    </tr>
-            </table> 
-           <hr>     
+                        
+            	</table> 
+          		 <hr>     
              <div align="right">
                 <button type="submit">수정하기</button>
                </div>

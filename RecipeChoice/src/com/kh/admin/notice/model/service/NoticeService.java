@@ -11,10 +11,10 @@ import com.kh.admin.notice.model.vo.Notice;
 public class NoticeService {
 
 	
-	public ArrayList<Notice> selectNoticeList() {
+	public ArrayList<Notice> selectNoticeList(int page) {
 		
 		Connection conn = getConnection();
-		ArrayList<Notice> noticeList = new NoticeDao().selectNoticeList(conn);
+		ArrayList<Notice> noticeList = new NoticeDao().selectNoticeList(conn, page);
 		close(conn);
 		
 		return noticeList;
@@ -74,13 +74,28 @@ public class NoticeService {
 		return result;
 	}
 
-	public ArrayList<Notice> selectNoticeListManagement() {
+	public ArrayList<Notice> selectNoticeListManagement(int page) {
 		
 		Connection conn = getConnection();
-		ArrayList<Notice> noticeList = new NoticeDao().selectNoticeListManagement(conn);
+		ArrayList<Notice> noticeList = new NoticeDao().selectNoticeListManagement(conn,page);
 		close(conn);
 		
 		return noticeList;
+	}
+
+	public int noticeListCount() {
+
+		Connection conn = getConnection();
+		int result = new NoticeDao().noticeListCount(conn);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollBack(conn);
+		}
+		close(conn);
+		
+		return result;
 	}
 
 	

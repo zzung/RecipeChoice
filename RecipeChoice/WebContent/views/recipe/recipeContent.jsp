@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="com.kh.user.reply.model.vo.Reply"%>
+<%@page import="com.kh.user.reply.model.vo.*"%>
 <%@ page import="com.kh.user.recipe.model.vo.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@page import="com.kh.user.reply.model.*"%>
@@ -13,7 +13,7 @@
 	ArrayList<Cook> cook = (ArrayList<Cook>)request.getAttribute("cook"); 
 	ArrayList<Recipe> relation =(ArrayList<Recipe>)request.getAttribute("relation"); 
 	
-	
+	ReplyCount cr = (ReplyCount)request.getAttribute("cr"); 
 %>
 <!DOCTYPE html>
 <html>
@@ -182,7 +182,7 @@
 				<br>
 
 				<!-- 숫자에 실제로 가져온 댓글의 숫자값으로 대체 -->
-				<h4 id="replyCount" class="replytitle" align="left">댓글 15</h4>
+				<h4 id="replyCount" class="replytitle" align="left">총<%=cr.getReplyCount() %>댓글</h4>
 
 				<table id="replyListArea" class="replylistArea" style="margin: 0px auto; width: 800px;">
 					

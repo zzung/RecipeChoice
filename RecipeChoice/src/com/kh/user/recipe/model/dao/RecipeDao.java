@@ -697,5 +697,33 @@ public class RecipeDao {
 			close(pstmt);
 		}
 		return list; 
-	}
+	}//e.selectReplyList
+	
+	public int replyCount(Connection conn, int rcpNo) {
+		int replyCount = 0; 
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		
+		String sql = prop.getProperty("replyCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rcpNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				replyCount = rs.getInt("CR");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return replyCount; 
+	}//e.replyCount
 }

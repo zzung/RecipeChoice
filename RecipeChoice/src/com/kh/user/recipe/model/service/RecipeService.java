@@ -276,4 +276,14 @@ public class RecipeService {
 		
 		return list; 
 	}
+	
+	public int replyCount(int rcpNo) {
+		Connection conn = getConnection();
+		
+		int replyCount = new RecipeDao().replyCount(conn,rcpNo);
+		
+		close(conn);
+		
+		return replyCount;
+	}
 }

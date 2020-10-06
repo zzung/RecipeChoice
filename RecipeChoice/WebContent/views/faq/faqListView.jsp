@@ -79,18 +79,20 @@
         box-sizing:border-box; 
         
     }
-    .b,#a1{
+    .bb,#a1{
     	font-weight:bold;
     }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+	for(i = 1; 1<=5; i++){
     $(document).ready(function(){
-    	$('p#b1').hide();
+    	$('p#b' + i).hide();
         $('p#a1').click(function(){
-            $('p#b1').toggle();
+            $('p#b' + i).toggle();
         });
-    });
+	});	
+	}
      </script>
 
 <body>
@@ -129,7 +131,7 @@
 				 <!-- 리스트가 비어있을 경우 -->
                 <% if(listView.isEmpty()) {%>
                 	<div class="t1">
-                	<p class="b">&nbsp;&nbsp;존재하는 faq가 없습니다.</p>
+                	<p class="bb">&nbsp;&nbsp;존재하는 faq가 없습니다.</p>
                 	<hr style="width:93%;">
                 	</div>
                 <% }else { %>
@@ -141,8 +143,10 @@
                      <img id="img" onclick="deleteConfirm();" src="resources/image/admin/recyclebin.JPG">
                      <img id="img" onclick="location.href='<%=contextPath%>/updateForm.mf?fno=<%= f.getFaqNo() %>';" src="<%= request.getContextPath() %>/resources/image/admin/update.JPG">                                 
                    	<br>
-                    <hr style="width:93%;">
-                    <p id="b1">&nbsp; <%= f.getFaqContent() %></p>
+					<hr style="width:93%;">
+					<%=for(i = 1; i<=5; i++){%>
+                    <p id="b + i">&nbsp; <%= f.getFaqContent() %></p>
+					<%=}%>
 				</div>
 				<script>
 	          function deleteConfirm(){

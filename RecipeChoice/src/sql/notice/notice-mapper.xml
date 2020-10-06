@@ -2,6 +2,23 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectNoticeList">
+		SELECT RNUM
+			 , NOT_NO
+			 , NOT_TITLE
+			 , NOT_CONTENT
+			 , NOT_IMPORTANT
+			 , NOT_DATE
+			 , STATUS
+		  FROM (
+		SELECT 
+			   ROWNUM RNUM
+			 , NOT_NO
+			 , NOT_TITLE
+			 , NOT_CONTENT
+			 , NOT_IMPORTANT
+			 , NOT_DATE
+			 , STATUS
+		  FROM (
 		SELECT
 		       NOT_NO
 		     , NOT_TITLE
@@ -11,7 +28,8 @@
 		     , STATUS
 		  FROM NOTICE
 		 WHERE STATUS = 'Y'
-		 ORDER BY NOT_NO
+		 ORDER BY NOT_IMPORTANT DESC, NOT_DATE DESC))
+		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
 	<entry key="selectNotice">
@@ -68,7 +86,24 @@
 	</entry>
 	
 	<entry key="selectNoticeListManagement">
-	SELECT
+		SELECT RNUM
+			 , NOT_NO
+			 , NOT_TITLE
+			 , NOT_CONTENT
+			 , NOT_IMPORTANT
+			 , NOT_DATE
+			 , STATUS
+		  FROM (
+		SELECT 
+			   ROWNUM RNUM
+			 , NOT_NO
+			 , NOT_TITLE
+			 , NOT_CONTENT
+			 , NOT_IMPORTANT
+			 , NOT_DATE
+			 , STATUS
+		  FROM (
+		SELECT
 		       NOT_NO
 		     , NOT_TITLE
 		     , NOT_CONTENT
@@ -76,8 +111,13 @@
 		     , NOT_DATE
 		     , STATUS
 		  FROM NOTICE
-		 ORDER BY NOT_NO
+		 ORDER BY NOT_IMPORTANT DESC, NOT_DATE DESC))
+		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
-	
+	<entry key="noticeListCount">
+		SELECT
+		       COUNT(*)
+		  FROM NOTICE
+	</entry>
 	
 </properties>

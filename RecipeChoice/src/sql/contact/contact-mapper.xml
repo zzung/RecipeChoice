@@ -66,11 +66,12 @@ WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="updateContactList">
 			UPDATE
-		         CONTACT
-		    SET CON_TITLE = ?
-		      , CON_TYPE = ?  
-		      , CON_CONTENT = ?
-		  WHERE CON_NO = ?
+			        CONTACT
+			    SET CON_TITLE = ?
+			      , CON_TYPE = ?  
+			      , CON_CONTENT = ?
+			      
+			  WHERE CON_NO = ?
 	</entry>
 	<entry key="deleteContactList">
 		UPDATE
@@ -89,7 +90,7 @@ WHERE RNUM BETWEEN ? AND ?
 		     , ANSWER
 		  FROM CONTACT C
 		  JOIN MEMBER M ON (M.USER_NO = C.USER_NO)
-		 WHERE C.STATUS='Y'
+		 WHERE C.STATUS='Y' 
 		 ORDER
 		    BY CON_REPLY DESC, CON_DATE ASC
 	</entry>
@@ -107,5 +108,25 @@ WHERE RNUM BETWEEN ? AND ?
 		  JOIN MEMBER M ON (M.USER_NO = C.USER_NO)
 		 WHERE CON_NO = ?
 		   AND C.STATUS = 'Y'
+	</entry>
+	<entry key="insertContactView">
+		INSERT /*com.kh.admin.contact.model.dao.ContactDao#insertContact()*/
+			  INTO CONTACT
+			  (
+			    CON_NO 
+			  , CON_TITLE
+			  , CON_CONTENT
+			  , USER_NO
+			  , CON_REPLY
+			  )
+			  VALUES
+			  (
+			    SEQ_CONNO.NEXTVAL
+			  , ?
+			  , ?
+			  , ?
+			  , ?
+			  , SYSDATE
+			  )
 	</entry>
 </properties>

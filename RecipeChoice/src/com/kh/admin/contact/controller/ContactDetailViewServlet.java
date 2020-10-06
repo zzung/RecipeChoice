@@ -31,9 +31,9 @@ public class ContactDetailViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		int bno = Integer.parseInt(request.getParameter("bno"));
+		int cno = Integer.parseInt(request.getParameter("cno"));
 		
-		Contact c = new ContactService().selectContact(bno);
+		Contact c = new ContactService().selectContact(cno);
 		
 		request.setAttribute("c", c);
 		

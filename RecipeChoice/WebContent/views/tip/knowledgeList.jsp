@@ -1,3 +1,4 @@
+<%@page import="com.kh.admin.common.PagingManager"%>
 <%@page import="com.kh.admin.tip.model.vo.Tip"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -165,14 +166,27 @@
                     </tbody>
                 </table>
 				
-				<br><br><br><br>
+				<br><br><br>
                 <div align="right" style="margin-bottom: 30px">
-                	<hr>
                 	<button onclick="knowledgeDelete();" class="btn btn-dark">삭제</button>
                 	<button onclick="knowledgeUpdate();" class="btn btn-primary">수정</button>
                 	<a href="<%=contextPath%>/knowledgeEnrollForm.mn" class="btn btn-success">작성</a>
+                	<hr>
                 </div>
-
+                
+				<div class="pagination" align="center">
+	                <% PagingManager pm = (PagingManager)request.getAttribute("pagingManager"); %>
+	                <%if(pm.getNowBlock()>=2) { %>
+	               	<a href="<%=contextPath%>/knowledgeList.mn?page=<%=pm.getStartPage()-1%>">&laquo;</a>
+	                <% } %>
+	            	<%for(int i=0; i<pm.getEndPage(); i++){ %>
+	            	<a href="<%=contextPath%>/knowledgeList.mn?page=<%=i+1%>"><%=i+1%></a>
+	            	<% } %>
+	            	<%if(pm.getNowBlock()<pm.getTotalBlock()){ %>
+	            	<a href="<%=contextPath%>/knowledgeList.mn?page=<%=pm.getEndPage()+1%>">&raquo;</a>
+	            	<% } %>
+           		</div>
+           		
             	</div>
             	<div id="content_3"></div>
         	</div>
