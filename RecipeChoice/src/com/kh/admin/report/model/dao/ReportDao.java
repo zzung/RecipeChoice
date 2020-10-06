@@ -89,7 +89,9 @@ public class ReportDao {
 			
 			
 			while(rs.next()) {
-				list.add(new Report(rs.getInt("REP_NO"),
+				list.add(new Report(rs.getString("BOARD_TITLE"),
+									rs.getString("RCP_TITLE"),
+									rs.getInt("REP_NO"),
 									rs.getString("WRITER"),
 									rs.getString("TARGET"),
 									rs.getString("REP_REASON"),

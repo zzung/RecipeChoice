@@ -114,8 +114,6 @@
         border-radius: 5px;
     }
  
-    tbody>tr:hover{background: rgb(243, 243, 243)}
-
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -176,8 +174,11 @@
                    <% for(Contact c: list) { %>
                     <tr>
                         <td><%=c.getConNo() %></td>
+                        <% if (c.getConType().equals("답변")){ %>
+                        <td>  </td>
+                        <% }else {%>
                         <td><%=c.getConType() %></td>
-                        <td><%=c.getConTitle() %></td>
+                        <% } %>
                         <td><%=c.getUserNo() %></td>
                         <td><%=c.getConDate() %></td>
                         <td>  <% if(loginUser != null && loginUser.getMemId().equals(c.getUserNo())) { %>

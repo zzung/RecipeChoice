@@ -36,6 +36,7 @@ public class Report {
 
 	public Report(int repNo, String repWriterNo, String repTargetNo, String repReason, Date repDate) {
 		super();
+		this.board
 		this.repNo = repNo;
 		this.repWriterNo = repWriterNo;
 		this.repTargetNo = repTargetNo;

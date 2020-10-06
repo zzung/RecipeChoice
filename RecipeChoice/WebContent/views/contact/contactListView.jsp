@@ -115,10 +115,10 @@
             <div id="content_1">
                 <div id="menu_1">관리자</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항관리</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/memberList.mn?page=1'">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/blackList.mn?page=1'">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/seasonList.ms'">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/tip.mn'">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/faqList.mf'">&nbsp;&nbsp;&nbsp;FAQ</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.mc'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/reportList.mr'">&nbsp;&nbsp;&nbsp;신고 관리</div>
@@ -151,11 +151,10 @@
                 <% }else { %>
                 <!--  리스트가 비어있지 않을 경우 -->
                 <% for(Contact c : listView){ %>
-                
                 	<% if (c.getConType().equals("답변")){ %>
                     <tr onclick="location.href='';">
                     <% }else { %>
-                    <tr onclick="문의글 상세조회">
+                    <tr onclick="location.href='<%=contextPath%>/detail.mc?cno=<%=c.getConNo() %>';">
                     <%} %>
                         <td><%= c.getConNo() %></td>
                         <% if (c.getConType().equals("답변")){ %>
@@ -173,7 +172,6 @@
 	                    	<% } else if(c.getAnswer().equals("A") && loginUser != null && loginUser.getMemId().equals("admin")){%>
 	                    	 <td>
                        		 <a onclick="contactUpdate(this); event.stopImmediatePropagation();">수정</a>&nbsp;&nbsp;
-                       		 <a onclick="contactDelete(this); event.stopImmediatePropagation();">삭제</a>
                        		 </td>
 	                      <%} %>
                     	</tr>
@@ -196,17 +194,6 @@
 					    }
 					    	};
 					    		
-					const contactDelete =  function(e){
-					    var answer = confirm("삭제하시겠습니까 ?");
-					    if(answer){
-					       var cno = e.parentNode.parentNode.childNodes[1].textContent;
-					           // 삭제 진행
-					       location.href="<%=contextPath%>/delete.mc?cno="+cno;
-					     }else{
-						return;
-					     }
-					    };
-					    
 					$(".inq_s>tbody>tr").click(function(){
 				    	var cno = $(this).children().eq(0).text();
 					 	location.href="<%=contextPath%>/detail.mc?cno="+ $(this).children().eq(0).text();    	

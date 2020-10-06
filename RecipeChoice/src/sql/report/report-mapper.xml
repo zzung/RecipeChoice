@@ -15,14 +15,18 @@
 	              , A.*
 	          FROM (
 	                SELECT 
-	                       REP_NO
+	                	   B.BOARD_TITLE
+	                	 , RE.RCP_TITLE  	
+	                     , REP_NO
 	                     , M.MEM_ID WRITER
 	                     , M_.MEM_ID TARGET
 	                     , REP_REASON
 	                     , REP_DATE
 	                  FROM REPORT R
-	                  JOIN MEMBER M ON (REP_WRITER_NO=M.USER_NO)
-	                  JOIN MEMBER M_ ON (REP_TARGET_NO=M_.USER_NO)
+	                  JOIN MEMBER M ON (REP_WRITER_NO = M.USER_NO)
+	                  JOIN MEMBER M_ ON (REP_TARGET_NO = M_.USER_NO)
+	                  LEFT JOIN BOARD B ON (R.REP_CONTENT_NO = B.BOARD_NO)
+	                  LEFT JOIN RECIPE RE ON (RE.RCP_NO = R.REP_CONTENT_NO)
 	                 WHERE R.STATUS='Y'
 	                 ORDER 
 	                    BY REP_NO DESC
