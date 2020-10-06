@@ -75,13 +75,13 @@
         <div id="content">
             <div id="content_1">
                 <div id="menu_1">관리자</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/notice.mn'">&nbsp;&nbsp;&nbsp;공지사항관리</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/memberList.mn'">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/blackList.mn'">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/notice.mn?page=1'" style="color: rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;공지사항관리</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/memberList.mn?page=1'">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/blackList.mn?page=1'">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/seasonList.ms'">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/tip.mn'">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/faqList.mf'">&nbsp;&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.mc?currentPage=1'">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/tip.mn'">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/faqlist.mf'">&nbsp;&nbsp;&nbsp;FAQ</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.mc">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/reportList.mr?currentPage=1'">&nbsp;&nbsp;&nbsp;신고 관리</div>
             </div>
             <div id="content_2">
@@ -95,23 +95,34 @@
 		                    <th width="70" >제목</th>
 		                    <td>
 		                        <input name="noticeTitle" type="text" style=" width: 300px; height:30px; float: left; padding-top: 5px; margin-top: 10px; margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;
-		                        <input name="noticeImportant" id="noticeImportant" type="checkbox" style="margin-top: 15px;"> 중요공지사항
+		                    	<input name="noticeImportant" id="noticeImportant" onclick="doOpenCheck(this);" value="Y" type="checkbox" style="margin-top: 15px;"> 중요공지 &nbsp;
+		                        <input name="noticeImportant" id="noticeImportant" onclick="doOpenCheck(this);" value="N" type="checkbox"> 일반공지
 		                    </td>
 		                </tr>
 		                <tr>
 		                    <th>글쓰기</th>
 		                    <td>
 		                        <textarea id="textarea" name="noticeContent" style="resize: none; width: 550px; height: 300px; float: left; padding-top: 5px; margin-top:10px; margin-bottom: 20px; font-size: 15px;"></textarea>
-		                    	<p id="text"></p>
 		                    </td>
 		                </tr>
 	                </table>
 	                <script>
+		                function doOpenCheck(chk){
+		                    var obj = document.getElementsByName("noticeImportant");
+		                    for(var i=0; i<obj.length; i++){
+		                        if(obj[i] != chk){
+		                            obj[i].checked = false;
+		                        }
+		                    }
+		                }
+	                
+		                <%--
 	                	if ($("input[id='noticeImportant']").is(":checked")){
 	                		$("#noticeImportant").val('Y');
 	                	}else{
 	                		$("#noticeImportant").val('N');
 	                	}
+	                	--%>
 	                	
 	                </script>
 	                <script>

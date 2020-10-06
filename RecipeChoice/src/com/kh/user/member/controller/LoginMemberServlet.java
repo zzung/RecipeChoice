@@ -51,9 +51,13 @@ public class LoginMemberServlet extends HttpServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("loginUser", loginUser);
 					
-					
+					if(loginUser.getMemId().equals("admin")) {
+						response.sendRedirect(request.getContextPath()+"/admin.mn");
+					}else {
+						
 					// sendRedirect 방식으로 url재요청
 					response.sendRedirect(request.getContextPath());
+					}
 					
 				}else { // 로그인 실패 => 에러페이지
 					
