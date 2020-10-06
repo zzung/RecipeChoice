@@ -568,8 +568,8 @@ public class RecipeDao {
 		}
 		return myPage; 
 	}
-	public ArrayList<Recipe> myPage2(Connection conn, int rcp){
-		ArrayList<Recipe> myPage2 = new ArrayList<>(); 
+	public Recipe myPage2(Connection conn, int rcp){
+		Recipe my = new Recipe();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null; 
@@ -582,11 +582,11 @@ public class RecipeDao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				Recipe my = new Recipe();
+				
 				my.setRcpTitle(rs.getString("RCP_TITLE"));
 				my.setCreateDate(rs.getDate("CREATE_DATE"));
 				my.setRcpPic(rs.getString("RCP_PIC"));
-				myPage2.add(my); 
+				 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -594,7 +594,7 @@ public class RecipeDao {
 			close(rs);
 			close(pstmt);
 		}
-		return myPage2; 
+		return my; 
 	}
 
 	public ArrayList<Recipe> todayRecipeList(Connection conn) {

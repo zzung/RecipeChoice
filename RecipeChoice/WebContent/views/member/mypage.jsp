@@ -117,14 +117,14 @@
               <table class="table table">
                   <thead>
                     <tr>
-                      <th  colspan="2"> 최근 본 게시물</th>
+                      <th  colspan="2"> 최근 본 레시피</th>
                     </tr>
                   </thead>
                 </table>
               <div class="content2_1_1">
                <%for(Recipe cl: cookieList){ %>
                   <div class="card" style="width: 10.8rem;">
-                      <img src="resources/recipe_upfiles/<%=cl.getRcpPic()%>"  class="card-img-top" alt="...">
+                      <img src="resources/recipe_upfiles/<%=cl.getRcpPic()%>"style="width:160px;height:130px;"  class="card-img-top" alt="...">
                       <div class="body" style="height: 45px; ">
                           <p><b><%=cl.getRcpTitle() %></b></p>
                           <p>작성일 :<%=cl.getCreateDate() %></p>

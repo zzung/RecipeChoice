@@ -232,11 +232,11 @@ public class RecipeService {
 	 * @param rcpNo
 	 * @return
 	 */
-	public ArrayList<Recipe> myPage2(String rcpNo){
+	public Recipe myPage2(String rcpNo){
 		Connection conn = getConnection();
 		int rcp = Integer.parseInt(rcpNo);
 
-		ArrayList<Recipe> myPage2 = new RecipeDao().myPage2(conn, rcp);
+		Recipe myPage2 = new RecipeDao().myPage2(conn, rcp);
 		
 		close(conn);
 		

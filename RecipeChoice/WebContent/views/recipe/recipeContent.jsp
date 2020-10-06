@@ -14,6 +14,7 @@
 	ArrayList<Recipe> relation =(ArrayList<Recipe>)request.getAttribute("relation"); 
 	
 	ReplyCount cr = (ReplyCount)request.getAttribute("cr"); 
+	
 %>
 <!DOCTYPE html>
 <html>

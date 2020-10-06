@@ -68,14 +68,16 @@ public class MypageMain extends HttpServlet {
 		request.setAttribute("pageInfo", pi);
 		
 		 ArrayList<Recipe> cookieList = new  ArrayList<Recipe>();
+		 
 		//[쿠키 정보 꺼내오기]
 		// request객체에서 전체 쿠키들을 가져온다.
 		Cookie[] cookies = request.getCookies();
 		for (int i =0; i < cookies.length; i++) {
-		    if (cookies[i].getName().equals("rcpnum")) {
+		    if (cookies[i].getName().contains("rcpnum")) {
 		        String rcpNo = cookies[i].getValue();
 		        System.out.println(rcpNo);
-		        cookieList = new RecipeService().myPage2(rcpNo);
+		       Recipe m = new RecipeService().myPage2(rcpNo);
+		       cookieList.add(m);
 		    }
 		  
 		}

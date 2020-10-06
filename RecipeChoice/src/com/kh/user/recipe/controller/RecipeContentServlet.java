@@ -44,7 +44,7 @@ public class RecipeContentServlet extends HttpServlet {
 	
 		// 쿠키 
 		// 1. 쿠키를 생성한다.(생성하며 key,value를 지정한다.)
-        Cookie cookie =new Cookie("rcpnum", Integer.toString(rcpNo));
+        Cookie cookie =new Cookie("rcpnum"+rcpNo, Integer.toString(rcpNo));
         // 2. 유효시간을 설정한다. 쿠키가 유지되는 기간이다.(브라우저가 종료되도 해당 유효시간 동안은 유지된다.)
         cookie.setMaxAge(60 *60 *60);// 초단위
         // 쿠키가 적용될 경로를 지정하는데 / 해놓으면 컨텍스트패스 아래의 모든 페이지에 적용된다.
