@@ -154,13 +154,16 @@ input[type="checkbox"]:hover ~ .recipe {
 	text-align: center;
 }
 
-input[type="checkbox"]:checked ~ #recipe {
+input[type="radio"]{
+	display:none;
+}
+input[type="radio"]:checked ~ #recipe {
 	color: white;
 	font-size: 16px;
 	background: rgb(39, 174, 96);
 }
 
-input[type="checkbox"]:hover ~ #recipe {
+input[type="radio"]:hover ~ #recipe {
 	color: white;
 	cursor: pointer;
 	background: rgb(39, 174, 96);

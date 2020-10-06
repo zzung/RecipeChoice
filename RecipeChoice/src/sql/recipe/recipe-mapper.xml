@@ -155,7 +155,8 @@
 		 	OR RCP_TAG LIKE ?
 		 	OR RCP_TAG LIKE ?
 		 	OR RCP_TAG LIKE ?
-		   AND RCP_TIME = ?
+		    OR RCP_TIME = ?
+		    OR RCP_DISH_TYPE = ?
 	</entry>
 	
 	<entry key="updateRecipe">

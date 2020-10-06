@@ -253,7 +253,7 @@ public class RecipeDao {
 		return cook; 
 	}//e.selectDetailCookList
 	
-	public ArrayList<Recipe> tagSearch(Connection conn, String[] rcpTags, int rcpTime){
+	public ArrayList<Recipe> tagSearch(Connection conn, String[] rcpTags, int rcpTime, String rcpDishType){
 		ArrayList<Recipe> tags = new ArrayList<>();
 
 		PreparedStatement pstmt = null;
@@ -273,7 +273,8 @@ public class RecipeDao {
 				pstmt.setString(j+1, "%NULL%");
 			}
 			pstmt.setInt(15, rcpTime);
-			System.out.println("rcpTime" + rcpTime);
+			pstmt.setString(16, rcpDishType);
+
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -290,9 +291,7 @@ public class RecipeDao {
 			close(rs);
 			close(pstmt);
 		}
-		for(Recipe tag : tags) {
-			System.out.println(tag.toString());
-		}
+		
 		return tags; 
 	}//e.tagSearch
 	

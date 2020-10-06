@@ -26,22 +26,22 @@
 							<th width="90">종류별</th>
 							<td>
 								<ul>
-									<li><input type="checkbox" id="rice" name="dishType"
+									<li><input type="radio" id="rice" name="dishType"
 										value="밥종류"> <label for="rice" id="recipe"><p>밥종류</p></label>
 									</li>
-									<li><input type="checkbox" id="soup" name="dishType"
+									<li><input type="radio" id="soup" name="dishType"
 										value="찌게"> <label for="soup" id="recipe"><p>찌게</p></label>
 									</li>
-									<li><input type="checkbox" id="stew" name="dishType"
+									<li><input type="radio" id="stew" name="dishType"
 										value="탕"> <label for="stew" id="recipe"><p>탕</p></label>
 									</li>
-									<li><input type="checkbox" id="steamed" name="dishType"
+									<li><input type="radio" id="steamed" name="dishType"
 										value="찜"> <label for="steamed" id="recipe"><p>찜</p></label>
 									</li>
-									<li><input type="checkbox" id="stir" name="dishType"
+									<li><input type="radio" id="stir" name="dishType"
 										value="볶음"> <label for="stir" id="recipe"><p>볶음</p></label>
 									</li>
-									<li><input type="checkbox" id="side" name="dishType"
+									<li><input type="radio" id="side" name="dishType"
 										value="밑반찬"> <label for="side" id="recipe"><p>밑반찬</p></label>
 									</li>
 								</ul>

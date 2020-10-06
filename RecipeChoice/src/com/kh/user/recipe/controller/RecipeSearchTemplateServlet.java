@@ -33,12 +33,12 @@ public class RecipeSearchTemplateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//String[] rcpDishTypes = request.getParameterValues("dishType");
+		String rcpDishType = request.getParameter("dishType");
 		String[] rcpTags = request.getParameterValues("tag");
 		
 		int rcpTime = Integer.parseInt(request.getParameter("time"));
 		
-		ArrayList<Recipe> tags = new RecipeService().tagSearch(rcpTags,rcpTime);
+		ArrayList<Recipe> tags = new RecipeService().tagSearch(rcpTags,rcpTime, rcpDishType);
 
 		int totalCount = new RecipeService().totalCount();
 		Count ct = new Count(totalCount);
