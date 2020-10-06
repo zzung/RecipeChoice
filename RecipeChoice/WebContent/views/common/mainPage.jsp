@@ -71,9 +71,8 @@
         width: 150px;
         position: absolute;
         top: 789px;
-        background: gray;
-        opacity: 0.6;
-        color: black;
+        background-color: rgba(0, 0, 0, 0.4);
+        color: white;
     }
     
     .recommendedRecipeTitle {
@@ -140,7 +139,7 @@
 			<div class="content_3">
                 <h3>계절메뉴</h3>
                 <div align="center">
-                    <img src="resources/recipe_upfiles/2020092807305412149.JPG" width="500" height="400">
+                    <img src="resources/recipe_upfiles/2020100312222886578.jpg" width="500" height="400">
                 </div>
 			</div>
 		</div>
