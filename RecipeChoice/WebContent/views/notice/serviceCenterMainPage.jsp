@@ -91,11 +91,11 @@
                     <tr>
                         <td style="width: 350px">
 	                                                     궁금한 사항을 자주 묻는  <br> 질문에서 먼저 확인 하세요 <br><br>
-	                        <a href="" class="btn btn-secondary">&nbsp;GO&nbsp;</a>
+	                        <a href="<%= contextPath %>/faqDetail.mf" class="btn btn-secondary">&nbsp;GO&nbsp;</a>
                         </td>
                         <td style="width: 500px">
 	                                                     원하는 답변이 없을 경우 <br> 운영자에게 1:1 문의를 남겨주세요 <br><br>
-	                        <a href="" class="btn btn-secondary">&nbsp;GO&nbsp;</a>
+	                        <a href="<%= contextPath %>/contactList.co?currentPage=1" class="btn btn-secondary">&nbsp;GO&nbsp;</a>
                         </td>
                         <td style="width: 300px">
                                                               접수하신 문의내용을 <br> 확인해주세요 <br><br>
