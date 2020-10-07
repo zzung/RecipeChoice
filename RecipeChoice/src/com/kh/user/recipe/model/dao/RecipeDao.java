@@ -263,14 +263,19 @@ public class RecipeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			for(int i=0; i<rcpTags.length; i++) {
-				System.out.println(i+1 + "번째 인덱스 -> " + rcpTags[i]);
-				pstmt.setString(i+1, "%"+rcpTags[i]+"%");
-			}
-			for(int j=rcpTags.length; j<14; j++) {
-				System.out.println(j+1 + "번째 인덱스 -> NULL" );
-				pstmt.setString(j+1, "%NULL%");
+			if(rcpTags != null ) {
+				for(int i=0; i<rcpTags.length; i++) {
+					//System.out.println(i+1 + "번째 인덱스 -> " + rcpTags[i]);
+					pstmt.setString(i+1, "%"+rcpTags[i]+"%");
+				}	
+				for(int j=rcpTags.length; j<14; j++) {
+					//System.out.println(j+1 + "번째 인덱스 -> NULL" );
+					pstmt.setString(j+1, "%NULL%");
+				}
+			} else {			
+				for(int i=0; i<14; i++) {
+					pstmt.setString(i+1, "%NULL%");
+				}
 			}
 			pstmt.setInt(15, rcpTime);
 			pstmt.setString(16, rcpDishType);
