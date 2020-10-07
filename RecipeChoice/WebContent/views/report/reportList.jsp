@@ -10,6 +10,7 @@
  	int startPage = pi.getStartPage();
  	int endPage = pi.getEndPage();
  	int maxPage = pi.getMaxPage();
+ 	
  %>   
 <!DOCTYPE html>
 <html>
@@ -160,17 +161,17 @@
         		<tr>
         			<td colspan ="6">조회된 리스트가 없습니다.</td>
        			</tr>
-        		<% }else { %>
-        	<%for(Report r: list) {%>
-                    <tr>
+	        		<% }else { %>
+	        	<%for(Report r: list) {%>
+	                    <tr>
                         <td><%= r.getRepNo()%></td>
-                       <% if (r.getBoardType() == 1) { %> 
-                        <td><a href="<%=contextPath%>/boardView.bo?bno=" + bno">신고된 게시물로 ㄱ</a></td>
+                       <% if (r.getBoardType().equals("1")) { %> 
+                        <td><a href="<%=contextPath%>/boardView.bo?bno=<%= r.getRepContentNo() %>"><%= r.getBoardTitle() %></a></td>
                        <%}else {%>
-                        <td><a href="<%=contextPath%>/신고된게시글"></a></td>
+                        <td><a href="<%=contextPath%>/신고된게시글"></a><%= r.getBoardTitle() %></td>
                         <%} %>
-                        <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=loginUser.getUserNo()%>"><%= r.getRepWriterNo()%></a></td>
-                        <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=loginUser.getUserNo()%>"><%= r.getRepTargetNo() %></a></td>
+                        <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=r.getRepWriterNo()%>"><%= r.getWriter()%></a></td>
+                        <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=r.getRepTargetNo()%>"><%= r.getTarget() %></a></td>
                        <td><%= r.getRepReason()%></td>
                         <td><%= r.getRepDate()%></td>
                     </tr>
@@ -178,8 +179,7 @@
 	                <% } %>  
                	 </tbody>
     			</table>
-            </div>
-          
+            
         <div id="footer">
          <div class="pagination">
          		<% if(currentPage != 1) {%>
@@ -197,6 +197,7 @@
                 <%if(maxPage != 0 && currentPage != maxPage){ %>
                 <a href='<%=contextPath%>/reportList.mr?currentPage=<%= maxPage%>';">&raquo;</a>
             	<% } %>
+            </div>
             </div>
         </div>
     </div>

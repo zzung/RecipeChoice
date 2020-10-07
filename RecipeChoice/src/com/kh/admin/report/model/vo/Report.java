@@ -4,7 +4,11 @@ import java.sql.Date;
 
 public class Report {
 	
+	private String boardTitle;
+	private String rcpTitle;
 	private int repNo;
+	private String writer;
+	private String target;
 	private String repWriterNo;
 	private String repTargetNo;
 	private String repReason;
@@ -18,30 +22,57 @@ public class Report {
 		
 	}
 
-	public Report(int repNo, String repWriterNo, String repTargetNo, String repReason, Date repDate, String status,
-			String boardType, String repContentNo, int repReply) {
+	public Report(String boardTitle, String rcpTitle, int repNo, String writer, String target, String repWriterNo,
+			String repTargetNo, String repReason, Date repDate, String status, String boardType, String repContentNo,
+			int repReply) {
 		super();
+		this.boardTitle = boardTitle;
+		this.rcpTitle = rcpTitle;
 		this.repNo = repNo;
+		this.writer = writer;
+		this.target = target;
 		this.repWriterNo = repWriterNo;
 		this.repTargetNo = repTargetNo;
 		this.repReason = repReason;
 		this.repDate = repDate;
 		this.status = status;
-		BoardType = boardType;
+		this.BoardType = boardType;
 		this.repContentNo = repContentNo;
 		this.repReply = repReply;
 	}
 	
-	
-
-	public Report(String repContentNo, int repNo, String repWriterNo, String repTargetNo, String repReason, Date repDate) {
-		super();
-		this.repContentNo = repContentNo;
+	public Report(String boardTitle, String rcpTitle, int repNo, String writer, String target, String repWriterNo,
+			String repTargetNo, String repReason, Date repDate, String boardType, String repContentNo) {
+		this.boardTitle = boardTitle;
+		this.rcpTitle = rcpTitle;
 		this.repNo = repNo;
+		this.writer = writer;
+		this.target = target;
 		this.repWriterNo = repWriterNo;
 		this.repTargetNo = repTargetNo;
 		this.repReason = repReason;
 		this.repDate = repDate;
+		this.BoardType = boardType;
+		this.repContentNo = repContentNo;
+
+	
+	}
+
+
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
+	}
+
+	public String getRcpTitle() {
+		return rcpTitle;
+	}
+
+	public void setRcpTitle(String rcpTitle) {
+		this.rcpTitle = rcpTitle;
 	}
 
 	public int getRepNo() {
@@ -50,6 +81,22 @@ public class Report {
 
 	public void setRepNo(int repNo) {
 		this.repNo = repNo;
+	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+	public String getTarget() {
+		return target;
+	}
+
+	public void setTarget(String target) {
+		this.target = target;
 	}
 
 	public String getRepWriterNo() {
@@ -118,10 +165,17 @@ public class Report {
 
 	@Override
 	public String toString() {
-		return "Report [repNo=" + repNo + ", repWriterNo=" + repWriterNo + ", repTargetNo=" + repTargetNo
+		return "Report [boardTitle=" + boardTitle + ", rcpTitle=" + rcpTitle + ", repNo=" + repNo + ", writer=" + writer
+				+ ", target=" + target + ", repWriterNo=" + repWriterNo + ", repTargetNo=" + repTargetNo
 				+ ", repReason=" + repReason + ", repDate=" + repDate + ", status=" + status + ", BoardType="
 				+ BoardType + ", repContentNo=" + repContentNo + ", repReply=" + repReply + "]";
 	}
 	
 	
+
+
 }
+
+	
+	
+	

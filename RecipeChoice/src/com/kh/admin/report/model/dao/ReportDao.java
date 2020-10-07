@@ -94,8 +94,12 @@ public class ReportDao {
 									rs.getInt("REP_NO"),
 									rs.getString("WRITER"),
 									rs.getString("TARGET"),
+									rs.getString("REP_WRITER_NO"),
+									rs.getString("REP_TARGET_NO"),
 									rs.getString("REP_REASON"),
-									rs.getDate("REP_DATE")));
+									rs.getDate("REP_DATE"),
+									rs.getString("BOARD_TYPE"),
+									rs.getString("REP_CONTENT_NO")));
 									
 			}
 			

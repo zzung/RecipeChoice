@@ -7,7 +7,7 @@
 		 WHERE STATUS = 'Y'
 	
 	</entry>
-	<entry key="selectList">
+	<entry key="selectReportList">
 	SELECT *
 	  FROM (
 	        SELECT 
@@ -20,8 +20,12 @@
 	                     , REP_NO
 	                     , M.MEM_ID WRITER
 	                     , M_.MEM_ID TARGET
+	                     , REP_WRITER_NO
+	                     , REP_TARGET_NO
 	                     , REP_REASON
 	                     , REP_DATE
+	                     , B.BOARD_TYPE
+	                     , R.REP_CONTENT_NO
 	                  FROM REPORT R
 	                  JOIN MEMBER M ON (REP_WRITER_NO = M.USER_NO)
 	                  JOIN MEMBER M_ ON (REP_TARGET_NO = M_.USER_NO)
