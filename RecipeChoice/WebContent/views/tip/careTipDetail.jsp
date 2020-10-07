@@ -4,7 +4,6 @@
 <%
 	Tip t = (Tip)request.getAttribute("t");
 
-	System.out.println(t);
 %>
 <!DOCTYPE html>
 <html>

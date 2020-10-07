@@ -125,7 +125,7 @@
                 <hr>
 
                 <div align="right" style="margin-right: 50px;">
-                	<% if(loginUser.getMemId().equals("admin")){ %>
+                	<% if(loginUser!=null && loginUser.getMemId().equals("admin")){ %>
 	                	<% if(t.getStatus().equals("N")){ %>
 	                    	<a href="<%=contextPath%>/changeTipStatus.mn?tno=<%=t.getTipNo()%>" class="btn btn-danger">활성화</a>
 						<% }else{ %>
