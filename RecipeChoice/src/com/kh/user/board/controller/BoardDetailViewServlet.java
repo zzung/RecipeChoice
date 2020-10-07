@@ -46,7 +46,7 @@ public class BoardDetailViewServlet extends HttpServlet {
 		}
 		
 		int bno = Integer.parseInt(checkNum);
-		
+		System.out.println(checkNum);
 		int countResult = new BoardService().updateBoardCount(bno);
 		
 		if(countResult <= 0) {
