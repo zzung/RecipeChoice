@@ -290,7 +290,7 @@
 						var picPath = contextPath + "/resources/image/board/defaultprofile.png";
 						
 						if(replyList[i].memPic != null) {
-							picPath = contextPath + replyList[i].memPic;
+							picPath = contextPath + "/resources/member_upfiles/" + replyList[i].memPic;
 						}
 						
 						var appendHtml = "";

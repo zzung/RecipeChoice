@@ -249,7 +249,7 @@
             	<% if(b.getMemPic() == null) { %>
                 	<img src="<%= request.getContextPath() %>/resources/image/board/defaultprofile.png" class="profileImg" width="40px" height="40px">
                 <% } else { %>
-                	<img src="<%= request.getContextPath() %>/<%= b.getMemPic() %>" class="profileImg" width="40px" height="40px">
+                	<img src="<%= request.getContextPath() %>/resources/member_upfiles/<%= b.getMemPic() %>" class="profileImg" width="40px" height="40px">
                 <% } %>
                 	<div style="font-size: 10px;"><%= b.getMemName() %></div>
                 </td>

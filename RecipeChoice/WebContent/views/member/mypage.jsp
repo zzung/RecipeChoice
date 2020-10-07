@@ -167,6 +167,7 @@
                   </thead>
                 </table>
               <div class="content2_3_1">
+             	 <%int count = 0; %>
           		 <% for(Board b : boardList) { %>
               		<% if(userName.equals(b.getMemName())) {%>
 	                  <div class="card" style="width:10.8rem;" onclick="location.href='<%= request.getContextPath() %>/boardView.bo?bno=<%= b.getBoardNo() %>'">
@@ -181,7 +182,12 @@
 	                          <p><%=b.getCreateDate() %></p>
 	                      </div>
 	                  </div>
+	                  <% count ++; %>
                   	<%} %>
+                  	<% if(count == 4){
+                  		break;	
+                  	}%>
+                  	
                  <%} %> 
               </div>   
            
