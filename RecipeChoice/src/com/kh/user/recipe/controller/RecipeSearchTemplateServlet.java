@@ -35,6 +35,7 @@ public class RecipeSearchTemplateServlet extends HttpServlet {
 
 		String rcpDishType = request.getParameter("dishType");
 		String[] rcpTags = request.getParameterValues("tag");
+		System.out.println(rcpTags);
 		
 		int rcpTime = Integer.parseInt(request.getParameter("time"));
 		

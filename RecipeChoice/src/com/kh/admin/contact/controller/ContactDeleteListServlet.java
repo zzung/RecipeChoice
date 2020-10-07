@@ -40,7 +40,7 @@ public class ContactDeleteListServlet extends HttpServlet {
 			
 		}else {
 			request.getSession().setAttribute("alertMsg", "문의 삭제 실패하였습니다.");
-			request.getRequestDispatcher(request.getContextPath() + "/contactList.co?currentPage=1").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/contactList.co?currentPage=1");
 		}
 	
 	}

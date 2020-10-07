@@ -176,7 +176,11 @@
                    <% for(Contact c: list) { %>
                     <tr>
                         <td><%=c.getConNo() %></td>
+                        <% if (c.getConType().equals("답변")){ %>
+                        <td>  </td>
+                        <% }else {%>
                         <td><%=c.getConType() %></td>
+                        <% } %>
                         <td><%=c.getConTitle() %></td>
                         <td><%=c.getUserNo() %></td>
                         <td><%=c.getConDate() %></td>
@@ -222,19 +226,19 @@
         	<div id="footer">
             <div class="pagination">
          		<% if(currentPage != 1) {%>
-                <a href="location.href='<%=contextPath%>/contactList.co?currentPage=1';">&laquo;</a> 
+                <a href='<%=contextPath%>/contactList.co?currentPage=1';>&laquo;</a> 
                <% } %>
                
              <%for(int p=startPage; p<=endPage; p++) { %> 
                 <% if(p != currentPage){ %>
-                <a href="location.href='<%=contextPath%>contactList.co?currentPage=<%= p%>';"><%= p%></a> 
+                <a href='<%=contextPath%>/contactList.co?currentPage=<%= p%>';><%= p%></a> 
                	<%}else{ %>
                	<a disabled><%= p %></a>
                	<%} %>
               <% } %>
                
                 <%if(maxPage != 0 && currentPage != maxPage){ %>
-                <a href="location.href='<%=contextPath%>/contactList.co?currentPage=<%= maxPage%>';">&raquo;</a>
+                <a href='<%=contextPath%>/contactList.co?currentPage=<%= maxPage%>';>&raquo;</a>
             	<% } %>
             </div>
          

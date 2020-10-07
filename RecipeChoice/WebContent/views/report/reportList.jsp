@@ -128,10 +128,10 @@
             <div id="content_1">
                 <div id="menu_1">관리자</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항관리</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/memberList.mn?page=1'">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/blackList.mn?page=1'">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/seasonList.ms'">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/tip.mn'">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/faqList.mf'">&nbsp;&nbsp;&nbsp;FAQ</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.mc'">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/reportList.mr'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;신고 관리</div>
@@ -164,9 +164,11 @@
         	<%for(Report r: list) {%>
                     <tr>
                         <td><%= r.getRepNo()%></td>
-                       
-                        <td><a href="<%=contextPath%>/신고된게시글">신고된게시글이</a></td>
-                       
+                       <% if (r.getBoardType() == 1) { %> 
+                        <td><a href="<%=contextPath%>/boardView.bo?bno=" + bno">신고된 게시물로 ㄱ</a></td>
+                       <%}else {%>
+                        <td><a href="<%=contextPath%>/신고된게시글"></a></td>
+                        <%} %>
                         <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=loginUser.getUserNo()%>"><%= r.getRepWriterNo()%></a></td>
                         <td><a href="<%=contextPath%>/memberDetail.mn?uno=<%=loginUser.getUserNo()%>"><%= r.getRepTargetNo() %></a></td>
                        <td><%= r.getRepReason()%></td>
@@ -181,19 +183,19 @@
         <div id="footer">
          <div class="pagination">
          		<% if(currentPage != 1) {%>
-                <a href="location.href='<%=contextPath%>/reportList.mr?currentPage=1';">&laquo;</a> 
+                <a href='<%=contextPath%>/reportList.mr?currentPage=1';">&laquo;</a> 
                <% } %>
                
                <%for(int p=startPage; p<=endPage; p++) { %> 
                <% if(p != currentPage){ %>
-                <a href="location.href='<%=contextPath%>/reportList.mr?currentPage=<%=p%>';"><%=p %></a> 
+                <a href='<%=contextPath%>/reportList.mr?currentPage=<%=p%>';"><%=p %></a> 
                	<%}else{ %>
                	<a disabled><%= p %></a>
                	<%} %>
                <% } %>
                
                 <%if(maxPage != 0 && currentPage != maxPage){ %>
-                <a href="#location.href='<%=contextPath%>/reportList.mr?currentPage=<%= maxPage%>';">&raquo;</a>
+                <a href='<%=contextPath%>/reportList.mr?currentPage=<%= maxPage%>';">&raquo;</a>
             	<% } %>
             </div>
         </div>

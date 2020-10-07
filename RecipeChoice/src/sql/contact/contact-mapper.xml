@@ -79,7 +79,7 @@ WHERE RNUM BETWEEN ? AND ?
 		UPDATE
 		       CONTACT
 		   SET STATUS ='N'
-		 WHERE CON_REPLY = CON_NO
+		 WHERE CON_REPLY = ?
 	</entry>
 	
 	<entry key="selectContactListView">

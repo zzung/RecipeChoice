@@ -34,8 +34,9 @@ public class Report {
 	
 	
 
-	public Report(int repNo, String repWriterNo, String repTargetNo, String repReason, Date repDate) {
+	public Report(String repContentNo, int repNo, String repWriterNo, String repTargetNo, String repReason, Date repDate) {
 		super();
+		this.repContentNo = repContentNo;
 		this.repNo = repNo;
 		this.repWriterNo = repWriterNo;
 		this.repTargetNo = repTargetNo;

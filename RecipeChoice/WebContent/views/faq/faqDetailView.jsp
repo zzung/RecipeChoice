@@ -103,7 +103,7 @@ function faqToggle(e){
                 <div id="menu_1">고객센터</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항</div>
                 <div id="menu_2" onclick="location.href='<%=contextPath%>/faqDetail.fa'"style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href='<%=contextPath%>/contactList.co'">&nbsp;&nbsp;&nbsp;1:1 문의</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/contactList.co?currentPage=1'">&nbsp;&nbsp;&nbsp;1:1 문의</div>
                 <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;개인정보취급방침</div>
                 <div id="menu_3">
                     <br><b>&nbsp;&nbsp;고객센터</b><br>

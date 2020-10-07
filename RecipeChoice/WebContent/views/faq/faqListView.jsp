@@ -15,6 +15,7 @@
 	    box-sizing: border-box;
 	}
 	.wrap{
+		overflow:hidden;
 	    width:1000px;
 	    height:800px;
 	    margin: auto;
@@ -55,6 +56,8 @@
 	#menu_2{cursor: pointer;}
 	#menu_2:hover{color: rgb(39, 174, 96);}
     .t1{
+		display:inline-block;
+		vertical-align:top;
 		width:45%;
 		height:auto;;
 	    margin-top: 8px;
@@ -73,26 +76,23 @@
     #img{
     cursor:pointer;
     }
-    .tt1{
-        width:800px;
-        height:400px;
-        box-sizing:border-box; 
-        
-    }
     .bb,#a1{
     	font-weight:bold;
     }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
-    $(document).ready(function(){
-    	$('p#b1').hide();
-        $('p#a1').click(function(){
-            $('p#b1').toggle();
-        });
-	});	
-     </script>
+	$(document).ready(function(){
+		 $('p.b').hide();
+	
+		});
+	
+	
+	function faqToggle(e){
+		$(e).siblings('.b').toggle();
+		
+	}
+	 </script>
 
 <body>
 	 <!--메뉴바 추가-->
@@ -110,10 +110,10 @@
             <div id="content_1">
                 <div id="menu_1">관리자</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/noticeList.no'">&nbsp;&nbsp;&nbsp;공지사항관리</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/memberList.mn?page=1'">&nbsp;&nbsp;&nbsp;전체 회원 조회</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/blackList.mn?page=1'">&nbsp;&nbsp;&nbsp;블랙리스트 관리</div>
                 <div id="menu_2" onclick="location.href='<%=contextPath%>/seasonList.ms'">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
-                <div id="menu_2" onclick="location.href=''">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
+                <div id="menu_2" onclick="location.href='<%=contextPath%>/tip.mn'">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
                 <div id="menu_2" onclick="location.href='<%=contextPath%>/faqList.mf'"style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;FAQ</div>
                 <div id="menu_2" onclick="location.href='<%=contextPath%>/contactList.mc'">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
                 <div id="menu_2" onclick="location.href='<%=contextPath%>/reportList.mc'">&nbsp;&nbsp;&nbsp;신고 관리</div>
@@ -126,7 +126,6 @@
                 </h4>
                 <h5>FAQ</h5>
                 <hr>
-				<div class="tt1">
 				 <!-- 리스트가 비어있을 경우 -->
                 <% if(listView.isEmpty()) {%>
                 	<div class="t1">
@@ -138,11 +137,13 @@
                 <% for(Faq f : listView){ %>
 				<div class="t1">
 					<br>
-                    <p id="a1">&nbsp;<%= f.getFaqTitle() %>&nbsp; &nbsp;⌄</p>
+                    <p id="a1" onclick="faqToggle(this);">&nbsp;<%= f.getFaqTitle() %>&nbsp; &nbsp;⌄</p>
                      <img id="img" onclick="deleteConfirm();" src="resources/image/admin/recyclebin.JPG">
                      <img id="img" onclick="location.href='<%=contextPath%>/updateForm.mf?fno=<%= f.getFaqNo() %>';" src="<%= request.getContextPath() %>/resources/image/admin/update.JPG">                                 
                    	<br>
 					<hr style="width:93%;">
+					<p class="b">&nbsp; <%= f.getFaqContent() %></p>
+				
 				</div>
 				<script>
 	          function deleteConfirm(){
@@ -159,7 +160,6 @@
 				<% } %>
 			 <% } %>	
 				<br>
-            </div>
 				<hr>
 				<!-- 로그인한 회원이 관리자일 경우에만 보여지는거임 -->
 				 <% if(loginUser != null && loginUser.getMemId().equals("admin") ){ %>

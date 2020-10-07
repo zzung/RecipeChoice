@@ -127,7 +127,7 @@
 							<td>
 								<ul>
 									<li><input type="range" min="10" max="60" step="10"
-										name="time" value="분"></li>
+										name="time" value="30"></li>
 								</ul>
 							</td>
 						</tr>

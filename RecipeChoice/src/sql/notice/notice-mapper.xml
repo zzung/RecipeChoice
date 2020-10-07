@@ -111,7 +111,7 @@
 		     , NOT_DATE
 		     , STATUS
 		  FROM NOTICE
-		 ORDER BY NOT_IMPORTANT DESC, NOT_DATE DESC))
+		 ORDER BY NOT_DATE DESC))
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="noticeListCount">
