@@ -89,7 +89,7 @@
                     <tr>
                         <td> 이메일</td>
                         <td><input type="email" name="userEmail" class="form-control" style="height:30px;"maxlength="30" placeholder="이메일을 입력해주세요"required></td><br>
-                        <td><button type=""id="checkNumBtn"class="btn btn-success"style="width:100px">인증번호받기</button></td>
+                        <td><button type="submit"id="checkNumBtn"class="btn btn-success"style="width:100px">인증번호받기</button></td>
                     </tr>
                     <tr>
                         <td> 인증번호</td>
