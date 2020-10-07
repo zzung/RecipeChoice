@@ -108,7 +108,8 @@
 		<!-- searchbar -->
 		<nav class="navbar navbar-expand-sm bg-teamColor navbar-light justify-content-center">
 			<form class="form-inline" action="<%=contextPath %>/searchBar.sh">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search">
+				<input type="hidden" name="currentPage" value="1"> 
+				<input class="form-control mr-sm-2" type="text" placeholder="Search" name="keyword">
 				<button class="btn btn-success my-2 my-sm-0" type="submit" >Search</button>
 			</form>
 		</nav>

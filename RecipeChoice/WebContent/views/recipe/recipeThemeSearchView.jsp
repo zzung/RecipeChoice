@@ -4,7 +4,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%
 	ArrayList<Recipe> tags = (ArrayList<Recipe>)request.getAttribute("tags");
-	Count ct = (Count)request.getAttribute("ct");
+	int themeCount = (int)request.getAttribute("themeCount");
 %>
 <!DOCTYPE html>
 <html>
@@ -160,7 +160,7 @@
 			<!--검색후 보여질 결과(if문처리)-->
 			<div align="center">
 				<p>
-					<b style="color: rgb(39, 174, 96)"><big>총 <%=ct.getTotalCount() %>개</big></b>
+					<b style="color: rgb(39, 174, 96)"><h2>총 <%=themeCount %>개</h2></b>
 					의 레시피가 검색되었습니다.
 				</p>
 			</div>
