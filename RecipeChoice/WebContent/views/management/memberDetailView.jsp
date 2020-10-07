@@ -146,7 +146,7 @@
                 <div id="tb1_outer">
                     <table class="tb1">
                         <thead id="con1" style="width: 150px; height: 150px;">
-                        	<tr><%= m.getMemPic() %></tr>
+                        	<tr><img src="resources/member_upfiles/<%= m.getMemPic() %>" style="width:150px; height:150px"></tr>
                         </thead>
                         <tbody id="con2">
                             <tr>

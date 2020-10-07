@@ -42,7 +42,6 @@
 		     , STATUS
 		  FROM NOTICE
 		 WHERE NOT_NO = ?
-		   AND STATUS='Y'
 	 </entry>
 
 	<entry key="insertNotice">
