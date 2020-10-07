@@ -4,8 +4,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%
 	ArrayList<Recipe> search = (ArrayList<Recipe>)request.getAttribute("search");
-	Count ct = (Count)request.getAttribute("ct");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int searchCount = (int)request.getAttribute("searchCount"); 
 	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -167,7 +167,7 @@
 			<!--검색후 보여질 결과(if문처리)-->
 			<div align="center">
 				<p>
-					<b style="color: rgb(39, 174, 96)"><big>총 <%=ct.getTotalCount() %>개</big></b>
+					<b style="color: rgb(39, 174, 96)"><big>총<%=searchCount %>개</big></b>
 					의 레시피가 검색되었습니다.
 				</p>
 			</div>
@@ -181,7 +181,7 @@
 						<img src="<%=contextPath %>/resources/recipe_upfiles/<%=r.getRcpPic() %>" width="200px" height="150px" />
 					<br />
 					<div class="w3-container w3-border-bottom w3-border-teamColor">
-						"<%=r.getRcpContent() %>" <br /> <br>
+						<br />
 						<small><p style="font-style:italic"><%=r.getRcpTitle() %></p></small>
 					</div>
 					<p align="left"><%=r.getMemName() %></p>

@@ -35,17 +35,21 @@ public class RecipeSearchTemplateServlet extends HttpServlet {
 
 		String rcpDishType = request.getParameter("dishType");
 		String[] rcpTags = request.getParameterValues("tag");
-		System.out.println(rcpTags);
+		String rcpTag = "";
+		if(rcpTags != null) {
+			rcpTag = String.join(",", rcpTags); 
+		}
+		System.out.println(rcpTag);
 		
 		int rcpTime = Integer.parseInt(request.getParameter("time"));
 		
 		ArrayList<Recipe> tags = new RecipeService().tagSearch(rcpTags,rcpTime, rcpDishType);
 
-		int totalCount = new RecipeService().totalCount();
-		Count ct = new Count(totalCount);
+		int themeCount = new RecipeService().themeCount(rcpTag, rcpTime, rcpDishType);
+		
 		
 		request.setAttribute("tags", tags);
-		request.setAttribute("ct", ct); 
+		request.setAttribute("themeCount", themeCount); 
 		request.getRequestDispatcher("views/recipe/recipeThemeSearchView.jsp").forward(request, response);
 		
 	}

@@ -344,8 +344,23 @@
 		     , RCP_CONTENT
 		     , RCP_PIC
 	      FROM RECIPE
-	     WHERE RCP_TAG LIKE ?
-	        OR RCP_DISH_TYPE LIKE ?
+	     WHERE RCP_TITLE LIKE ?
+	        OR RCP_CONTENT LIKE ?
+	</entry>
+	
+	<entry key="searchCount">
+		SELECT COUNT(*) 
+	      FROM RECIPE
+	     WHERE RCP_TITLE LIKE ?
+	        OR RCP_CONTENT LIKE ?
+	</entry>
+	
+	<entry key="themeCount">
+		SELECT COUNT(*)
+		  FROM RECIPE
+		 WHERE RCP_TAG LIKE ?
+		    OR RCP_TIME = ?
+		    OR RCP_DISH_TYPE LIKE ?
 	</entry>
 	
 </properties>

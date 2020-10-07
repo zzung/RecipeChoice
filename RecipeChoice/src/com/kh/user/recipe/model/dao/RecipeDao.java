@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.user.recipe.model.vo.Cook;
-import com.kh.user.recipe.model.vo.Count;
 import com.kh.user.recipe.model.vo.IngredientList;
 import com.kh.user.recipe.model.vo.PageInfo;
 import com.kh.user.recipe.model.vo.Recipe;
@@ -761,7 +760,7 @@ public class RecipeDao {
 		return replyCount; 
 	}//e.replyCount
 	
-	public ArrayList<Recipe> searchAll(Connection conn, String rcpTag, String rcpDishType){
+	public ArrayList<Recipe> searchAll(Connection conn, String keyword){
 		ArrayList<Recipe> search = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
@@ -772,8 +771,8 @@ public class RecipeDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, "%"+rcpTag+"%");
-			pstmt.setString(2, "%"+rcpDishType+"%");
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setString(2, "%"+keyword+"%");
 			
 			rs = pstmt.executeQuery();
 			
@@ -792,9 +791,67 @@ public class RecipeDao {
 			close(rs);
 			close(pstmt);
 		}
-		for(Recipe sh : search) {
-			System.out.println("sh :" + sh);
-		}
 		return search; 
 	}
+
+	public int searchCount(Connection conn, String keyword) {
+		int searchCount = 0; 
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		String sql = prop.getProperty("searchCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "%" + keyword + "%");
+			pstmt.setString(2, "%" + keyword + "%");
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				searchCount = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs); 
+			close(pstmt); 
+		}
+		
+		return searchCount;
+	}
+
+	public int themeCount(Connection conn, String rcpTag, int rcpTime, String rcpDishType) {
+		int themeCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		String sql = prop.getProperty("themeCount"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, rcpTag);	
+			pstmt.setInt(2, rcpTime);
+			pstmt.setString(3, rcpDishType);
+			
+			rs = pstmt.executeQuery();
+				
+			if(rs.next()) {
+				themeCount = rs.getInt(1); 
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs); 
+			close(pstmt);
+		}
+		
+		return themeCount;
+	}
+
+	
 }

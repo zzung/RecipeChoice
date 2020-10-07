@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import com.kh.user.recipe.model.dao.RecipeDao;
 import com.kh.user.recipe.model.vo.Cook;
-import com.kh.user.recipe.model.vo.Count;
 import com.kh.user.recipe.model.vo.IngredientList;
 import com.kh.user.recipe.model.vo.PageInfo;
 import com.kh.user.recipe.model.vo.Recipe;
@@ -302,13 +301,32 @@ public class RecipeService {
 		return replyCount;
 	}//e.replyCount
 	
-	public ArrayList<Recipe> searchAll(String rcpTag, String rcpDishType){
+	public ArrayList<Recipe> searchAll(String keyword){
 		Connection conn = getConnection();
 		
-		ArrayList<Recipe> search = new RecipeDao().searchAll(conn,rcpTag,rcpDishType);
+		ArrayList<Recipe> search = new RecipeDao().searchAll(conn,keyword);
 		
 		close(conn);
 		
 		return search; 
+	}
+
+	public int searchCount(String keyword) {
+		Connection conn = getConnection();
+		
+		int searchCount = new RecipeDao().searchCount(conn,keyword);
+		
+		close(conn); 
+		return searchCount;
+	}
+
+	public int themeCount(String rcpTag, int rcpTime, String rcpDishType) {
+		Connection conn = getConnection();
+		
+		int themeCount = new RecipeDao().themeCount(conn, rcpTag, rcpTime, rcpDishType);
+		
+		close(conn);
+		
+		return themeCount;
 	}
 }
