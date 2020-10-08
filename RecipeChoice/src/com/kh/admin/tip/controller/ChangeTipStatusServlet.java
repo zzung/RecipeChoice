@@ -7,9 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.admin.management.model.service.ManagementService;
 import com.kh.admin.tip.model.service.TipService;
-import com.kh.user.member.model.vo.Member;
 
 @WebServlet("/changeTipStatus.mn")
 public class ChangeTipStatusServlet extends HttpServlet {

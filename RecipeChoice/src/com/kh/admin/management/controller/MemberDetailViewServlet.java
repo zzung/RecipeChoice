@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.management.model.service.ManagementService;
 import com.kh.user.board.model.vo.Board;
-import com.kh.user.member.model.service.MemberService;
 import com.kh.user.member.model.vo.Member;
 
 @WebServlet("/memberDetail.mn")

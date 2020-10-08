@@ -1,6 +1,5 @@
 package com.kh.admin.tip.controller;
 
-import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +12,6 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.kh.admin.tip.model.service.TipService;
 import com.kh.admin.tip.model.vo.Tip;
 import com.kh.user.common.MyFileRenamePolicy;
-import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.MultipartRequest;
 
 @WebServlet("/updateCareTip.mn")

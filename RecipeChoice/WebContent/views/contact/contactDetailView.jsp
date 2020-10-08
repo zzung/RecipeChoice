@@ -162,14 +162,12 @@
             </div>
             <% } %>
         </div>  
-        </form>
-       
-        </div>
+
             <div id="content_3"></div>
-        </div>
+        
         <div id="footer"></div>
     </div>
-    
+    </div>
     <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>
 </body>

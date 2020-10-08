@@ -5,15 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-    <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <style>
 	div{
 	    box-sizing: border-box;
@@ -110,7 +101,7 @@
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/seasonList.ms'">&nbsp;&nbsp;&nbsp;시즌 메뉴</div>
                 <div id="menu_2" onclick="location.href='<%=contextPath%>/tip.mn'">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/faqList.mf'">&nbsp;&nbsp;&nbsp;FAQ</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.mc'" style="color:rgb(39, 174, 96);"\>&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.mc'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/reportList.mr?currentPage=1'">&nbsp;&nbsp;&nbsp;신고 관리</div>
                
             </div>
@@ -121,7 +112,7 @@
                     &nbsp;<img src="resources/image/admin/inquiry.jpg" align="center">
 				</h1>
                 <hr>
-                <form action="" method=""> 
+                
                     <table class="answer">
                        <tr>
                            <th ><h2>제목</h2></th>
@@ -133,7 +124,7 @@
                               <textarea cols="70" rows="13" style="resize:none; margin-top:10px; margin-bottom:10px;" required></textarea>
                            </td>
                        </tr>
-                 </table>  
+                 </table> 
                  <br>    
                <br>
                <div align="center">
@@ -141,8 +132,8 @@
                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                    <button type="button" onclick="history.back();">뒤로가기</button>
                </div>
+  
            </div>  
-       </form>
        <script>
         function answerConfirm(){
             if(confirm("등록하시겠습니까?")){
@@ -159,7 +150,5 @@
     
      <!-- footer 추가-->
      <%@include file="../common/footer.jsp" %>
-</body>
-</html>
 </body>
 </html>

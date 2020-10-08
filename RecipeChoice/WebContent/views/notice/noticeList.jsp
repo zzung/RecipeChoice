@@ -143,6 +143,7 @@
                 	</tr>
                 	<%} else{ %>
 	                	<% for (Notice n : noticeList) { %>
+	                	<% System.out.println(n); %>
 	                    <tr>
 	                    	<% if(n.getNoticeImportant().equals("Y")){ %>
 	                    	<td width="55px"><input type="hidden" name="nno" id="nno" value="<%=n.getNoticeNo()%>"><button id="important">공지</button></td>

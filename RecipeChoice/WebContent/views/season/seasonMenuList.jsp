@@ -126,7 +126,7 @@
                 <table class="seas">
                 <thead>
                      <th>NO.</th>
-                    <th width=300">카테고리</th>
+                    <th width="300">카테고리</th>
                     <th width="900">제목</th>
                     <th width="300">등록일</th>
                   </thead>

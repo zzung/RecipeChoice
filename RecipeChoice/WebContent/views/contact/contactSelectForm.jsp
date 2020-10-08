@@ -136,8 +136,8 @@
                 &nbsp;
                 <button type="button" onclick="history.back();">취소</button>
             </div>
+   	 </form>
         </div>  
-    </form>
         <script>
         function modifyConfirm(){
              location.href='./inquiryUpdate.no';
