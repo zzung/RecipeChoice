@@ -89,7 +89,7 @@
                            <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/contactForm.me?currentPage=1';">1:1문의 조회</th>
                        </tr>
                        <tr>
-                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me';">작성 게시글 보기 </th>
+                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me?currentPage=1';">작성 게시글 보기 </th>
                            
                        </tr>
                         <tr>

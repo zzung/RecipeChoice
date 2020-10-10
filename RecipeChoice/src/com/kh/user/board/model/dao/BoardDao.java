@@ -395,4 +395,63 @@ public class BoardDao {
 		
 	}
 
+	public int selectListCount(Connection conn, String memId) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+			 result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<Board> selectMyBoardList(Connection conn, com.kh.user.member.model.vo.PageInfo pi, String memId) {
+		
+		ArrayList<Board> myList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectMyBoardList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit()+1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			pstmt.setString(1, memId);
+			pstmt.setInt(2,startRow );
+			pstmt.setInt(3,endRow );
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				myList.add(new Board(rs.getInt("BOARD_NO"),
+									 rs.getInt("USER_NO"),
+									 rs.getString("BOARD_TITLE"),
+									 rs.getString("BOARD_TYPE"),
+									 rs.getString("CREATE_DATE")
+						
+						));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return myList;
+	}
+
 }

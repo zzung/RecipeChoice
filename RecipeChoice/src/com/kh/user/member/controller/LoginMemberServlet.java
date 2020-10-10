@@ -35,9 +35,7 @@ public class LoginMemberServlet extends HttpServlet {
 	
 				// 1. 전달값에 한글이 있을 경우 인코딩 처리해야됨 (POST방식일 경우)
 				request.setCharacterEncoding("UTF-8");
-				
 				// 2. 요청시 전달값(request parameter영역) 꺼내서 변수 또는 객체에 기록하기 
-			
 				String userId = request.getParameter("userId"); // "사용자가 입력한 아이디"
 				String userPwd = request.getParameter("userPwd"); // "사용자가 입력한 비밀번호"
 				

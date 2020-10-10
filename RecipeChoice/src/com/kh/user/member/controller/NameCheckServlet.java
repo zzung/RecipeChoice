@@ -33,10 +33,10 @@ public class NameCheckServlet extends HttpServlet {
 		
 		int count = new MemberService().nameCheck(checkName);
 		
-		if(count == 1) { // 이미 존재하는 아이디 => 사용불가
+		if(count == 1) { // 이미 존재하는 닉네임 => 사용불가
 			//fail
 			response.getWriter().print("fail");
-		}else {	// 존재하는 아이디 없음 => 사용가능
+		}else {	// 존재하는 닉네임 없음 => 사용가능
 			// success
 			response.getWriter().print("success");
 	}
