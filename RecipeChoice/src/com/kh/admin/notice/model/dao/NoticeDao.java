@@ -42,7 +42,7 @@ public class NoticeDao {
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			rs = pstmt.executeQuery();
-			
+
 			while(rs.next()) {
 				Notice n = new Notice(rs.getInt("not_no"), rs.getString("not_title"),
 									  rs.getString("not_content"), rs.getString("not_important"),

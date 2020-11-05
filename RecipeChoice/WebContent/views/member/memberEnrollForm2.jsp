@@ -188,8 +188,6 @@
   		  </div>
   	</div>
   	<!-- 닉네임, 아이디, 중복체크 ajax 사용  -->
-  	
-  	
   	<script>
   	function nameCheck(){
   		var $userName = $("#enrollFormTable input[name=userName]");
@@ -264,13 +262,13 @@
   	
   	
   	 function validate(){
-         // 유효성 검사 : 아이디, 비밀번호, 비밀번호일치, 이름 
+        // 변수에 값들 담아주기
          var userName = document.getElementById("userName");
          var userId = document.getElementById("userId");
          var userPwd = document.getElementById("userPwd");
          var userPwd2 = document.getElementById("checkPwd");
     	 var email = document.getElementById("userEmail");
-         
+    	  // 유효성 검사 : 닉네임, 아이디, 비밀번호, 이메일
          var id = /^[a-z][a-z\d]{5,11}$/;
          var pwd1 = /^[a-z\d!@#$%^&*]{5,15}$/i;  //특수문자(!@#$%^&*)
          var name = /^[가-힣a-z\d]{5,12}$/;

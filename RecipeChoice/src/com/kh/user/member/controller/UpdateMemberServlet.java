@@ -36,36 +36,22 @@ public class UpdateMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("utf-8");
 		if(ServletFileUpload.isMultipartContent(request)) {
-			
-			// 용량제한
+		// 용량제한
 			int maxSize = 10 * 1024 * 1024 ;
 			
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/member_upfiles/");
-			//C:\Users\jieun\Desktop\RecipeChoice\RecipeChoice\WebContent\resources\member_upfiles\
-			
-			
+
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-			
-			/*
-			 *  DB에 기록할 데이터를 뽑아서 vo에 담기
-			 * 	   > 닉네임,아이디,비밀번호,이메일
-			 * 	   > 넘어온 첨부파일이 있다면 첨부파일도 담기
-			 * 
-			 */
+
 				String userName = multiRequest.getParameter("userName");
 				String userId = multiRequest.getParameter("userId");
 				String userPwd = multiRequest.getParameter("userPwd");
 				String email = multiRequest.getParameter("email");
 				
 			if(multiRequest.getOriginalFileName("upfile")!= null) { // 넘어온 첨부파일이 있다면
-				
-				
 				String memPic = multiRequest.getFilesystemName("upfile"); // 실제 서버에 저장된 수정명
-			
-				
 				Member m = new Member (userId,userPwd,userName,email,memPic);
 				
 				Member updateMem = new MemberService().updateMember(m);
@@ -77,8 +63,6 @@ public class UpdateMemberServlet extends HttpServlet {
 						session.setAttribute("loginUser", updateMem);
 						
 						session.setAttribute("alertMsg", "성공적으로 회원정보를 수정했습니다.");
-						
-						
 						response.sendRedirect(request.getContextPath() + "/updateForm2.me");
 						
 						

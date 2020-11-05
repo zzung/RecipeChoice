@@ -175,7 +175,6 @@
 	        	
 	        	function sendFile(files, editor) {
 	        		
-	        		console.log("작동");
 	        		data = new FormData();
 	        		for (var i = 0, max = files.length; i < max; i++) {
 						data.append("file" + (i + 1), files[i]);						

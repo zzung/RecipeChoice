@@ -127,6 +127,33 @@ public class BoardService {
 		return result;
 		
 	}
+	/**
+	 * USER가 작성한 글 갯수 가져오기
+	 * @return 개수
+	 */
+	public int selectListCount(String memId) {
+		
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().selectListCount(conn,memId);
+		 
+		close(conn);
+		
+		return result;
+	}
+	/**
+	 * 내가 작성한 글 가져오기 서비스
+	 * @param pi
+	 * @return ArrayList
+	 */
+	public ArrayList<Board> selectMyBoardList(com.kh.user.member.model.vo.PageInfo pi, String memId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Board> myList = new BoardDao().selectMyBoardList(conn, pi, memId);
+		
+		close(conn);
+		return myList;
+	}
 
 
 }

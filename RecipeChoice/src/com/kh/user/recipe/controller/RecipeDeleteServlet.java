@@ -41,7 +41,7 @@ public class RecipeDeleteServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "게시글 삭제 완료되었습니다.");
 			
-			response.sendRedirect(request.getContextPath() + "/recipeView.rp");
+			response.sendRedirect(request.getContextPath() + "/pageList.rp?currentPage=1");
 		} else {
 			
 			request.setAttribute("errorMsg","게시글 삭제 실패했습니다");

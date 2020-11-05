@@ -120,5 +120,34 @@
 		  , ?
 		  )
 	</entry>
-
+	<entry key="selectListCount"> <!-- USER가 작성한 글 총 갯수 가져오기 -->
+	 SELECT COUNT(*)LISTCOUNT
+	     FROM BOARD B
+         JOIN MEMBER M ON(B.USER_NO=M.USER_NO)
+	    WHERE M.MEM_ID = ?
+	     AND M.STATUS = 'Y'
+         AND B.STATUS = 'Y'
+	</entry>
+	<entry key="selectMyBoardList"> <!-- USER가 작성한 글  가져오기 -->
+	 SELECT *
+			  FROM (
+				      SELECT 
+			                ROWNUM RNUM, 
+			                A.*
+			            FROM ( SELECT
+			                    BOARD_NO
+			                   ,USER_NO
+			                   ,BOARD_TITLE
+			                   ,BOARD_TYPE
+			                   ,CREATE_DATE
+			             FROM BOARD B
+			             JOIN MEMBER USING(USER_NO)
+			            WHERE B.STATUS = 'Y'
+                        AND MEM_ID = ?
+			            ORDER
+			               BY BOARD_NO DESC
+			            )A
+			    )
+             WHERE RNUM BETWEEN ? AND ?
+	</entry>
 </properties>

@@ -226,19 +226,19 @@
         	<div id="footer">
             <div class="pagination">
          		<% if(currentPage != 1) {%>
-                <a href='<%=contextPath%>/contactList.co?currentPage=1';>&laquo;</a> 
+                <a href='<%=contextPath%>/contactList.co?currentPage=1'>&laquo;</a> 
                <% } %>
                
              <%for(int p=startPage; p<=endPage; p++) { %> 
                 <% if(p != currentPage){ %>
-                <a href='<%=contextPath%>/contactList.co?currentPage=<%= p%>';><%= p%></a> 
+                <a href='<%=contextPath%>/contactList.co?currentPage=<%= p%>'><%= p%></a> 
                	<%}else{ %>
                	<a disabled><%= p %></a>
                	<%} %>
               <% } %>
                
                 <%if(maxPage != 0 && currentPage != maxPage){ %>
-                <a href='<%=contextPath%>/contactList.co?currentPage=<%= maxPage%>';>&raquo;</a>
+                <a href='<%=contextPath%>/contactList.co?currentPage=<%= maxPage%>'>&raquo;</a>
             	<% } %>
             </div>
          

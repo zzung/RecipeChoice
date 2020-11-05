@@ -131,6 +131,7 @@
             </div>
             <div id="content_3"></div>
         </div>
+        </div>
         <div id="footer"></div>
 
 </body>

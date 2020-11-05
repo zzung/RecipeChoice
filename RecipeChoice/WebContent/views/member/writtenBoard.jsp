@@ -1,27 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.Date" %>
-<%@page import="com.kh.user.board.model.vo.PageInfo"%>
+<%@page import="com.kh.user.member.model.vo.PageInfo"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.kh.user.board.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
 
 <%
 
-	ArrayList<Board> boardList = new ArrayList<Board>();
-	if(request.getAttribute("boardList") instanceof ArrayList) {
-		ArrayList<?> tmpList = (ArrayList<?>)request.getAttribute("boardList");
-		for(Object obj : tmpList) {
-			if(obj instanceof Board) {
-				boardList.add((Board)obj);
-			}
-		}
-	}
-	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	ArrayList<Board> myList =(ArrayList<Board>)request.getAttribute("myList");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	session.removeAttribute("alertMsg");
 	
-	String orderUrl = "&order=" + pi.getOrder() + "&searchType=" + pi.getSearchType() + "&keyword=" + pi.getKeyword();
+	   int listCount = pi.getListCount();
+	   int currentPage = pi.getCurrentPage();
+	   int startPage = pi.getStartPage();
+	   int endPage = pi.getEndPage();
+	   int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -31,10 +27,8 @@
  <link rel="stylesheet" href="resources/css/subvar.css">
  
 <style>
-.paging{
-	margin-left:300px;
-}
 
+.pagination{margin: 550px 300px;}
 </style>
 </head>
 <body>
@@ -83,25 +77,25 @@
                       <tbody>
 
                        <tr>
-                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/updateForm.me'";>개인 정보 수정</th>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/updateForm.me';">개인 정보 수정</th>
                        </tr>
                        <tr>
-                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/'";>내 문의 확인</th>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/';">내 문의 확인</th>
                        </tr>
                        <tr>
-                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me'";>작성 게시글 보기 </th>
+                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me';">작성 게시글 보기 </th>
                            
                        </tr>
                         <tr>
-                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/'";>작성 레시피 보기 </th>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/';">작성 레시피 보기 </th>
                            
                        </tr>
                        <tr>
-                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/writtenBoard.me'";>스크랩한 게시글 보기 </th>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/writtenBoard.me';">스크랩한 게시글 보기 </th>
                            
                        </tr>
                        <tr>
-                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/deleteForm.me'";>회원 탈퇴 </th>
+                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/deleteForm.me';">회원 탈퇴 </th>
                            
                        </tr>
                        </tbody>
@@ -128,13 +122,15 @@
                     </thead>
                   </table>
                 <div class="content2_1_1">
-                    <% for(Board b : boardList) { %>
-              			<% if(userName.equals(b.getMemName())) {%>
-	                  <div class="card" style="width:10.8rem;" onclick="location.href='<%= request.getContextPath() %>/boardView.bo?bno=<%= b.getBoardNo() %>'">
+                    <% for(Board b : myList) { %>
+	                  <div class="card my" style="width:10.8rem; margin-top:30px;" onclick="location.href='<%= request.getContextPath() %>/boardView.bo?bno=<%= b.getBoardNo() %>'">
 	                  	<div class="pic">
 	                      	<div class="text">
-	                      	<p><%=b.getCategory() %></p>
-	                      	
+	                      		<%if(b.getCategory().equals("1")){ %>
+	                      		<p>일상</p>
+	                      		<%} else {%>
+	                      	    <p>후기</p>	
+	                      		<% } %>
 	                      	</div>
 	                      </div>
 	                      <div class="body" style="height: 45px; ">
@@ -142,51 +138,39 @@
 	                          <p><%=b.getCreateDate() %></p>
 	                      </div>
 	                  </div>
-                  	<%} %>
-	                 <%} %> 
+                  	<%} %> 
                 </div>   
             </div>
          
          
-            <div class="content2_3">
                  
-             	<!-- 페이징 -->
-        <div class="pagingArea" align="center">
+				<nav aria-label="Page navigation example">
+				  <ul class="pagination">
+				    <li class="page-item">
+				    <!-- 현재 페이지가 첫페이지 일때 : 이전,맨처음으로 버튼 안보이게 하기 -->
+        			 <% if(currentPage != 1) { %>
+				      <a class="page-link" href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				      <%} %>
+				    </li>
+				     <% for (int p=startPage; p<=endPage; p++) {%>
+				     	<% if(p != currentPage) { %>
+				   			 <li class="page-item"><a class="page-link" href="<%= contextPath %>/writtenBoard.me?currentPage=<%=p%>"><%=p%></a></li>
+				   		 <% } else { %>
+				   		 	<li class="page-item"><a class="page-link" href="<%= contextPath %>/writtenBoard.me?currentPage=<%=p%>"><%=p%></a></li>
+				   		 <%} %>
+				   	<%} %>
+				     <% if(currentPage != maxPage) { %>
+					    <li class="page-item">
+					      <a class="page-link" href="<%= contextPath %>/writtenBoard.me?currentPage=<%= maxPage %>" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+				     <% } %>
+				  </ul>
+				</nav>
             
-            <% if(pi.getMaxPage() == 0) { %>
-            <a href="<%= request.getContextPath() %>/board.bo">1</a>
-            <% } else { %>
-	            <% if(pi.getCurrentPage() != 1) { %>
-	            <!-- 맨 처음으로 (<<) -->
-	            <a href="<%= request.getContextPath() %>/board.bo?p=1&category=<%= pi.getCategory() %><%= orderUrl %>" class="btn btn-secondry"> &lt;&lt; </a>
-	            <!-- 이전페이지로 (<) -->
-	            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() - 1 %>&category=<%= pi.getCategory() %><%= orderUrl %>"class="btn btn-secondry"> &lt; </a>
-	         	<% } %>
-	         	
-	            <% for(int i = pi.getStartPage(), last = pi.getLastPage(); i <= last; i++) { %>
-	            	<% if(i == pi.getCurrentPage()) { %>
-	                <a class="btn btnDisabled"><%= i %></a>
-	            	<% } else { %>
-	            	<a href="<%= request.getContextPath() %>/board.bo?p=<%= i %>&category=<%= pi.getCategory() %><%= orderUrl %>"class="btn btn-secondry pagebtn"><%= i %></a>
-	            	<% } %>
-	            	
-	            	<% 
-	            	if(i == pi.getMaxPage()) {
-						break;            		
-	            	}
-	            	%>
-	            <% } %>
-	            
-	            <% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
-	            <!-- 다음페이지로 (>) -->
-	            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getCurrentPage() + 1 %>&category=<%= pi.getCategory() %><%= orderUrl %>"class="btn btn-secondry"> &gt; </a>
-	            <!-- 맨 끝으로 (>>) -->
-	            <a href="<%= request.getContextPath() %>/board.bo?p=<%= pi.getMaxPage() %>&category=<%= pi.getCategory() %><%= orderUrl %>" class="btn btn-secondry"> &gt;&gt; </a>
-	            <% } %>
-            <% } %>
-        </div>
-             	
-            </div>
 			
   
         </div>

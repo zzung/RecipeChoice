@@ -2,7 +2,6 @@ package com.kh.user.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,10 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.user.board.model.service.BoardService;
 import com.kh.user.board.model.vo.Board;
-import com.kh.user.board.model.vo.PageInfo;
+import com.kh.user.member.model.vo.Member;
+import com.kh.user.member.model.vo.PageInfo;
 
 /**
  * Servlet implementation class WrittenBoardServlet
@@ -34,29 +35,50 @@ public class WrittenBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+			request.setCharacterEncoding("UTF-8");
+			
 		
-		String regex = "^[0-9]*$";
-		String page = request.getParameter("p");
-		String category = request.getParameter("category");
-		String order = request.getParameter("order");
-		String searchType = request.getParameter("searchType");
-		String keyword = request.getParameter("keyword");
+			int listCount;		// 현재 총 게시글 갯수
+			int currentPage;	// 현재 페이지 (즉, 요청한 페이지)
+			int pageLimit;		// 한 페이지 하단에 보여질 페이지 최대 갯수 
+			int boardLimit;		// 한 페이지내에 보여질 게시글 최대갯수 
+			
+			int maxPage;		// 전체 페이지들 중에서의 가장 마지막 페이지
+			int startPage;		// 현재 페이지에 하단에 보여질 페이징 바의 시작 수 
+			int endPage;		// 현재 페이지에 하단에 보여질 페이징 바의 끝 수 
+			
+			HttpSession session = request.getSession();
+			Member loginUser = (Member) session.getAttribute("loginUser");
+			String memId = loginUser.getMemId();
+			
+			// 총 게시글 갯수 
+			listCount = new BoardService().selectListCount(memId);
+			
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			
+			// * pageLimit : 한 페이지 하단에 보여질 페이지 최대 갯수 (페이지 목록을 몇개 단위)
+			pageLimit = 3;	
+			
+			// * boardLimit : 한 페이지에 보여질 게시글 최대 갯수
+			boardLimit = 8; 
+			
+			
+			maxPage = (int)Math.ceil((double)listCount / boardLimit);
+	
+			startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+			
 		
-		// 넘겨받은 p값이 널인지 0인지 또는 숫자가 아닌값이 들어왔는지 확인
-		if(page == null || !Pattern.matches(regex, page) || page.equals("0")) {
-			page = "1";
-		}
-		
-		PageInfo pi = new PageInfo(Integer.parseInt(page), category, order, searchType, keyword);
-		
-		new BoardService().getMaxPage(pi);
-
-		ArrayList<Board> boardList = new BoardService().selectBoardList(pi);
-		
-		request.setAttribute("boardList", boardList);
-		request.setAttribute("pageInfo", pi);
-		
+			endPage = startPage + pageLimit -1;
+			
+			if(maxPage < endPage){
+			endPage = maxPage;
+			}
+			
+		PageInfo pi = new PageInfo(listCount,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
+		ArrayList<Board> myList = new BoardService().selectMyBoardList(pi,memId);
+		request.setAttribute("myList", myList);
+		request.setAttribute("pi", pi);
+			
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/member/writtenBoard.jsp");
 		view.forward(request, response);

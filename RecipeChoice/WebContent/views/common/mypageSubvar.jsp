@@ -45,21 +45,21 @@
                        <tbody>
 
                        <tr>
-                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/updateForm.me'";>개인 정보 수정</th>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/updateForm.me';">개인 정보 수정</th>
                        </tr>
                        <tr>
-                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/contactForm.me'";>내 문의 확인</th>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/contactForm.me';">내 문의 확인</th>
                        </tr>
                        <tr>
-                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me'";>작성 게시글 보기 </th>
+                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/writtenBoard.me';">작성 게시글 보기 </th>
                            
                        </tr>
                        <tr>
-                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/writtenBoard.me'";>스크랩한 게시글 보기 </th>
+                           <th scope="row" colspan="3"onclick="location.href='<%=contextPath%>/writtenBoard.me';">스크랩한 게시글 보기 </th>
                            
                        </tr>
                        <tr>
-                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/deleteForm.me'";>회원 탈퇴 </th>
+                           <th scope="row" colspan="3" onclick="location.href='<%=contextPath%>/deleteForm.me';">회원 탈퇴 </th>
                            
                        </tr>
                        </tbody>

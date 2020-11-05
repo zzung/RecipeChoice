@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 import com.kh.admin.management.model.dao.ManagementDao;
 import com.kh.user.board.model.vo.Board;
-import com.kh.user.common.JDBCTemplate;
-import com.kh.user.member.model.dao.MemberDao;
 import com.kh.user.member.model.vo.Member;
 import static com.kh.user.common.JDBCTemplate.*;
 

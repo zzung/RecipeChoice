@@ -1,5 +1,7 @@
 package com.kh.user.board.model.vo;
 
+import java.sql.Date;
+
 public class Board {
 
 	private int boardNo;			// 게시판 번호
@@ -60,6 +62,25 @@ public class Board {
 		this.boardContent = boardContent;
 		this.createDate = createDate;
 		this.boardCount = boardCount;
+	}
+
+	public Board(int boardNo, int userNo, String boardTitle, String category, String createDate) {
+		super();
+		this.boardNo = boardNo;
+		this.userNo = userNo;
+		this.boardTitle = boardTitle;
+		this.category = category;
+		this.createDate = createDate;
+	}
+
+	public Board(int boardNo, int userNo, String boardTitle, String category, String boardContent, String createDate) {
+		super();
+		this.boardNo = boardNo;
+		this.userNo = userNo;
+		this.boardTitle = boardTitle;
+		this.category = category;
+		this.boardContent = boardContent;
+		this.createDate = createDate;
 	}
 
 	public int getBoardNo() {

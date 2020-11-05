@@ -2,8 +2,6 @@ package com.kh.user.member.model.service;
 
 import static com.kh.user.common.JDBCTemplate.close;
 import static com.kh.user.common.JDBCTemplate.commit;
-import static com.kh.user.common.JDBCTemplate.close;
-import static com.kh.user.common.JDBCTemplate.commit;
 import static com.kh.user.common.JDBCTemplate.getConnection;
 import static com.kh.user.common.JDBCTemplate.rollBack;
 

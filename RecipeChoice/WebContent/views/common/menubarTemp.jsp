@@ -63,15 +63,32 @@
 						<a class="dropdown-item" href="<%=contextPath%>/loginForm.me">로그인</a>
 						<%}else{ %>
 						<!-- 로그인 회원 -->
+						<!-- 관리자 로그인하고 마이페이지 누르면 관리자페이지로 이동  -->
+						 <% if(loginUser != null && loginUser.getMemId().equals("admin") ){ %>
+						<a class="dropdown-item" href="<%=contextPath%>/admin.mm">마이페이지</a>
+						<%}else {%>
 						<a class="dropdown-item" href="<%=contextPath%>/mypage.me">마이페이지</a>
+						<% } %>
 						<a class="dropdown-item" href="<%=contextPath%>/logout.me">로그아웃</a>
 						<%} %>
 					</div>
 				</li>
 				<li class="nav-item margin-top">
+				<%if(loginUser == null){ %>
+					<a class="navbar-brand nav-link" href="#" onclick="recipeWrite();"> 
+						<img src="resources/image/navbar/pencil.png" alt="logo" style="width: 30px;">
+					</a>
+				<%} else { %>
 					<a class="navbar-brand nav-link" href="<%=contextPath%>/recipeWrite.rp"> 
 						<img src="resources/image/navbar/pencil.png" alt="logo" style="width: 30px;">
 					</a>
+				<%} %>
+				<script>
+					function recipeWrite(){
+						alert("로그인 후 사용 가능합니다.")
+					}
+				</script>
+				
 				</li>
 				<li class="nav-item dropdown margin-top">
 				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> 고객센터 </a>
@@ -87,9 +104,10 @@
 		</nav>
 		<!-- searchbar -->
 		<nav class="navbar navbar-expand-sm bg-teamColor navbar-light justify-content-center">
-			<form class="form-inline">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search">
-				<button class="btn btn-success my-2 my-sm-0" type="button">Search</button>
+			<form class="form-inline" action="<%=contextPath %>/searchBar.sh">
+				<input type="hidden" name="currentPage" value="1"> 
+				<input class="form-control mr-sm-2" type="text" placeholder="Search" name="keyword">
+				<button class="btn btn-success my-2 my-sm-0" type="submit" >Search</button>
 			</form>
 		</nav>
 </div>

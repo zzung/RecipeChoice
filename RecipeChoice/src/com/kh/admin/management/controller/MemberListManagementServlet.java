@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.admin.common.PagingManager;
 import com.kh.admin.management.model.service.ManagementService;
 import com.kh.admin.notice.model.service.NoticeService;
-import com.kh.user.member.model.service.MemberService;
 import com.kh.user.member.model.vo.Member;
 
 @WebServlet("/memberList.mn")

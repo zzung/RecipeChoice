@@ -131,9 +131,10 @@ $(document).ready(function(){
                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                    <button type="button" onclick="history.back();">뒤로가기</button>
                </div>
+       	</form>
            </div>  
-       </form>
       
+          </div>
           </div>
     <!-- 푸터 추가-->
     <%@include file="../common/footer.jsp" %>

@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.admin.common.PagingManager;
 import com.kh.admin.notice.model.service.NoticeService;
 import com.kh.admin.notice.model.vo.Notice;
-import com.kh.user.member.model.service.MemberService;
-import com.kh.user.member.model.vo.Member;
 
 @WebServlet("/notice.no")
 public class NoticeListServlet extends HttpServlet {

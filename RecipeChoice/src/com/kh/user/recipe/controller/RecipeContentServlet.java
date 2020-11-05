@@ -9,7 +9,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.user.recipe.model.service.RecipeService;
 import com.kh.user.recipe.model.vo.Cook;
