@@ -135,7 +135,7 @@
                 <div id="menu_2" onclick="location.href='<%=contextPath%>/tip.mn'">&nbsp;&nbsp;&nbsp;꿀팁 관리</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/faqList.mf'">&nbsp;&nbsp;&nbsp;FAQ</div>
                 <div id="menu_2" onclick="location.href='<%= contextPath %>/contactList.mc'">&nbsp;&nbsp;&nbsp;1:1문의 관리</div>
-                <div id="menu_2" onclick="location.href='<%= contextPath %>/reportList.mr'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;신고 관리</div>
+                <div id="menu_2" onclick="location.href='<%= contextPath %>/reportList.mr?currentPage=1'" style="color:rgb(39, 174, 96);">&nbsp;&nbsp;&nbsp;신고 관리</div>
                
             </div>
             <div id="content_2">
@@ -179,23 +179,23 @@
 	                <% } %>  
                	 </tbody>
     			</table>
-            
+              
         <div id="footer">
          <div class="pagination">
          		<% if(currentPage != 1) {%>
-                <a href='<%=contextPath%>/reportList.mr?currentPage=1';">&laquo;</a> 
+                <a href='<%=contextPath%>/reportList.mr?currentPage=1'>&laquo;</a> 
                <% } %>
                
                <%for(int p=startPage; p<=endPage; p++) { %> 
                <% if(p != currentPage){ %>
-                <a href='<%=contextPath%>/reportList.mr?currentPage=<%=p%>';"><%=p %></a> 
+                <a href='<%=contextPath%>/reportList.mr?currentPage=<%=p%>'><%=p %></a> 
                	<%}else{ %>
                	<a disabled><%= p %></a>
                	<%} %>
                <% } %>
                
                 <%if(maxPage != 0 && currentPage != maxPage){ %>
-                <a href='<%=contextPath%>/reportList.mr?currentPage=<%= maxPage%>';">&raquo;</a>
+                <a href='<%=contextPath%>/reportList.mr?currentPage=<%= maxPage%>'>&raquo;</a>
             	<% } %>
             </div>
             </div>

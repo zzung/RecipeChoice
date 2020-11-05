@@ -91,8 +91,8 @@
 	function faqToggle(e){
 		$(e).siblings('.b').toggle();
 		
-	}
-	 </script>
+	};
+</script>
 
 <body>
 	 <!--메뉴바 추가-->
@@ -159,7 +159,7 @@
            </script>
 				<% } %>
 			 <% } %>	
-				<br>
+				<br><br><br><br><br><br><br><br>
 				<hr>
 				<!-- 로그인한 회원이 관리자일 경우에만 보여지는거임 -->
 				 <% if(loginUser != null && loginUser.getMemId().equals("admin") ){ %>
